@@ -1,4 +1,4 @@
-public class Main{
+public class God{
 	public static void main(String[] args){
 		HuluBros family=new HuluBros();
 		System.out.println("BubbleSort:");
