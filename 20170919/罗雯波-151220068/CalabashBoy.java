@@ -2,7 +2,7 @@
 public class CalabashBoy {
 
     public enum Attribute {
-        NAME, COLOR
+        RANK, COLOR
     }
 
     private static final String[] NAMES = {
@@ -12,25 +12,33 @@ public class CalabashBoy {
             "红色", "橙色", "黄色", "绿色", "青色", "蓝色", "紫色"
     };
 
-    private int number;
-    CalabashBoy(int number) {
-        this.number = number;
+    private int rank, position;
+    CalabashBoy(int rank, int position) {
+        this.rank = rank;
+        this.position = position;
     }
 
     public void report(Attribute attr) {
         switch (attr) {
-            case NAME:
-                System.out.println(NAMES[number]);
+            case RANK:
+                System.out.println(NAMES[rank]);
                 break;
             case COLOR:
-                System.out.println(COLORS[number]);
+                System.out.println(COLORS[rank]);
                 break;
         }
     }
     public int compareTo(CalabashBoy cb, Attribute attr) {
-        return number - cb.number;
+        return rank - cb.rank;
     }
-    public void reportSwap(int from, int to) {
-        System.out.println(NAMES[number] + ":" + from + " -> " + to);
+    public void moveTo(int toPos) {
+        if (toPos == position) {
+            return;
+        }
+        reportSwap(position, toPos);
+        position = toPos;
+    }
+    private void reportSwap(int from, int to) {
+        System.out.println(NAMES[rank] + ":" + from + " -> " + to);
     }
 }

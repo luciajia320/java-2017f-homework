@@ -10,7 +10,7 @@ public class SevenBrothers {
     private CalabashBoy[] calaBoys = new CalabashBoy[NUM_BROS];
     SevenBrothers() {
         for (int i = 0; i < NUM_BROS; i ++) {
-            calaBoys[i] = new CalabashBoy(i);
+            calaBoys[i] = new CalabashBoy(i, i);
         }
     }
 
@@ -57,8 +57,8 @@ public class SevenBrothers {
             for (int k = 0; k < i; k ++) {
                 if (calaBoys[k].compareTo(calaBoys[k + 1], key) > 0) {
                     swap(k, k + 1);
-                    calaBoys[k].reportSwap(k + 1, k);
-                    calaBoys[k + 1].reportSwap(k, k + 1);
+                    calaBoys[k].moveTo(k);
+                    calaBoys[k + 1].moveTo(k + 1);
                 }
             }
         }
@@ -79,10 +79,10 @@ public class SevenBrothers {
         CalabashBoy temp = calaBoys[end];
         for (int i = end - 1; i >= pos; i --) {
             calaBoys[i + 1] = calaBoys[i];
-            calaBoys[i + 1].reportSwap(i, i + 1);
+            calaBoys[i + 1].moveTo(i + 1);
         }
         calaBoys[pos] = temp;
-        calaBoys[pos].reportSwap(end, pos);
+        calaBoys[pos].moveTo(pos);
     }
     private int binSearch(int begin, int end,
                           CalabashBoy cb,

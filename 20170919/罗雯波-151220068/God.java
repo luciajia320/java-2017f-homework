@@ -1,11 +1,12 @@
 
-public class Grandpa {
+public class God {
     public static void main(String[] args) {
         SevenBrothers sevenBro = new SevenBrothers();
+
         sevenBro.lineUpRandomly();
         sevenBro.sort(SevenBrothers.SortType.BUBBLE,
-                CalabashBoy.Attribute.NAME);
-        sevenBro.report(CalabashBoy.Attribute.NAME);
+                CalabashBoy.Attribute.RANK);
+        sevenBro.report(CalabashBoy.Attribute.RANK);
 
         sevenBro.lineUpRandomly();
         sevenBro.sort(SevenBrothers.SortType.BIN_INSERT,
