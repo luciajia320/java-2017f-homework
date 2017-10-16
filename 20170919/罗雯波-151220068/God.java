@@ -1,16 +1,22 @@
-
 public class God {
     public static void main(String[] args) {
-        SevenBrothers sevenBro = new SevenBrothers();
+        Huluwa[] brothers = new Huluwa[7];
+        for (int i = 0; i < 7; i ++) {
+            brothers[i] = new Huluwa(COLOR.values()[i], SENIORITY.values()[i]);
+        }
+        Queue queue = new Queue(brothers, FORMATION.长蛇,
+                new PosCoord(0, 0), ORIENTATION.WEST);
 
-        sevenBro.lineUpRandomly();
-        sevenBro.sort(SevenBrothers.SortType.BUBBLE,
-                CalabashBoy.Attribute.RANK);
-        sevenBro.report(CalabashBoy.Attribute.RANK);
+        queue.rollCall();
 
-        sevenBro.lineUpRandomly();
-        sevenBro.sort(SevenBrothers.SortType.BIN_INSERT,
-                CalabashBoy.Attribute.COLOR);
-        sevenBro.report(CalabashBoy.Attribute.COLOR);
+        queue.shuffle();
+        queue.rollCall();
+        queue.sort(SortType.BUBBLE);
+        queue.rollCall();
+
+        queue.shuffle();
+        queue.rollCall();
+        queue.sort(SortType.INSERTION);
+        queue.rollCall();
     }
 }
