@@ -1,3 +1,8 @@
+package Layout;
+
+import Characters.Comparable;
+import Position.Position;
+
 public class BubbleSorter implements Sorter {
     @Override
     public void sort(Queue queue) {

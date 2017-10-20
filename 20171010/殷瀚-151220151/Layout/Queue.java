@@ -1,3 +1,11 @@
+package Layout;
+
+import Characters.Creature;
+import Characters.Huluwa;
+import Position.Position;
+import Types.COLOR;
+import Types.SENIORITY;
+
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -68,19 +76,6 @@ public class Queue {
         }
 
         Queue queue = new Queue(brothers);
-
-        queue.rollCall();
-
-        queue.shuffle();
-
-
-        queue.rollCall();
-
-        new QuickSorter().sort(queue);
-
-        queue.rollCall();
-
-        queue.shuffle();
 
 
         queue.rollCall();

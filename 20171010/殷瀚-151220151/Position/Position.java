@@ -1,6 +1,13 @@
+package Position;
+
+import Characters.Creature;
+import Types.Vector2;
+
 public class Position {
 
     private Vector2 coordinate;
+    private Creature holder;
+
 
     public Creature getHolder() {
         return holder;
@@ -10,10 +17,12 @@ public class Position {
         this.holder = holder;
     }
 
-    private Creature holder;
-
     public int getX() {
         return coordinate.getX();
+    }
+
+    public int getY() {
+        return coordinate.getY();
     }
 
     public void setX(int x) {

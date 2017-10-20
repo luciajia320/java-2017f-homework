@@ -1,4 +1,9 @@
-public class QuickSorter implements  Sorter{
+package Layout;
+
+import Characters.Comparable;
+import Position.Position;
+
+public class QuickSorter implements Sorter {
     @Override
     public void sort(Queue queue) {
         Position[] positions = queue.getPositions();

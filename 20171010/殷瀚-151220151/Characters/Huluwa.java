@@ -1,8 +1,12 @@
-public class Huluwa implements Creature, Comparable{
+package Characters;
+
+import Types.COLOR;
+import Types.SENIORITY;
+
+public class Huluwa extends Creature implements Comparable {
 
     private COLOR color;
     private SENIORITY seniority;
-    private Position position;
 
     public COLOR getColor() {
         return color;
@@ -13,18 +17,7 @@ public class Huluwa implements Creature, Comparable{
     }
 
 
-    @Override
-    public Position getPosition() {
-        return position;
-    }
-
-    @Override
-    public void setPosition(Position position) {
-        this.position = position;
-        position.setHolder(this);
-    }
-
-    Huluwa(COLOR color, SENIORITY seiority) {
+    public Huluwa(COLOR color, SENIORITY seiority) {
         this.color = color;
         this.seniority = seiority;
     }
@@ -36,7 +29,10 @@ public class Huluwa implements Creature, Comparable{
 
     @Override
     public String toString(){
-        return this.seniority.toString() + "(" + this.color.toString() + ")@" + this.position.getX() + ";";
+        return this.seniority.toString()
+                + "(" + this.color.toString() + ")@"
+                + this.position.getX() + this.position.getY()
+                + ";";
     }
 
     @Override
@@ -54,17 +50,9 @@ public class Huluwa implements Creature, Comparable{
             System.out.println(seniority + ": " + this.getPosition().getX() + "->" + another.getPosition().getX());
         }
 
-        Creature creatureTemp = this;
-        Position positionTemp = another.getPosition();
-        another.setPosition(this.getPosition());
-        creatureTemp.setPosition(positionTemp);
+        super.changePositionWith(another);
     }
 }
 
-enum COLOR {
-    赤, 橙, 黄, 绿, 青, 蓝, 紫
-}
 
-enum SENIORITY {
-    一, 二, 三, 四, 五, 六, 七
-}
+
