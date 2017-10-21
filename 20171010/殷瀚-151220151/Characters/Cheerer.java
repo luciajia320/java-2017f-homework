@@ -7,12 +7,11 @@ import Position.Position;
 
 public class Cheerer extends Creature implements CheeringGroup {
     private String name;
-    private Position position;
-    private String campName;
 
-    Cheerer(String campName){
-        this.campName = campName;
+    public Cheerer(String name){
+        this.name = name;
     }
+
 
     @Override
     public void cheerUp(){
@@ -27,6 +26,7 @@ public class Cheerer extends Creature implements CheeringGroup {
     @Override
     public String toString(){
         return this.name
+                + "  "
                 + "@"
                 + this.position.getX() + this.position.getY()
                 + ";";

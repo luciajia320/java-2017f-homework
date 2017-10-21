@@ -34,12 +34,12 @@ public class FormationManager {
                         {false, false, true, false, false}
                 }
         };
-        Vector2[] learderCoordinates = new Vector2[1];
-        Vector2[] cheerCoordinates = new Vector2[1];
+        Vector2[] learderCoordinates = new Vector2[2];
+        Vector2[] cheerCoordinates = new Vector2[2];
         learderCoordinates[0] = new Vector2(2, 0);
         cheerCoordinates[0] = new Vector2(2, 5);
-        learderCoordinates[0] = new Vector2(2, 0);
-        cheerCoordinates[0] = new Vector2(2, 5);
+        learderCoordinates[1] = new Vector2(2, 0);
+        cheerCoordinates[1] = new Vector2(2, 5);
 
         this.formationLayouts.put("锋矢", FormationsLayouts[0]);
         this.leaderCoordinates.put("锋矢", learderCoordinates[0]);

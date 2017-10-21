@@ -1,12 +1,27 @@
 /**
- * Leader是一种生物,可以指挥自己管理的生物进行排队
+ * Leader是一种生物，有名字，暂时只会站着
  * 蝎子精属于这个类
  */
 package Characters;
 
 public class Leader extends Creature {
-    @Override
-    public void report(){
+    private String name;
 
+    public Leader(String name){
+        this.name = name;
+    }
+
+    @Override
+    public void report() {
+        System.out.print(this.toString());
+    }
+
+    @Override
+    public String toString(){
+        return this.name
+                + "  "
+                + "@"
+                + this.position.getX() + this.position.getY()
+                + ";";
     }
 }

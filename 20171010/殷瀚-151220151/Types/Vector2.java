@@ -31,4 +31,9 @@ public class Vector2 {
     public void setY(int y) {
         this.y = y;
     }
+
+    public Vector2 add(Vector2 another){
+        Vector2 result = new Vector2(this.x + another.getX(), this.y + another.getY());
+        return result;
+    }
 }
