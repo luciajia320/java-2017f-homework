@@ -19,9 +19,8 @@ public class Leader extends Creature {
     @Override
     public String toString(){
         return this.name
-                + "  "
                 + "@"
-                + this.position.getX() + this.position.getY()
+                + this.position.getX() + "," + this.position.getY()
                 + ";";
     }
 }

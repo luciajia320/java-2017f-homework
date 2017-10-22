@@ -20,11 +20,10 @@ public class Louluo extends Creature{
 
     @Override
     public String toString(){
-        return "喽啰 "
-                + this.codeName.toString()
-                + "@"
-                + this.position.getX() + this.position.getY()
-                + ";";
+        return this.codeName.toString()
+                + " @"
+                + this.position.getX() + "," + this.position.getY()
+                + ";_ ";
     }
 }
 

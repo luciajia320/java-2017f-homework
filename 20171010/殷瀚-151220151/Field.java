@@ -2,9 +2,12 @@ import Characters.Cheerer;
 import Characters.Huluwa;
 import Characters.Leader;
 import Characters.Louluo;
+import Layout.Queue;
 import Layout.Troop;
+import Layout.BubbleSorter;
 import Position.Position;
 import Types.COLOR;
+import Types.FormationName;
 import Types.SENIORITY;
 import Types.TianGan;
 
@@ -29,17 +32,17 @@ public class Field {
         }
     }
 
+    public Position[][] getPositions(){
+        return this.positions;
+    }
     public void addTroop(Troop newTroop){
+        newTroop.applyTo(this.positions);
         troops.add(newTroop);
     }
 
-    public void arrange(){  // 根据每个troop的信息放置creature
-        for(int i = 0 ; i < troops.size() ; i++) {
-            troops.get(i).arrange(this.positions);
-        }
-    }
 
     public void show(){ //  依次显示每个position
+        System.out.println();
         for(int i = 0; i < fieldSize; i++){
             for(int j = 0; j < fieldSize; j++){
                 if(positions[i][j].getHolder() == null){
@@ -49,6 +52,15 @@ public class Field {
                 }
             }
             System.out.println();
+        }
+        System.out.println();
+
+        act();
+    }
+
+    public void act(){
+        for(int i = 0 ; i < troops.size() ; i++) {
+            troops.get(i).act();
         }
     }
 
@@ -94,11 +106,22 @@ public class Field {
 
 
         /* 各方势力布阵 */
-        powerOfHuluwa.setFormation("长蛇");
-        powerOfYaojing.setFormation("锋矢");
+        powerOfHuluwa.setFormation(FormationName.长蛇);
+        powerOfYaojing.setFormation(FormationName.锋矢);
 
-        field.arrange();
+        /* 使用queue管理待排序的成员 */
+        Queue queue = new Queue(HuluBrothers);
+
+        queue.shuffle();    //  打乱
+        field.show();
+
+        new BubbleSorter().sort(queue); //  冒泡排序
+        field.show();
+
+        /* 妖精变换阵型 */
+        powerOfYaojing.setFormation(FormationName.偃月);
 
         field.show();
+
     }
 }

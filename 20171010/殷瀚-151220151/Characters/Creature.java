@@ -8,9 +8,28 @@ public abstract class Creature {
 
     public abstract void report();
 
-    public void setPosition(Position position) {
+    public void act(){}
+
+
+    public void moveTo(Position position) {
+
+        if(this.position != null){
+            this.position.setHolder(null);
+        }
+        if(position == null){
+            this.setPosition(position);
+            return;
+        }
+        if(position.getHolder() != null){   //  将目标位置上原有的占有者移走
+            position.getHolder().moveTo(null);
+        }
+
         this.position = position;
         position.setHolder(this);
+    }
+
+    private void setPosition(Position position) {   //  只改变position的值，但是不会处理相应的holder
+        this.position = position;
     }
 
     public Position getPosition() {
@@ -19,10 +38,9 @@ public abstract class Creature {
 
     public void changePositionWith(Creature another){
 
-        Creature creatureTemp = this;
-        Position positionTemp = another.getPosition();
-        another.setPosition(this.getPosition());
-        creatureTemp.setPosition(positionTemp);
+        Position tempPosition = this.position;
+        this.moveTo(another.getPosition());
+        another.moveTo(tempPosition);
     }
 
     public void setCampName(String campName){

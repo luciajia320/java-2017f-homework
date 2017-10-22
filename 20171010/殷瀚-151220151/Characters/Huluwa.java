@@ -22,6 +22,7 @@ public class Huluwa extends Creature implements Comparable {
         this.seniority = seiority;
     }
 
+
     @Override
     public void report() {
         System.out.print(this.toString());
@@ -31,7 +32,7 @@ public class Huluwa extends Creature implements Comparable {
     public String toString(){
         return this.seniority.toString()
                 + "(" + this.color.toString() + ")@"
-                + this.position.getX() + this.position.getY()
+                + this.position.getX() + "," + this.position.getY()
                 + ";";
     }
 
@@ -47,7 +48,11 @@ public class Huluwa extends Creature implements Comparable {
     @Override
     public void changePositionWith(Creature another){
         if(another instanceof Huluwa) {
-            System.out.println(seniority + ": " + this.getPosition().getX() + "->" + another.getPosition().getX());
+            System.out.println(seniority + ": "
+                    + this.position.getX() + "," + this.position.getY()
+                    + "->"
+                    + another.position.getX() + "," + another.position.getY()
+            );
         }
 
         super.changePositionWith(another);

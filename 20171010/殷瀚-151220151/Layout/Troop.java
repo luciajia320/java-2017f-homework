@@ -7,6 +7,7 @@ import Characters.Cheerer;
 import Characters.Creature;
 import Characters.Leader;
 import Position.Position;
+import Types.FormationName;
 import Types.Vector2;
 
 import java.util.ArrayList;
@@ -16,55 +17,69 @@ import java.util.stream.IntStream;
 
 public class Troop {
     private String campName;
-    private String formationName;
-    private int size;
-    private Vector2 anchorCoordinate;
-    private List<Vector2> memberCoordinates = new ArrayList<>();
-    private Vector2 leaderCoordinate, cheerCoordinate;
-    private FormationManager formationManager = new FormationManager();
     private List<Creature> creatures = new ArrayList<>();
+
+    private List<Vector2> memberCoordinates = new ArrayList<>();
+    private Vector2 anchorCoordinate;
+    private Vector2 leaderCoordinate, cheererCoordinate;
+
+    private FormationManager formationManager = new FormationManager();
+
+    private Position[][] battleField;
 
     public Troop(){
 
-        this.formationName = null;
         this.campName = null;
-        this.size = 0;
         this.memberCoordinates = null;
         this.leaderCoordinate = new Vector2();
-        this.cheerCoordinate = new Vector2();
+        this.cheererCoordinate = new Vector2();
         this.anchorCoordinate = new Vector2(0,0);
-
     }
 
     public Troop(int size, String campName, int anchorX, int anchorY){
 
         this.campName = campName;
-        this.formationName = null;
-        this.size = size;
         this.leaderCoordinate = new Vector2();
-        this.cheerCoordinate = new Vector2();
+        this.cheererCoordinate = new Vector2();
         this.anchorCoordinate = new Vector2(anchorX, anchorY);
     }
 
+    public void setAnchorCoordinate(Vector2 anchorCoordinate) {
+        this.anchorCoordinate = anchorCoordinate;
+    }
+
+    public void setLeaderCoordinate(Vector2 leaderCoordinate) {
+        this.leaderCoordinate = leaderCoordinate;
+    }
+
+    public void setCheererCoordinate(Vector2 cheererCoordinate) {
+        this.cheererCoordinate = cheererCoordinate;
+    }
+
+    public void applyTo(Position[][] positions){
+        this.battleField = positions;
+    }
+
     private void setMemberCoordinates(boolean[][] layout){
+        memberCoordinates.clear();  //  变换阵型前，先将已有阵型清空
+
         int rowNum = layout.length;
         int colNum = layout[0].length;
         for(int i = 0; i < rowNum; i++){
             for(int j = 0; j < colNum; j++){
                 if(layout[i][j]){
-                    Vector2 newMemCoor = new Vector2(i, j);
-                    memberCoordinates.add(newMemCoor);
+                    memberCoordinates.add(new Vector2(i, j));
                 }
             }
         }
     }
 
-    public void setFormation(String formationName){
-        this.formationName = formationName;
+    public void setFormation(FormationName formationName){
         boolean[][] layout = formationManager.getFormationLayoutWithName(formationName);
         this.leaderCoordinate = formationManager.getLeaderCoordinateWithName(formationName);
-        this.cheerCoordinate = formationManager.getCheerCoordinateWithName(formationName);
+        this.cheererCoordinate = formationManager.getCheerCoordinateWithName(formationName);
         setMemberCoordinates(layout);
+        arrange();
     }
 
     public void addCreatures(Creature[] newCreatures){
@@ -78,17 +93,26 @@ public class Troop {
 
     public void addOneCreature(Creature someCreature){
         creatures.add(someCreature);
+        someCreature.setCampName(this.campName);
     }
 
-    public void arrange(Position[][] positions){
+    public void act(){
+        for(int i = 0 ; i < creatures.size() ; i++) {
+            creatures.get(i).act();
+        }
+    }
+
+    private void arrange(){
         int indexOfMemCoor = 0;
         for(int i = 0 ; i < creatures.size() ; i++) {
+
             Creature someCreature = creatures.get(i);
+
             Vector2 coordinateInField = new Vector2();
             if(someCreature instanceof Leader){
                 coordinateInField = this.leaderCoordinate.add(this.anchorCoordinate);
             }else if(someCreature instanceof Cheerer){
-                coordinateInField = this.cheerCoordinate.add(this.anchorCoordinate);
+                coordinateInField = this.cheererCoordinate.add(this.anchorCoordinate);
             }else { //  campMember
                 coordinateInField = this.memberCoordinates.get(indexOfMemCoor).add(this.anchorCoordinate);
 
@@ -98,7 +122,7 @@ public class Troop {
                     indexOfMemCoor = 0;
             }
 
-            someCreature.setPosition(positions[coordinateInField.getX()][coordinateInField.getY()]);
+            someCreature.moveTo(this.battleField[coordinateInField.getX()][coordinateInField.getY()]);
         }
     }
 }

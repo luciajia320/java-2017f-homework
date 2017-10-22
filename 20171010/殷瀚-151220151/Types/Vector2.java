@@ -36,4 +36,8 @@ public class Vector2 {
         Vector2 result = new Vector2(this.x + another.getX(), this.y + another.getY());
         return result;
     }
+
+    public boolean lessThan(Vector2 another){
+        return (this.x < another.getX()) || ((this.x == another.getX()) && (this.y < another.getY()));
+    }
 }

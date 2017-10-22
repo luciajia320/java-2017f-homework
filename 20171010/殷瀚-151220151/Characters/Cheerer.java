@@ -14,6 +14,11 @@ public class Cheerer extends Creature implements CheeringGroup {
 
 
     @Override
+    public void act(){
+        cheerUp();
+    }
+
+    @Override
     public void cheerUp(){
         System.out.println(name + " : " + campName + "牛逼！");
     }
@@ -28,7 +33,7 @@ public class Cheerer extends Creature implements CheeringGroup {
         return this.name
                 + "  "
                 + "@"
-                + this.position.getX() + this.position.getY()
+                + this.position.getX() + "," + this.position.getY()
                 + ";";
     }
 }

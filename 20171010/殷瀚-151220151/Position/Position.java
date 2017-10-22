@@ -25,6 +25,10 @@ public class Position {
         return coordinate.getY();
     }
 
+    public Vector2 getCoordinate() {
+        return coordinate;
+    }
+
     public void setX(int x) {
         this.coordinate.setX(x);
     }
@@ -38,5 +42,6 @@ public class Position {
         super();
         this.coordinate = new Vector2(x, y);
     }
+
 }
 

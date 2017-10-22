@@ -1,63 +1,124 @@
 package Layout;
 
+import Types.FormationName;
 import Types.Vector2;
 
 import java.util.HashMap;
 
 /**
- * 管理所有的阵型
+ * 管理所有的阵型，包括每种阵型的默认Leader位置，默认Cheerer位置，阵型布局（二维布尔数组表示）
  * 暂时全用成员变量来存储阵型
  */
 public class FormationManager {
-    private HashMap<String, boolean[][]> formationLayouts = new HashMap<>();
-    private HashMap<String, Vector2> leaderCoordinates = new HashMap<>();
-    private HashMap<String, Vector2> cheerCoordinates = new HashMap<>();
+    private HashMap<FormationName, boolean[][]> formationLayouts = new HashMap<>();
+    private HashMap<FormationName, Vector2> leaderCoordinates = new HashMap<>();
+    private HashMap<FormationName, Vector2> cheererCoordinates = new HashMap<>();
 
 
     public FormationManager(){
 
         /*录入阵型，领导者和加油者的位置*/
 
-        boolean[][][] FormationsLayouts={
-                {
-                        {false, false, true, false, false},
-                        {false, true, true, true, false},
-                        {true, false, true, false, true},
-                        {false, false, true, false, false},
-                        {false, false, true, false, false}
-                },
-                {
-                        {false, false, true, false, false},
-                        {false, false, true, false, false},
-                        {false, false, true, false, false},
-                        {false, false, true, false, false},
-                        {false, false, true, false, false}
-                }
-        };
-        Vector2[] learderCoordinates = new Vector2[2];
-        Vector2[] cheerCoordinates = new Vector2[2];
-        learderCoordinates[0] = new Vector2(2, 0);
-        cheerCoordinates[0] = new Vector2(2, 5);
-        learderCoordinates[1] = new Vector2(2, 0);
-        cheerCoordinates[1] = new Vector2(2, 5);
+        for(int i = 0; i < FormationName.values().length; i++){
+            this.formationLayouts.put(FormationName.values()[i], FormationsLayouts[i]);
+            this.leaderCoordinates.put(FormationName.values()[i], LeaderCoordinates[i]);
+            this.cheererCoordinates.put(FormationName.values()[i], CheererCoordinates[i]);
+        }
 
-        this.formationLayouts.put("锋矢", FormationsLayouts[0]);
-        this.leaderCoordinates.put("锋矢", learderCoordinates[0]);
-        this.cheerCoordinates.put("锋矢", cheerCoordinates[0]);
-        this.formationLayouts.put("长蛇", FormationsLayouts[1]);
-        this.leaderCoordinates.put("长蛇", learderCoordinates[1]);
-        this.cheerCoordinates.put("长蛇", cheerCoordinates[1]);
     }
 
-    public boolean[][] getFormationLayoutWithName(String formationName){
+    public boolean[][] getFormationLayoutWithName(FormationName formationName){
         return formationLayouts.get(formationName);
     }
-    public Vector2 getLeaderCoordinateWithName(String formationName){
+    public Vector2 getLeaderCoordinateWithName(FormationName formationName){
         return leaderCoordinates.get(formationName);
     }
-    public Vector2 getCheerCoordinateWithName(String formationName){
-        return cheerCoordinates.get(formationName);
+    public Vector2 getCheerCoordinateWithName(FormationName formationName){
+        return cheererCoordinates.get(formationName);
     }
+
+    private static boolean[][][] FormationsLayouts={
+            {//鹤翼
+                    {false, false, false, false, false, false, false},
+                    {true, false, false, false, false, false, true},
+                    {false, true, false, false, false, true, false},
+                    {false, false, true, false, true, false, false},
+                    {false, false, false, true, false, false, false}
+            },
+            {//雁行
+                    {false, false, false, false, true},
+                    {false, false, false, true, false},
+                    {false, false, true, false, false},
+                    {false, true, false, false, false},
+                    {true, false, false, false, false}
+            },
+            {//衡轭
+                    {false, false, true, false, false},
+                    {false, true, false, false, false},
+                    {false, false, true, false, false},
+                    {false, true, false, false, false},
+                    {false, false, true, false, false}
+            },
+            {//长蛇
+                    {false, false, true, false, false},
+                    {false, false, true, false, false},
+                    {false, false, true, false, false},
+                    {false, false, true, false, false},
+                    {false, false, true, false, false},
+                    {false, false, true, false, false},
+                    {false, false, true, false, false}
+            },
+            {//鱼鳞
+                    {false, false, true, false, false},
+                    {false, false, false, true, false},
+                    {false, false, true, true, true},
+                    {false, true, true, true, true},
+                    {false, false, true, false, false}
+            },
+            {//方圆
+                    {false, false, true, false, false},
+                    {false, true, false, true, false},
+                    {true, false, false, false, true},
+                    {false, true, false, true, false},
+                    {false, false, true, false, false}
+            },
+            {//偃月
+                    {false, false, false, false, true},
+                    {false, false, true, true, false},
+                    {false, true, true, true, false},
+                    {false, false, true, true, false},
+                    {false, false, false, false, true}
+            },
+            {//锋矢
+                    {false, false, true, false, false},
+                    {false, true, true, true, false},
+                    {true, false, true, false, true},
+                    {false, false, true, false, false},
+                    {false, false, true, false, false}
+            }
+    };
+
+    private static Vector2[] LeaderCoordinates = {
+            new Vector2(2, 0),
+            new Vector2(2, 0),
+            new Vector2(2, 0),
+            new Vector2(2, 1),
+            new Vector2(2, 0),
+            new Vector2(2, 0),
+            new Vector2(2, 0),
+            new Vector2(2, 0)
+    };
+    private static Vector2[] CheererCoordinates = {
+            new Vector2(2, 5),
+            new Vector2(2, 5),
+            new Vector2(2, 5),
+            new Vector2(2, 3),
+            new Vector2(2, 5),
+            new Vector2(2, 5),
+            new Vector2(2, 5),
+            new Vector2(2, 5)
+    };
 }
+
 
 
