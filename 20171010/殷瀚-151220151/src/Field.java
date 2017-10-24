@@ -3,6 +3,7 @@ import Characters.Huluwa;
 import Characters.Leader;
 import Characters.Louluo;
 import Layout.Queue;
+import Layout.QuickSorter;
 import Layout.Troop;
 import Layout.BubbleSorter;
 import Position.Position;
@@ -65,10 +66,7 @@ public class Field {
     }
 
     public static void main(String[] args) {
-        /* 初始化场地，10*10方阵，有2方势力 */
-        Field field = new Field(10, 2);
-
-        /* 初始化所有人物 */
+        /* 初始化所有生物 */
         //葫芦娃
         Huluwa[] HuluBrothers = new Huluwa[7];
         for (int i = 0; i < HuluBrothers.length; i++) {
@@ -88,8 +86,8 @@ public class Field {
 
 
         /* 初始化各方势力 */
-        Troop powerOfHuluwa = new Troop(5, "葫芦娃", 0, 0);
-        Troop powerOfYaojing = new Troop(5, "妖精", 4, 4);
+        Troop powerOfHuluwa = new Troop(5, "葫芦娃", 0, -1);
+        Troop powerOfYaojing = new Troop(5, "妖精", 0, 4);
 
         /* 所有人物加入势力 */
         powerOfHuluwa.addCreatures(HuluBrothers);
@@ -98,6 +96,9 @@ public class Field {
         powerOfYaojing.addCreatures(lackeys);
         powerOfYaojing.addOneCreature(SheJing);
         powerOfYaojing.addOneCreature(XieZiJing);
+
+        /* 初始化场地，11*11方阵，可容纳2方势力 */
+        Field field = new Field(11, 2);
 
         /* 各方势力登场 */
         field.addTroop(powerOfHuluwa);
@@ -115,7 +116,7 @@ public class Field {
         queue.shuffle();    //  打乱
         field.show();
 
-        new BubbleSorter().sort(queue); //  冒泡排序
+        new QuickSorter().sort(queue); //  冒泡排序
         field.show();
 
         /* 妖精变换阵型 */
