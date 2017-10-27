@@ -1,5 +1,6 @@
 public class FightMan extends Creature {
-    public FightMan(int row, int col){
-        super(row, col);
+    FightMan(int row, int col, CHARACTER character1){
+        super(row, col, character1);
     }
+
 }

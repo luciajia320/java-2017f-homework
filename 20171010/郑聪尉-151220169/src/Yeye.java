@@ -1,5 +1,6 @@
 public class Yeye extends CheerMan {
-    public Yeye(int row, int col){
-        super(row, col);
+    Yeye(int row, int col, CHARACTER character){
+        super(row, col, character);
     }
+
 }

@@ -1,5 +1,6 @@
 public class DemonSnake extends CheerMan {
-    public DemonSnake(int row, int col){
-        super(row, col);
+    DemonSnake(int row, int col, CHARACTER character){
+        super(row, col, character);
     }
+
 }
