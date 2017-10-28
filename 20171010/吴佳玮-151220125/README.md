@@ -4,7 +4,7 @@
 ## 程序结构
 
 基于老师给的例子，做进一步更改扩充（之前自己写的太烂了）。<br>
-![]()
+![](https://github.com/thunderning/java-2017f-homework/blob/master/20171010/吴佳玮-151220125/类图.png)
 
 ## 面向对象概念
 
