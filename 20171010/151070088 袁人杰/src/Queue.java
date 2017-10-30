@@ -1,13 +1,13 @@
 public class Queue {
-    private Grid[] queue;
+    private Grid[] grids;
     private int length;
     private int curIndex=0;
 
     public Queue(int length){
         this.length=length;
-        queue = new Grid[length];
+        grids = new Grid[length];
         for (int i=0;i<length;i++){
-            queue[i]=new Grid(i,0);
+            grids[i]=new Grid(20+i,0);
         }
     }
 
@@ -16,7 +16,7 @@ public class Queue {
     }
 
     public Grid getGrid(int index){
-        return queue[index];
+        return grids[index];
     }
 
     public void enQueue(Creature creature){
@@ -24,7 +24,8 @@ public class Queue {
             System.out.println("出界");
         }
         else {
-            queue[curIndex].setHolder(creature);
+            grids[curIndex].setHolder(creature);
+            creature.setGrid(getGrid(curIndex));
             curIndex++;
         }
     }

@@ -26,59 +26,51 @@ public class Planar{
 
     public void cleanPlanar(){
         for(int i = 0; i< planarSize; i++){
-            for (int j = 0; j< planarSize; i++){
-                grids[i][j].setHolder(null);
+            for (int j = 0; j< planarSize; j++){
+                grids[i][j].setNull();
             }
         }
     }
 
     public void printPlanar(){
+        System.out.println("---------------------------------------------------------------------------");
         for(int i=0;i<planarSize;i++){
-            for (int j=0;i<planarSize;j++){
+            System.out.print("|");
+            for (int j=0;j<planarSize;j++){
                 if(grids[i][j].isOccupied()){
-                    System.out.println(grids[i][j].getHolder().getName()+" ");
+                    System.out.print(grids[i][j].getHolder().getName()+" ");
                 }
                 else
-                    System.out.println("    ");
+                    System.out.print("    ");
             }
+            System.out.println();
         }
+        System.out.println("---------------------------------------------------------------------------");
 
     }
 
-    /*public static void main(String[] args) {
-        Planar planar = new Planar(15);
-
-        Huluwa[] bros = new Huluwa[7];
-        for (int i=0;i<bros.length;i++){
-            bros[i] = new Huluwa(Huluwa.COLOUR.values()[i], Huluwa.SENIORITY.values()[i]);
+    public void enterCreature(Creature creature,Coordinate start){
+        if (start.getX()>planarSize||start.getY()>planarSize){
+            System.out.println("出界");
+            return;
         }
-
-        Queue HuluQueue = new Queue(bros.length);
-        for (int i=0;i<bros.length;i++){
-            HuluQueue.enQueue(bros[i]);
+        else{
+            creature.setGrid(grids[start.getX()][start.getY()]);
+            grids[start.getX()][start.getY()].setHolder(creature);
         }
+    }
 
-        for (int i=0;i<bros.length;i++) {
-            bros[i].setGrid(planar.grids[0][i]);
+    public void enterRow(Creature[] creatures,Coordinate start){
+        if ((start.getY()+creatures.length)>planarSize){
+            System.out.println("出界");
+            return;
         }
-        planar.arrRandom(bros);
-
-        Sorter sorter = new Sorter();
-        //sorter.bubbleSort(planar.grids[0]);
-        sorter.bubbleSort(HuluQueue);
-        for (int i=0;i<bros.length;i++){
-            HuluQueue.getGrid(i).getHolder().report();
+        else{
+            for (int i=0;i<creatures.length;i++){
+                enterCreature(creatures[i],new Coordinate(start.getX(),start.getY()+1));
+            }
         }
-
-        for (int i=0;i<bros.length;i++) {
-            bros[i].setGrid(planar.grids[i][0]);
-        }
-
-        System.out.println();
-        System.out.flush();
-
-
-    }*/
+    }
 
 
 }

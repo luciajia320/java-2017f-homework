@@ -63,6 +63,11 @@ public class Grid implements CoordinatorCompare{
         this.setOccupied();
     }
 
+    public void setNull(){
+        this.holder=null;
+        this.cleanOccupied();
+    }
+
     public Creature getHolder() {
         return holder;
     }

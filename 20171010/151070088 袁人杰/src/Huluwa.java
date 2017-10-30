@@ -84,4 +84,27 @@ public class Huluwa implements Creature,Comparation {
             return this.sNum;
         }
     }
+
+    public static void main(String[] args) {
+        Huluwa[] bros = new Huluwa[7];
+        for (int i=0;i<bros.length;i++){
+            bros[i] = new Huluwa(Huluwa.COLOUR.values()[i], Huluwa.SENIORITY.values()[i]);
+        }
+
+        Queue huluQueue =new Queue(bros.length);
+        for(int i=0;i<bros.length;i++){
+            huluQueue.enQueue(bros[i]);
+        }
+
+        try {
+            new HuluShuffle().arrRandom(bros);
+        }
+        catch (NullPointerException e){
+            System.out.println("Exception"+e);
+        }
+
+        for (int i=0;i<bros.length;i++){
+            huluQueue.getGrid(i).getHolder().report();
+        }
+    }
 }

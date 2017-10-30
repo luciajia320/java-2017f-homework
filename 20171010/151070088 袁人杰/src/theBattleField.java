@@ -5,14 +5,17 @@ public class theBattleField {
     private Minions[] minions;
     private Scorpion scorpion;
     private Snake shejing;
+    private Grandpa grandpa;
 
     public theBattleField(){
-        planar= new Planar(15);
+        planar= new Planar(20);
 
         bros=new Huluwa[7];
         for (int i=0;i<bros.length;i++){
             bros[i] = new Huluwa(Huluwa.COLOUR.values()[i], Huluwa.SENIORITY.values()[i]);
         }
+
+        grandpa=new Grandpa();
 
         shejing=new Snake(Snake.NAME.金蛇精, Villain.LEVEL.Boss);
         scorpion=new Scorpion(Villain.LEVEL.Captain,1);
@@ -33,31 +36,37 @@ public class theBattleField {
         }
         new HuluShuffle().arrRandom(field.bros);
         new Sorter().bubbleSort(huluQueue);
+
+
         //蝎子精带队
         Queue villainQueue = new Queue(field.minions.length+1);
         villainQueue.enQueue(field.scorpion);
         for (int i=0;i<field.minions.length;i++){
-            huluQueue.enQueue(field.minions[i]);
+            villainQueue.enQueue(field.minions[i]);
         }
 
-        LineFormat lineFormator = new LineFormat();
-        VshapeFormat vshapeFormator = new VshapeFormat();
-        ArrowFormat arrowFormator =new ArrowFormat();
-        GeeseFormat geeseFormat =new GeeseFormat();
+        //VshapeFormat vshapeFormator = new VshapeFormat();
+        //ArrowFormat arrowFormator =new ArrowFormat();
+        //GeeseFormator geeseFormator =new GeeseFormator();
 
-        lineFormator.format(huluQueue,new Coordinate(4,3),field.planar);
-
-        field.shejing.setGrid(field.planar.getGridOF(14,7));
-        vshapeFormator.format(villainQueue,new Coordinate(11,10),field.planar);
-
+        System.out.println("First Battle！");
+        //双方势力入场
+        field.planar.enterCreature(field.grandpa,new Coordinate(0,10));
+        field.planar.enterCreature(field.shejing,new Coordinate(19,10));
+        field.grandpa.lineFormation(huluQueue,new Coordinate(8,5),field.planar);
+        field.shejing.chongeFormation(villainQueue,new Coordinate(15,5),field.planar);
         field.planar.printPlanar();
-        arrowFormator.format(huluQueue,new Coordinate(4,5),field.planar);
-
-
         field.planar.cleanPlanar();
 
 
-
+        System.out.println("Second Battle!");
+        //双方再次入场
+        field.planar.enterCreature(field.grandpa,new Coordinate(0,10));
+        field.planar.enterCreature(field.shejing,new Coordinate(19,10));
+        field.grandpa.arrowFormation(huluQueue,new Coordinate(4,10),field.planar);
+        field.shejing.yanxingFormation(villainQueue,new Coordinate(18,5),field.planar);
+        field.planar.printPlanar();
+        field.planar.cleanPlanar();
 
     }
 
