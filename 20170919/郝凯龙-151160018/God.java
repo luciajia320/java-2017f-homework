@@ -7,4 +7,3 @@ public class God{
 		family.quickSort();	
 	}	
 }
-

@@ -1,5 +1,3 @@
-
-
 class Hulu{
 	private int key;
 	private String rank;
