@@ -1,19 +1,22 @@
 package lyc.hw;
+import lyc.life.Creature;
 
 public class Formation {
-    public static final String holder = "\uD83C\uDE33";
+    private String name;
+    private static final Creature grass = new Creature(0,0,"\uD83C\uDE33");
     private Location location;
     private int width;
     private int height;
-    protected String[][] contents;
+    protected Creature[][] contents;
+
 
     public Formation(int width, int height) {
         this.width = width;
         this.height = height;
-        this.contents = new String[width][height];
+        this.contents = new Creature[width][height];
         for (int i = 0; i < this.width; i++) {
             for (int j = 0; j < this.height; j++) {
-                this.contents[i][j] = holder;
+                this.contents[i][j] = grass;
             }
         }
     }
@@ -42,8 +45,16 @@ public class Formation {
         this.location = location;
     }
 
-    public String[][] getContents() {
+    public Creature[][] getContents() {
         return contents;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
