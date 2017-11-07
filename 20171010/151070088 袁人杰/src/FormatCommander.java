@@ -1,6 +1,6 @@
 public class FormatCommander implements Formation{
     @Override
-    public void arrowFormat(Queue queue, Coordinate start, Planar planar) {
+    public void arrowFormat(CreatureQueue queue, Coordinate start, Planar planar) {
         int planarSize=planar.getPlanarSize();
         int x,y;
         int queueLength=0;
@@ -23,7 +23,7 @@ public class FormatCommander implements Formation{
     }
 
     @Override
-    public void chongeFormat(Queue queue, Coordinate start, Planar planar) {
+    public void chongeFormat(CreatureQueue queue, Coordinate start, Planar planar) {
         int planarSize=planar.getPlanarSize();
         int x,y;
         int queueLength=0;
@@ -53,7 +53,7 @@ public class FormatCommander implements Formation{
 
 
     @Override
-    public void lineFormat(Queue queue, Coordinate start, Planar planar) {
+    public void lineFormat(CreatureQueue queue, Coordinate start, Planar planar) {
         int planarSize=planar.getPlanarSize();
         int x,y;
         int queueLength=0;
@@ -80,7 +80,7 @@ public class FormatCommander implements Formation{
     }
 
     @Override
-    public void yanxingFormat(Queue queue, Coordinate start, Planar planar) {
+    public void yanxingFormat(CreatureQueue queue, Coordinate start, Planar planar) {
         int planarSize=planar.getPlanarSize();
         int x,y;
         int queueLength=0;
@@ -108,7 +108,7 @@ public class FormatCommander implements Formation{
     }
 
     @Override
-    public void heyiFormat(Queue queue, Coordinate start, Planar planar) {
+    public void heyiFormat(CreatureQueue queue, Coordinate start, Planar planar) {
         int planarSize=planar.getPlanarSize();
         int x,y;
         int queueLength=0;

@@ -30,7 +30,7 @@ public class theBattleField {
         theBattleField field = new theBattleField();
 
         //葫芦娃入队
-        Queue huluQueue =new Queue(field.bros.length);
+        CreatureQueue huluQueue =new CreatureQueue(field.bros.length);
         for(int i=0;i<field.bros.length;i++){
             huluQueue.enQueue(field.bros[i]);
         }
@@ -39,20 +39,21 @@ public class theBattleField {
 
 
         //蝎子精带队
-        Queue villainQueue = new Queue(field.minions.length+1);
-        villainQueue.enQueue(field.scorpion);
-        for (int i=0;i<field.minions.length;i++){
-            villainQueue.enQueue(field.minions[i]);
-        }
-
-        //VshapeFormat vshapeFormator = new VshapeFormat();
-        //ArrowFormat arrowFormator =new ArrowFormat();
-        //GeeseFormator geeseFormator =new GeeseFormator();
+        CreatureQueue villainQueue = new CreatureQueue(field.minions.length+1);
 
         System.out.println("First Battle！");
         //双方势力入场
         field.planar.enterCreature(field.grandpa,new Coordinate(0,10));
         field.planar.enterCreature(field.shejing,new Coordinate(19,10));
+        LineFormation l1 = new LineFormation(huluQueue);
+        field.planar.layout(l1,new Coordinate(8,5));
+        YanxingFormation y1 = new YanxingFormation(villainQueue);
+        field.planar.layout(y1,new Coordinate(18,5));
+        field.planar.printPlanar();
+/*
+        System.out.println("First Battle！");
+        //双方势力入场
+
         field.grandpa.lineFormation(huluQueue,new Coordinate(8,5),field.planar);
         field.shejing.chongeFormation(villainQueue,new Coordinate(15,5),field.planar);
         field.planar.printPlanar();
@@ -67,6 +68,8 @@ public class theBattleField {
         field.shejing.yanxingFormation(villainQueue,new Coordinate(18,5),field.planar);
         field.planar.printPlanar();
         field.planar.cleanPlanar();
+      */
+
 
     }
 

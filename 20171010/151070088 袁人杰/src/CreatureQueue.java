@@ -1,9 +1,9 @@
-public class Queue {
+public class CreatureQueue {
     private Grid[] grids;
     private int length;
     private int curIndex=0;
 
-    public Queue(int length){
+    public CreatureQueue(int length){
         this.length=length;
         grids = new Grid[length];
         for (int i=0;i<length;i++){

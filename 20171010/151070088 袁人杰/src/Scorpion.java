@@ -31,7 +31,7 @@ public class Scorpion extends Villain{
 
     @Override
     public String toString() {
-        return this.Name.toString()+this.Seniority+this.yourLevel.toString()+"@grid("+ grid.getX()+","+ grid.getY()+")";
+        return this.Name.toString()+this.Seniority+this.yourLevel.toString()+"@grids("+ grid.getX()+","+ grid.getY()+")";
     }
 
 }

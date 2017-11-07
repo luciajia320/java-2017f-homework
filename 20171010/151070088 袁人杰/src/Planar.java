@@ -4,6 +4,8 @@ public class Planar{
     private int planarSize;
     private Grid[][] grids;
 
+    public static final String PLACE_HOLDER = "\uD83C\uDF3F";
+
     public Grid getGridOF(int x,int y) {
         return grids[x][y];
     }
@@ -41,7 +43,7 @@ public class Planar{
                     System.out.print(grids[i][j].getHolder().getName()+" ");
                 }
                 else
-                    System.out.print("    ");
+                    System.out.print("\uD83C\uDF3F ");
             }
             System.out.println();
         }
@@ -57,6 +59,23 @@ public class Planar{
         else{
             creature.setGrid(grids[start.getX()][start.getY()]);
             grids[start.getX()][start.getY()].setHolder(creature);
+        }
+    }
+
+    public void layout(Formations formation,Coordinate start) {
+        int x = start.getX();
+        int y = start.getY();
+        if (start.getX()>planarSize||start.getY()>planarSize){
+            System.out.println("出界");
+            return;
+        }
+        else {
+            for(int i=0;i<formation.width;i++) {
+                for (int j=0;j<formation.height;j++) {
+
+                    grids[x+i][y+j].setHolder(formation.getGridof(i,j).getHolder());
+                }
+            }
         }
     }
 
