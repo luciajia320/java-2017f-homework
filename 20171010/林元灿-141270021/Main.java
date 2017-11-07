@@ -1,7 +1,6 @@
 import lyc.hw.*;
 import lyc.life.*;
 
-
 public class Main {
     public static void main(String[] args) {
         //造物主创造万物
