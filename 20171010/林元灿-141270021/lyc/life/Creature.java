@@ -1,12 +1,10 @@
 package lyc.life;
 
-import java.io.PipedWriter;
-
-public class Creature {
+public abstract class Creature {
 
     private int power;
     private int blood;
-    private String identity = "creature";
+    private String identity;
 
     public Creature(int power,int blood,String identity){
         this.power = power;
@@ -39,9 +37,4 @@ public class Creature {
     }
 
 
-
-    @Override
-    public String toString() {
-        return identity;
-    }
 }

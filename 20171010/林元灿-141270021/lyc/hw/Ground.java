@@ -1,6 +1,7 @@
 package lyc.hw;
 
 import lyc.life.Creature;
+import lyc.life.Terrain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 public class Ground {
     private int width;
     private int height;
-    private static final Creature terrain = new Creature(0, 0, "\uD83C\uDF3F");
+    private static final Creature terrain = new Terrain(0, 0, "\uD83C\uDF3F");
     private List armies;
     private Creature [][]battlefield;
 

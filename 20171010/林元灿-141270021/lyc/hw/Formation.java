@@ -1,9 +1,10 @@
 package lyc.hw;
 import lyc.life.Creature;
+import lyc.life.Terrain;
 
 public class Formation {
     private String name;
-    private static final Creature grass = new Creature(0,0,"\uD83C\uDE33");
+    private static final Creature soil = new Terrain(0,0,"\uD83C\uDE33");
     private Location location;
     private int width;
     private int height;
@@ -16,7 +17,7 @@ public class Formation {
         this.contents = new Creature[width][height];
         for (int i = 0; i < this.width; i++) {
             for (int j = 0; j < this.height; j++) {
-                this.contents[i][j] = grass;
+                this.contents[i][j] = soil;
             }
         }
     }

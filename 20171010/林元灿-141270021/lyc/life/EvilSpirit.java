@@ -9,6 +9,7 @@ public class EvilSpirit extends Creature {  //xiao lou lou
     }
 
     public String getName() {
+
         return name;
     }
 
