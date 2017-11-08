@@ -1,8 +1,6 @@
 package Homework3;
 
-public class Creature{
-	int ID;
-	String Name;
-	
-	Creature(){}
+public interface Creature{
+	public int returnID();
+	public String returnName();
 }

@@ -1,8 +1,8 @@
 package Homework3;
 
-public class HuluBrother extends Creature{
-	
-	public int order;
+public class HuluBrother implements Creature{
+	int ID;
+	String Name;
 	
 	HuluBrother(int order){
 		this.ID = 4 + order;
@@ -31,5 +31,15 @@ public class HuluBrother extends Creature{
 			default:
 				break;
 		}
+	}
+	
+	@Override
+	public int returnID(){
+		return this.ID;
+	}
+	
+	@Override
+	public String returnName(){
+		return this.Name;
 	}
 }
