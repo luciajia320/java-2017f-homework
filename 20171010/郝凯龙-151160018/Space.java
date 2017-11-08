@@ -29,7 +29,7 @@ public class Space
 			matrix[line-index][row+index]=array[i++];
 			++index;
 		}
-		matrix[line-3][row]=encourage;//助阵
+		matrix[line][row+3]=encourage;//助阵
 		show();//显示战况
 		matrix[line][row]=null;
 		i=0; index=1;
@@ -39,7 +39,7 @@ public class Space
 			matrix[line-index][row+index]=null; ++i;
 			++index;
 		}
-		matrix[line-3][row]=null;
+		matrix[line][row+3]=null;
 	}
 	public void AFormation(Creature head,Creature array[],int n,Creature encourage)//锋矢阵
 	{
@@ -66,8 +66,12 @@ public class Space
 		while(i<n)
 		{
 			matrix[line+index][row]=null; ++i;
-			matrix[line+index][row-index]=null; ++i;
-			matrix[line+index][row+index]=null; ++i;
+			if(i<3*n/4 && i<n)
+			{
+				matrix[line+index][row-index]=null; ++i;
+				if(i>=n) break;
+				matrix[line+index][row+index]=null; ++i;
+			}
 			++index;
 		}
 		matrix[line][row+3]=null;
@@ -91,19 +95,19 @@ public class Space
 		{
 			for(int j=0;j<N;++j)
 				if(matrix[i][j]==null)
-					System.out.print('~');
+					System.out.print("~~");
 				else if(matrix[i][j].getName()=="Hulu")
-					System.out.print('*');
+					System.out.print(((Hulu)matrix[i][j]).getColor());
 				else if(matrix[i][j].getName()=="Soldier")
-					System.out.print('^');
+					System.out.print("兵");
 				else if(matrix[i][j].getName()=="Snake")
-					System.out.print('&');
+					System.out.print("蛇");
 				else if(matrix[i][j].getName()=="Grandpa")
-					System.out.print('#');
+					System.out.print("爷");
 				else if(matrix[i][j].getName()=="Scorpion")
-					System.out.print('$');
+					System.out.print("蝎");
 				else
-					System.out.print('~');
+					System.out.print("~~");
 			System.out.println();
 		}
 	}
