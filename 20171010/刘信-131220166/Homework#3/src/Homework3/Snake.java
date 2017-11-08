@@ -6,7 +6,7 @@ public class Snake implements Creature{
 	
 	Snake(){
 		this.ID = 4;
-		this.Name = "Éß¾«       ";
+		this.Name = "è›‡ç²¾";
 	}
 	
 	@Override

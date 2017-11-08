@@ -5,7 +5,7 @@ public class Grandpa implements Creature{
 	String Name;
 	Grandpa(){
 		this.ID = 1;
-		this.Name = "��үү   ";
+		this.Name = "老爷爷";
 	}
 
 	@Override

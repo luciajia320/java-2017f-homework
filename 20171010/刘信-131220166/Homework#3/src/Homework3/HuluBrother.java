@@ -8,25 +8,25 @@ public class HuluBrother implements Creature{
 		this.ID = 4 + order;
 		switch(order){
 			case 1:
-				this.Name = "老大       ";
+				this.Name = "鑰佸ぇ";
 				break;
 			case 2:
-				this.Name = "老二       ";
+				this.Name = "鑰佷簩";
 				break;
 			case 3:
-				this.Name = "老三       ";
+				this.Name = "鑰佷笁";
 				break;
 			case 4:
-				this.Name = "老四       ";
+				this.Name = "鑰佸洓";
 				break;
 			case 5:
-				this.Name = "老五       ";
+				this.Name = "鑰佷簲";
 				break;
 			case 6:
-				this.Name = "老六       ";
+				this.Name = "鑰佸叚";
 				break;
 			case 7:
-				this.Name = "老七       ";
+				this.Name = "鑰佷竷";
 				break;
 			default:
 				break;

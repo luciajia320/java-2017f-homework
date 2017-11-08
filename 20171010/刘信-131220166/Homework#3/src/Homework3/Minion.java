@@ -6,7 +6,7 @@ public class Minion implements Creature{
 	
 	Minion(){
 		this.ID = 3;
-		this.Name = "Сආ�  ";
+		this.Name = "小喽啰";
 	}
 
 	@Override

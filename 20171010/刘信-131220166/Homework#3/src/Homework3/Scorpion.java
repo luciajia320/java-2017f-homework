@@ -6,7 +6,7 @@ public class Scorpion implements Creature{
 	
 	Scorpion(){
 		this.ID = 2;
-		this.Name = "Ы�Ӿ�   ";
+		this.Name = "蝎子精";
 	}
 
 	@Override
