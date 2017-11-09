@@ -1,9 +1,15 @@
+package lonhh.huluwa;
+
 public class Huluwa extends Creature implements Comparable, Active {
+
+    private static final String[] NAME = {"🌷","🌻","🌹","🔥","🌸","🌸","🍁"};
+
     private COLOR color;
     private SENIORITY seniority;
 
     Huluwa(COLOR color, SENIORITY seniority){
         super(seniority.toString());
+        //super(NAME[seniority.ordinal()]);
         this.color = color;
         this.seniority = seniority;
     }
@@ -26,7 +32,7 @@ public class Huluwa extends Creature implements Comparable, Active {
 
     @Override
     public void act(){
-        System.out.println("呔,妖怪受死!");
+        System.out.println("呔," + this.seniority.toString() + "娃在此, 妖怪快来受死!");
     }
 
 }
@@ -36,5 +42,5 @@ enum COLOR{
 }
 
 enum SENIORITY{
-    一,二,三,四,五,六,七
+    大,二,三,四,五,六,七
 }

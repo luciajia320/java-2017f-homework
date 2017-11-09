@@ -1,3 +1,5 @@
+package lonhh.huluwa;
+
 public class Minions extends Creature implements Active {
 
     Minions(String name){
