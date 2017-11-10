@@ -4,18 +4,7 @@
 
 1. Creature类
 
-   Creature设计为基类, 而不是使用接口的原因是: 对于葫芦娃, 爷爷, 蛇精等 来说, 都拥有共同的属性和实现相同的方法, 也就是
-
-   ```java
-   String name;
-   Position position;
-   ```
-
-    以及对应的一些方法
-
-   从另一个角度来说,
-
-   Creature -> 葫芦娃  和  人 -> 女人相同
+   Creature类作为基类, 相较于前一个版本所做的改变是去除了position field. 这是考虑到Creature类出现在Space中是在formation类的包装下,而formation类包含Position信息, 故考虑除去冗余部分
 
 2. Huluwa, Grandpa, Snake, Minions类
 
@@ -38,7 +27,7 @@
    ```java
    public class Grandpa extends Creature implements Active {
        Grandpa(){
-           super("爷");
+           super("\uD83C\uDF85");
        }
        @Override
        public void act(){
@@ -49,11 +38,37 @@
 
    另外, 由于蝎子精在剧中只是一个高级步兵, 故暂时将其归入了杂兵类
 
-3. 阵法接口Formation
+   ​
 
-   考虑将阵法实现成一个接口而不是类的原因是, 阵法中个体的联系性,或者说整体性目前来看并不强. 
+3. 阵法类Formation
 
-    抽象成一个聚合多个对象的类, 会让程序变得复杂(?)
+   Formation类相比example中所给出的Formation类做了一点改变
 
-    但如果阵法涉及到"增幅"或者其他效果时, 作为类实现应该会更好.
+   ``` java
+   //protected String[][] content;
+   protected Creature[][] content;
+   ```
 
+   这是因为若仅仅存储String, Formation类则仅仅只有显示功能, 而丧失了拓展的可能性, 例如可能存在的"属性加成", "群体技能"等等
+
+   而Formation有一个子类SingleFormation
+
+   ``` java
+   public class SingleFormation extends Formation {
+       SingleFormation(Creature creature){
+           super(1,1);
+           Creature[][] creatures = super.getContent();
+           creatures[0][0] = creature;
+       }
+   }
+   ```
+
+   这是由单个生物形成的formation, 是为了让爷爷,蛇精 和葫芦娃及蝎子精带队的小喽啰有相同的形式.
+
+4. 类的关系
+
+   Space类只记录formation类, 而 formation类记录包含的Creature以及自己的Position信息
+
+5. 关于sort
+
+   由于各种Formation中,只有长蛇阵才有sort的可能, 故在长蛇阵类中实现sort函数, 通过之前实现的Bubble Sorter, 对稍做一些改变的content数组进行排序
