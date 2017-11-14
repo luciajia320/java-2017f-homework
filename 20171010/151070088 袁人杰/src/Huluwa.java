@@ -53,7 +53,7 @@ public class Huluwa implements Creature,Comparation {
 
     @Override
     public String getName() {
-        return "🥜";
+        return SENIORITY.values().toString();
     }
 
     enum COLOUR {

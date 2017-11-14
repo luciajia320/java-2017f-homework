@@ -1,6 +1,6 @@
 public class Scorpion extends Villain{
     //private LEVEL yourlevel;
-    private String Name="蝎子";
+    private String Name="🦂";
     private int Seniority;
 
     public Scorpion(LEVEL level,int seniority) {

@@ -2,12 +2,10 @@ public class Snake extends Villain {
     private NAME yourName;
     //private LEVEL yourlevel;
     private Grid grid;
-    private FormatCommander formatCommander;
 
     public Snake(NAME name,LEVEL level) {
         this.yourName=name;
         this.yourLevel=level;
-        formatCommander=new FormatCommander();
     }
 
     @Override
@@ -33,32 +31,31 @@ public class Snake extends Villain {
 
     @Override
     public String getName() {
-        return "蛇精";
+        return "🐍";
     }
 
     public void arrowFormation(CreatureQueue queue, Coordinate start, Planar planar){
         System.out.println("蛇精：锋矢阵！");
-        formatCommander.arrowFormat(queue, start, planar);
     }
 
     public void chongeFormation(CreatureQueue queue, Coordinate start, Planar planar){
         System.out.println("蛇精：衝轭阵！");
-        formatCommander.chongeFormat(queue, start, planar);
+
     }
 
     public void lineFormation(CreatureQueue queue, Coordinate start, Planar planar){
         System.out.println("蛇精：长蛇阵！");
-        formatCommander.lineFormat(queue, start, planar);
+
     }
 
     public void yanxingFormation(CreatureQueue queue, Coordinate start, Planar planar){
         System.out.println("蛇精：雁行阵！");
-        formatCommander.yanxingFormat(queue, start, planar);
+
     }
 
     public void heyiFormation(CreatureQueue queue, Coordinate start, Planar planar){
         System.out.println("蛇精：鹤翼阵！");
-        formatCommander.heyiFormat(queue, start, planar);
+
     }
     enum NAME {
         金蛇精(1),青蛇精(2);

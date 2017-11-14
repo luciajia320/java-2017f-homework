@@ -1,11 +1,9 @@
 public class Grandpa implements Creature{
     private String name;
     public Grid grid;
-    private FormatCommander formatCommander;
 
     public Grandpa(){
-        name="爷爷";
-        formatCommander=new FormatCommander();
+        name="爷";
     }
     @Override
     public String getName() {
@@ -29,27 +27,23 @@ public class Grandpa implements Creature{
 
     public void arrowFormation(CreatureQueue queue, Coordinate start, Planar planar){
         System.out.println("爷爷：锋矢阵！");
-        formatCommander.arrowFormat(queue, start, planar);
+
     }
 
     public void chongeFormation(CreatureQueue queue, Coordinate start, Planar planar){
         System.out.println("爷爷：衝轭阵！");
-        formatCommander.chongeFormat(queue, start, planar);
     }
 
     public void lineFormation(CreatureQueue queue, Coordinate start, Planar planar){
         System.out.println("爷爷：长蛇阵！");
-        formatCommander.lineFormat(queue, start, planar);
     }
 
     public void yanxingFormation(CreatureQueue queue, Coordinate start, Planar planar){
         System.out.println("爷爷：雁行阵！");
-        formatCommander.yanxingFormat(queue, start, planar);
     }
 
     public void heyiFormation(CreatureQueue queue, Coordinate start, Planar planar){
         System.out.println("爷爷：鹤翼阵！");
-        formatCommander.heyiFormat(queue, start, planar);
     }
 
 }

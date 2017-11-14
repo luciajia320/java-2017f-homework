@@ -1,4 +1,4 @@
-public class Grid implements CoordinatorCompare{
+public class Grid {
     private Coordinate coordinate;
     private  boolean occupied;
     private Creature holder;
@@ -41,22 +41,6 @@ public class Grid implements CoordinatorCompare{
 
 
     public int getY() { return this.coordinate.getY(); }
-
-    @Override
-    public boolean XisBigger(Coordinate another) {
-        if (another.getX()>this.getX())
-            return true;
-        else
-            return false;
-    }
-
-    @Override
-    public boolean YisBigger(Coordinate another) {
-        if (another.getY()>this.getY())
-            return true;
-        else
-            return false;
-    }
 
     public void setHolder(Creature holder) {
         if (!(holder==null)) {

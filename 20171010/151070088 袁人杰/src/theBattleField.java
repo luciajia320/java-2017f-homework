@@ -40,16 +40,30 @@ public class theBattleField {
 
         //蝎子精带队
         CreatureQueue villainQueue = new CreatureQueue(field.minions.length+1);
+        villainQueue.enQueue(field.scorpion);
+        for (Creature i:field.minions) {
+            huluQueue.enQueue(i);
+        }
 
         System.out.println("First Battle！");
         //双方势力入场
-        field.planar.enterCreature(field.grandpa,new Coordinate(0,10));
-        field.planar.enterCreature(field.shejing,new Coordinate(19,10));
-        LineFormation l1 = new LineFormation(huluQueue);
-        field.planar.layout(l1,new Coordinate(8,5));
-        YanxingFormation y1 = new YanxingFormation(villainQueue);
-        field.planar.layout(y1,new Coordinate(18,5));
-        field.planar.printPlanar();
+        try {
+
+            field.planar.enterCreature(field.grandpa, new Coordinate(0, 10));
+            field.planar.enterCreature(field.shejing, new Coordinate(19, 10));
+
+            LineFormation l1 = new LineFormation(huluQueue);
+            field.planar.layout(l1, new Coordinate(1, 6));
+            YanxingFormation y1 = new YanxingFormation(villainQueue);
+            field.planar.layout(y1, new Coordinate(5, 5));
+
+            field.planar.printPlanar();
+
+            field.planar.cleanPlanar();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
 /*
         System.out.println("First Battle！");
         //双方势力入场
