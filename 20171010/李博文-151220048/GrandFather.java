@@ -3,7 +3,7 @@ public class GrandFather implements  Creature{
     String name = "爷";
     @Override
     public void report() {
-        System.out.print(name);
+        System.out.print("👴 ");
     }
 
     @Override

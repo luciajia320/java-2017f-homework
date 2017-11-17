@@ -3,7 +3,7 @@ public class Snake implements Creature{
     String name = "蛇";
     @Override
     public void report() {
-        System.out.print(name);
+        System.out.print("🐍 ");
     }
 
     @Override
