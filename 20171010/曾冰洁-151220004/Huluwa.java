@@ -2,16 +2,19 @@ class Huluwa extends Creature implements Comparable{
     private int rank;
     private COLOR color;
 
-    Huluwa(int rank, COLOR color, NAME name) {
+    Huluwa(int rank, COLOR color) {
         this.rank = rank;
         this.color = color;
-        this.name = name.toString();
+        this.name = "🍐";
     }
 
     public COLOR getColor() {
         return color;
     }
-    public int getRank() { return rank; }
+
+    public int getRank() {
+        return rank;
+    }
 
     @Override
     public boolean isOlderThan(Comparable huluwa){

@@ -30,11 +30,17 @@ public class Position {
         return coord;
     }
 
-    public void setCoord(Coord coord) { this.coord = coord; }
+    public void setCoord(Coord coord) {
+        this.coord = coord;
+    }
 
-    public void setCoordX(int x){ coord.setX(x); }
+    public void setCoordX(int x){
+        coord.setX(x);
+    }
 
-    public void setCoordY(int y){ coord.setY(y); }
+    public void setCoordY(int y){
+        coord.setY(y);
+    }
 
     public boolean holderOccupied(){
         if (holder==null) { return false; } else { return true; }

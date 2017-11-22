@@ -1,9 +1,7 @@
 public class XiaoLouLuo extends Creature {
-
-    XiaoLouLuo(String name) {
-        this.name = name;
+    XiaoLouLuo(){
+        this.name = "👾";
     }
-
 }
 
 enum XIAOLOULUONAME{
