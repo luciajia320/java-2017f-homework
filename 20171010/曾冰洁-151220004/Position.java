@@ -1,17 +1,17 @@
-public class Position {
+public class Position<T extends Creature> {
 
     private Coord coord;
-    private Creature holder;
+    private T holder;
 
     public Position(Coord coord){
         this.coord = coord;
     }
 
-    public Creature getHolder() {
+    public T getHolder() {
         return holder;
     }
 
-    public void setHolder(Creature holder) {
+    public void setHolder(T holder) {
         this.holder = holder;
     }
 
