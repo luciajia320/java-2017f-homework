@@ -1,26 +1,38 @@
-public class jianshi implements formation{
+import java.util.ArrayList;
+
+public class jianshi implements layout{
     @Override
     public void sort(Map queue) {
-        creature creature;
-        Position[][] positions = queue.getPositions();
+        ArrayList<ArrayList<Position>> positions = queue.getPositions();
         // positions[0][1].getHolder().setPosition(positions[1][1]);
-        positions[1][1].setHolder(positions[0][1].getHolder());
-        positions[0][1].invalid();
 
-        positions[1][2].setHolder(positions[2][2].getHolder());
-        positions[2][2].invalid();
+        for(int i=0;i<2;i++){
+            positions.get(i).get(4-i).setHolder(positions.get(i).get(6-i).getHolder());
+            positions.get(i).get(6-i).invalid();
+        }
 
-        positions[0][2].setHolder(positions[2][4].getHolder());
-        positions[2][4].invalid();
+        /*positions.get(1).get(1).setHolder(positions.get(0).get(1).getHolder());
+        positions.get(0).get(1).invalid();*/
 
-        positions[1][3].setHolder(positions[1][5].getHolder());
-        positions[1][5].invalid();
+        positions.get(1).get(2).setHolder(positions.get(2).get(2).getHolder());
+        positions.get(2).get(2).invalid();
 
-        positions[0][4].setHolder(positions[0][6].getHolder());
-        positions[0][6].invalid();
+        positions.get(0).get(2).setHolder(positions.get(2).get(4).getHolder());
+        positions.get(2).get(4).invalid();
 
-        positions[2][2].setHolder(positions[3][3].getHolder());
-        positions[3][3].invalid();
+        /*positions.get(1).get(3).setHolder(positions.get(1).get(5).getHolder());
+        positions.get(1).get(5).invalid();
+
+        positions.get(0).get(4).setHolder(positions.get(0).get(6).getHolder());
+        positions.get(0).get(6).invalid();*/
+
+        positions.get(2).get(2).setHolder(positions.get(3).get(3).getHolder());
+        positions.get(3).get(3).invalid();
+
+        for(int i=6;i<13;i++){
+            positions.get(i).get(2).setHolder(positions.get(i).get(3).getHolder());
+            positions.get(i).get(3).invalid();
+        }
 
     }
 }

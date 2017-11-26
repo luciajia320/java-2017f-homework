@@ -1,4 +1,6 @@
-public class GrandpaAndShejing implements formation {
+import java.util.ArrayList;
+
+public class GrandpaAndShejing implements layout {
     private creature creature4;
     private creature creature5;
 
@@ -8,8 +10,8 @@ public class GrandpaAndShejing implements formation {
     }
     @Override
     public void sort(Map queue) {
-        Position[][] positions = queue.getPositions();
-        positions[3][1].setHolder(this.creature5);
-        positions[7][1].setHolder(this.creature4);
+        ArrayList<ArrayList<Position>> positions= queue.getPositions();
+        positions.get(3).get(1).setHolder(this.creature5);
+        positions.get(5).get(1).setHolder(this.creature4);
     }
 }

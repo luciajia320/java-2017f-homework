@@ -1,44 +1,57 @@
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.ArrayList;
+
 
 public class Map {
-    private Position[][] positions;
-    private creature[] creatures1;
+    //private Position[][] positions;
+    private ArrayList<ArrayList<Position>> positions;
+ //   private creature[] creatures1;
     private creature creature2;
-    private creature[] creatures3;
+  //  private creature[] creatures3;
+    int length,width;
 
+    public Map(int n,int m){
+        length=n;
+        width=m;
+        this.positions=new ArrayList<>();
+        for(int i=0;i<n;i++){
+            positions.add(new ArrayList<>());
+            for(int j=0;j<m;j++)
+                positions.get(i).add(new Position(i,j));
+        }
+    }
 
-    public Map(brothers[] bro,xiezijing xie,monsters[] mon){
-        this.positions=new Position[15][10];
-        this.creatures1=bro;
+    public void PutOnMap(queue huluQueue,xiezijing xie,ArrayList<? extends creature> mon){
+      //  this.positions=new Position[15][10];
+     //   this.creatures1=bro;
         this.creature2=xie;
-        this.creatures3=mon;
+     //   this.creatures3=mon;
      //   this.creatures4=blank;
-        for(int i=0;i<15;i++)
+      /*  for(int i=0;i<15;i++)
             for(int j=0;j<10;j++)
                 this.positions[i][j]=new Position(i,j);
+       */
 
-        for(int i=8;i<15;i++){
-            this.positions[i][3].setHolder(bro[i-8]);
+        for(int i=6;i<13;i++){
+            this.positions.get(i).get(3).setHolder(huluQueue.getCreat(i-6));
         }
         for(int i=0;i<6;i++){
-            this.positions[0][i].setHolder(mon[i]);
+            this.positions.get(0).get(i).setHolder(mon.get(i));
         }
-        this.positions[1][0].setHolder(xie);
+        this.positions.get(1).get(0).setHolder(xie);
 
     }
 
-    public Position[][] getPositions() {
+    public ArrayList<ArrayList<Position>> getPositions() {
         return positions;
     }
 
     public void output(){
-        for(int i=0;i<15;i++) {
-            for (int j = 0; j < 10; j++) {
-                if(positions[i][j].getValid())
-                    System.out.print(positions[i][j].getHolder().getName() + "  ");
+        for(int i=0;i<length;i++) {
+            for (int j = 0; j < width; j++) {
+                if(positions.get(i).get(j).getValid())
+                    System.out.print(positions.get(i).get(j).getHolder().getName());
                 else
-                    System.out.print("       ");
+                    System.out.print("🌿");
             }
             System.out.println();
         }

@@ -1,26 +1,39 @@
+import java.util.ArrayList;
+
 public class sort {
     public static  void main(String[] args) {
-        brothers[] brother = new brothers[7];
+        /*brothers[] brother = new brothers[7];
         brother[0] = new brothers(COLORS.values()[3], SENIORITY.values()[3]);
         brother[1] = new brothers(COLORS.values()[2], SENIORITY.values()[2]);
         brother[2] = new brothers(COLORS.values()[5], SENIORITY.values()[5]);
         brother[3] = new brothers(COLORS.values()[4], SENIORITY.values()[4]);
         brother[4] = new brothers(COLORS.values()[6], SENIORITY.values()[6]);
         brother[5] = new brothers(COLORS.values()[1], SENIORITY.values()[1]);
-        brother[6] = new brothers(COLORS.values()[0], SENIORITY.values()[0]);
+        brother[6] = new brothers(COLORS.values()[0], SENIORITY.values()[0]);*/
+
+        ArrayList<brothers> brother=new ArrayList<>();
+        for(int i=0;i<7;i++)
+           brother.add(new brothers(COLORS.values()[i],SENIORITY.values()[i]));
+        queue huluQueue=new queue(brother);
+        huluQueue.ramdom();
 
         xiezijing xiezi=new xiezijing();
 
-        monsters[] monster=new monsters[6];
+        //monsters[] monster=new monsters[6];
+        ArrayList<monsters> monster=new ArrayList<>();
         for(int i=0;i<6;i++)
-            monster[i]=new monsters(i);
+            monster.add(new monsters(i));
 
         grandpa grand=new grandpa();
 
         shejing snake=new shejing();
 
-        Map map=new Map(brother,xiezi,monster);
+       // Map map=new Map(huluQueue,xiezi,monster);
        // map.shuffle();
+
+        Map map=new Map(13,10);
+        map.PutOnMap(huluQueue,xiezi,monster);
+
         System.out.println("初始站位：");
         map.output();
 

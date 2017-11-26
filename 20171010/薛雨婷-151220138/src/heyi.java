@@ -1,26 +1,37 @@
-public class heyi implements formation {
+import java.util.ArrayList;
+
+public class heyi implements layout {
     @Override
     public void sort(Map queue) {
-        creature creature;
-        Position[][] positions = queue.getPositions();
+        ArrayList<ArrayList<Position>> positions = queue.getPositions();
        // positions[0][1].getHolder().setPosition(positions[1][1]);
-        positions[1][1].setHolder(positions[0][1].getHolder());
-        positions[0][1].invalid();
+        for (int i=1;i<3;i++){
+            positions.get(i).get(i).setHolder(positions.get(0).get(i).getHolder());
+            positions.get(0).get(i).invalid();
+        }
+        for (int i=3;i<6;i++){
+            positions.get(5-i).get(i+1).setHolder(positions.get(0).get(i).getHolder());
+            positions.get(0).get(i).invalid();
+        }
 
-        positions[2][2].setHolder(positions[0][2].getHolder());
-        positions[0][2].invalid();
 
-        positions[2][4].setHolder(positions[0][3].getHolder());
-        positions[0][3].invalid();
+        /*positions.get(1).get(1).setHolder(positions.get(0).get(1).getHolder());
+        positions.get(0).get(1).invalid();
 
-        positions[1][5].setHolder(positions[0][4].getHolder());
-        positions[0][4].invalid();
+        positions.get(2).get(2).setHolder(positions.get(0).get(2).getHolder());
+        positions.get(0).get(2).invalid();
 
-        positions[0][6].setHolder(positions[0][5].getHolder());
-        positions[0][5].invalid();
+        positions.get(2).get(4).setHolder(positions.get(0).get(3).getHolder());
+        positions.get(0).get(3).invalid();
 
-        positions[3][3].setHolder(positions[1][0].getHolder());
-        positions[1][0].invalid();
+        positions.get(1).get(5).setHolder(positions.get(0).get(4).getHolder());
+        positions.get(0).get(4).invalid();
+
+        positions.get(0).get(6).setHolder(positions.get(0).get(5).getHolder());
+        positions.get(0).get(5).invalid();*/
+
+        positions.get(3).get(3).setHolder(positions.get(1).get(0).getHolder());
+        positions.get(1).get(0).invalid();
 
     }
 }
