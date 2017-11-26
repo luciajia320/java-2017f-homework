@@ -1,7 +1,7 @@
-public class Position {
+public class Position <T extends creature>{
     private int x;
     private int y;
-    private creature holder;
+    private T holder;
     private boolean valid;
 
 
@@ -16,7 +16,7 @@ public class Position {
         return holder;
     }
 
-    public void setHolder(creature holder) {
+    public void setHolder(T holder) {
         this.holder = holder;
         valid=true;
     }

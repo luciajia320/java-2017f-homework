@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 
 
-public class Map {
+public class Map <T extends creature>{
     //private Position[][] positions;
     private ArrayList<ArrayList<Position>> positions;
  //   private creature[] creatures1;
-    private creature creature2;
+  //  private creature creature2;
   //  private creature[] creatures3;
     int length,width;
 
@@ -20,10 +20,10 @@ public class Map {
         }
     }
 
-    public void PutOnMap(queue huluQueue,xiezijing xie,ArrayList<? extends creature> mon){
+    public void PutOnMap(queue huluQueue,T xie,ArrayList<T> mon){
       //  this.positions=new Position[15][10];
      //   this.creatures1=bro;
-        this.creature2=xie;
+      //  this.creature2=xie;
      //   this.creatures3=mon;
      //   this.creatures4=blank;
       /*  for(int i=0;i<15;i++)
@@ -45,6 +45,7 @@ public class Map {
         return positions;
     }
 
+    //打印阵型
     public void output(){
         for(int i=0;i<length;i++) {
             for (int j = 0; j < width; j++) {

@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
-public class GrandpaAndShejing implements layout {
-    private creature creature4;
-    private creature creature5;
+public class GrandpaAndShejing <T extends creature> implements layout  {
+    private T creature4;
+    private T creature5;
 
-    public GrandpaAndShejing(grandpa grandp,shejing snake){
+    public GrandpaAndShejing(T grandp,T snake){
         this.creature4=grandp;
         this.creature5=snake;
     }

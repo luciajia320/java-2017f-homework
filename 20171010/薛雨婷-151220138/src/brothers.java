@@ -21,6 +21,7 @@ public class brothers implements creature{
         }
     }
 
+    //返回比较大小的结果
     public boolean biggerThan(brothers brother){
 
         if (brother instanceof  brothers)

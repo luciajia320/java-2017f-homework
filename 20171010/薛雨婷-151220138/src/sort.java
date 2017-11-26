@@ -14,23 +14,30 @@ public class sort {
         ArrayList<brothers> brother=new ArrayList<>();
         for(int i=0;i<7;i++)
            brother.add(new brothers(COLORS.values()[i],SENIORITY.values()[i]));
+        //将葫芦娃入队并打乱顺序
         queue huluQueue=new queue(brother);
         huluQueue.ramdom();
 
+        //蝎子精
         xiezijing xiezi=new xiezijing();
 
         //monsters[] monster=new monsters[6];
+
+        //小喽啰
         ArrayList<monsters> monster=new ArrayList<>();
         for(int i=0;i<6;i++)
             monster.add(new monsters(i));
 
+        //爷爷
         grandpa grand=new grandpa();
 
+        //蛇精
         shejing snake=new shejing();
 
        // Map map=new Map(huluQueue,xiezi,monster);
        // map.shuffle();
 
+        //创建地图，将葫芦娃、蝎子精、小喽啰放置上去
         Map map=new Map(13,10);
         map.PutOnMap(huluQueue,xiezi,monster);
 
