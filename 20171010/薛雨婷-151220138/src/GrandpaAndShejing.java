@@ -2,8 +2,8 @@ public class GrandpaAndShejing implements formation {
     private creature creature4;
     private creature creature5;
 
-    public GrandpaAndShejing(grandpa grand,shejing snake){
-        this.creature4=grand;
+    public GrandpaAndShejing(grandpa grandp,shejing snake){
+        this.creature4=grandp;
         this.creature5=snake;
     }
     @Override

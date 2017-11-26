@@ -19,7 +19,7 @@ public class jianshi implements formation{
         positions[0][4].setHolder(positions[0][6].getHolder());
         positions[0][6].invalid();
 
-        positions[2][2].setHolder(positions[2][2].getHolder());
+        positions[2][2].setHolder(positions[3][3].getHolder());
         positions[3][3].invalid();
 
     }
