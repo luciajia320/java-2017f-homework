@@ -7,16 +7,27 @@ public class Ground {
 
     public static final String PLACE_HOLDER = "\uD83C\uDF3F";
     private int sideLength;
-
-
+    private String[][] content;
     private List exists;
 
     public Ground(int n) {
         this.sideLength = n;
 
         exists = new ArrayList();
+        
+        content = new String[sideLength][sideLength];
+
+        for (int i = 0; i < this.sideLength; i++) {
+            for (int j = 0; j < this.sideLength; j++) {
+                content[i][j] = PLACE_HOLDER;
+            }
+        }
 
 
+    }
+    
+    public void layout(Creature creature, Location location) {
+    	this.content[location.getX()][location.getY()] = creature.getName();
     }
 
     public void layout(Formation formation, Location location) throws TooCrowdedException {
@@ -38,8 +49,12 @@ public class Ground {
             }
 
         }
-
-
+            for (int i = 0; i < formation.getWidth(); i++) {
+                for (int j = 0; j < formation.getHeight(); j++) {
+                    content[i + formation.getLocation().getX()][j + formation.getLocation().getY()] = formation.getContent()[i][j];
+                }
+            }
+        
         exists.add(formation);
     }
 
@@ -81,28 +96,14 @@ public class Ground {
 
     public void clear() {
     	exists.clear();
+    	for(int i = 0;i < sideLength;++i)
+    		for(int j = 0;j < sideLength;++j) {
+    			content[i][j] = PLACE_HOLDER;
+    		}
+    		
     }
     
     public String toString() {
-
-
-        String[][] content = new String[sideLength][sideLength];
-
-        for (int i = 0; i < this.sideLength; i++) {
-            for (int j = 0; j < this.sideLength; j++) {
-                content[i][j] = PLACE_HOLDER;
-            }
-        }
-        for (Object o : exists) {
-            Formation f = (Formation) o;
-
-            for (int i = 0; i < f.getWidth(); i++) {
-                for (int j = 0; j < f.getHeight(); j++) {
-                    content[i + f.getLocation().getX()][j + f.getLocation().getY()] = f.getContent()[i][j];
-                }
-            }
-        }
-
         StringBuilder sb = new StringBuilder();
         for (int j = 0; j < content.length; j++) {
             for (int i = 0; i < content[j].length; i++) {

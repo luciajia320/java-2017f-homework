@@ -1,15 +1,14 @@
 
 
 public class GooseFormation extends Formation {
-    public GooseFormation(String matter) {
+    public GooseFormation(ScorpionFaction matter) {
         super(7, 4);
         for (int i = 0; i < 4; i++) {
-            content[i][i] = matter;
+            content[i][i] = matter.getLittleMinions();
         }
         for (int i = 4; i < 7; i++) {
-            content[i][2 - i % 4] = matter;
+            content[i][2 - i % 4] = matter.getLittleMinions();
         }
-        content[3][0] = "蛇";
-        content[0][0] = "蝎";
+        content[0][0] = matter.getLeader();
     }
 }
