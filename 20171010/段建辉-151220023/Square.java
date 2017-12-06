@@ -1,21 +1,22 @@
 /*
 TODO:
 * 1、用容器重新实现葫芦娃
-* 2、加入
+* 2、加入异常控制块
 * */
 
 import java.util.*;
+import java.lang.*;
 
 public class Square {
     private static final int N = 15;
     public ArrayList<Position>[][] positions = new ArrayList[N][N];
-    //Position[][] positions = new Position[N][N];
-    //creature[][] positions = new creature[N][N];
+
     Square() {
         for(int i = 0; i < N; i++)
             for(int j = 0; j < N; j++)
                 positions[i][j] = new ArrayList();
     }
+
     Position getThisPositions(int row, int col) {
         return positions[row][col].get(0);
     }
@@ -34,26 +35,15 @@ public class Square {
         }
     }
 
-    private void initHuluwas(Square square, int row, int col) {
-        if (col + 7 >= N)
-            System.out.println("超过了");
-        square.positions[row][col].add(new Position(new Dawa(), row, col));
-        square.positions[row][col + 3].add(new Position(new Erwa(), row, col));
-        square.positions[row][col + 2].add(new Position(new Sanwa(), row, col));
-        square.positions[row][col + 5].add(new Position(new Siwa(), row, col));
-        square.positions[row][col + 4].add(new Position(new Wuwa(), row, col));
-        square.positions[row][col + 1].add(new Position(new Liuwa(), row, col));
-        square.positions[row][col + 6].add(new Position(new Qiwa(), row, col));
-    }
-
-    private void sortHuluBros(int row, int start){
+    private void sortHuluBros(int row, int start) throws Exception {
         ranksort S = new ranksort();
-        S.Sort(positions[row], start, start + 7);
-    }
-
-    private void initMonsters(Square square, int left, int right, int up, int down, formationID ID) {
-        Formation formation1 = new Formation(square, left,right, up, down);
-        formation1.setFormation(ID);
+        try {
+            S.Sort(positions[row], start, start + 7);
+        } catch (IllegalArgumentException E) {
+            S.Sort(positions[row], start - 3, start + 7);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void reshapeMonsters() {
@@ -66,6 +56,32 @@ public class Square {
         }
     }
 
+    private void initHuluwas(Square square, int row, int col) {
+        try {
+            if (col + 7 >= N)
+                throw new Exception("HuluBros only have 7, over it.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        square.positions[row][col].add(new Position(new Dawa(), row, col));
+        square.positions[row][col + 3].add(new Position(new Erwa(), row, col));
+        square.positions[row][col + 2].add(new Position(new Sanwa(), row, col));
+        square.positions[row][col + 5].add(new Position(new Siwa(), row, col));
+        square.positions[row][col + 4].add(new Position(new Wuwa(), row, col));
+        square.positions[row][col + 1].add(new Position(new Liuwa(), row, col));
+        square.positions[row][col + 6].add(new Position(new Qiwa(), row, col));
+    }
+
+    private void initMonsters(Square square, int left, int right, int up, int down, formationID ID) throws Exception {
+        Formation formation1 = new Formation(square, left,right, up, down);
+        try {
+            formation1.setFormation(ID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void setCheers() {
         positions[3][7] = new ArrayList<>();
         positions[5][7] = new ArrayList<>();
@@ -73,7 +89,7 @@ public class Square {
         positions[5][7].add(new Position(new Snake(),5, 7));
     }
 
-    public static void main(String arg[]) {
+    public static void main(String arg[]) throws Exception {
         Square square = new Square();
         int huluBroStartPosCol = 4, huluBroStartPosRow = 1;
 
@@ -84,7 +100,6 @@ public class Square {
             System.out.printf("%s\t", square.positions[huluBroStartPosRow][i].get(0).getCreature().getName());
         }
         System.out.println();
-
         square.sortHuluBros(huluBroStartPosRow, huluBroStartPosCol);
 
         square.setCheers();

@@ -16,19 +16,23 @@ class Xiaojingang implements creature {
     public int getRank() {
         return rank;
     }
+
     @Override
     public String getName() {
         return name;
     }
+
     @Override
     public void doSomething() {
         System.out.println("我可以打败蛇精！");
     }
+
     @Override
     public void setPosition(Position pos){
         this.position = pos;
         this.position.setCreature(this);
     }
+
     @Override
     public Position getPosition() {
         return this.position;

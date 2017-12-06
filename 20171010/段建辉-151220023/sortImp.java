@@ -1,14 +1,20 @@
-import javafx.geometry.Pos;
+import java.lang.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 class ranksort implements sort {
-
     @Override
-    public void Sort(List<Position>[] positions, int start, int end) {
+    public void Sort(List<Position>[] positions, int start, int end) throws Exception {
         for (int i = start; i < end; i++) {
             for (int j = start; j < end - 1; j++) {
+                if(positions[j].get(0).getCreature().getRank() > 7) {
+                    throw new Exception("It's not a HuluBro."); // 12
+                }
+                if(end > 15) {
+                    throw new IllegalArgumentException(String.valueOf(end)); // 15
+                }
+
                 List<Position> temp = new ArrayList();
                 if (positions[j].get(0).getCreature().getRank() > positions[j + 1].get(0).getCreature().getRank()){
                     temp =  positions[j];

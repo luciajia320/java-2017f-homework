@@ -1,4 +1,4 @@
-public class monster implements creature {
+class monster implements creature {
     private int rank;
     private String name;
     private Position position;
@@ -21,11 +21,13 @@ public class monster implements creature {
     public int getRank() {
         return this.rank;
     }
+
     @Override
     public void setPosition(Position pos) {
         position = pos;
         position.setCreature(this);
     }
+
     @Override
     public Position getPosition(){
         return this.position;
@@ -44,10 +46,12 @@ class Scorpion extends monster {
     public int getRank() {
         return this.rank;
     }
+
     @Override
     public String getName() {
         return this.name;
     }
+
     @Override
     public void doSomething() {
         System.out.println("受死吧！");
@@ -66,10 +70,12 @@ class Snake extends monster {
     public int getRank() {
         return this.rank;
     }
+
     @Override
     public String getName() {
         return this.name;
     }
+
     @Override
     public void doSomething() {
         System.out.println("老公加油！");
@@ -77,7 +83,6 @@ class Snake extends monster {
 }
 
 class Soldier extends monster {
-
     private int rank;
     private String name;
     private Position position;
@@ -89,10 +94,12 @@ class Soldier extends monster {
     public int getRank() {
         return this.rank;
     }
+
     @Override
     public String getName() {
         return this.name;
     }
+
     @Override
     public void doSomething() {
         System.out.println("哇呀呀呀呀呀！");

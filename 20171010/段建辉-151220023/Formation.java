@@ -13,13 +13,19 @@ class Formation {
         this.down = down;
     }
 
-    void setFormation(formationID ID) {
+    void setFormation(formationID ID) throws Exception {
         switch (ID) {
             case HEYI: break;
             case YANXING: break;
             case HENGE: break;
             case CHANGSHE: {
-                if(up != down) {   break;}
+                try {
+                    if (up != down) {
+                        throw new FormationException(3);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 for(int i = 0; i <= right - left; i++) {
                     square.positions[up][left + 1] = new ArrayList<>();
                     square.positions[up][left + i].add(new Position(new Soldier(), up, left + i));
@@ -27,6 +33,10 @@ class Formation {
                 break;
             }
             case YULIN: {
+                if(up >= down) {
+                    throw new FormationException(4);
+                }
+
                 for(int i = up; i <= down; i++) {
                     for(int j = left; j <= right; j++) {
                         boolean area = (i == up && j == left + 2)
@@ -48,6 +58,10 @@ class Formation {
             }
             case FANGYUAN: break;
             case YANYUE: {
+                if(up >= down) {
+                    throw new FormationException(6);
+                }
+
                 for(int i = up; i <= down; i++) {
                     for(int j = left; j <= right; j++) {
                         if(i == up + 1 && j == left + 4) {

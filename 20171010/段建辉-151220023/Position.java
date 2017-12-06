@@ -18,6 +18,7 @@ class Position {
     int getROW() {
         return this.row;
     }
+
     int getCOL() {
         return this.col;
     }
