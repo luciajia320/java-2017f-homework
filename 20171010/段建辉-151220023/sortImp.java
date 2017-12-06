@@ -1,19 +1,20 @@
+import javafx.geometry.Pos;
+
+import java.util.ArrayList;
+import java.util.List;
+
 class ranksort implements sort {
 
     @Override
-    public void Sort(creature[] creatures,Position[] positions, int start, int end) {
+    public void Sort(List<Position>[] positions, int start, int end) {
         for (int i = start; i < end; i++) {
             for (int j = start; j < end - 1; j++) {
-                creature tempC;
-                Position tempP;
-                if (creatures[j].getRank() > creatures[j + 1].getRank()){
-                    tempC = creatures[j];
-                    tempP = positions[j];
-                    creatures[j] = creatures[j + 1];
+                List<Position> temp = new ArrayList();
+                if (positions[j].get(0).getCreature().getRank() > positions[j + 1].get(0).getCreature().getRank()){
+                    temp =  positions[j];
                     positions[j] = positions[j + 1];
                     //System.out.println(creatures[j].getName() + ": " + (j + 1) + "->" + j);
-                    creatures[j + 1] = tempC;
-                    positions[j + 1] = tempP;
+                    positions[j + 1] = temp;
                     //System.out.println(creatures[j + 1].getName() + ": " + j + "->" + (j + 1));
                 }
             }
@@ -41,7 +42,7 @@ class colorsort implements sort {
         return mid + 1;
 
     }
-    /*
+
     @Override
     public void Sort(creature[] creatures, int start, int end) {
         for (int i = start + 1; i <= end; i++) {

@@ -4,11 +4,11 @@ public class grandFather implements creature {
     private Position position;
     grandFather() {
         rank = 8;
-        name = "爷";
+        name = "👴";
     }
 
     @Override
-    public void talkSomething() {
+    public void doSomething() {
         System.out.println("葫芦娃加油V(^_^)V！");
     }
 
@@ -21,11 +21,13 @@ public class grandFather implements creature {
     public int getRank() {
         return this.rank;
     }
+
     @Override
     public void setPosition(Position position){
         this.position = position;
         this.position.setCreature(this);
     }
+
     @Override
     public Position getPosition(){
         return this.position;

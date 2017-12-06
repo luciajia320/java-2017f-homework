@@ -1,5 +1,5 @@
 public interface creature {
-    void talkSomething();
+    void doSomething();
     String getName();
     int getRank();
     void setPosition(Position position);

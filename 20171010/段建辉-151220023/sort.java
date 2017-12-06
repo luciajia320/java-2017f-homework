@@ -1,3 +1,5 @@
+import java.util.List;
+
 public interface sort {
-    void Sort(creature[] creatures,Position[] position, int start, int end);
+    void Sort(List<Position>[] position, int start, int end);
 }

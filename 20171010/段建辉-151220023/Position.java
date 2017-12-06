@@ -1,11 +1,10 @@
-import javafx.geometry.Pos;
-
 class Position {
     private int row, col;
     private creature Creature;
-    Position(int row, int col) {
+    Position(creature Creature, int row, int col) {
         this.row = row;
         this.col = col;
+        this.Creature = Creature;
     }
 
     creature getCreature() {
