@@ -1,65 +1,64 @@
+import java.util.ArrayList;
 enum FORMATIONS{
     HEYI,YANXING,CHONGE,CHANGSHE,YULIN,FANGYUAN,YANYUE,FENGSHI
 }
 
 public class Formation {
-  public static void buildYANXING(Creature[] queue,Position[][] positions,int leaderX, int leaderY, boolean pn){
-      for(int i = 0; i < queue.length; ++i){
-          if(queue[i].getPosition()!=null)
-              queue[i].getPosition().setHolder(null);
+  public static void buildYANXING(ArrayList<Creature> queue,Position[][] positions,int leaderX, int leaderY, boolean pn){
+      for(int i = 0; i < queue.size(); ++i){
+          if(queue.get(i).getPosition()!=null)
+              queue.get(i).getPosition().setHolder(null);
       }
-      queue[0].setPosition(positions[leaderX][leaderY]);
+      queue.get(0).setPosition(positions[leaderX][leaderY]);
       if(pn){
-          for(int i = 1; i <queue.length; ++i){
-              queue[i].setPosition(positions[leaderX+i][leaderY-i]);
+          for(int i = 1; i <queue.size(); ++i){
+              queue.get(i).setPosition(positions[leaderX+i][leaderY-i]);
           }
       }
       else{
-          for(int i = 1; i <queue.length; ++i){
-              queue[i].setPosition(positions[leaderX-i][leaderY+i]);
+          for(int i = 1; i <queue.size(); ++i){
+              queue.get(i).setPosition(positions[leaderX-i][leaderY+i]);
           }
       }
   }
-  public static void buildCHANGSHE(Creature[] queue,Position[][] positions,int leaderX, int leaderY, boolean pn){
-      for(int i = 0; i < queue.length; ++i){
-          if(queue[i].getPosition()!=null)
-              queue[i].getPosition().setHolder(null);
+  public static void buildCHANGSHE(ArrayList<Creature> queue,Position[][] positions,int leaderX, int leaderY, boolean pn){
+      for(int i = 0; i < queue.size(); ++i){
+          if(queue.get(i).getPosition()!=null)
+              queue.get(i).getPosition().setHolder(null);
       }
-      queue[0].setPosition(positions[leaderX][leaderY]);
-      if(pn){
-          for(int i = 1; i <queue.length; ++i){
-              queue[i].setPosition(positions[leaderX+i][leaderY]);
+      queue.get(0).setPosition(positions[leaderX][leaderY]);
+      for(int i = 1; i <queue.size(); ++i){
+          if(i%2==1){
+              queue.get(i).setPosition(positions[leaderX][leaderY-(i+1)/2]);
           }
-      }
-      else{
-          for(int i = 1; i <queue.length; ++i){
-              queue[i].setPosition(positions[leaderX-i][leaderY]);
+          else{
+              queue.get(i).setPosition(positions[leaderX][leaderY+i/2]);
           }
       }
   }
-  public static void bulidHEYI(Creature[] queue,Position[][] positions,int leaderX, int leaderY, boolean pn){
-      for(int i = 0; i < queue.length; ++i){
-          if(queue[i].getPosition()!=null)
-            queue[i].getPosition().setHolder(null);
+  public static void bulidHEYI(ArrayList<Creature> queue,Position[][] positions,int leaderX, int leaderY, boolean pn){
+      for(int i = 0; i < queue.size(); ++i){
+          if(queue.get(i).getPosition()!=null)
+            queue.get(i).getPosition().setHolder(null);
       }
-      queue[0].setPosition(positions[leaderX][leaderY]);
+      queue.get(0).setPosition(positions[leaderX][leaderY]);
       if(pn){
-          for(int i = 1; i <queue.length; ++i){
+          for(int i = 1; i <queue.size(); ++i){
               if(i%2==1){
-                  queue[i].setPosition(positions[leaderX+(i+1)/2][leaderY-(i+1)/2]);
+                  queue.get(i).setPosition(positions[leaderX+(i+1)/2][leaderY-(i+1)/2]);
               }
               else{
-                  queue[i].setPosition(positions[leaderX+i/2][leaderY+i/2]);
+                  queue.get(i).setPosition(positions[leaderX+i/2][leaderY+i/2]);
               }
           }
       }
       else{
-          for(int i = 1; i <queue.length; ++i){
+          for(int i = 1; i <queue.size(); ++i){
               if(i%2==1){
-                  queue[i].setPosition(positions[leaderX-(i+1)/2][leaderY-(i+1)/2]);
+                  queue.get(i).setPosition(positions[leaderX-(i+1)/2][leaderY-(i+1)/2]);
               }
               else{
-                  queue[i].setPosition(positions[leaderX-i/2][leaderY+i/2]);
+                  queue.get(i).setPosition(positions[leaderX-i/2][leaderY+i/2]);
               }
           }
       }

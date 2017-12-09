@@ -3,7 +3,12 @@ public class Huluwa implements Creature, Comparable{
     private COLOR color;
     private SENIORITY seniority;
     private Position position;
+    String icon;
 
+    @Override
+    public String getIcon(){
+        return icon;
+    }
     public COLOR getColor() {
         return color;
     }
@@ -27,9 +32,10 @@ public class Huluwa implements Creature, Comparable{
         }
     }
 
-    Huluwa(COLOR color, SENIORITY seiority) {
+    Huluwa(COLOR color, SENIORITY seiority, String icon) {
         this.color = color;
         this.seniority = seiority;
+        this.icon = icon;
     }
 
     @Override

@@ -1,6 +1,14 @@
 public class Snake implements Creature {
     private Position position;
+    String icon;
 
+    public Snake(String icon){
+        this.icon = icon;
+    }
+    @Override
+    public String getIcon(){
+        return icon;
+    }
     @Override
     public Position getPosition() {
         return position;

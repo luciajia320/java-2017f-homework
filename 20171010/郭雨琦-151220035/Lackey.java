@@ -1,5 +1,13 @@
 public class Lackey implements Creature {
     private Position position;
+    String icon;
+    public Lackey(String icon){
+        this.icon = icon;
+    }
+    @Override
+    public String getIcon(){
+        return icon;
+    }
     @Override
     public void cheer(){}
     @Override

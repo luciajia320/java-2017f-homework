@@ -1,5 +1,14 @@
 public class Grandpa implements Creature {
     private Position position;
+    String icon;
+    public Grandpa(String icon){
+        this.icon = icon;
+    }
+    @Override
+    public String getIcon(){
+        return icon;
+    }
+
 
     @Override
     public Position getPosition() {

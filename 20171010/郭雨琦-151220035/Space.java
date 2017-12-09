@@ -1,14 +1,16 @@
 //import java.util.ArrayList;
 //import java.util.Arrays;
+import java.util.ArrayList;
+
 
 public class Space {//This is a 2D space
     static final int N = 20;
 
     private Position[][] positions;
 
-    private Creature[] positiveCreatures;
-    private Creature[] negativeCreatures;
-    private Creature[] onlookerCreatures;
+    ArrayList<Creature> positiveCreatures;
+    ArrayList<Creature> negativeCreatures;
+    ArrayList<Creature> onlookerCreatures;
 
     public Space()
     {
@@ -24,26 +26,34 @@ public class Space {//This is a 2D space
 
     }
 
-    public void addPositiveCreatures(Huluwa[] brothers) {
-        positiveCreatures = new Creature[brothers.length];
-        for(int i = 0; i <brothers.length; ++i ){
-            positiveCreatures[i] = brothers[i];
-        }
+    public void addPositiveCreatures(ArrayList<Creature> brothers) {
+        //positiveCreatures = new Creature[brothers.length];
+        //for(int i = 0; i <brothers.length; ++i ){
+        //    positiveCreatures[i] = brothers[i];
+        //}
+
+        positiveCreatures = new ArrayList<Creature>(brothers);
     }
 
-    public void addNegativeCreatures(Scorpion scorpion, Creature[] lackeys) {
-        negativeCreatures = new Creature[lackeys.length+1];
+    public void addNegativeCreatures(Scorpion scorpion, ArrayList<Creature> lackeys) {
+        /*negativeCreatures = new Creature[lackeys.length+1];
         negativeCreatures[0] = scorpion;
         for(int i = 0; i <lackeys.length; ++i ){
             negativeCreatures[i+1] = lackeys[i];
         }
-
+        */
+        negativeCreatures = new ArrayList<Creature>();
+        negativeCreatures.add(scorpion);
+        negativeCreatures.addAll(lackeys);
     }
 
     public void addOnlookerCreatures(Grandpa grandpa, Snake snake) {
-        onlookerCreatures = new Creature[2];
+        /*onlookerCreatures = new Creature[2];
         onlookerCreatures[0]=grandpa;
-        onlookerCreatures[1]=snake;
+        onlookerCreatures[1]=snake;*/
+        onlookerCreatures = new ArrayList<Creature>();
+        onlookerCreatures.add(grandpa);
+        onlookerCreatures.add(snake);
     }
 
     public void setPositive(){
@@ -56,13 +66,13 @@ public class Space {//This is a 2D space
     }
 
     public void setOnlooker(){
-        onlookerCreatures[0].setPosition(positions[10][0]);
-        onlookerCreatures[1].setPosition(positions[9][0]);
+        onlookerCreatures.get(0).setPosition(positions[10][0]);
+        onlookerCreatures.get(1).setPosition(positions[9][0]);
     }
 
     public void shout(){
-        for(int i = 0; i < onlookerCreatures.length; ++i){
-            onlookerCreatures[i].cheer();
+        for(int i = 0; i < onlookerCreatures.size(); ++i){
+            onlookerCreatures.get(i).cheer();
         }
     }
 
@@ -87,11 +97,11 @@ public class Space {//This is a 2D space
                 Creature temp = positions[i][j].getHolder();
                 if(temp!=null)
                 {
-                    System.out.print(temp.toString());
+                    System.out.print(temp.getIcon());
                 }
                 else
                 {
-                    System.out.print("  ");
+                    System.out.print("\uD83C\uDF40");
                 }
             }
             System.out.println();

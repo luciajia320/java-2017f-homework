@@ -1,35 +1,43 @@
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.ArrayList;
 
 public class Queue {
 
 
-    private Position[] positions;
+    private ArrayList<Position> positions;
 
-    public Position[] getPositions() {
+    private ArrayList<Creature> creatures;
+
+
+    public ArrayList<Position> getPositions() {
         return positions;
     }
 
-
-    public Creature[] getCreatures() {
+    public ArrayList<Creature> getCreatures() {
         return creatures;
     }
 
 
-
-    private Creature[] creatures;
-
-    public Queue(Huluwa[] brothers) {
+    public Queue(ArrayList<Creature> brothers) {
 
 
-        this.positions = new Position[brothers.length];
+        //this.positions = new Position[brothers.size()];
 
-        this.creatures = brothers;
-
-        for (int i = 0; i < brothers.length; i++) {
+        this.creatures = new ArrayList<Creature>(brothers);
+        this.positions = new ArrayList<Position>();
+        /*for (int i = 0; i < brothers.size(); i++) {
 
             this.positions[i] = new Position(i,0);
             this.creatures[i].setPosition(this.positions[i]);
+        }*/
+        for (int i = 0; i < 7; i++){
+
+            Position position = new Position(i,0);
+            //position.setHolder(creatures.get(i));
+            positions.add(position);
+
+            this.creatures.get(i).setPosition(this.positions.get(i));
         }
     }
 
@@ -52,26 +60,36 @@ public class Queue {
 
     private void shuffle() {
         Random rnd = ThreadLocalRandom.current();
-        for (int i = creatures.length - 1; i > 0; i--) {
+        for (int i = creatures.size() - 1; i > 0; i--) {
             int index = rnd.nextInt(i + 1);
-            Position position = creatures[index].getPosition();
-            creatures[index].setPosition(creatures[i].getPosition());
-            creatures[i].setPosition(position);
+            Position position = creatures.get(index).getPosition();
+            creatures.get(index).setPosition(creatures.get(i).getPosition());
+            creatures.get(i).setPosition(position);
         }
     }
 
     public static void main(String[] args) {
 
-        Huluwa[] brothers = new Huluwa[7];
+        /*Huluwa[] brothers = new Huluwa[7];
         for (int i = 0; i < brothers.length; i++) {
             brothers[i] = new Huluwa(COLOR.values()[i], SENIORITY.values()[i]);
+        }*/
+        ArrayList<Creature> brothers = new ArrayList<Creature>();
+        for (int i = 0; i < 7; i++) {
+            Huluwa huluwa = new Huluwa(COLOR.values()[i], SENIORITY.values()[i],"\uD83D\uDC66");
+            brothers.add(huluwa);
         }
-        Grandpa grandpa=new Grandpa();
-        Snake snake = new Snake();
-        Scorpion scorpion = new Scorpion();
-        Creature[] lackeys = new Lackey[6];
+
+        Grandpa grandpa=new Grandpa("\uD83D\uDC74");
+        Snake snake = new Snake("\uD83D\uDC0D");
+        Scorpion scorpion = new Scorpion("\uD83E\uDD82");
+        /*Creature[] lackeys = new Lackey[6];
         for(int i = 0; i < lackeys.length; i++) {
             lackeys[i] = new Lackey();
+        }*/
+        ArrayList<Creature> lackeys = new ArrayList<Creature>();
+        for (int i = 0; i < 6; i++) {
+            lackeys.add(new Lackey("\uD83D\uDC38"));
         }
 
         Queue queue = new Queue(brothers);

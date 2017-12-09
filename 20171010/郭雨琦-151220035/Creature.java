@@ -1,4 +1,6 @@
 public interface Creature {
+    public String getIcon();
+
     public void report();
 
     public void setPosition(Position position);
