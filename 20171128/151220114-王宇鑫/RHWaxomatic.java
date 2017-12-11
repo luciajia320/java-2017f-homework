@@ -9,15 +9,15 @@ public class RHWaxomatic {
         exec.execute(new WaxOff(car));
         exec.execute(new WaxOn(car));
         exec.execute(new WaxOn(car));
-        TimeUnit.SECONDS.sleep(60); // Run for a while...
+        TimeUnit.SECONDS.sleep(5); // Run for a while...
         exec.shutdownNow(); // Interrupt all tasks
     }
 }
 
 class Car {
     private boolean waxOn = false;
-    private boolean lockOn = false;
-    private boolean lockOff = false;
+
+    private boolean lock = false;
 
     private int test = 0;
 
@@ -35,32 +35,36 @@ class Car {
         }
     }
 
-    public synchronized boolean askForLockOn() {
-        if (!lockOn && !waxOn) {
-            lockOn = true;
-            return true;
-        } else {
+    public synchronized boolean askForWaxOn() {
+        if (waxOn) {
             return false;
         }
+        if (lock) {
+            return false;
+        }
+        lock = true;
+        return true;
     }
 
-    public synchronized boolean askForLockOff() {
-        if (!lockOff && waxOn) {
-            lockOff = true;
-            return true;
-        } else {
+    public synchronized boolean askForWaxOff() {
+        if (!waxOn) {
             return false;
         }
+        if (lock) {
+            return false;
+        }
+        lock = true;
+        return true;
     }
 
     public synchronized void waxed() {
-        lockOn = false;
+        lock = false;
         waxOn = true; // Ready to buff
         notifyAll();
     }
 
     public synchronized void buffed() {
-        lockOff = false;
+        lock = false;
         waxOn = false; // Ready for another coat of wax
         notifyAll();
     }
@@ -90,7 +94,7 @@ class WaxOn implements Runnable {
     public void run() {
         try {
             while (!Thread.interrupted()) {
-                if (car.askForLockOn()) {
+                if (car.askForWaxOn()) {
                     car.testAdd();
                     System.out.println("Wax On" + this.id + "!");
                     TimeUnit.MILLISECONDS.sleep(1000);
@@ -117,7 +121,7 @@ class WaxOff implements Runnable {
     public void run() {
         try {
             while (!Thread.interrupted()) {
-                if (car.askForLockOff()) {
+                if (car.askForWaxOff()) {
                     car.testSub();
                     car.waitForWaxing();
                     System.out.println("Wax Off" + this.id + "!");
