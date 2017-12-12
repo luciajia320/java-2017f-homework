@@ -1,11 +1,10 @@
 package Homework.CalabashBrothers;
-import java.util.Random;
 
-public class Pattern implements Show, Formation{
+public abstract class Pattern implements Show{
     public int row;
     public int column;
     public Type type;
-    Point[][] points;
+    public Point[][] points;
 
     public Pattern(){
         this.row = row;
@@ -19,13 +18,9 @@ public class Pattern implements Show, Formation{
         }
     }
 
-    public void setformat(){
-        System.out.print("!");
-    }
+    public abstract void setpattern();
 
-    public void putmaincreature() {
-        System.out.print("!");
-    }
+    public abstract void putmaincreature();
 
 
     public void showyourself(){

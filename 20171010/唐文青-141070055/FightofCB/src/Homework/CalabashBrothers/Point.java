@@ -1,18 +1,19 @@
 package Homework.CalabashBrothers;
+import Homework.CalabashBrothers.Creatures.Flower;
 
-public class Point implements Show {
+public final class Point implements Show {
     public boolean isempty;
     int x;
     int y;
-    Creature creature;
-    Species species;
+    public Creature creature;
+    public Species species;
 
     public Point(int x, int y) {
         this.isempty = true;
         this.x = x;
         this.y = y;
         this.creature = new Flower();
-        this.species = Species.Flower;
+        this.species = Species.FLOWER;
     }
 
     public void setX(int x) {
@@ -34,7 +35,7 @@ public class Point implements Show {
     public void putcreature(Creature creature, Species species){
         this.creature = creature;
         this.species = species;
-        if(species != Species.Flower){
+        if(species != Species.FLOWER){
             this.isempty = false;
         }
     }

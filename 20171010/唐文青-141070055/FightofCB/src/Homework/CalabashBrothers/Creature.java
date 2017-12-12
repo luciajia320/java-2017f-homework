@@ -1,12 +1,11 @@
 package Homework.CalabashBrothers;
-enum Species{
-    Calabashbro, Grandpa, Scorpion, Snake, Underling, Flower
-}
-public class Creature implements Show {
-    boolean isalive;
-    boolean isgood;
-    boolean gender;
-    Species species;
+import Homework.CalabashBrothers.*;
+
+public abstract class Creature implements Show {
+    public boolean isalive;
+    public boolean isgood;
+    public boolean gender;
+    public Species species;
     int x;
     int y;
 
@@ -30,8 +29,6 @@ public class Creature implements Show {
         this.species = species;
     }
 
-    public void showyourself(){
-        System.out.print("?");
-    }
+    public abstract void showyourself();
 
 }

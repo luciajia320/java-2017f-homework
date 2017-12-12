@@ -1,11 +1,13 @@
-package Homework.CalabashBrothers;
-import java.util.Random;
+package Homework.CalabashBrothers.Patterns;
+import Homework.CalabashBrothers.*;
+import Homework.CalabashBrothers.Creatures.*;
 
-public class heyi extends Pattern implements Formation {
-    public heyi() {
+
+public final class HeYi extends Pattern {
+    public HeYi() {
         this.row = 4;
         this.column = 7;
-        this.type = Type.heyi;
+        this.type = Type.HEYI;
         this.points = new Point[row][column];
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
@@ -14,7 +16,8 @@ public class heyi extends Pattern implements Formation {
         }
     }
 
-    public void setformat() {
+    @Override
+    public void setpattern() {
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
                 if (i + j == 3) {
@@ -25,12 +28,15 @@ public class heyi extends Pattern implements Formation {
         }
     }
 
+    @Override
     public void putmaincreature() {
-        points[0][3].putcreature(new Scorpion(),Species.Scorpion);
+        //First, let the Scorpion take the lead.
+        points[0][3].putcreature(new Scorpion(),Species.SCORPION);
+        //Then, the underlings gather together to support the Scorpion.
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
-                if (points[i][j].isempty == false && points[i][j].species == Species.Flower ) {
-                    points[i][j].putcreature(new Underling(), Species.Underling);
+                if (points[i][j].isempty == false && points[i][j].species == Species.FLOWER ) {
+                    points[i][j].putcreature(new Underling(), Species.UNDERLING);
                 }
             }
         }
