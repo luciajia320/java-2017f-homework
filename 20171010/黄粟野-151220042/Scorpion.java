@@ -1,13 +1,7 @@
 public class Scorpion implements Creature
 {
     private Position position;
-    //Queueguys queueguy;
-
-    public Scorpion(Guys[] guys)
-    {
-        position = new Position(0,0);
-        //queueguy = new Queueguys(guys);
-    }
+    public static final String PLACE_HOLDER = "🦂";
 
     @Override
     public Position getPosition() {
@@ -23,7 +17,6 @@ public class Scorpion implements Creature
     @Override
     public void report() {
         System.out.print(this.toString());
-        //queueguy.rollCall();
     }
 
     @Override
@@ -31,26 +24,19 @@ public class Scorpion implements Creature
         return "蝎子精 @" + this.position.getX() + "," + this.position.getY() + ";";
     }
 
-    public void queuefirst(Guys[] guys)
+    public void queuefirst()
     {
-        Position p = new Position(7,7);
+        Position p = new Position(5,1);
         this.setPosition(p);
 
-        //queueguy = new Queueguys(guys);
-
-        //this.report();
-        //queueguy.rollCall();
     }
 
-    public void queuesecond(Guys[] guys)
+    public void queuesecond()
     {
-        Position p = new Position(3,3);
+        Position p = new Position(5,6);
         this.setPosition(p);
 
-        //queueguy = new Queueguys(guys,p);
-        //queueguy.shuffle(guys,p);
-
-        //this.report();
-        //queueguy.rollCall();
     }
+
+    public String getPlaceHolder() { return PLACE_HOLDER; }
 }

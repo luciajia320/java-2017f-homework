@@ -2,6 +2,7 @@ public class Guys implements Creature
 {
     private Position position;
     private SENIORITY seniority;
+    public static final String PLACE_HOLDER = "👺";
 
     @Override
     public Position getPosition() {
@@ -27,4 +28,6 @@ public class Guys implements Creature
     Guys(SENIORITY seiority) {
         this.seniority = seiority;
     }
+    public String getPlaceHolder() { return this.PLACE_HOLDER; }
+
 }

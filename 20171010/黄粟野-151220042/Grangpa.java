@@ -1,6 +1,7 @@
 public class Grangpa implements Creature
 {
     private Position position;
+    public static final String PLACE_HOLDER = "👴";
 
     @Override
     public Position getPosition() {
@@ -22,5 +23,7 @@ public class Grangpa implements Creature
     public String toString(){
         return "爷爷 @" + this.position.getX() + "," + this.position.getY() + ";";
     }
+
+    public String getPlaceHolder() { return PLACE_HOLDER; }
 
 }

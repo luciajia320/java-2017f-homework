@@ -3,6 +3,7 @@ public class Huluwa implements Creature{
     private COLOR color;
     private SENIORITY seniority;
     private Position position;
+    public static final String PLACE_HOLDER = "👧";
 
     public COLOR getColor() {
         return color;
@@ -39,14 +40,8 @@ public class Huluwa implements Creature{
         return this.seniority.toString() + "(" + this.color.toString() + ")@" + this.position.getX() + "," + this.position.getY() + ";";
     }
 
-    /*@Override
-    public boolean biggerThan(Comparable brother){
+    public String getPlaceHolder() { return this.PLACE_HOLDER; }
 
-        if (brother instanceof  Huluwa)
-            return this.getSeniority().ordinal()> ((Huluwa) brother).getSeniority().ordinal();
-        else
-            return false;
-    }*/
 
 }
 

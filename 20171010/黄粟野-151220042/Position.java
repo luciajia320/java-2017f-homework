@@ -3,15 +3,6 @@ public class Position {
     private int x;
     private int y;
 
-    public Creature getHolder() {
-        return holder;
-    }
-
-    public void setHolder(Creature holder) {
-        this.holder = holder;
-    }
-
-    private Creature holder;
 
     public int getX() {
         return x;
@@ -32,4 +23,14 @@ public class Position {
         this.x = x;
         this.y = y;
     }
+
+    public Creature getHolder() {
+        return holder;
+    }
+
+    public void setHolder(Creature holder) {
+        this.holder = holder;
+    }
+
+    private Creature holder;
 }
