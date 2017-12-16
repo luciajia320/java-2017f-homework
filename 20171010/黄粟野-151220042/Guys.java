@@ -1,21 +1,23 @@
-public class Guys implements Creature
+public class Guys <T extends Creature>//implements Creature
 {
     private Position position;
     private SENIORITY seniority;
     public static final String PLACE_HOLDER = "👺";
+    private T creatureguy;
 
-    @Override
+    //@Override
     public Position getPosition() {
         return position;
     }
 
-    @Override
+    //@Override
     public void setPosition(Position position) {
         this.position = position;
-        position.setHolder(this);
+        //position.setHolder(this.position);
+        position.setHolder(this.creatureguy);
     }
 
-    @Override
+    //@Override
     public void report() {
         System.out.print(this.toString());
     }

@@ -1,20 +1,22 @@
-public class Scorpion implements Creature
+public class Scorpion <T extends Creature>//implements Creature
 {
     private Position position;
     public static final String PLACE_HOLDER = "🦂";
+    private T creatures;
 
-    @Override
+    //@Override
     public Position getPosition() {
         return position;
     }
 
-    @Override
+    //@Override
     public void setPosition(Position position) {
         this.position = position;
-        position.setHolder(this);
+        //position.setHolder(this.position);
+        position.setHolder(this.creatures);
     }
 
-    @Override
+    //@Override
     public void report() {
         System.out.print(this.toString());
     }

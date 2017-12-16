@@ -1,20 +1,23 @@
-public class Grangpa implements Creature
+public class Grangpa <T extends Creature>//implements Creature
 {
     private Position position;
     public static final String PLACE_HOLDER = "👴";
+    private T creatrueg;
 
-    @Override
+
+    //@Override
     public Position getPosition() {
         return position;
     }
 
-    @Override
+    //@Override
     public void setPosition(Position position) {
         this.position = position;
-        position.setHolder(this);
+        //position.setHolder(this.position);
+        position.setHolder(this.creatrueg);
     }
 
-    @Override
+    //@Override
     public void report() {
         System.out.print(this.toString());
     }
