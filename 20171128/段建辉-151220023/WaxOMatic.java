@@ -19,6 +19,7 @@ class Car {
 
     public synchronized void blockAnotherWax() {
         waxChoice = false;
+        waxOn = false;
     }
 
     public synchronized void waitForCar()
