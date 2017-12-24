@@ -16,11 +16,11 @@
 
 ### 命令行中运行步骤:
 
-- 进入到 './20171128/汪值-141270037/' 目录下
+- 进入到 `./20171128/汪值-141270037/` 目录下
 
-- 编译: 'javac concurrency/waxomatic/WaxOMatic.java' 
+- 编译: `javac concurrency/waxomatic/WaxOMatic.java` 
 
-- 运行: 'java javac concurrency/waxomatic/WaxOMatic' 
+- 运行: `java javac concurrency/waxomatic/WaxOMatic` 
 
 - 某次运行结果:
 
