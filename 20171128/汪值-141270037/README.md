@@ -2,7 +2,7 @@
 
 ### 程序简介:
 
-- 本程序修改自原版程序[concurrency/waxomatic/WaxOMatic.java](https://github.com/njuics/java-2017f/blob/master/examples/Concurrency/src/main/java/concurrency/waxomatic/WaxOMatic.java)
+- 本程序修改自原版程序-示例代码[WaxOMatic.java](https://github.com/njuics/java-2017f/blob/master/examples/Concurrency/src/main/java/concurrency/waxomatic/WaxOMatic.java)
 
 - 首先启动两个打蜡线程WaxOn1, WaxOn2和一个抛光线程WaxOff
 
