@@ -22,11 +22,11 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 七只葫芦娃按长蛇阵法摆阵，爷爷走得慢，七只娃便先行一步，匆匆忙忙赶往端星台，队伍排得那叫一个乱七八糟。
 
 到端星台时，却发现那蛇蝎派也尚未到场。
->![](jpgs/scene1.jpg)
+>![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/20171010/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/jpgs/scene1.JPG)
 
 ### 3. 整队
 葫芦兄弟见那蛇蝎派未到，正好借机修整队伍。
->![](jpgs/scene2.jpg)
+>![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/20171010/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/jpgs/scene2.JPG)
 
 ### 4. 魔至
 葫芦娃们整队完毕后，蛇蝎派此时也匆忙赶到。
@@ -34,7 +34,7 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 却见众魔中，只见那蝎子精和一众小妖，独独不见那蛇精的身影。
 
 蝎子精带领众小妖，摆出了一个锋矢阵法，与葫芦娃对峙。
->![](jpgs/scene3.jpg)
+>![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/20171010/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/jpgs/scene3.JPG)
 
 ### 5. 助阵
 摆阵之后，蝎子精便再无举动，也不进攻，只是在那边警惕地看着七只葫芦娃，似乎在等什么。
@@ -42,16 +42,16 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 对峙良久，却见远处吹来一阵黑风。到眼前，化为了蛇精的模样。那蛇精脸上，只见是傅粉施朱，好一番精心打扮。
 
 此时，爷爷也赶到了端星台，为娃娃们助阵。
->![](jpgs/scene4.jpg)
+>![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/20171010/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/jpgs/scene4.JPG)
 
 ### 6. 魔动
 那蝎子精见蛇精赶到，便开始作妖。
 
 首先，变换了阵法，动轭阵法。
->![](jpgs/scene5.jpg)
+>![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/20171010/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/jpgs/scene5.JPG)
 
 那蝎子精似乎是想示威，转而再次变换了阵法，鹤翼阵法。
->![](jpgs/scene6.jpg)
+>![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/20171010/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/jpgs/scene6.JPG)
 
 ### ……
 预知后事如何，请听下回分解。
