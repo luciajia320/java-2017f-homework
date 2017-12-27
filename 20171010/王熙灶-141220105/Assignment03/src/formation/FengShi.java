@@ -1,6 +1,5 @@
 package formation;
 
-import space.Position;
 import space.Space;
 
 /**
@@ -18,21 +17,12 @@ public class FengShi extends BasicFormation {
      */
     public FengShi(Space space, int x, int y) {
         super(space, x, y);
-    }
-
-    /**
-     * @return 返回阵法中的下一个位置
-     */
-    public Position Next() {
-        switch (no) {
-            case 0: no++; return space.getPos(current_x, current_y);
-            case 1: no++; return space.getPos(current_x-1, current_y+1);
-            case 2: no++; return space.getPos(current_x, current_y+1);
-            case 3: no++; return space.getPos(current_x+1, current_y+1);
-            case 4: no++; return space.getPos(current_x, current_y+2);
-            case 5: no++; return space.getPos(current_x, current_y+3);
-            case 6: no++; return space.getPos(current_x, current_y+4);
-            default: no = 0; return null;
-        }
+        positions[0] = space.getPos(current_x, current_y);
+        positions[1] = space.getPos(current_x-1, current_y+1);
+        positions[2] = space.getPos(current_x, current_y+1);
+        positions[3] = space.getPos(current_x+1, current_y+1);
+        positions[4] = space.getPos(current_x, current_y+2);
+        positions[5] = space.getPos(current_x, current_y+3);
+        positions[6] = space.getPos(current_x, current_y+4);
     }
 }

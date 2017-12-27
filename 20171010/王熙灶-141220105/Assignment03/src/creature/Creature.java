@@ -8,10 +8,6 @@ import space.Position;
 public class Creature {
     private Position position;
 
-    public Creature() {
-        position = null;
-    }
-
     public Position getPosition() {
         return position;
     }

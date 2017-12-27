@@ -1,6 +1,5 @@
 package formation;
 
-import space.Position;
 import space.Space;
 
 /**
@@ -16,21 +15,12 @@ public class LongSnake extends BasicFormation {
      */
     public LongSnake(Space space, int x, int y) {
         super(space, x, y);
-    }
-
-    /**
-     * @return 返回阵法中的下一个位置
-     */
-    public Position Next() {
-        switch (no) {
-            case 0: no++; return space.getPos(current_x, current_y);
-            case 1: no++; return space.getPos(current_x+1, current_y);
-            case 2: no++; return space.getPos(current_x+2, current_y);
-            case 3: no++; return space.getPos(current_x+3, current_y);
-            case 4: no++; return space.getPos(current_x+4, current_y);
-            case 5: no++; return space.getPos(current_x+5, current_y);
-            case 6: no++; return space.getPos(current_x+6, current_y);
-            default: no = 0; return null;
-        }
+        positions[0] = space.getPos(current_x, current_y);
+        positions[1] = space.getPos(current_x+1, current_y);
+        positions[2] = space.getPos(current_x+2, current_y);
+        positions[3] = space.getPos(current_x+3, current_y);
+        positions[4] = space.getPos(current_x+4, current_y);
+        positions[5] = space.getPos(current_x+5, current_y);
+        positions[6] = space.getPos(current_x+6, current_y);
     }
 }

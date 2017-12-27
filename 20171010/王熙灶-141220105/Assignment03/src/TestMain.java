@@ -2,10 +2,7 @@ import creature.CalaCrops;
 import creature.EssenceCrops;
 import creature.GrandPa;
 import creature.SnakeEssence;
-import formation.DongE;
-import formation.FengShi;
-import formation.HeYi;
-import formation.LongSnake;
+import formation.*;
 import space.Space;
 
 public class TestMain {
@@ -45,6 +42,11 @@ public class TestMain {
         essenceCrops.clearFormation();
         essenceCrops.setFormation(new HeYi(space, 5, 5));
         System.out.println("Scenario 6: 蝎子精战队变换阵法，鹤翼阵法！");
+        System.out.println(space);
+
+        essenceCrops.clearFormation();
+        essenceCrops.setFormation(new FangYuan(space, 5, 5));
+        System.out.println("Scenario 7: 蝎子精战队变换阵法，方円阵法！");
         System.out.println(space);
     }
 }

@@ -3,15 +3,17 @@ package formation;
 import space.Position;
 import space.Space;
 
+import java.util.Iterator;
+
 /**
  * 默认阵法中只允许有七个位置
  */
-public class BasicFormation {
+public class BasicFormation implements Iterable<Position> {
     protected int current_x;
     protected int current_y;
     protected Space space;
-    protected Position current_pos;
-    protected int no;
+    protected int no = 0;
+    protected Position[] positions = new Position[7]; // 每个阵法只由七个位置构成
 
     /**
      * @param space, 摆放阵法的空间
@@ -23,8 +25,6 @@ public class BasicFormation {
         this.current_x = x;
         this.current_y = y;
         this.space = space;
-        current_pos = space.getPos(x, y);
-        no = 0;
     }
 
     /**
@@ -34,10 +34,20 @@ public class BasicFormation {
         no = 0;
     }
 
-    /**
-     * @return 返回阵法中的下一个位置
-     */
-    public Position Next() {
-        return null;
+    @Override
+    public Iterator<Position> iterator() {
+        return new FormationIterator();
+    }
+
+    private class FormationIterator implements Iterator<Position> {
+        @Override
+        public boolean hasNext() {
+            return no < 7;
+        }
+
+        @Override
+        public Position next() {
+            return positions[no++];
+        }
     }
 }
