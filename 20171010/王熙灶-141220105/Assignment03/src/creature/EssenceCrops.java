@@ -3,6 +3,8 @@ package creature;
 import formation.BasicFormation;
 import space.Position;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 /**
@@ -10,10 +12,10 @@ import java.util.Iterator;
  */
 public class EssenceCrops {
     private ScorpionEssence scorpionEssence  = new ScorpionEssence();
-    private Minion[] minions = {
-        new Minion(), new Minion(), new Minion(),
-        new Minion(), new Minion(), new Minion()
-    };
+    private ArrayList<Minion> minions = new ArrayList<>(Arrays.asList(
+            new Minion(), new Minion(), new Minion(),
+            new Minion(), new Minion(), new Minion()
+    ));
     private BasicFormation basicFormation;
 
     /**

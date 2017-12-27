@@ -17,12 +17,12 @@ public class FengShi extends BasicFormation {
      */
     public FengShi(Space space, int x, int y) {
         super(space, x, y);
-        positions[0] = space.getPos(current_x, current_y);
-        positions[1] = space.getPos(current_x-1, current_y+1);
-        positions[2] = space.getPos(current_x, current_y+1);
-        positions[3] = space.getPos(current_x+1, current_y+1);
-        positions[4] = space.getPos(current_x, current_y+2);
-        positions[5] = space.getPos(current_x, current_y+3);
-        positions[6] = space.getPos(current_x, current_y+4);
+        positions.set(0, space.getPos(current_x, current_y));
+        positions.set(1, space.getPos(current_x-1, current_y+1));
+        positions.set(2, space.getPos(current_x, current_y+1));
+        positions.set(3, space.getPos(current_x+1, current_y+1));
+        positions.set(4, space.getPos(current_x, current_y+2));
+        positions.set(5, space.getPos(current_x, current_y+3));
+        positions.set(6, space.getPos(current_x, current_y+4));
     }
 }

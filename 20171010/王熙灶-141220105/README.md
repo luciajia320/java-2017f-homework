@@ -8,6 +8,7 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 - 基于 `Iterator` 和 `Iterable` 接口，重新实现迭代器模式
 - 增加变换阵法，**方円阵法**
 - 修改类`BasicFormation`，提高代码可复用性
+- 使用 Collection Framework 重写`BasicFormation`、`CalaCrops`、`EssenceCrops`
 
 ### v1.0 — 2017.12.26
 - 增加了两军对阵

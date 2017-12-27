@@ -16,12 +16,12 @@ public class DongE extends BasicFormation {
      */
     public DongE(Space space, int x, int y) {
         super(space, x, y);
-        positions[0] = space.getPos(current_x, current_y);
-        positions[1] = space.getPos(current_x+1, current_y+1);
-        positions[2] = space.getPos(current_x, current_y+2);
-        positions[3] = space.getPos(current_x+1, current_y+3);
-        positions[4] = space.getPos(current_x, current_y+4);
-        positions[5] = space.getPos(current_x+1, current_y+5);
-        positions[6] = space.getPos(current_x, current_y+6);
+        positions.set(0, space.getPos(current_x, current_y));
+        positions.set(1, space.getPos(current_x+1, current_y+1));
+        positions.set(2, space.getPos(current_x, current_y+2));
+        positions.set(3, space.getPos(current_x+1, current_y+3));
+        positions.set(4, space.getPos(current_x, current_y+4));
+        positions.set(5, space.getPos(current_x+1, current_y+5));
+        positions.set(6, space.getPos(current_x, current_y+6));
     }
 }

@@ -10,7 +10,7 @@ public class TestMain {
         Space space = new Space(11);
 
         CalaCrops calaCrops = new CalaCrops();
-        calaCrops.randomPermutation();
+        calaCrops.shuffle();
         calaCrops.setFormation(new LongSnake(space, 2, 2));
         System.out.println("Scenario 1: 乱序葫芦娃加入战场，长蛇阵法！");
         System.out.println(space);
@@ -27,10 +27,10 @@ public class TestMain {
         System.out.println(space);
 
         GrandPa grandPa = new GrandPa();
-        space.positionSetter(grandPa, 10, 2);
+        space.creature_position_setter(grandPa, 10, 2);
 
         SnakeEssence snakeEssence = new SnakeEssence();
-        space.positionSetter(snakeEssence, 7, 5);
+        space.creature_position_setter(snakeEssence, 7, 5);
         System.out.println("Scenario 4: 爷爷和蛇精加入战场，为双方助威！");
         System.out.println(space);
 

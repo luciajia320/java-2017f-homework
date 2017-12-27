@@ -3,6 +3,8 @@ package formation;
 import space.Position;
 import space.Space;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 /**
@@ -12,7 +14,8 @@ public class BasicFormation implements Iterable<Position> {
     protected int current_x;
     protected int current_y;
     protected Space space;
-    protected Position[] positions = new Position[7]; // 每个阵法只由七个位置构成
+    // 每个阵法只由七个位置构成
+    protected ArrayList<Position> positions = new ArrayList<>(Collections.nCopies(7, null));
 
     /**
      * @param space, 摆放阵法的空间
@@ -31,7 +34,7 @@ public class BasicFormation implements Iterable<Position> {
      */
     public void clear() {
         for (Position pos : this) {
-            pos.setHolder(null);
+            pos.clearHolder();
         }
     }
 
@@ -50,7 +53,7 @@ public class BasicFormation implements Iterable<Position> {
 
         @Override
         public Position next() {
-            return positions[no++];
+            return positions.get(no++);
         }
     }
 }

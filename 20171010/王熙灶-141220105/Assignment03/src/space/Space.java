@@ -27,7 +27,7 @@ public class Space {
      * @param y, y坐标位置
      * 表示在空间的(x, y)位置上放置生物体creature
      */
-    public void positionSetter(Creature creature, int x, int y) {
+    public void creature_position_setter(Creature creature, int x, int y) {
         if(x > size || y > size) {
             return;
         }
@@ -62,10 +62,10 @@ public class Space {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for(int i = 0; i < size; i++) {
-            for(int j = 0; j < size; j++) {
-                if(Loc[i][j].getHolder() == null) stringBuilder.append("[] ");
-                else stringBuilder.append(Loc[i][j].getHolder().toString()).append(' ');
+        for(Position[] positions: Loc) {
+            for(Position position: positions) {
+                if(position.getHolder() == null) stringBuilder.append("[] ");
+                else stringBuilder.append(position.getHolder().toString()).append(' ');
             }
             stringBuilder.append('\n');
         }

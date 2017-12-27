@@ -16,6 +16,10 @@ public class Position {
         this.holder = holder;
     }
 
+    public void clearHolder() {
+        setHolder(null);
+    }
+
     public Creature getHolder() {
         return holder;
     }
