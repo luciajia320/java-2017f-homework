@@ -62,11 +62,6 @@ public class CalaCrops {
      */
     public void clearFormation() {
         if(basicFormation == null) return;
-        basicFormation.reset();
-        Iterator<Position> itr = basicFormation.iterator();
-        while (itr.hasNext()) {
-            Position pos = itr.next();
-            pos.setHolder(null);
-        }
+        basicFormation.clear();
     }
 }

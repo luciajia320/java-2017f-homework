@@ -12,7 +12,6 @@ public class BasicFormation implements Iterable<Position> {
     protected int current_x;
     protected int current_y;
     protected Space space;
-    protected int no = 0;
     protected Position[] positions = new Position[7]; // 每个阵法只由七个位置构成
 
     /**
@@ -28,10 +27,12 @@ public class BasicFormation implements Iterable<Position> {
     }
 
     /**
-     * 恢复默认序数，重新开始获取位置
+     * 清除当前阵法的每个位置上的生物
      */
-    public void reset() {
-        no = 0;
+    public void clear() {
+        for (Position pos : this) {
+            pos.setHolder(null);
+        }
     }
 
     @Override
@@ -40,6 +41,8 @@ public class BasicFormation implements Iterable<Position> {
     }
 
     private class FormationIterator implements Iterator<Position> {
+        int no = 0;
+
         @Override
         public boolean hasNext() {
             return no < 7;
