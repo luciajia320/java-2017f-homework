@@ -2,22 +2,25 @@ package space;
 
 import creature.Creature;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 空间类，表示一个 N*N 的二维空间
  */
 public class Space {
     private int size;
-    private Position[][] Loc;
+    private List<List<Position<Creature>>> Loc;
 
     public Space(int size) {
         this.size = size;
-        Loc = new Position[size][];
-
+        Loc = new ArrayList<>();
         for(int i = 0; i < size; i++) {
-            Loc[i] = new Position[size];
+            List<Position<Creature>> ls = new ArrayList<>();
             for(int j = 0; j < size; j++) {
-                Loc[i][j] = new Position();
+                ls.add(new Position<>());
             }
+            Loc.add(ls);
         }
     }
 
@@ -31,8 +34,9 @@ public class Space {
         if(x > size || y > size) {
             return;
         }
-        Loc[x][y].setHolder(creature);
-        creature.setPosition(Loc[x][y]);
+        Position<Creature> pos = Loc.get(x).get(y);
+        pos.setHolder(creature);
+        creature.setPosition(pos);
     }
 
     /**
@@ -40,11 +44,11 @@ public class Space {
      * @param y, y坐标位置
      * @return 空间中(x, y)上的位置
      */
-    public Position getPos(int x, int y) {
+    public Position<Creature> getPos(int x, int y) {
         if(x > size || y > size) {
             return null;
         }
-        return Loc[x][y];
+        return Loc.get(x).get(y);
     }
 
     /**
@@ -62,10 +66,14 @@ public class Space {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for(Position[] positions: Loc) {
-            for(Position position: positions) {
-                if(position.getHolder() == null) stringBuilder.append("[] ");
-                else stringBuilder.append(position.getHolder().toString()).append(' ');
+        for(List<Position<Creature>> positions: Loc) {
+            for(Position<Creature> position: positions) {
+                if(position.getHolder() == null) {
+                    stringBuilder.append("[] ");
+                }
+                else {
+                    stringBuilder.append(position.getHolder().toString()).append(' ');
+                }
             }
             stringBuilder.append('\n');
         }

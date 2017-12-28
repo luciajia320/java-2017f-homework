@@ -5,6 +5,7 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 
 ### V 1.2 — 2017.12.28
 - 重构`CalaCrops`、`EssenceCrops`，增加抽象基类`Crops`
+- 增加泛型机制，将`Position`改进为泛型
 
 ### V 1.1 — 2017.12.27
 - 更新README，插入图片

@@ -5,14 +5,14 @@ import creature.Creature;
 /**
  * 位置类，表示空间中的一个点，每个点上可以放置一个Creature
  */
-public class Position {
-    private Creature holder;
+public class Position<T extends Creature> {
+    private T holder;
 
     public Position() {
         holder = null;
     }
 
-    public void setHolder(Creature holder) {
+    public void setHolder(T holder) {
         this.holder = holder;
     }
 

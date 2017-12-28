@@ -6,13 +6,13 @@ import space.Position;
  * 基类，生物体类
  */
 public class Creature {
-    private Position position;
+    private Position<Creature> position;
 
-    public Position getPosition() {
+    public Position<Creature> getPosition() {
         return position;
     }
 
-    public void setPosition(Position position) {
+    public void setPosition(Position<Creature> position) {
         this.position = position;
     }
 }
