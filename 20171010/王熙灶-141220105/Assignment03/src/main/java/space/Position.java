@@ -20,7 +20,7 @@ public class Position<T extends Creature> {
         setHolder(null);
     }
 
-    public Creature getHolder() {
+    public T getHolder() {
         return holder;
     }
 }

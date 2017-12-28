@@ -22,7 +22,6 @@ public class HeYi extends BasicFormation {
     public HeYi(Space space, int x, int y) {
         super(space, x, y);
         positions.set(0, space.getPos(current_x, current_y));
-        positions.set(0, space.getPos(current_x, current_y));
         positions.set(1, space.getPos(current_x-1, current_y+1));
         positions.set(2, space.getPos(current_x+1, current_y+1));
         positions.set(3, space.getPos(current_x-2, current_y+2));

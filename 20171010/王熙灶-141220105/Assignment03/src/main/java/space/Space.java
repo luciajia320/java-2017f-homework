@@ -28,7 +28,7 @@ public class Space {
      * @param creature, 一个生物体
      * @param x, x坐标位置
      * @param y, y坐标位置
-     * 表示在空间的(x, y)位置上放置生物体creature
+     * 表示在空间的 (x, y) 位置上放置生物体 creature
      */
     public void creature_position_setter(Creature creature, int x, int y) {
         if(x > size || y > size) {

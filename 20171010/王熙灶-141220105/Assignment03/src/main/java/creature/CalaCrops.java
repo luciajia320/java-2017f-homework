@@ -33,16 +33,19 @@ public class CalaCrops extends Crops {
         Collections.sort(calabashes);
     }
 
+    public Calabash get(int i) {
+        return calabashes.get(i);
+    }
     /**
      * @param formation, 设定葫芦娃战队的阵法
      */
     @Override
     public void setFormation(BasicFormation formation) {
         basicFormation = formation;
-        Iterator<Position> itr = formation.iterator();
+        Iterator<Position<Creature>> itr = formation.iterator();
         for(Calabash c: calabashes) {
             if(itr.hasNext()) {
-                Position pos = itr.next();
+                Position<Creature> pos = itr.next();
                 c.setPosition(pos);
                 pos.setHolder(c);
             }

@@ -1,5 +1,6 @@
 package formation;
 
+import creature.Creature;
 import space.Position;
 import space.Space;
 
@@ -10,12 +11,12 @@ import java.util.Iterator;
 /**
  * 默认阵法中只允许有七个位置
  */
-public class BasicFormation implements Iterable<Position> {
+public class BasicFormation implements Iterable<Position<Creature>> {
     protected int current_x;
     protected int current_y;
     protected Space space;
     // 每个阵法只由七个位置构成
-    protected ArrayList<Position> positions = new ArrayList<>(Collections.nCopies(7, null));
+    protected ArrayList<Position<Creature>> positions = new ArrayList<>(Collections.nCopies(7, null));
 
     /**
      * @param space, 摆放阵法的空间
@@ -30,21 +31,21 @@ public class BasicFormation implements Iterable<Position> {
     }
 
     /**
-     * 清除当前阵法的每个位置上的生物
+     * 取消当前阵法中每个位置上的生物与阵法位置的关联
      */
     public void clear() {
-        for (Position pos : this) {
+        for (Position<Creature> pos : this) {
             pos.getHolder().setPosition(null);
             pos.clearHolder();
         }
     }
 
     @Override
-    public Iterator<Position> iterator() {
+    public Iterator<Position<Creature>> iterator() {
         return new FormationIterator();
     }
 
-    private class FormationIterator implements Iterator<Position> {
+    private class FormationIterator implements Iterator<Position<Creature>> {
         int no = 0;
 
         @Override
@@ -53,7 +54,7 @@ public class BasicFormation implements Iterable<Position> {
         }
 
         @Override
-        public Position next() {
+        public Position<Creature> next() {
             return positions.get(no++);
         }
     }

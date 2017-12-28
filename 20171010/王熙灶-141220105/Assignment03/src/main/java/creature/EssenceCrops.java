@@ -23,8 +23,8 @@ public class EssenceCrops extends Crops {
     @Override
     public void setFormation(BasicFormation formation) {
         basicFormation = formation;
-        Iterator<Position> itr = formation.iterator();
-        Position pos = itr.next();
+        Iterator<Position<Creature>> itr = formation.iterator();
+        Position<Creature> pos = itr.next();
         scorpionEssence.setPosition(pos);
         pos.setHolder(scorpionEssence);
 
@@ -35,5 +35,20 @@ public class EssenceCrops extends Crops {
                 pos.setHolder(minion);
             }
         }
+    }
+
+    /**
+     * @return 返回妖魔战队中的蝎子精头领
+     */
+    public ScorpionEssence getScorpionEssence() {
+        return scorpionEssence;
+    }
+
+    /**
+     * @param i, 小喽啰的序号
+     * @return 返回妖魔战队中的第 i 个小喽啰
+     */
+    public Minion get(int i) {
+        return minions.get(i);
     }
 }

@@ -4,14 +4,16 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 ## 版本更新记录
 
 ### V 1.2 — 2017.12.28
-- 重构`CalaCrops`、`EssenceCrops`，增加抽象基类`Crops`
-- 增加泛型机制，将`Position`改进为泛型
+- 增加抽象基类`Crops`。重构`CalaCrops`、`EssenceCrops`
+- 增加泛型机制。将`Position`改进为泛型
+- 使用 Maven 构建项目。将原项目迁移至新的 Maven 项目
+- 添加单元测试。对`Space`、`Crops`等类中的部分方法进行单元测试
 
 ### V 1.1 — 2017.12.27
-- 更新README，插入图片
-- 基于 `Iterator` 和 `Iterable` 接口，重新实现迭代器模式
-- 增加变换阵法，**方円阵法**
-- 修改类`BasicFormation`，提高代码可复用性
+- 更新README。插入图片
+- 重新实现迭代器模式。基于 `Iterator` 和 `Iterable` 接口
+- 增加变换阵法。**方円阵法**
+- 修改类`BasicFormation`。提高代码可复用性
 - 使用 Collection Framework 重写`BasicFormation`、`CalaCrops`、`EssenceCrops`
 
 ### V 1.0 — 2017.12.26
@@ -99,7 +101,7 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 ### 设计模式
 ~~阵法类中，使用了迭代器设计模式的思想，从阵法的阵头初始位置，使用`Next()`依次获得下一个位置。~~
 
-阵法类中，使用了迭代器设计模式。在阵法基类中实现了  `Iterable<Position>`接口，定义了一个实现了`Iterator<Position>`接口的内部类。
+阵法类中，使用了迭代器设计模式。在阵法基类中实现了 `Iterable<Position<Creature>>`接口，定义了一个实现了`Iterator<Position<Creature>>`接口的内部类。
 
 ## 说明
 每种阵法**只能由七人**才能施展，多一人不可，少一人亦不行。
