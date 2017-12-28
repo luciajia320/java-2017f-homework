@@ -13,7 +13,7 @@ import View.PlainTextView;
 import java.util.ArrayList;
 
 public class TwoDimensionBattleGround extends BattleGround {
-    private final int GROUND_SIZE=12;
+    public static final int GROUND_SIZE=12;
     private final int NR_LOLOS=7;
     private static TwoDimensionBattleGround ourInstance = new TwoDimensionBattleGround();
 
@@ -169,7 +169,7 @@ public class TwoDimensionBattleGround extends BattleGround {
 
     @Override
     public void show(){
-        PlainTextView.getInstance(GROUND_SIZE,positionInterfaces).show();
+        PlainTextView.getInstance().show(positionInterfaces);
         System.out.flush();
     }
 

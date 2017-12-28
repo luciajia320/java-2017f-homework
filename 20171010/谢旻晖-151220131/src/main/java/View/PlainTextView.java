@@ -4,28 +4,27 @@
 * @time 18:35
 */
 package View;
+import BattleGround.TwoDimensionBattleGround;
 import Creatures.Creature;
 import View.View;
 import Position.PositionInterface;
 
 public class PlainTextView implements View{
-    private int GROUND_SIZE;
-    private PositionInterface[] positionInterfaces;
+    private int GROUND_SIZE= TwoDimensionBattleGround.GROUND_SIZE;
 
     private static PlainTextView ourInstance;
 
-    public static PlainTextView getInstance(int GROUND_SIZE,PositionInterface[] positionInterfaces) {
+    public static PlainTextView getInstance() {
         if(ourInstance==null)
-            ourInstance=new PlainTextView(GROUND_SIZE,positionInterfaces);
+            ourInstance=new PlainTextView();
         return ourInstance;
     }
 
-    private PlainTextView(int GROUND_SIZE,PositionInterface[] positionInterfaces)    {
-        this.GROUND_SIZE=GROUND_SIZE;
-        this.positionInterfaces=positionInterfaces;
+    private PlainTextView()    {
+
     }
 
-    public void show()
+    public void show(PositionInterface[] positionInterfaces)
     {
         System.out.println("-----------------------------");
         for (int i = 0; i< GROUND_SIZE; i++) {

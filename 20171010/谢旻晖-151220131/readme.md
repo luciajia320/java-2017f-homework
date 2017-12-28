@@ -2,6 +2,10 @@
 
 ###151220131 谢旻晖
 
+## 文件结构
+
+![](fileStructure.png)
+
 ## 类图
 
 ![](./class.png)
@@ -21,15 +25,18 @@
 
 生物相关的类
 
-|       类型       |   Name   |  意义   |
-| :------------: | :------: | :---: |
-| Abstract Class | Creature | 抽象生物  |
-| Abstract Class | Monster  | 抽象妖怪  |
-|     Class      |  Huluwa  |  葫芦娃  |
-|     Class      | Grandpa  |  爷爷   |
-|     Class      |   Lolo   | 小喽喽妖怪 |
-|     Class      |  Snake   |  蛇精   |
-|     Class      | Scorpion |  蝎子精  |
+|       类型       |           Name           |   意义    |
+| :------------: | :----------------------: | :-----: |
+| Abstract Class |         Creature         |  抽象生物   |
+| Abstract Class |         Monster          |  抽象妖怪   |
+| Abstract Class |           Good           |  正义阵营   |
+|     Class      |          Huluwa          |   葫芦娃   |
+|     Class      |         Grandpa          |   爷爷    |
+|     Class      |           Lolo           |  小喽喽妖怪  |
+|     Class      |          Snake           |   蛇精    |
+|     Class      |         Scorpion         |   蝎子精   |
+|   Interface    | CreatureFactoryInterface | 生物工厂接口  |
+|     Class      |     CreatureFactory      | 生物工厂的实现 |
 
 视相关
 
@@ -44,6 +51,7 @@
 | :-------: | :------------: | :--------: |
 |   Class   | RandomNumArray | 不重复的随机数产生器 |
 | Interface |     Sorter     |     排序     |
+|   Class   |      Main      |     入口     |
 
 
 
@@ -91,7 +99,17 @@
 
    ​
 
-4. 抽象出**BattleGround**,定义出广义上的战场,他有一系列抽象的坐标，有一群生物，会往战场中加入生物，会清除生物，可以查看具体坐标的生物是什么，可以有观察整个战场情况的`show()`,以及最重要的打架`battle()`.
+4. 所有生物的制造者，**CreatureFactory**工厂,利用泛型和工厂设计模式,抽象出工厂接口，用于生成所有的生物。
+
+   ```java
+   public interface CreatureFactoryInterface {
+        <T extends Creature> T createCreature(Class<T> tClass, PositionInterface positionInterface);
+   }
+   ```
+
+   ​
+
+5. 抽象出**BattleGround**,定义出广义上的战场,他有一系列抽象的坐标，有一群生物，会往战场中加入生物，会清除生物，可以查看具体坐标的生物是什么，可以有观察整个战场情况的`show()`,以及最重要的打架`battle()`.
 
    ```java
    //下面的代码删去了具体实现（为了缩减readme的容量）
@@ -125,7 +143,15 @@
 
      其中startPos为起始点，toBeArrangeCreatures为待排兵布阵的生物。
 
- 6.  所有的输出均会由接口View的实现来承担，我实现了**PlainTextView**，即文本输出类
+ 6.  所有的输出均会由接口**View**的实现来承担,他接受战场上所有的位置数组，(由于位置可以得到他上面的holder)，所以我们可以显示战场。
+
+     ```java
+     public interface View {
+         void show(PositionInterface[] positionInterfaces);
+     }
+     ```
+
+     我实现了**PlainTextView**，即文本输出类
 
  7.  运用到的设计模式主要为单例模式、工厂模式。其中**GrandPa**.**Snake**等奇怪的生物，**PlainTextView**视图类，**BattleGround**战场类均为单例。
 
@@ -134,6 +160,8 @@
 - 设计过程自然，便于重构，这点我深有体会，改老师的代码改到二维着实方便，改我第二次作业的代码稍微改了一下就放弃了。
 - 访问控制减少了过多暴露的数据，减少了BUG的发生的几率。
 - 利用向上转型，实现多态，具有灵活性和可扩充性。
+- MVC框架，将模型、控制、视隔离，结构清晰。
+- 低耦合，高内聚的代码便于后期的重构。设计原则SOLID很重要！！！！(现在才有体会)
 
 ## 心得
 

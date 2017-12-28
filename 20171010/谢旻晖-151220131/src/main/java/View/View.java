@@ -1,4 +1,7 @@
 package View;
+
+import Position.PositionInterface;
+
 public interface View {
-    void show();
+    void show(PositionInterface[] positionInterfaces);
 }
