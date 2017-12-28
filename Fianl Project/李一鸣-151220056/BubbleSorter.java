@@ -2,12 +2,12 @@ import java.util.ArrayList;
 
 public class BubbleSorter implements Sorter {
     @Override
-    public void sort(Field queue ,int row) {
+    public void sort(Field queue ,int line) {
         Creature creature;
-        ArrayList<Position> positions = queue.getPositions(row);
-
-        for (int i = 4; i < 10; i++) {
-            for (int j = 4; j < 10; j++) {
+        ArrayList<Position> positions = queue.getPositions(line);
+    //  System.out.println(positions.get(0).getX());
+        for (int i = 0; i <7; i++) {
+            for (int j = i+1; j <6; j++) {
                 /*
                 if (((Comparable) (positions.get[j].getHolder())).biggerThan((Comparable) (positions[j + 1].getHolder()))) {
                     creature = positions[j].getHolder();
@@ -21,6 +21,7 @@ public class BubbleSorter implements Sorter {
                 }
             }
         }
+
     }
 }
 
