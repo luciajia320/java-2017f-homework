@@ -3,14 +3,17 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 
 ## 版本更新记录
 
-### v1.1 — 2017.12.27
+### V 1.2 — 2017.12.28
+- 重构`CalaCrops`、`EssenceCrops`，增加抽象基类`Crops`
+
+### V 1.1 — 2017.12.27
 - 更新README，插入图片
 - 基于 `Iterator` 和 `Iterable` 接口，重新实现迭代器模式
 - 增加变换阵法，**方円阵法**
 - 修改类`BasicFormation`，提高代码可复用性
 - 使用 Collection Framework 重写`BasicFormation`、`CalaCrops`、`EssenceCrops`
 
-### v1.0 — 2017.12.26
+### V 1.0 — 2017.12.26
 - 增加了两军对阵
 - 爷爷和蛇精助阵
 - 提供多种阵法
@@ -79,6 +82,8 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 1、生物体基类`Creature`。葫芦娃类`Calabash`、蝎子精类`ScorpionEssence`、蛇精类`SnakeEssence`、爷爷类`GrandPa`、小喽啰类`Minion`均继承于此。
 
 2、阵法基类`BasicFormation`。动轭阵法类`DongE`、方円阵法类`FangYuan`、锋矢阵法类`FengShi`、鹤翼阵法类`HeYi`、长蛇阵法类`LongSnake`等均继承于此。
+
+3、军团基类`Crops`。葫芦军团`CalaCrops`和妖精军团`EssenceCrops`均继承于此。
 
 ### 聚合思想
 1、葫芦娃战队类`CalaCrops`。聚合了七只葫芦娃。

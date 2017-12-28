@@ -10,17 +10,17 @@ import java.util.Iterator;
 /**
  * 妖精战队，由蝎子精带领六只小喽啰组成
  */
-public class EssenceCrops {
+public class EssenceCrops extends Crops {
     private ScorpionEssence scorpionEssence  = new ScorpionEssence();
     private ArrayList<Minion> minions = new ArrayList<>(Arrays.asList(
             new Minion(), new Minion(), new Minion(),
             new Minion(), new Minion(), new Minion()
     ));
-    private BasicFormation basicFormation;
 
     /**
      * @param formation, 设定妖精战队的阵法
      */
+    @Override
     public void setFormation(BasicFormation formation) {
         basicFormation = formation;
         Iterator<Position> itr = formation.iterator();
@@ -35,13 +35,5 @@ public class EssenceCrops {
                 pos.setHolder(minion);
             }
         }
-    }
-
-    /**
-     * 清除妖精战队的当前阵法
-     */
-    public void clearFormation() {
-        if(basicFormation == null) return;
-        basicFormation.clear();
     }
 }

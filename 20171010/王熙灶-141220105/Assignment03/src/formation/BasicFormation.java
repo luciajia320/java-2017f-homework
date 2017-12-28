@@ -34,6 +34,7 @@ public class BasicFormation implements Iterable<Position> {
      */
     public void clear() {
         for (Position pos : this) {
+            pos.getHolder().setPosition(null);
             pos.clearHolder();
         }
     }

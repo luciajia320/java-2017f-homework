@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * 葫芦娃战队，由七只葫芦娃组成
  */
-public class CalaCrops {
+public class CalaCrops extends Crops {
     private ArrayList<Calabash> calabashes = new ArrayList<>(Arrays.asList(
             new Calabash(Color.红, Order.一),
             new Calabash(Color.橙, Order.二),
@@ -18,8 +18,6 @@ public class CalaCrops {
             new Calabash(Color.蓝, Order.六),
             new Calabash(Color.紫, Order.七)
     ));
-
-    private BasicFormation basicFormation;
 
     /**
      * 将葫芦娃顺序打乱
@@ -38,6 +36,7 @@ public class CalaCrops {
     /**
      * @param formation, 设定葫芦娃战队的阵法
      */
+    @Override
     public void setFormation(BasicFormation formation) {
         basicFormation = formation;
         Iterator<Position> itr = formation.iterator();
@@ -48,13 +47,5 @@ public class CalaCrops {
                 pos.setHolder(c);
             }
         }
-    }
-
-    /**
-     * 清除葫芦娃战队的当前阵法
-     */
-    public void clearFormation() {
-        if(basicFormation == null) return;
-        basicFormation.clear();
     }
 }
