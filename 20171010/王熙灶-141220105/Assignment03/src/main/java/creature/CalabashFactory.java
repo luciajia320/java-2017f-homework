@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class CalabashFactory {
-    private ArrayList<Calabash> calabashes = new ArrayList<>(Arrays.asList(
+    private static ArrayList<Calabash> calabashes = new ArrayList<>(Arrays.asList(
             new Calabash(Color.红, Order.一),
             new Calabash(Color.橙, Order.二),
             new Calabash(Color.黄, Order.三),
@@ -13,6 +13,13 @@ public class CalabashFactory {
             new Calabash(Color.蓝, Order.六),
             new Calabash(Color.紫, Order.七)
     ));
+
+    private static CalabashFactory calabashFactory = new CalabashFactory();
+    private CalabashFactory() {}
+
+    public static CalabashFactory getInstance() {
+        return calabashFactory;
+    }
 
     public Calabash get(int i) {
         return calabashes.get(i);

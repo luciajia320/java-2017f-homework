@@ -8,7 +8,7 @@ import space.Space;
 import static org.junit.Assert.*;
 
 public class CropsTest {
-    private CalaCrops crops = new CalaCrops();
+    private CalaCrops crops = CalaCrops.getInstance();
     private Space space = new Space(11);
 
     @Before

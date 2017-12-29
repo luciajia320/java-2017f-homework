@@ -12,7 +12,7 @@ import space.Space;
  *         X
  *            X
  */
-public class HeYi extends BasicFormation {
+public final class HeYi extends BasicFormation {
     /**
      * @param space, 摆放阵法的空间
      * @param x, 阵头的x方向位置

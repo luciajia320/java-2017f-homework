@@ -11,10 +11,10 @@ import static org.junit.Assert.*;
 
 public class SpaceTest {
     private static Space space = new Space(11);
-    private GrandPa gp = new GrandPa();
+    private GrandPa gp = GrandPa.getInstance();
     private Minion mn = new Minion();
-    private ScorpionEssence se = new ScorpionEssence();
-    private SnakeEssence sn = new SnakeEssence();
+    private ScorpionEssence se = ScorpionEssence.getInstance();
+    private SnakeEssence sn = SnakeEssence.getInstance();
     private String scene;
 
     @Before

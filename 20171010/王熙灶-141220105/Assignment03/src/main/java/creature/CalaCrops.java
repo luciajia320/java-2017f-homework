@@ -9,15 +9,23 @@ import java.util.*;
  * 葫芦娃战队，由七只葫芦娃组成
  */
 public class CalaCrops extends Crops {
+    private CalabashFactory calabashFactory = CalabashFactory.getInstance();
     private ArrayList<Calabash> calabashes = new ArrayList<>(Arrays.asList(
-            new Calabash(Color.红, Order.一),
-            new Calabash(Color.橙, Order.二),
-            new Calabash(Color.黄, Order.三),
-            new Calabash(Color.绿, Order.四),
-            new Calabash(Color.青, Order.五),
-            new Calabash(Color.蓝, Order.六),
-            new Calabash(Color.紫, Order.七)
+            calabashFactory.get(0),
+            calabashFactory.get(1),
+            calabashFactory.get(2),
+            calabashFactory.get(3),
+            calabashFactory.get(4),
+            calabashFactory.get(5),
+            calabashFactory.get(6)
     ));
+
+    private static CalaCrops crops = new CalaCrops();
+    private CalaCrops() {}
+
+    public static CalaCrops getInstance() {
+        return crops;
+    }
 
     /**
      * 将葫芦娃顺序打乱

@@ -8,8 +8,8 @@ import space.Space;
 import static org.junit.Assert.*;
 
 public class CalaCropsTest {
-    private CalaCrops crops = new CalaCrops();
-    private CalabashFactory calabashFactory = new CalabashFactory();
+    private CalaCrops crops = CalaCrops.getInstance();
+    private CalabashFactory calabashFactory = CalabashFactory.getInstance();
     private Space space = new Space(11);
 
     @Before

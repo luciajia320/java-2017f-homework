@@ -11,11 +11,19 @@ import java.util.Iterator;
  * 妖精战队，由蝎子精带领六只小喽啰组成
  */
 public class EssenceCrops extends Crops {
-    private ScorpionEssence scorpionEssence  = new ScorpionEssence();
+    private ScorpionEssence scorpionEssence  = ScorpionEssence.getInstance();
+    private MinionFactory minionFactory = MinionFactory.getInstance();
     private ArrayList<Minion> minions = new ArrayList<>(Arrays.asList(
-            new Minion(), new Minion(), new Minion(),
-            new Minion(), new Minion(), new Minion()
+            minionFactory.get(0), minionFactory.get(1), minionFactory.get(2),
+            minionFactory.get(3), minionFactory.get(4), minionFactory.get(5)
     ));
+
+    private static EssenceCrops crops = new EssenceCrops();
+    private EssenceCrops() {}
+
+    public static EssenceCrops getInstance() {
+        return crops;
+    }
 
     /**
      * @param formation, 设定妖精战队的阵法

@@ -37,7 +37,7 @@ public class Calabash extends Creature implements Comparable<Calabash> {
 
     @Override
     public int compareTo(Calabash o) {
-        return Integer.compare(this.color.ordinal(), o.color.ordinal());
+        return Integer.compare(this.order.ordinal(), o.order.ordinal());
     }
 }
 

@@ -10,7 +10,7 @@ import space.Space;
  *      X     X
  *         X
  */
-public class FangYuan extends BasicFormation {
+public final class FangYuan extends BasicFormation {
     /**
      * @param space, 摆放阵法的空间
      * @param x, 阵头的x方向位置

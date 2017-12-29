@@ -6,7 +6,7 @@ import space.Space;
  * 长蛇阵法:
  *   X X X X X X X
  */
-public class LongSnake extends BasicFormation {
+public final class LongSnake extends BasicFormation {
     /**
      * @param space, 摆放阵法的空间
      * @param x, 阵头的x方向位置

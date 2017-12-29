@@ -7,7 +7,7 @@ import space.Space;
 import static org.junit.Assert.*;
 
 public class EssenceCropsTest {
-    private EssenceCrops crops = new EssenceCrops();
+    private EssenceCrops crops = EssenceCrops.getInstance();
     private Space space = new Space(11);
 
     @Test

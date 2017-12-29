@@ -3,6 +3,14 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 
 ## 版本更新记录
 
+### V 1.3 — 2017.12.29
+- 更新README。增加项目整体类结构图。
+- 更新README。增加源代码说明。
+- 将`GrandPa`、`SnakeEssence`、`ScorpionEssence`重新实现为单例模式。
+- 将`FengShi`、`DongE`等类定义为`final`类。
+- 添加`MinionFactory`单例类，一次批量生成小喽啰。
+- 将`CalaCrops`、`EssenceCrops`重新实现为单例模式。
+
 ### V 1.2 — 2017.12.28
 - 增加抽象基类`Crops`。重构`CalaCrops`、`EssenceCrops`
 - 增加泛型机制。将`Position`改进为泛型
@@ -93,6 +101,8 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 
 2、妖魔战队类`EssenceCrops`。聚合了蝎子精和六只小喽啰。
 
+3、空间类`Space`。由 N*N 个`Position`构成。
+
 ### 多态思想
 1、在`Position`类定义中，`Holder`成员的类型定义为`Creature`，实际的`Holder`可能为其派生类：葫芦娃`Calabash`、蝎子精`ScorpionEssence`、蛇精`SnakeEssence`、爷爷`GrandPa`、小喽啰`Minion`。
 
@@ -101,7 +111,60 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 ### 设计模式
 ~~阵法类中，使用了迭代器设计模式的思想，从阵法的阵头初始位置，使用`Next()`依次获得下一个位置。~~
 
-阵法类中，使用了迭代器设计模式。在阵法基类中实现了 `Iterable<Position<Creature>>`接口，定义了一个实现了`Iterator<Position<Creature>>`接口的内部类。
+1、阵法类中，使用了迭代器设计模式。在阵法基类中实现了 `Iterable<Position<Creature>>`接口，定义了一个实现了`Iterator<Position<Creature>>`接口的内部类。
+
+2、葫芦娃战队`CalaCrops`和妖魔战队`EssenceCrops`等类中，使用了单例设计模式，表示其唯一性。
+
+3、工厂模式。`CalabashFactory`和`MinionFactory`使用了工厂模式，一次性构造葫芦娃和小喽啰。
+
+## 项目结构
+### 整体结构图
+>![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/20171010/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/jpgs/structure.png)
+
+### 源代码说明
+#### Package `creature`
+1、Class `Creature`：代表生物体的基类。每个生物体拥有一个`Position`属性，代表其位置。还有相应的操作`Position`的`getPosition`和`setPosition`方法。
+
+2、Class `Calabash`：代表葫芦娃的类，继承自`Creature`。每个葫芦娃有两个属性：`order`和`color`，分别表示其长幼次序和颜色，有相应的`get`和`set`方法。另外`Calabash`还实现了`Comparable`接口，根据长幼次序比较大小。在其中还定义了两个枚举类型：`Color`、`Order`，对应于表示葫芦娃的两个属性。
+
+3、Class `CalabashFactory`：葫芦娃的单例工厂类。其中包含`get(int i)`方法，表示返回第几个葫芦娃。
+
+4、Class `GrandPa`：代表爷爷的类。使用单例设计模式。
+
+5、Class `Minion`：代表小喽啰的类。
+
+6、Class `MinionFactory`：小喽啰的单例工厂类。其中包含`get(int i)`方法，表示返回第几个小喽啰。
+
+7、Class `SnakeEssence`：代表蛇精的类。使用单例设计模式。
+
+8、Class `ScorpionEssence`：代表蝎子精的类。使用单例设计模式。
+
+9、Class `Crops`：表示一个战队的抽象基类。战队有一个属性`basicFormation`，表示战队当前使用的阵法；其中包含一个抽象方法`setFormation`，用于为战队设定当前使用的阵法；还包含一个`clearFormation`方法，用于取消当前使用的阵法。
+
+10、Class `CalaCrops`：葫芦娃战队类，继承自`Crops`类。由七只葫芦娃构成。实现了`Crops`中的抽象方法。提供了`shuffle`和`sort`方法，用于将葫芦娃战队顺序打乱和排序。还提供了`get(int i)`方法，返回战队中的第`i`个葫芦娃。
+
+11、Class `EssenceCrops`：妖魔战队类，继承自`Crops`类。由一只蝎子精和六只小喽啰构成。实现了`Crops`中的抽象方法。
+
+#### Package `formation`
+1、Class `BasicFormation`：阵法基类。`BasicFormation`有四个属性，`current_x`表示阵头的x方向坐标，`current_y`表示阵头的y方向坐标，`space`表示阵法所处的空间，`positions`则表示阵法的空间位置集合，每个阵法由七个阵法位置构成。`clear`方法取消当前阵法中每个位置上的生物与阵法位置的关联。`BasicFormation`实现了`Iterable`接口，为阵法位置提供了迭代器访问方式。
+
+2、Class `DonE`：动轭阵法类，继承自`BasicFormation`类。
+
+3、Class `FangYuan`：方円阵法类，继承自`BasicFormation`类。
+
+4、Class `FengShi`：锋矢阵法类，继承自`BasicFormation`类。
+
+5、Class `HeiYi`：鹤翼阵法类，继承自`BasicFormation`类。
+
+6、Class `LongSnake`：长蛇阵法类，继承自`BasicFormation`类。
+
+#### Package `space`
+1、Class `Position`：表示位置的类。使用泛型机制，其上有一个泛型类型的属性`Holder`，表示这个位置上的物体。提供了`Holder`的`get`和`set`方法。
+
+2、Class `Space`：表示二维空间的类。`Space`有一个属性`size`，表示其大小，`Space`由 `size` * `size`个`Position`构成。其上有个方法`creature_position_setter`，用于将生物体与空间位置关联起来。还有相应的`Pos`和`size`的`get`方法。`Space`类重载了`toString`方法，用于输出空间上每个位置上的生物体情况。
+
+#### Class `TestMain`
+主类。
 
 ## 说明
 每种阵法**只能由七人**才能施展，多一人不可，少一人亦不行。
