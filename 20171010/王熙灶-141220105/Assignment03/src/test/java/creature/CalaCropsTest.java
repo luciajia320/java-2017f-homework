@@ -1,7 +1,6 @@
 package creature;
 
 import formation.*;
-import org.junit.Before;
 import org.junit.Test;
 import space.Space;
 
@@ -12,24 +11,25 @@ public class CalaCropsTest {
     private CalabashFactory calabashFactory = CalabashFactory.getInstance();
     private Space space = new Space(11);
 
-    @Before
-    public void setUp() throws Exception {
-        crops.shuffle();
+    @Test
+    public void test_getInstance() throws Exception {
+        CalaCrops cc = CalaCrops.getInstance();
+        assertEquals(cc, crops);
     }
 
     @Test
     public void test_sort() throws Exception {
+        crops.shuffle();
         crops.sort();
 
         for(int i = 0; i < 7; i++) {
-            assertEquals(calabashFactory.get(i).getColor(), crops.get(i).getColor());
-            assertEquals(calabashFactory.get(i).getOrder(), crops.get(i).getOrder());
+            assertEquals(calabashFactory.get(i), crops.get(i));
+            assertEquals(calabashFactory.get(i), crops.get(i));
         }
     }
 
     @Test
     public void test_setLongSnakeFormation() throws Exception {
-        crops.sort();
         crops.setFormation(new LongSnake(space, 3, 3));
 
         for(int i = 0; i < 7; i++) {
@@ -40,7 +40,6 @@ public class CalaCropsTest {
 
     @Test
     public void test_setHeYiFormation() throws Exception {
-        crops.sort();
         int current_x = 5, current_y = 5;
         crops.setFormation(new HeYi(space, current_x, current_y));
 
@@ -68,7 +67,6 @@ public class CalaCropsTest {
 
     @Test
     public void test_setFengShiFormation() throws Exception {
-        crops.sort();
         int current_x = 5, current_y = 5;
         crops.setFormation(new FengShi(space, current_x, current_y));
 
@@ -96,7 +94,6 @@ public class CalaCropsTest {
 
     @Test
     public void test_setFangYuanFormation() throws Exception {
-        crops.sort();
         int current_x = 5, current_y = 5;
         crops.setFormation(new FangYuan(space, current_x, current_y));
 
@@ -124,7 +121,6 @@ public class CalaCropsTest {
 
     @Test
     public void test_setDongEFormation() throws Exception {
-        crops.sort();
         int current_x = 4, current_y = 4;
         crops.setFormation(new DongE(space, current_x, current_y));
 

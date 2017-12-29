@@ -14,6 +14,6 @@ public final class SnakeEssence extends Creature {
 
     @Override
     public String toString() {
-        return "蛇";
+        return "\uD83D\uDC0D";
     }
 }

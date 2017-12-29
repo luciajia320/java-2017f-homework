@@ -14,6 +14,6 @@ public final class ScorpionEssence extends Creature {
 
     @Override
     public String toString() {
-        return "蝎";
+        return "\uD83E\uDD82";
     }
 }

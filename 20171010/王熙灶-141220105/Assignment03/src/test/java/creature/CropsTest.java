@@ -21,9 +21,8 @@ public class CropsTest {
         crops.clearFormation();
 
         for(int i = 0; i < 7; i++) {
-            assertEquals(null, space.getPos(i+3, 3).getHolder());
             assertEquals(null, crops.get(i).getPosition());
+            assertNotEquals(null, space.getPos(i+3, 3).getHolder());
         }
     }
-
 }

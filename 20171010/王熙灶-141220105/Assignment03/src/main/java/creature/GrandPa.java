@@ -13,6 +13,6 @@ public final class GrandPa extends Creature {
     }
     @Override
     public String toString() {
-        return "爷";
+        return "\uD83D\uDC74";
     }
 }

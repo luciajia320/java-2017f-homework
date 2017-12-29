@@ -11,6 +11,12 @@ public class EssenceCropsTest {
     private Space space = new Space(11);
 
     @Test
+    public void getInstance() throws Exception {
+        EssenceCrops c = EssenceCrops.getInstance();
+        assertEquals(c, crops);
+    }
+
+    @Test
     public void test_setLongSnakeFormation() throws Exception {
         int current_x = 3, current_y = 3;
         crops.setFormation(new LongSnake(space, current_x, current_y));

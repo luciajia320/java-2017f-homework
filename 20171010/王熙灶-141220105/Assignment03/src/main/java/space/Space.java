@@ -1,6 +1,7 @@
 package space;
 
 import creature.Creature;
+import creature.plant.RandomPlant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,17 +11,19 @@ import java.util.List;
  */
 public class Space {
     private int size;
-    private List<List<Position<Creature>>> Loc;
+    private List<List<Position<Creature>>> positionss;
 
     public Space(int size) {
         this.size = size;
-        Loc = new ArrayList<>();
+        positionss = new ArrayList<>();
         for(int i = 0; i < size; i++) {
             List<Position<Creature>> ls = new ArrayList<>();
             for(int j = 0; j < size; j++) {
-                ls.add(new Position<>());
+                Position<Creature> pos = new Position<>();
+                pos.setHolder(RandomPlant.get());
+                ls.add(pos);
             }
-            Loc.add(ls);
+            positionss.add(ls);
         }
     }
 
@@ -34,7 +37,7 @@ public class Space {
         if(x > size || y > size) {
             return;
         }
-        Position<Creature> pos = Loc.get(x).get(y);
+        Position<Creature> pos = positionss.get(x).get(y);
         pos.setHolder(creature);
         creature.setPosition(pos);
     }
@@ -48,7 +51,7 @@ public class Space {
         if(x > size || y > size) {
             return null;
         }
-        return Loc.get(x).get(y);
+        return positionss.get(x).get(y);
     }
 
     /**
@@ -60,20 +63,15 @@ public class Space {
 
     /**
      * @return 返回整个空间的状态布局
-     * 如果某个位置上有生物体存在，则输出生物体对应的名字；
-     * 否则输出 []
+     * 如果某个位置上有动物存在，则输出动物对于的图标；
+     * 否则输出该位置上的默认植物图标
      */
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for(List<Position<Creature>> positions: Loc) {
+        for(List<Position<Creature>> positions: positionss) {
             for(Position<Creature> position: positions) {
-                if(position.getHolder() == null) {
-                    stringBuilder.append("[] ");
-                }
-                else {
-                    stringBuilder.append(position.getHolder().toString()).append(' ');
-                }
+                stringBuilder.append(position.getHolder().toString()).append(' ');
             }
             stringBuilder.append('\n');
         }

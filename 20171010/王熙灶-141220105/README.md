@@ -4,12 +4,15 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 ## 版本更新记录
 
 ### V 1.3 — 2017.12.29
-- 更新README。增加项目整体类结构图。
-- 更新README。增加源代码说明。
-- 将`GrandPa`、`SnakeEssence`、`ScorpionEssence`重新实现为单例模式。
-- 将`FengShi`、`DongE`等类定义为`final`类。
-- 添加`MinionFactory`单例类，一次批量生成小喽啰。
-- 将`CalaCrops`、`EssenceCrops`重新实现为单例模式。
+- 更新README。增加项目整体类结构图
+- 更新README。增加源代码说明、单元测试说明、自动构建说明
+- 将`GrandPa`、`SnakeEssence`、`ScorpionEssence`重新实现为单例模式
+- 将`FengShi`、`DongE`等类定义为`final`类
+- 添加`MinionFactory`单例类，一次批量生成小喽啰
+- 将`CalaCrops`、`EssenceCrops`重新实现为单例模式
+- 添加`creature.plant`包，添加各种植物类型。在空间位置上没有动物时随机放置一种植物
+- 使用 **RTTI** 信息在`RandomPlant`类中创建随机植物类对象实例
+- 添加单元测试。对`RandomPlant`、`MinionFactory`等类中的部分方法进行单元测试
 
 ### V 1.2 — 2017.12.28
 - 增加抽象基类`Crops`。重构`CalaCrops`、`EssenceCrops`
@@ -51,11 +54,11 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 七只葫芦娃按长蛇阵法摆阵，爷爷走得慢，七只娃便先行一步，匆匆忙忙赶往端星台，队伍排得那叫一个乱七八糟。
 
 到端星台时，却发现那蛇蝎派也尚未到场。
->![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/20171010/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/jpgs/scene1.JPG)
+>![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/20171010/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/jpgs/r-scene1.JPG)
 
 ### 3. 整队
 葫芦兄弟见那蛇蝎派未到，正好借机修整队伍。
->![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/20171010/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/jpgs/scene2.JPG)
+>![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/20171010/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/jpgs/r-scene2.JPG)
 
 ### 4. 魔至
 葫芦娃们整队完毕后，蛇蝎派此时也匆忙赶到。
@@ -63,7 +66,7 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 却见众魔中，只见那蝎子精和一众小妖，独独不见那蛇精的身影。
 
 蝎子精带领众小妖，摆出了一个锋矢阵法，与葫芦娃对峙。
->![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/20171010/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/jpgs/scene3.JPG)
+>![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/20171010/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/jpgs/r-scene3.JPG)
 
 ### 5. 助阵
 摆阵之后，蝎子精便再无举动，也不进攻，只是在那边警惕地看着七只葫芦娃，似乎在等什么。
@@ -71,19 +74,19 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 对峙良久，却见远处吹来一阵黑风。到眼前，化为了蛇精的模样。那蛇精脸上，只见是傅粉施朱，好一番精心打扮。
 
 此时，爷爷也赶到了端星台，为娃娃们助阵。
->![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/20171010/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/jpgs/scene4.JPG)
+>![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/20171010/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/jpgs/r-scene4.JPG)
 
 ### 6. 魔动
 那蝎子精见蛇精赶到，便开始作妖。
 
 首先，变换了阵法，动轭阵法。
->![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/20171010/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/jpgs/scene5.JPG)
+>![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/20171010/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/jpgs/r-scene5.JPG)
 
 那蝎子精似乎是想示威，转而再次变换了阵法，鹤翼阵法。
->![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/20171010/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/jpgs/scene6.JPG)
+>![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/20171010/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/jpgs/r-scene6.JPG)
 
 须臾，蝎子精又再次变换了阵法，方円阵法。
->![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/20171010/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/jpgs/scene7.JPG)
+>![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/20171010/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/jpgs/r-scene7.JPG)
 
 ### ……
 欲知后事如何，请听下回分解。
@@ -95,6 +98,8 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 2、阵法基类`BasicFormation`。动轭阵法类`DongE`、方円阵法类`FangYuan`、锋矢阵法类`FengShi`、鹤翼阵法类`HeYi`、长蛇阵法类`LongSnake`等均继承于此。
 
 3、军团基类`Crops`。葫芦军团`CalaCrops`和妖精军团`EssenceCrops`均继承于此。
+
+4、`creature.plant`中的十种植物类均继承于生物体基类`Creature`，用于表示空间位置上的空白位置。
 
 ### 聚合思想
 1、葫芦娃战队类`CalaCrops`。聚合了七只葫芦娃。
@@ -116,6 +121,9 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 2、葫芦娃战队`CalaCrops`和妖魔战队`EssenceCrops`等类中，使用了单例设计模式，表示其唯一性。
 
 3、工厂模式。`CalabashFactory`和`MinionFactory`使用了工厂模式，一次性构造葫芦娃和小喽啰。
+
+### RTTI
+在`RandomPlant`类中，定义了一个`Class`对象数组，数组元素为上述十种植物类的`**.class`。
 
 ## 项目结构
 ### 整体结构图
@@ -145,6 +153,21 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 
 11、Class `EssenceCrops`：妖魔战队类，继承自`Crops`类。由一只蝎子精和六只小喽啰构成。实现了`Crops`中的抽象方法。
 
+#### Package `creature.plant`
+1、包含以下十种植物类，均继承自`Creature`类：
+- Class `FourLeafClover`：four leaf clover
+- Class `Mushroom`：mushroom
+- Class `MapleLeaf`：maple leaf
+- Class `Blossom`：blossom
+- Class `SunFlower`：sun flower
+- Class `Tulip`：tulip
+- Class `PalmTree`：palm tree
+- Class `Rose`：rose
+- Class `Cactus`：cactus
+- Class `Hibiscus`：hibiscus
+
+2、Class `RandomPlant`：随机植物类。静态方法`get()`从以上十种植物中，随机返回一种植物对象实例。使用了RTTI信息。
+
 #### Package `formation`
 1、Class `BasicFormation`：阵法基类。`BasicFormation`有四个属性，`current_x`表示阵头的x方向坐标，`current_y`表示阵头的y方向坐标，`space`表示阵法所处的空间，`positions`则表示阵法的空间位置集合，每个阵法由七个阵法位置构成。`clear`方法取消当前阵法中每个位置上的生物与阵法位置的关联。`BasicFormation`实现了`Iterable`接口，为阵法位置提供了迭代器访问方式。
 
@@ -165,6 +188,30 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 
 #### Class `TestMain`
 主类。
+
+### 单元测试
+#### Package `create`
+1、Class `CalabashFactoryTest`：测试`getInstance()`、`get()`方法
+
+2、Class `CalaCropsTest`：测试`getInstance()`、`sort()`、`setXXXFormation()`方法
+
+3、Class `CropTest`：测试`clearFormation()`方法
+
+4、Class `EssenceCropsTest`：测试`getInstance()`、`setXXXFormation()`方法
+
+5、Class `MinionFactoryTest`：测试`getInstance()`、`get()`方法
+
+#### Package `create.plant`
+1、Class `RandomPlantTest`：测试`get()`方法
+
+#### Package `space`
+1、Class `SpaceTest`：测试`creature_position_setter()`方法
+
+## 自动构建
+本项目使用的自动构建工具为 **Maven**，版本 **3.5.2**
+- **mvn package**：自动打包项目。其中，`target`目录下的`Assignment03-1.3.jar`是不指定主类版本，`Assignment03-1.3-jar-with-dependencies.jar`是指定主类版本
+- **mvn clean**：自动清理项目。删除`target`目录
+- **mvn test**：自动测试。调用项目中的所有单元测试方法进行测试
 
 ## 说明
 每种阵法**只能由七人**才能施展，多一人不可，少一人亦不行。

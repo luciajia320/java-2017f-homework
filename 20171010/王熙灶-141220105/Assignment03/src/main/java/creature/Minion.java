@@ -6,6 +6,6 @@ package creature;
 public class Minion extends Creature {
     @Override
     public String toString() {
-        return "卒";
+        return "\uD83D\uDC12";
     }
 }

@@ -16,10 +16,6 @@ public class Position<T extends Creature> {
         this.holder = holder;
     }
 
-    public void clearHolder() {
-        setHolder(null);
-    }
-
     public T getHolder() {
         return holder;
     }

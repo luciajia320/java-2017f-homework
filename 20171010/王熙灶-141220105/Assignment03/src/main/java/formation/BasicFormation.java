@@ -1,6 +1,7 @@
 package formation;
 
 import creature.Creature;
+import creature.plant.RandomPlant;
 import space.Position;
 import space.Space;
 
@@ -36,7 +37,7 @@ public class BasicFormation implements Iterable<Position<Creature>> {
     public void clear() {
         for (Position<Creature> pos : this) {
             pos.getHolder().setPosition(null);
-            pos.clearHolder();
+            pos.setHolder(RandomPlant.get());
         }
     }
 

@@ -32,7 +32,7 @@ public class Calabash extends Creature implements Comparable<Calabash> {
 
     @Override
     public String toString() {
-        return color.name();
+        return order.toString();
     }
 
     @Override
@@ -52,5 +52,19 @@ enum Color {
  * 枚举类型，长幼次序
  */
 enum Order {
-    一, 二, 三, 四, 五, 六, 七
+    一, 二, 三, 四, 五, 六, 七;
+
+    @Override
+    public String toString() {
+        switch (this.ordinal()) {
+            case 0: return "\uD83D\uDE0E";
+            case 1: return "\uD83D\uDE00";
+            case 2: return "\uD83D\uDE1B";
+            case 3: return "\uD83D\uDE2E";
+            case 4: return "\uD83D\uDE10";
+            case 5: return "\uD83D\uDE19";
+            case 6: return "\uD83D\uDE1F";
+            default: return "";
+        }
+    }
 }
