@@ -1,6 +1,11 @@
 package formation;
 
+import formation.exception.FormationException;
+import formation.util.Point;
+import formation.util.XmlReader;
 import space.Space;
+
+import java.util.ArrayList;
 
 /**
  * 鹤翼阵法:
@@ -19,14 +24,19 @@ public final class HeYi extends BasicFormation {
      * @param y, 阵头的y方向位置
      * 这里的x方向表示从上到下，y方向表示从左到右
      */
-    public HeYi(Space space, int x, int y) {
+    public HeYi(Space space, int x, int y) throws FormationException {
         super(space, x, y);
-        positions.set(0, space.getPos(current_x, current_y));
-        positions.set(1, space.getPos(current_x-1, current_y+1));
-        positions.set(2, space.getPos(current_x+1, current_y+1));
-        positions.set(3, space.getPos(current_x-2, current_y+2));
-        positions.set(4, space.getPos(current_x+2, current_y+2));
-        positions.set(5, space.getPos(current_x-3, current_y+3));
-        positions.set(6, space.getPos(current_x+3, current_y+3));
+        ArrayList<Point> points = XmlReader.readFromFile("HeYi.xml");
+        try {
+            positions.set(0, space.getPos(current_x+points.get(0).x, current_y+points.get(0).y));
+            positions.set(1, space.getPos(current_x+points.get(1).x, current_y+points.get(1).y));
+            positions.set(2, space.getPos(current_x+points.get(2).x, current_y+points.get(2).y));
+            positions.set(3, space.getPos(current_x+points.get(3).x, current_y+points.get(3).y));
+            positions.set(4, space.getPos(current_x+points.get(4).x, current_y+points.get(4).y));
+            positions.set(5, space.getPos(current_x+points.get(5).x, current_y+points.get(5).y));
+            positions.set(6, space.getPos(current_x+points.get(6).x, current_y+points.get(6).y));
+        } catch (IndexOutOfBoundsException e) {
+            throw new FormationException("HeYi");
+        }
     }
 }

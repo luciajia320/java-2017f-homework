@@ -1,10 +1,12 @@
 package creature.plant;
 
-import creature.Creature;
+public final class Blossom extends Plant {
+    public Blossom() {
+        super("Blossom", "\uD83C\uDF3C");
+    }
 
-public final class Blossom extends Creature {
     @Override
     public String toString() {
-        return "\uD83C\uDF3C";
+        return plantEmoji;
     }
 }

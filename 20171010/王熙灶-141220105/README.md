@@ -3,6 +3,17 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 
 ## 版本更新记录
 
+### V 1.4 — 2017.12.30
+- 重构自定义异常类`FormationException`。增强可复用性
+- 添加植物类`Plant`。修改继承结构
+- 改写`RandomPlant`。使用泛型通配符
+- 添加文件IO。将输出写入文件
+- 添加文件IO，定义`XmlReader`类。从外部读入`XXXFormation`的阵法配置文件
+- 更新README。添加 emoji 图标说明
+- 更新README。添加 **泛型机制**、**IO** 小节
+- 更新README。更新项目结构
+
+
 ### V 1.3 — 2017.12.29
 - 更新README。增加项目整体类结构图
 - 更新README。增加源代码说明、单元测试说明、自动构建说明
@@ -13,6 +24,8 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 - 添加`creature.plant`包，添加各种植物类型。在空间位置上没有动物时随机放置一种植物
 - 使用 **RTTI** 信息在`RandomPlant`类中创建随机植物类对象实例
 - 添加单元测试。对`RandomPlant`、`MinionFactory`等类中的部分方法进行单元测试
+- 添加异常处理。自定义异常类`FormationException`，用于处理阵法位置超出空间`space`边界的情况
+- 项目重构。在`create`包中新建`animal`包，将所有动物类迁移至其中
 
 ### V 1.2 — 2017.12.28
 - 增加抽象基类`Crops`。重构`CalaCrops`、`EssenceCrops`
@@ -122,8 +135,18 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 
 3、工厂模式。`CalabashFactory`和`MinionFactory`使用了工厂模式，一次性构造葫芦娃和小喽啰。
 
+### 泛型机制
+1、`Position`类中，定义泛型为`T extends Creature`，表示`Position`的`Holder`是某种`Creature`类型。
+
+2、`RandomPlant`类中，将`plants`定义为`ArrayList<Class<? extends Plant>>`，表示该`List`中的`element`都是`Plant`或其派生类的`Class`对象。
+
 ### RTTI
 在`RandomPlant`类中，定义了一个`Class`对象数组，数组元素为上述十种植物类的`**.class`。
+
+### IO
+1、在`TestMain`中使用文件输出，将运行结果输出至文件中
+
+2、定义`XmlReader`类。将`formation`包中定义的各阵法的阵型配置存于 xml 文件中，使用`XmlReader`从文件中读取阵型配置。
 
 ## 项目结构
 ### 整体结构图
@@ -131,30 +154,33 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 
 ### 源代码说明
 #### Package `creature`
-1、Class `Creature`：代表生物体的基类。每个生物体拥有一个`Position`属性，代表其位置。还有相应的操作`Position`的`getPosition`和`setPosition`方法。
+Class `Creature`：代表生物体的基类。每个生物体拥有一个`Position`属性，代表其位置。还有相应的操作`Position`的`getPosition`和`setPosition`方法。
 
-2、Class `Calabash`：代表葫芦娃的类，继承自`Creature`。每个葫芦娃有两个属性：`order`和`color`，分别表示其长幼次序和颜色，有相应的`get`和`set`方法。另外`Calabash`还实现了`Comparable`接口，根据长幼次序比较大小。在其中还定义了两个枚举类型：`Color`、`Order`，对应于表示葫芦娃的两个属性。
+#### Package `creature.animal`
+1、Class `Calabash`：代表葫芦娃的类，继承自`Creature`。每个葫芦娃有两个属性：`order`和`color`，分别表示其长幼次序和颜色，有相应的`get`和`set`方法。另外`Calabash`还实现了`Comparable`接口，根据长幼次序比较大小。在其中还定义了两个枚举类型：`Color`、`Order`，对应于表示葫芦娃的两个属性。
 
-3、Class `CalabashFactory`：葫芦娃的单例工厂类。其中包含`get(int i)`方法，表示返回第几个葫芦娃。
+2、Class `CalabashFactory`：葫芦娃的单例工厂类。其中包含`get(int i)`方法，表示返回第几个葫芦娃。
 
-4、Class `GrandPa`：代表爷爷的类。使用单例设计模式。
+3、Class `GrandPa`：代表爷爷的类。使用单例设计模式。
 
-5、Class `Minion`：代表小喽啰的类。
+4、Class `Minion`：代表小喽啰的类。
 
-6、Class `MinionFactory`：小喽啰的单例工厂类。其中包含`get(int i)`方法，表示返回第几个小喽啰。
+5、Class `MinionFactory`：小喽啰的单例工厂类。其中包含`get(int i)`方法，表示返回第几个小喽啰。
 
-7、Class `SnakeEssence`：代表蛇精的类。使用单例设计模式。
+6、Class `SnakeEssence`：代表蛇精的类。使用单例设计模式。
 
-8、Class `ScorpionEssence`：代表蝎子精的类。使用单例设计模式。
+7、Class `ScorpionEssence`：代表蝎子精的类。使用单例设计模式。
 
-9、Class `Crops`：表示一个战队的抽象基类。战队有一个属性`basicFormation`，表示战队当前使用的阵法；其中包含一个抽象方法`setFormation`，用于为战队设定当前使用的阵法；还包含一个`clearFormation`方法，用于取消当前使用的阵法。
+8、Class `Crops`：表示一个战队的抽象基类。战队有一个属性`basicFormation`，表示战队当前使用的阵法；其中包含一个抽象方法`setFormation`，用于为战队设定当前使用的阵法；还包含一个`clearFormation`方法，用于取消当前使用的阵法。
 
-10、Class `CalaCrops`：葫芦娃战队类，继承自`Crops`类。由七只葫芦娃构成。实现了`Crops`中的抽象方法。提供了`shuffle`和`sort`方法，用于将葫芦娃战队顺序打乱和排序。还提供了`get(int i)`方法，返回战队中的第`i`个葫芦娃。
+9、Class `CalaCrops`：葫芦娃战队类，继承自`Crops`类。由七只葫芦娃构成。实现了`Crops`中的抽象方法。提供了`shuffle`和`sort`方法，用于将葫芦娃战队顺序打乱和排序。还提供了`get(int i)`方法，返回战队中的第`i`个葫芦娃。
 
-11、Class `EssenceCrops`：妖魔战队类，继承自`Crops`类。由一只蝎子精和六只小喽啰构成。实现了`Crops`中的抽象方法。
+10、Class `EssenceCrops`：妖魔战队类，继承自`Crops`类。由一只蝎子精和六只小喽啰构成。实现了`Crops`中的抽象方法。
 
 #### Package `creature.plant`
-1、包含以下十种植物类，均继承自`Creature`类：
+1、Class `Plant`：植物基类，继承自`Creature`类。有两个属性：`plantName`表示植物名称，`plantEmoji`表示植物的 emoji 图标。
+
+2、包含以下十种植物类，均继承自`Plant`类：
 - Class `FourLeafClover`：four leaf clover
 - Class `Mushroom`：mushroom
 - Class `MapleLeaf`：maple leaf
@@ -166,7 +192,7 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 - Class `Cactus`：cactus
 - Class `Hibiscus`：hibiscus
 
-2、Class `RandomPlant`：随机植物类。静态方法`get()`从以上十种植物中，随机返回一种植物对象实例。使用了RTTI信息。
+3、Class `RandomPlant`：随机植物类。静态方法`get()`从以上十种植物中，随机返回一种植物对象实例。使用了RTTI信息。
 
 #### Package `formation`
 1、Class `BasicFormation`：阵法基类。`BasicFormation`有四个属性，`current_x`表示阵头的x方向坐标，`current_y`表示阵头的y方向坐标，`space`表示阵法所处的空间，`positions`则表示阵法的空间位置集合，每个阵法由七个阵法位置构成。`clear`方法取消当前阵法中每个位置上的生物与阵法位置的关联。`BasicFormation`实现了`Iterable`接口，为阵法位置提供了迭代器访问方式。
@@ -181,6 +207,14 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 
 6、Class `LongSnake`：长蛇阵法类，继承自`BasicFormation`类。
 
+#### Package `formation.exception`
+Class `FormationException`：自定义异常类。用于处理阵法中某个位置超出空间`space`边界的情况
+
+#### Package `formation.util`
+1、Class `XmlReader`：xml 配置文件读取器类。用于读取 xml 格式的阵法配置文件。
+
+2、Class `Point`：用于存储从 xml 文件中读取的阵法位置信息。
+
 #### Package `space`
 1、Class `Position`：表示位置的类。使用泛型机制，其上有一个泛型类型的属性`Holder`，表示这个位置上的物体。提供了`Holder`的`get`和`set`方法。
 
@@ -190,7 +224,7 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 主类。
 
 ### 单元测试
-#### Package `create`
+#### Package `create.animal`
 1、Class `CalabashFactoryTest`：测试`getInstance()`、`get()`方法
 
 2、Class `CalaCropsTest`：测试`getInstance()`、`sort()`、`setXXXFormation()`方法
@@ -215,3 +249,9 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 
 ## 说明
 每种阵法**只能由七人**才能施展，多一人不可，少一人亦不行。
+
+### emoji 图标说明
+大娃：😎 二娃：😀 三娃：😛 四娃：😮 五娃：😐 六娃：😙 七娃：😟<br>
+爷爷：👴<br>
+蛇精：🐍 蝎子精：🦂 小喽啰：🐒<br>
+植物图标：🌼 🌵 🍀 🌺 🍁 🍄 🌴 🌹 🌻 🌷

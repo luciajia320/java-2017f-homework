@@ -1,11 +1,10 @@
 package space;
 
-import creature.GrandPa;
-import creature.Minion;
-import creature.ScorpionEssence;
-import creature.SnakeEssence;
+import creature.animal.GrandPa;
+import creature.animal.Minion;
+import creature.animal.ScorpionEssence;
+import creature.animal.SnakeEssence;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

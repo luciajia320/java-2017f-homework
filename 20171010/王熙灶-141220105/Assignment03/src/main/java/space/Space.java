@@ -35,7 +35,7 @@ public class Space {
      */
     public void creature_position_setter(Creature creature, int x, int y) {
         if(x > size || y > size) {
-            return;
+            throw new IndexOutOfBoundsException("method 'void creature_position_setter(Creature creature, int x, int y)' index out of bounds in class Space.");
         }
         Position<Creature> pos = positionss.get(x).get(y);
         pos.setHolder(creature);
@@ -49,7 +49,7 @@ public class Space {
      */
     public Position<Creature> getPos(int x, int y) {
         if(x > size || y > size) {
-            return null;
+            throw new IndexOutOfBoundsException("method 'Position<Creature> getPos(int x, int y)' index out of bounds in class Space.");
         }
         return positionss.get(x).get(y);
     }
