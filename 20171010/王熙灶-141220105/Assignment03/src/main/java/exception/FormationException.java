@@ -1,4 +1,4 @@
-package formation.exception;
+package exception;
 
 public class FormationException extends Exception {
     private StringBuilder messageBuilder = new StringBuilder();

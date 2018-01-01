@@ -1,4 +1,4 @@
-package formation.util;
+package util;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -12,8 +12,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.util.ArrayList;
 
+@Deprecated
 public class XmlReader {
-    public static ArrayList<Point> readFromFile(String filename) {
+    @Deprecated
+    public static ArrayList<Point> read(String filename) {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         ArrayList<Point> points = new ArrayList<>();
         try {

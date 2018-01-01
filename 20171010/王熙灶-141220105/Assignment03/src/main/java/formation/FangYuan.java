@@ -1,8 +1,8 @@
 package formation;
 
-import formation.exception.FormationException;
-import formation.util.Point;
-import formation.util.XmlReader;
+import exception.FormationException;
+import util.Dom4jXmlReader;
+import util.Point;
 import space.Space;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public final class FangYuan extends BasicFormation {
      */
     public FangYuan(Space space, int x, int y) throws FormationException {
         super(space, x, y);
-        ArrayList<Point> points = XmlReader.readFromFile("FangYuan.xml");
+        ArrayList<Point> points = Dom4jXmlReader.read("FangYuan.xml");
         try {
             positions.set(0, space.getPos(current_x+points.get(0).x, current_y+points.get(0).y));
             positions.set(1, space.getPos(current_x+points.get(1).x, current_y+points.get(1).y));

@@ -1,4 +1,4 @@
-package formation.util;
+package util;
 
 public class Point {
     public int x;

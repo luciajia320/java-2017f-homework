@@ -3,20 +3,26 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 
 ## 版本更新记录
 
+### V 2.0 (final version) — 2018.01.01
+- 重新组织项目结构
+- 更新 README。更新 **项目结构**
+- 添加单元测试。对`Dom4jXmlReader.read()`进行单元测试。 ~~此处需注意要更改`Dom4jXmlReader`中的文件路径~~
+- 增加一个重载方法解决上述更改路径问题
+
 ### V 1.4 — 2017.12.30
 - 重构自定义异常类`FormationException`。增强可复用性
 - 添加植物类`Plant`。修改继承结构
 - 改写`RandomPlant`。使用泛型通配符
-- 添加文件IO。将输出写入文件
-- 添加文件IO，定义`XmlReader`类。从外部读入`XXXFormation`的阵法配置文件
-- 更新README。添加 emoji 图标说明
-- 更新README。添加 **泛型机制**、**IO** 小节
-- 更新README。更新项目结构
-
+- 添加文件 IO。将输出写入文件
+- 添加文件 IO，定义`XmlReader`类。从外部读入`XXXFormation`的阵法配置文件
+- 更新 README。添加 emoji 图标说明
+- 更新 README。添加 **泛型机制**、**IO** 小节
+- 更新 README。更新 **项目结构**
+- 使用 `Dom4j`重新构建 xml 解析器`Dom4jXmlReader`。为`XmlReader`添加注解`@Deprecated`
 
 ### V 1.3 — 2017.12.29
-- 更新README。增加项目整体类结构图
-- 更新README。增加源代码说明、单元测试说明、自动构建说明
+- 更新 README。增加项目整体类结构图
+- 更新 README。增加源代码说明、单元测试说明、自动构建说明
 - 将`GrandPa`、`SnakeEssence`、`ScorpionEssence`重新实现为单例模式
 - 将`FengShi`、`DongE`等类定义为`final`类
 - 添加`MinionFactory`单例类，一次批量生成小喽啰
@@ -34,7 +40,7 @@ Wangxiz的Java课程作业三(20171010)说明文档。
 - 添加单元测试。对`Space`、`Crops`等类中的部分方法进行单元测试
 
 ### V 1.1 — 2017.12.27
-- 更新README。插入图片
+- 更新 README。插入图片
 - 重新实现迭代器模式。基于 `Iterator` 和 `Iterable` 接口
 - 增加变换阵法。**方円阵法**
 - 修改类`BasicFormation`。提高代码可复用性
@@ -207,13 +213,15 @@ Class `Creature`：代表生物体的基类。每个生物体拥有一个`Positi
 
 6、Class `LongSnake`：长蛇阵法类，继承自`BasicFormation`类。
 
-#### Package `formation.exception`
+#### Package `exception`
 Class `FormationException`：自定义异常类。用于处理阵法中某个位置超出空间`space`边界的情况
 
-#### Package `formation.util`
-1、Class `XmlReader`：xml 配置文件读取器类。用于读取 xml 格式的阵法配置文件。
+#### Package `util`
+1、~~Class `XmlReader`：xml 配置文件读取器类。用于读取 xml 格式的阵法配置文件。~~ (Deprecated)
 
 2、Class `Point`：用于存储从 xml 文件中读取的阵法位置信息。
+
+3、Class `Dom4jXmlReader`：使用 `dom4j`库重新实现的xml 配置文件读取器类。
 
 #### Package `space`
 1、Class `Position`：表示位置的类。使用泛型机制，其上有一个泛型类型的属性`Holder`，表示这个位置上的物体。提供了`Holder`的`get`和`set`方法。
@@ -241,6 +249,9 @@ Class `FormationException`：自定义异常类。用于处理阵法中某个位
 #### Package `space`
 1、Class `SpaceTest`：测试`creature_position_setter()`方法
 
+#### Package `util`
+1、Class `Dom4jXmlReader`：测试`read()`方法
+
 ## 自动构建
 本项目使用的自动构建工具为 **Maven**，版本 **3.5.2**
 - **mvn package**：自动打包项目。其中，`target`目录下的`Assignment03-1.3.jar`是不指定主类版本，`Assignment03-1.3-jar-with-dependencies.jar`是指定主类版本
@@ -255,3 +266,23 @@ Class `FormationException`：自定义异常类。用于处理阵法中某个位
 爷爷：👴<br>
 蛇精：🐍 蝎子精：🦂 小喽啰：🐒<br>
 植物图标：🌼 🌵 🍀 🌺 🍁 🍄 🌴 🌹 🌻 🌷
+
+### xml 阵法配置文件说明
+阵法配置文件格式如下：
+```
+<positions>
+    <position>
+        <x>1</x>
+        <y>1</y>
+    </position>
+    ......
+</positions>
+```
+每个配置文件中有七个位置(`<position></position>`)，一个`position`由`x`坐标 (`<x></x>`) 和`y` (`<y></y>`) 坐标组成。
+
+在`src/main/resources`中，包含以下5个配置文件：
+- DongE.xml，动轭阵法配置文件
+- FangYuan.xml，方円阵法配置文件
+- FengShi.xml，锋矢阵法配置文件
+- HeYi.xml，鹤翼阵法配置文件
+- LongSnake.xml，长蛇阵法配置文件

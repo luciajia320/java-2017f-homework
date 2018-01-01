@@ -3,7 +3,7 @@ import creature.animal.EssenceCrops;
 import creature.animal.GrandPa;
 import creature.animal.SnakeEssence;
 import formation.*;
-import formation.exception.FormationException;
+import exception.FormationException;
 import space.Space;
 
 import java.io.FileWriter;
