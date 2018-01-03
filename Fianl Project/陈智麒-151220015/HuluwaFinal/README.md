@@ -161,11 +161,11 @@ class TAapter extends KeyAdapter {
 ```java
 // Field.java
 Class Field {
-  
+
   	public Field() {
 		...
 		addKeyListener(new TAdapter());
-    }
+	}
 	...
 }
 ```
@@ -202,7 +202,7 @@ BufferedReader br = new BufferedReader(new FileReader(file));
 
 
 
-#EOF
+*EOF*
 
 
 
