@@ -1,5 +1,7 @@
 package Types;
 
+import static java.lang.Math.abs;
+
 /**
  * 二维向量，用于表示位置坐标信息
  */
@@ -37,7 +39,31 @@ public class Vector2 {
         return result;
     }
 
+    public Vector2 minus(Vector2 another) {
+        Vector2 result = new Vector2(this.x - another.getX(), this.y - another.getY());
+        return result;
+    }
+
+    public Vector2 getDirection() {
+        int directionX, directionY;
+        if (x == 0) {
+            directionX = 0;
+        } else {
+            directionX = x > 0 ? 1 : -1;
+        }
+        if (y == 0) {
+            directionY = 0;
+        } else {
+            directionY = y > 0 ? 1 : -1;
+        }
+        return new Vector2(directionX, directionY);
+    }
+
     public boolean lessThan(Vector2 another){
         return (this.x < another.getX()) || ((this.x == another.getX()) && (this.y < another.getY()));
+    }
+
+    public static int ManhattanDistance(Vector2 v1, Vector2 v2) {
+        return abs(v1.x-v2.x) + abs(v1.y-v2.y);
     }
 }

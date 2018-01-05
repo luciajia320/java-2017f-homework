@@ -24,6 +24,9 @@ public class Field extends JPanel{
     private List<Troop> troops = new ArrayList<>();
 
     private Image backgroundImage;
+    private Image positionSquareImage;
+
+    private boolean isGridViewVisible = true;
 
     public Field(int fieldWidth, int fieldHeight, int positionRowCount, int positionColCount, int troopNum) {
         this.fieldWidth = fieldWidth;
@@ -33,13 +36,17 @@ public class Field extends JPanel{
         this.troopNum = troopNum;
 
         positions = new Position[positionRowCount][positionColCount];
-        for(int i = 0; i < positionRowCount; i++){
-            for(int j = 0; j < positionColCount; j++)
-                positions[i][j] = new Position(i, j);
+        for(int i = 0; i < positionRowCount; i++) {
+            for (int j = 0; j < positionColCount; j++) {
+                positions[i][j] = new Position(i, j, this);
+            }
         }
 
-        URL loc = this.getClass().getClassLoader().getResource("Image/background.jpg");
-        backgroundImage = new ImageIcon(loc).getImage();
+        URL loc1 = this.getClass().getClassLoader().getResource("Image/background.jpg");
+        backgroundImage = new ImageIcon(loc1).getImage();
+
+        URL loc2 = this.getClass().getClassLoader().getResource("Image/square.png");
+        positionSquareImage = new ImageIcon(loc2).getImage();
 
         addKeyListener(new TAdapter());
         setFocusable(true);
@@ -52,7 +59,7 @@ public class Field extends JPanel{
 
         for(int i = 0; i < fieldWidth; i++){
             for(int j = 0; j < fieldWidth; j++)
-                positions[i][j] = new Position(i, j);
+                positions[i][j] = new Position(i, j, this);
         }
     }
 
@@ -77,8 +84,33 @@ public class Field extends JPanel{
         // background
         g.drawImage(backgroundImage, 0, 0, this.getBoardWidth(), this.getBoardHeight(), this);
 
+        int positionWidth = fieldWidth/positionColCount, positionHeight = fieldHeight/positionRowCount;
+        if (isGridViewVisible) {
+ /*           g.drawImage(positionSquareImage,
+                    0*positionWidth, 0*positionHeight,
+                    positionWidth, positionHeight,
+                    this);
+            g.drawImage(positionSquareImage,
+                    1*positionWidth, 0*positionHeight,
+                    positionWidth, positionHeight,
+                    this);
+            g.drawImage(positionSquareImage,
+                    0*positionWidth, 1*positionHeight,
+                    positionWidth, positionHeight,
+                    this);
+*/
+            for(int i = 0; i < positionRowCount; i++) {
+                for(int j = 0; j < positionColCount; j++) {
+                    g.drawImage(positionSquareImage,
+                            j*positionWidth, i*positionHeight,
+                            positionWidth, positionHeight,
+                            this);
+                }
+            }
+
+        }
         for(Troop troop: troops) {
-            troop.paintInGraphics(g, fieldWidth/positionRowCount, fieldHeight/positionColCount);
+            troop.paintInGraphics(g, positionWidth, positionHeight);
         }
 
     }

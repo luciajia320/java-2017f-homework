@@ -10,9 +10,13 @@ public class Cheerer extends Creature implements CheeringGroup {
     private String name;
 
     public Cheerer(String name){
+        super();
         this.name = name;
     }
+    @Override
+    protected void loadImage() {
 
+    }
 
     @Override
     public void act(){
@@ -35,10 +39,9 @@ public class Cheerer extends Creature implements CheeringGroup {
     }
 
     @Override
-    public void paintInGraphics(Graphics g, int positionWidth, int positionHeight) {
+    protected void doThreadOperations() {
 
     }
-
 
     @Override
     public String toString(){

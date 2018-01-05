@@ -10,7 +10,12 @@ public class Leader extends Creature {
     private String name;
 
     public Leader(String name){
+        super();
         this.name = name;
+    }
+    @Override
+    protected void loadImage() {
+
     }
 
     @Override
@@ -24,10 +29,9 @@ public class Leader extends Creature {
     }
 
     @Override
-    public void paintInGraphics(Graphics g, int positionWidth, int positionHeight) {
+    protected void doThreadOperations() {
 
     }
-
 
     @Override
     public String toString(){

@@ -14,11 +14,14 @@ import Types.Vector2;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Troop {
     private String campName;
+
     private List<Creature> creatures = new ArrayList<>();
+    private List<Troop> hostileTroops = new ArrayList<>();
 
     private List<Vector2> memberCoordinates = new ArrayList<>();
     private Vector2 anchorCoordinate;
@@ -108,8 +111,9 @@ public class Troop {
         //IntStream.range(0, num).forEach(i -> newCreatures[i].setCampName(this.campName));
         for(Creature creature: newCreatures) {
             creature.setTroop(this);
+            creature.setPosition(this.field.getPositions()[creature.getPosition().getX()][creature.getPosition().getY()]);
         }
-        creatures.addAll(Arrays.asList(newCreatures).subList(0, num));
+        creatures.addAll(Arrays.asList(newCreatures));
     }
 
     public void addOneCreature(Creature someCreature){
@@ -170,4 +174,19 @@ public class Troop {
         }
     }
 
+    public void declareWarTo(Troop troop) {
+        hostileTroops.add(troop);
+    }
+
+    public List<Creature> getCreatures() {
+        return creatures;
+    }
+
+    public List<Creature> getHostileCreatures() {
+        List<Creature> hostileCreatures = new LinkedList<>();
+        for(Troop troop: hostileTroops) {
+            hostileCreatures.addAll(troop.getCreatures());
+        }
+        return hostileCreatures;
+    }
 }
