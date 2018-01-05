@@ -18,7 +18,7 @@ public class main {
             HuluBrothers[i] = new Huluwa(COLOR.values()[i], SENIORITY.values()[i]);
         }
         // 小喽啰
-        Louluo[] lackeys = new Louluo[7];
+        Louluo[] lackeys = new Louluo[1];
         for (int i = 0; i < lackeys.length; i++) {
             lackeys[i] = new Louluo(TianGan.values()[i]);
         }

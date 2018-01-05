@@ -4,18 +4,18 @@ import Field.Position;
 import Types.Vector2;
 
 import java.awt.*;
-import java.util.Collections;
-import java.util.List;
 
 public abstract class Creature implements Paintable, Runnable{
 
     protected Position position;
     //protected String campName;  //  每个生物有其所属的阵营
     protected Troop troop;
-
-    protected Image image;
-    protected int imageSizeX, imageSizeY, gestureNum;
+    protected RenderComponent renderComponent;
     protected NavigationDelegate navigationDelegate;// 寻路组件，在需要寻路时向其索要目的地等信息
+    protected TimerComponent timerComponent;
+
+    protected int remainMoveAnimationTimes = 0;
+    protected boolean isMoving = false; // 用于实现连续移动动画
 
     public abstract void report();
     public void act(){}
@@ -23,11 +23,13 @@ public abstract class Creature implements Paintable, Runnable{
     public Creature() {
 
         position = new Position(0, 0, null);
-        loadImage();
+        renderComponent = new RenderComponent(this);
+        prepareRenderDelegate();
         navigationDelegate = new NavigationDelegate(this);
+        timerComponent = new TimerComponent(this);
     }
 
-    protected abstract void loadImage();
+    protected abstract void prepareRenderDelegate();
 
     public void moveTo(Position position) {
 
@@ -66,7 +68,7 @@ public abstract class Creature implements Paintable, Runnable{
 
     }
 
-    public void attemptToMoveTo(Vector2[] positionCoordinates) {
+    public boolean attemptToMoveTo(Vector2[] positionCoordinates) {
         /*
         尝试移动到某一组坐标上的position，只有找到一个没有被占据的position后，才真的会移动，否则不动。
          */
@@ -75,9 +77,10 @@ public abstract class Creature implements Paintable, Runnable{
                 Position position = troop.getPositionAt(positionCoordinate.getX(), positionCoordinate.getY());
                 if (position.getHolder() == null) { // 候选的position没有被占据，可以移动
                     moveTo(position);
-                    return;
+                    return true;
                 }
             }
+            return false;
         }
     }
 
@@ -86,7 +89,15 @@ public abstract class Creature implements Paintable, Runnable{
         try {
             while (!Thread.interrupted()) {
                 doThreadOperations();
+                if (remainMoveAnimationTimes > 0) {
+                    remainMoveAnimationTimes --;
+                    renderComponent.updateMovingProgress();
+                    if (remainMoveAnimationTimes == 0)
+                        isMoving = false;
+                }
                 troop.askFieldToRepaint();
+
+                timerComponent.tick();
             }
         } catch (NullPointerException e) {
             System.out.println("Creature.startActing(): NullPointerException.");
@@ -99,25 +110,8 @@ public abstract class Creature implements Paintable, Runnable{
     protected abstract void doThreadOperations();
 
     public final void paintInGraphics(Graphics g, int positionWidth, int positionHeight) {
-        try {
-            int gestureImageWidth = imageSizeX/gestureNum;
-            int gestureImageHeight = imageSizeY;
-            // 先计算图片右下角在field中的坐标，这样可以确定生物在图中“站立”的位置
-            int rightBottomX = (int)((position.getY()+0.5)*positionWidth + 0.5*gestureImageWidth);
-            int rightBottomY = (position.getX()+1)*positionHeight;
-            int leftTopX = rightBottomX - gestureImageWidth;
-            int leftTopY = rightBottomY - gestureImageHeight;
-            g.drawImage(image,
-                    leftTopX, leftTopY,
-                    rightBottomX, rightBottomY,
-                    0, 0,
-                    gestureImageWidth, gestureImageHeight,
-                    null);
-            if(!this.position.isInSomeField()) {
-                g.drawString("线程错误，已被移除", leftTopX, leftTopY);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (renderComponent != null) {
+            renderComponent.paintInGraphics(g, positionWidth, positionHeight);
         }
     }
 

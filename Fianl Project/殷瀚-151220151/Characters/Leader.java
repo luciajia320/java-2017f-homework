@@ -14,18 +14,13 @@ public class Leader extends Creature {
         this.name = name;
     }
     @Override
-    protected void loadImage() {
+    protected void prepareRenderDelegate() {
 
     }
 
     @Override
     public void report() {
         System.out.print(this.toString());
-    }
-
-    @Override
-    public Image getImage() {
-        return null;
     }
 
     @Override

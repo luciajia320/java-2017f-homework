@@ -86,19 +86,6 @@ public class Field extends JPanel{
 
         int positionWidth = fieldWidth/positionColCount, positionHeight = fieldHeight/positionRowCount;
         if (isGridViewVisible) {
- /*           g.drawImage(positionSquareImage,
-                    0*positionWidth, 0*positionHeight,
-                    positionWidth, positionHeight,
-                    this);
-            g.drawImage(positionSquareImage,
-                    1*positionWidth, 0*positionHeight,
-                    positionWidth, positionHeight,
-                    this);
-            g.drawImage(positionSquareImage,
-                    0*positionWidth, 1*positionHeight,
-                    positionWidth, positionHeight,
-                    this);
-*/
             for(int i = 0; i < positionRowCount; i++) {
                 for(int j = 0; j < positionColCount; j++) {
                     g.drawImage(positionSquareImage,
@@ -137,6 +124,9 @@ public class Field extends JPanel{
                     for(Troop troop: troops) {
                         troop.startActing();
                     }
+                    break;
+                case KeyEvent.VK_T:
+                    repaint();
                     break;
                 default: break;
             }

@@ -4,16 +4,10 @@ import Field.Position;
 import Types.COLOR;
 import Types.SENIORITY;
 import Types.Vector2;
-import javafx.geometry.Pos;
 
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.SynchronousQueue;
 
 public class Huluwa extends Creature implements Comparable {
 
@@ -39,12 +33,12 @@ public class Huluwa extends Creature implements Comparable {
 
     }
     @Override
-    protected void loadImage() {
+    protected void prepareRenderDelegate() {
         URL loc = this.getClass().getClassLoader().getResource("Image/xiaojingang.png");
-        image = new ImageIcon(loc).getImage();
-        imageSizeX = 426;
-        imageSizeY = 96;
-        gestureNum = 6;
+        renderComponent.image = new ImageIcon(loc).getImage();
+        renderComponent.imageSizeX = new ImageIcon(loc).getIconWidth();
+        renderComponent.imageSizeY = new ImageIcon(loc).getIconHeight();
+        renderComponent.gestureNum = 6;
     }
 
     @Override
@@ -52,24 +46,35 @@ public class Huluwa extends Creature implements Comparable {
         System.out.print(this.toString());
     }
 
-    @Override
-    public Image getImage() {
-        return image;
-    }
-
 
     @Override
     protected void doThreadOperations() {
         try {
 
-            if (navigationDelegate != null) {
-                // 先得到要去的position
-                Position destination = navigationDelegate.getPositionOfNearestHostileCreature();
-                // 然后尝试往这个方向移动
-                attemptToMoveTo(navigationDelegate.getpossibleNextPositionVectors(destination));
+
+            if (timerComponent.timesCount == 0) { // per second
+                if (navigationDelegate != null) {
+                    // 先得到要去的position
+                    Position destination = navigationDelegate.getPositionOfNearestHostileCreature();
+                    // 然后尝试往这个方向移动
+                    Vector2 currentCoordinate = this.position.getCoordinate();
+                    isMoving = attemptToMoveTo(navigationDelegate.getPossibleNextPositionVectors(destination));
+                    if (isMoving) {
+                        remainMoveAnimationTimes = 10; // 移动动画持续500毫秒
+                        renderComponent.startMovingProgressWithDuration(remainMoveAnimationTimes, currentCoordinate);
+                    }
+
+                }
             }
 
-            Thread.sleep(1000);
+            if (timerComponent.timesCount%2 == 0) {
+                if (isMoving) {
+                    renderComponent.changeToNextMovingGesture();
+                }
+            }
+
+
+            //Thread.sleep(1000);
         } catch (NullPointerException e) {
             e.printStackTrace();
         } catch (Exception e) {

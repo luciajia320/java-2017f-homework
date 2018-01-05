@@ -14,7 +14,7 @@ public class Cheerer extends Creature implements CheeringGroup {
         this.name = name;
     }
     @Override
-    protected void loadImage() {
+    protected void prepareRenderDelegate() {
 
     }
 
@@ -31,11 +31,6 @@ public class Cheerer extends Creature implements CheeringGroup {
     @Override
     public void report() {
         System.out.print(this.toString());
-    }
-
-    @Override
-    public Image getImage() {
-        return null;
     }
 
     @Override
