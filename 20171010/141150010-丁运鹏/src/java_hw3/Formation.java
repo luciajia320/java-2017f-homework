@@ -57,7 +57,7 @@ class Goose_formation extends Formation {
         field_units = new Vector<>(size);
 
         try {
-            for (int i = 0; i < size; i++) {
+            for(int i = 0; i < size; i++) {
                 field_units.add(new Field_Unit());
                 field_units.get(i).set_location(x++, y++);
                 field_units.get(i).set_creature(entity.clone());
@@ -65,6 +65,36 @@ class Goose_formation extends Formation {
         }catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+}
+
+class Crane_formation extends Formation {
+    Crane_formation(int border_x, int border_y, Creature entity) {
+        super(border_x, border_y);
+
+        int size = 9;
+        int x = border_x, y = border_y;
+        field_units = new Vector<>(size);
+
+        try {
+            int i = 0;
+            for(; i <= size / 2; i++) {
+                field_units.add(new Field_Unit());
+                field_units.get(i).set_location(x--, y--);
+                field_units.get(i).set_creature(entity.clone());
+            }
+            x = border_x - 1;
+            y = border_y + 1;
+            for(; i < size; i++) {
+                field_units.add(new Field_Unit());
+                field_units.get(i).set_location(x--, y++);
+                field_units.get(i).set_creature(entity.clone());
+            }
+
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
     }
 }
 

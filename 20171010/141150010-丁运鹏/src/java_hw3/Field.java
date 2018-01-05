@@ -5,6 +5,7 @@ import java.util.*;
 class Field {
     private int height;
     private int width;
+    private static int count = 1;
     private Vector<Vector<Field_Unit>> field;
 
     Field(int width, int height) {
@@ -21,7 +22,7 @@ class Field {
     }
 
     void print_field() {
-        System.out.println(field.isEmpty());
+        System.out.println("field "+ count++);
         for(Vector<Field_Unit> units: field) {
             for(Field_Unit unit: units) {
                 unit.print_field_unit();
@@ -37,6 +38,18 @@ class Field {
             field.get(x).get(y).set_creature(entity.getCreature());
         }
     }
+
+    void remove_formation(Formation f) {
+        Vector<Field_Unit> units = f.getField_units();
+        int size = units.size();
+        Vector<Grass> grass = new Vector<>(size);
+        for(int i = 0; i < size; i++) {
+            int x = units.get(i).getX(), y = units.get(i).getY();
+            grass.add(new Grass());
+            field.get(x).get(y).set_creature(grass.get(i));
+        }
+    }
+
 
     public int getHeight() {
         return height;
