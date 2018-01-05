@@ -3,7 +3,6 @@
  * 爷爷和蛇精属于这个类
  */
 package Characters;
-import Position.Position;
 
 import java.awt.*;
 
@@ -22,7 +21,7 @@ public class Cheerer extends Creature implements CheeringGroup {
 
     @Override
     public void cheerUp(){
-        System.out.println(name + " : " + campName + "牛逼！");
+        System.out.println(name + " : " + troop.getCampName() + "牛逼！");
     }
 
     @Override
@@ -36,9 +35,10 @@ public class Cheerer extends Creature implements CheeringGroup {
     }
 
     @Override
-    public void paintInGraphics(Graphics g) {
+    public void paintInGraphics(Graphics g, int positionWidth, int positionHeight) {
 
     }
+
 
     @Override
     public String toString(){

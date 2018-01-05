@@ -2,10 +2,12 @@ package Characters;
 
 import Types.COLOR;
 import Types.SENIORITY;
+import Types.Vector2;
 
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
+import java.util.Random;
 
 public class Huluwa extends Creature implements Comparable {
 
@@ -42,12 +44,34 @@ public class Huluwa extends Creature implements Comparable {
     }
 
     @Override
-    public void paintInGraphics(Graphics g) {
-        g.drawImage(image,
-                position.getX(), position.getY(), imageSizeX/gestureNum, imageSizeY,
-                0, 0, imageSizeX/gestureNum, imageSizeY,
-                null);
+    public void paintInGraphics(Graphics g, int positionWidth, int positionHeight) {
+        try {
+            g.drawImage(image,
+                    position.getY()*positionWidth, position.getX()*positionHeight,
+                    position.getY()*positionWidth+imageSizeX/gestureNum, position.getX()*positionHeight+imageSizeY,
+                    0, 0,
+                    imageSizeX/gestureNum, imageSizeY,
+                    null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
+
+    @Override
+    protected void doThreadOperations() {
+
+        this.moveTo(new Vector2(position.getX()+1, position.getY()+1));
+        try {
+            troop.askFieldToRepaint();
+            Thread.sleep(100);
+        } catch (NullPointerException e) {
+            System.out.println("");
+        } catch (Exception e) {
+
+        }
+    }
+
     @Override
     public String toString(){
         return this.seniority.toString()

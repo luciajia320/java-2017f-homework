@@ -24,9 +24,10 @@ public class Leader extends Creature {
     }
 
     @Override
-    public void paintInGraphics(Graphics g) {
+    public void paintInGraphics(Graphics g, int positionWidth, int positionHeight) {
 
     }
+
 
     @Override
     public String toString(){

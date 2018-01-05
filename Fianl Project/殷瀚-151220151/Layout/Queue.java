@@ -2,12 +2,10 @@ package Layout;
 
 import Characters.Creature;
 import Characters.Huluwa;
-import Position.Position;
+import Field.Position;
 import Types.COLOR;
 import Types.SENIORITY;
-import Types.Vector2;
 
-import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 

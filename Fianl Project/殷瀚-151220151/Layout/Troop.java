@@ -6,7 +6,8 @@ package Layout;
 import Characters.Cheerer;
 import Characters.Creature;
 import Characters.Leader;
-import Position.Position;
+import Field.Position;
+import Field.Field;
 import Types.FormationName;
 import Types.Vector2;
 
@@ -14,7 +15,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class Troop {
     private String campName;
@@ -26,7 +26,8 @@ public class Troop {
 
     private FormationManager formationManager = new FormationManager();
 
-    private Position[][] battleField;
+    private Field field = null;
+    //private Position[][] battleField;
 
     public Troop(){
 
@@ -37,7 +38,7 @@ public class Troop {
         this.anchorCoordinate = new Vector2(0,0);
     }
 
-    public Troop(int size, String campName, int anchorX, int anchorY){
+    public Troop(String campName, int anchorX, int anchorY){
 
         this.campName = campName;
         this.leaderCoordinate = new Vector2();
@@ -57,13 +58,14 @@ public class Troop {
         this.cheererCoordinate = cheererCoordinate;
     }
 
-    public void applyTo(Position[][] positions){
-        this.battleField = positions;
+
+    public void enterField(Field field) {
+        this.field  = field;
     }
 
-    public void paintInGraphics(Graphics g) {
+    public void paintInGraphics(Graphics g, int positionWidth, int positionHeight) {
         for(Creature creature: creatures) {
-            creature.paintInGraphics(g);
+            creature.paintInGraphics(g, positionWidth, positionHeight);
         }
     }
     private void setMemberCoordinates(boolean[][] layout){
@@ -88,18 +90,31 @@ public class Troop {
         arrange();
     }
 
+    public Position getPositionAt(int x, int y) {
+        try {
+            return field.getPositions()[x][y];
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        } catch (NullPointerException e) {
+            System.out.println("Troop.getPositionAt(int, int): 该Troop未加入Field.");
+            return null;
+        }
+    }
     public void addCreatures(Creature[] newCreatures){
 
         int num = newCreatures.length;
         if(num == 0)
             return;
-        IntStream.range(0, num).forEach(i -> newCreatures[i].setCampName(this.campName));
+        //IntStream.range(0, num).forEach(i -> newCreatures[i].setCampName(this.campName));
+        for(Creature creature: newCreatures) {
+            creature.setTroop(this);
+        }
         creatures.addAll(Arrays.asList(newCreatures).subList(0, num));
     }
 
     public void addOneCreature(Creature someCreature){
         creatures.add(someCreature);
-        someCreature.setCampName(this.campName);
+        someCreature.setTroop(this);
     }
 
     public void act(){
@@ -108,7 +123,18 @@ public class Troop {
         }
     }
 
+    public void startActing() {
+        for(Creature creature: creatures) {
+            new Thread(creature).start();
+        }
+    }
+
     private void arrange(){
+        if(this.field == null) {
+            System.out.println("Troop.arrange(): 该Troop未加入Field.");
+            return;
+        }
+
         int indexOfMemCoor = 0;
         for(int i = 0 ; i < creatures.size() ; i++) {
 
@@ -128,7 +154,20 @@ public class Troop {
                     indexOfMemCoor = 0;
             }
 
-            someCreature.moveTo(this.battleField[coordinateInField.getX()][coordinateInField.getY()]);
+            someCreature.moveTo(this.field.getPositions()[coordinateInField.getX()][coordinateInField.getY()]);
         }
     }
+
+    public String getCampName() {
+        return campName;
+    }
+
+    public void askFieldToRepaint() {
+        try {
+            field.repaint();
+        } catch (NullPointerException e) {
+            System.out.println("Troop.askFieldToRepaint(): 该Troop未加入Field.");
+        }
+    }
+
 }

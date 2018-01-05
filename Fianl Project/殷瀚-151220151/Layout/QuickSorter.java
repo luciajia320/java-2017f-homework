@@ -1,7 +1,7 @@
 package Layout;
 
 import Characters.Comparable;
-import Position.Position;
+import Field.Position;
 
 public class QuickSorter implements Sorter {
     @Override
