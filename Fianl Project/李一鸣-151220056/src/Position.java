@@ -3,19 +3,14 @@ public class Position <T extends  Creature>{
     private int x;
     private int y;
 
-/*
-    public Creature getHolder() {
-        return holder;
-    }
-*/
     public T getHolder() {
-      return holder;
+        return holder;
     }
     public void setHolder(T holder) {
         this.holder = holder;
     }
 
-  //  private Creature holder;
+    //  private Creature holder;
     private T holder;
 
     public int getX() {

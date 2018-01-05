@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Queue {
-  //  private Position[] positions;
+    //  private Position[] positions;
     private ArrayList<Position>positions;
     public ArrayList<Position> getPositions() {
         return positions;

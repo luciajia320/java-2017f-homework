@@ -9,8 +9,5 @@ public class Audience implements Formation{
         tmp.get(0).setX(N/2);
         tmp.get(0).setY(0);
         tmp.get(0).getHolder().setPosition(tmp.get(0));
-        tmp.get(1).setX(N/2);
-        tmp.get(1).setY((N+HLW_SUM)/2);
-        tmp.get(1).getHolder().setPosition(tmp.get(1));
     }
 }
