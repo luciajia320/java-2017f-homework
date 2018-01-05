@@ -94,6 +94,7 @@ class Ground extends JPanel {
 
     void gameStart() {
         this.ready = false;
+        this.map.setEnd();
         this.gaming = true;
         map.forEach((position, unit) -> {
             if (unit.thread != null) unit.thread.start();

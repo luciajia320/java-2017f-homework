@@ -26,6 +26,7 @@ public interface MapControllerProtocol {
      * @return 返回地图是否所有单位都停止运行（被杀死或者结束）
      */
     boolean isEnd();
+    void setEnd();
     /**
      * @param g 在g上绘制场景
      */

@@ -153,12 +153,12 @@ public class MapController implements MapControllerProtocol {
 
     @Override
     public boolean isEnd() {
-        if (this.isAllUnitsStop) {
-            this.isAllUnitsStop = false;
-            return true;
-        } else {
-            return false;
-        }
+        return this.isAllUnitsStop;
+    }
+
+    @Override
+    public void setEnd() {
+        this.isAllUnitsStop = false;
     }
 
     @Override
