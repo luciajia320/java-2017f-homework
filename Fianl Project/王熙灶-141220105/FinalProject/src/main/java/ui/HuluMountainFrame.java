@@ -12,6 +12,7 @@ public class HuluMountainFrame extends JFrame {
     private Ground ground = new Ground();
     private JButton enter = new JButton("进入游戏");
     private JButton replay = new JButton("回放记录");
+    private JButton help = new JButton("游戏帮助");
     private MenuBar menuBar = new MenuBar();
     private final int width = 1200;
     private final int height = 720;
@@ -25,19 +26,22 @@ public class HuluMountainFrame extends JFrame {
         setLayout(null);
         welcome.setBounds(0, 0, width, height);
         add(welcome);
-        replay.setBounds(400, 100, 90, 40);
-        welcome.add(replay);
-        replay.addActionListener(e -> {
-            System.out.println("Hello, world!");
-        });
 
-        enter.setBounds(600, 500, 90, 40);
+        enter.setBounds(550, 300, 90, 40);
         welcome.add(enter);
         enter.addActionListener(e -> {
             ground.setVisible(true);
             welcome.setVisible(false);
             setJMenuBar(menuBar);
         });
+
+        replay.setBounds(550, 400, 90, 40);
+        welcome.add(replay);
+        replay.addActionListener(e -> System.out.println("Hello, world!"));
+
+        help.setBounds(550, 500, 90, 40);
+        welcome.add(help);
+        help.addActionListener(e -> System.out.println("Hello, world!"));
 
         ground.setBounds(0, 0, width, height);
         ground.setVisible(false);
