@@ -89,12 +89,12 @@ public class Ground extends JPanel implements Constant, Runnable {
         new GooseSwing(new Location(0, 0), brothers);
         new XFormation(new Location(GROUNDWIDTH - XWIDTH, 0), lackeys);
 
-        mf.thread = new Thread(this);
+        mf.thread = new Thread();
         mf.thread.start();
     }
 
     @Override
-    public void run() {
+    public synchronized void run() {
         while (mf.thread.isInterrupted() == false) {
             if (state == STATE.OVER) {
                 Creature cre = null;
@@ -140,6 +140,60 @@ public class Ground extends JPanel implements Constant, Runnable {
         options(message);
     }
 
+    public void start() {
+        stopAll();
+        Object[] options = {"确定", "取消"};
+        int response = JOptionPane.showOptionDialog(mf, "确定开始新游戏?", "", JOptionPane.YES_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        if (response == 0) {
+            mf.dispose();
+            mf.newSave();
+            restart();
+            mf.setVisible(true);
+        } else {
+            if (state == STATE.GOING) moveAll();
+        }
+    }
+
+    public void pause() {
+        setState(STATE.PAUSE);
+        stopAll();
+    }
+
+    public void exit() {
+        stopAll();
+        Object[] options = {"确定", "取消"};
+        int response = JOptionPane.showOptionDialog(mf, "确定退出游戏?", "", JOptionPane.YES_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        if (response == 0) {
+            if (mf.fw != null) try {
+                mf.fw.close();
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+            System.exit(0);
+        } else {
+            if (state == STATE.GOING) moveAll();
+        }
+    }
+
+    public void help() {
+        state = STATE.PAUSE;
+//        setState(Constant.STATE.PAUSE);
+        stopAll();
+        JOptionPane.showMessageDialog(mf, "按空格键控制双方交战", "提示!", JOptionPane.INFORMATION_MESSAGE);
+        this.setVisible(true);
+        moveAll();
+    }
+
+    public void readSave() {
+        JFileChooser jfc = new JFileChooser(SAVEPATH);
+        jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        int result = jfc.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File file = jfc.getSelectedFile();
+            replay(file);
+        }
+    }
+
     public void options(String message) {
 
         Object[] options = {"开始新游戏", "读取存档", "退出"};
@@ -148,10 +202,10 @@ public class Ground extends JPanel implements Constant, Runnable {
         int response = JOptionPane.showOptionDialog(null, message, "是否开始新游戏", JOptionPane.YES_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
         if (response == 0) {
-            getMf().dispose();
-            getMf().newSave();
+            mf.dispose();
+            mf.newSave();
             restart();
-            getMf().setVisible(true);
+            mf.setVisible(true);
         }
         else if (response == 1) {
 //            stopAll();
@@ -195,46 +249,75 @@ public class Ground extends JPanel implements Constant, Runnable {
         }
     }
 
-    // 读一次
-    public synchronized void replayOnce() {
+    public void replayAll() {
         String str;
         String[] sp;
-        Creature cre;
         try {
-            while ((str = br.readLine()) != null && str.equals("\n") == false) {
-                sp = str.split(" ");
-//                for (String s : sp) System.out.print(s + " "); System.out.println();
-                if (sp[0].equals("") == true) break;
-                cre = creatures.get(Integer.valueOf(sp[0]));
-                cre.setPoint(Integer.valueOf(sp[1]), Integer.valueOf(sp[2]));
-                cre.live = Boolean.valueOf(sp[3]);
-//                System.out.println(cre.id + " " + cre.getX() + " " + cre.getY());
-                try {
-                    cre.setImg();
-                } catch (OutOfBounce e) {
-                    System.out.println(e.getMessage());
+            while ((str = br.readLine()) != null) {
+                if (str.equals("") == false) {
+                    sp = str.split(" ");
+                    if (sp[0].equals("") == true) break;
+                    replayOnce(sp);
                 }
-                repaint();
             }
-
-            if (str == null) {
-                state = STATE.OVER;
-                try {
-                    if (fr != null) fr.close();
-                    if (br != null) br.close();
-                } catch (IOException ioe) {
-                    ioe.printStackTrace();
-                }
-
-                options("存档读取完毕");
-            }
+            if (str == null) replayFinished();
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
 
-    public synchronized void replayAll() {
+    public synchronized void replayOnce(String[] sp) {
+        Creature cre;
+//                for (String s : sp) System.out.print(s + " "); System.out.println();
+        cre = creatures.get(Integer.valueOf(sp[0]));
+        cre.setPoint(Integer.valueOf(sp[1]), Integer.valueOf(sp[2]));
+        cre.live = Boolean.valueOf(sp[3]);
+//                System.out.println(cre.id + " " + cre.getX() + " " + cre.getY());
+        try {
+            cre.setImg();
+        } catch (OutOfBounce e) {
+            System.out.println(e.getMessage());
+        }
+        repaint();
+    }
 
+    // 读一次
+    public synchronized void replayOnce() {
+        String str;
+        String[] sp;
+        try {
+            while ((str = br.readLine()) != null && str.equals("") == false) {
+                sp = str.split(" ");
+                replayOnce(sp);
+////                for (String s : sp) System.out.print(s + " "); System.out.println();
+//                cre = creatures.get(Integer.valueOf(sp[0]));
+//                cre.setPoint(Integer.valueOf(sp[1]), Integer.valueOf(sp[2]));
+//                cre.live = Boolean.valueOf(sp[3]);
+////                System.out.println(cre.id + " " + cre.getX() + " " + cre.getY());
+//                try {
+//                    cre.setImg();
+//                } catch (OutOfBounce e) {
+//                    System.out.println(e.getMessage());
+//                }
+//                repaint();
+            }
+
+            if (str == null) replayFinished();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
+
+    private void replayFinished() {
+        state = STATE.OVER;
+        try {
+            if (fr != null) fr.close();
+            if (br != null) br.close();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+
+        options("存档读取完毕");
     }
 
     public List<Creature> getCreatures() { return creatures; }

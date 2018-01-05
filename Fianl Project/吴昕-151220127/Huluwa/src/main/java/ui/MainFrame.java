@@ -20,6 +20,7 @@ public class MainFrame extends JFrame implements Constant {
         setSize(FRAMEWIDTH, FRAMEHEIGHT);
         setLocation(LOCATIONX, LOCATIONY);
         setTitle(TITLE);
+        setResizable(false);
 
         initFrame();
 
@@ -45,6 +46,7 @@ public class MainFrame extends JFrame implements Constant {
                 if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                     if (ground.getState() == STATE.READY || ground.getState() == STATE.PAUSE)
                         ground.moveAll();
+                    else if (ground.getState() == STATE.SAVE) ground.replayAll();
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                     if (ground.getState() == STATE.SAVE) ground.replayOnce();
@@ -61,6 +63,15 @@ public class MainFrame extends JFrame implements Constant {
                         else ground.options("是否开启新游戏? ");
                     }
                 }
+                else if (e.getKeyCode() == KeyEvent.VK_P) {
+                    if (ground.getState() == STATE.GOING) ground.pause();
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_C) {
+                    if (ground.getState() == STATE.PAUSE) ground.moveAll();
+                }
+                else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) ground.exit();
+                else if (e.getKeyCode() == KeyEvent.VK_H) ground.help();
+                else if (e.getKeyCode() == KeyEvent.VK_S) ground.readSave();
             }
         });
 
