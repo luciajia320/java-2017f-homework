@@ -1,13 +1,14 @@
 public class Buddy implements Creature {
-    private Position position;
-    int index;
+    private Position<Creature> position;
+    private int index;
+    private String name;
     @Override
-    public void setPosition(Position position) {
+    public void setPosition(Position<Creature> position) {
         this.position = position;
         position.setHolder(this);
     }
     @Override
-    public Position getPosition() {
+    public Position<Creature> getPosition() {
         return position;
     }
     @Override
@@ -18,8 +19,14 @@ public class Buddy implements Creature {
     public String toString(){
         return "小喽啰"+this.index+"@" + this.position.getX() + ","+this.position.getY()+";";
     }
+    @Override
+    public void show() {
+        System.out.print(name);
+    }
+
     Buddy(int i) {
         this.index = i;
-
+        this.name="🐶";
     }
 }
+
