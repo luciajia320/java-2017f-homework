@@ -1,11 +1,12 @@
 package ui;
 
+import util.Constant;
+import util.GroundState;
+import util.ImageReader;
+
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class HuluMountainFrame extends JFrame {
     private Welcome welcome = new Welcome();
@@ -13,53 +14,81 @@ public class HuluMountainFrame extends JFrame {
     private JButton enter = new JButton("进入游戏");
     private JButton replay = new JButton("回放记录");
     private JButton help = new JButton("游戏帮助");
+    private JPanel buttonpanel = new JPanel();
+    private ButtonGroup group = new ButtonGroup();
     private MenuBar menuBar = new MenuBar();
-    private final int width = 1200;
-    private final int height = 720;
+    private final int width = Constant.WIDTH;
+    private final int height = Constant.HEIGHT;
 
     public HuluMountainFrame() {
-//        Toolkit kit = Toolkit.getDefaultToolkit();
-//        Dimension dimension = kit.getScreenSize();
-//        System.out.println(dimension.height);
-//        System.out.println(dimension.width);
         setTitle("HuLu Mountain");
+        setIconImage(ImageReader.getIcon("hulu.png").getImage());
         setLayout(null);
+//        welcome.setBounds(0, 0, width, height);
+        setSize(width, height);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         welcome.setBounds(0, 0, width, height);
-        add(welcome);
+        getContentPane().add(welcome);
+        setVisible(true);
+        System.out.println(welcome.getWidth());
+        System.out.println(welcome.getHeight());
+
+        group.add(enter);
+        group.add(replay);
+        group.add(help);
 
         enter.setBounds(550, 300, 90, 40);
-        welcome.add(enter);
+//        welcome.add(enter);
+//        enter.repaint();
         enter.addActionListener(e -> {
-            ground.setVisible(true);
-            welcome.setVisible(false);
+//            ground.setVisible(true);
+//            welcome.setVisible(false);
             setJMenuBar(menuBar);
+            remove(welcome);
+            remove(buttonpanel);
+            ground.setBounds(0, 0, 960, 720);
+            add(ground);
+            setVisible(true);
+            System.out.println(ground.getWidth());
+            System.out.println(ground.getHeight());
         });
 
         replay.setBounds(550, 400, 90, 40);
-        welcome.add(replay);
+//        welcome.add(replay);
+//        replay.repaint();
         replay.addActionListener(e -> System.out.println("Hello, world!"));
 
         help.setBounds(550, 500, 90, 40);
-        welcome.add(help);
+//        welcome.add(help);
+//        help.repaint();
         help.addActionListener(e -> System.out.println("Hello, world!"));
 
-        ground.setBounds(0, 0, width, height);
-        ground.setVisible(false);
-        add(ground);
+        buttonpanel.setLayout(null);
+//        buttonpanel.setBounds(500,200,190,390);
+        buttonpanel.setBounds(0,0,1200,720);
+        buttonpanel.add(enter);
+        enter.setVisible(true);
+        buttonpanel.add(replay);
+        replay.setVisible(true);
+        buttonpanel.add(help);
+        help.setVisible(true);
+        buttonpanel.setVisible(true);
+        add(buttonpanel);
+//        welcome.repaint();
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    if(ground.getState() == GroundState.READY) {
+                        ground.run();
+                    }
+                }
+            }
+        });
 
-        setSize(width, height);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
         setResizable(false);
-//        addComponentListener(new ComponentAdapter() {
-//            @Override
-//            public void componentResized(ComponentEvent e) {
-//                System.out.println(e.getComponent().getBounds().height);
-//                System.out.println(e.getComponent().getBounds().width);
-//                System.out.println(e.getComponent().getBounds().x);
-//                System.out.println(e.getComponent().getBounds().y);
-//            }
-//        });
+        setVisible(true);
+        validate();
     }
 }

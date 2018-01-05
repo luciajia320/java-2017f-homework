@@ -7,17 +7,14 @@ import exception.FormationException;
 import space.Position;
 import ui.Ground;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * 葫芦娃战队，由七只葫芦娃组成
  */
 public class CalaCrops extends Crops implements Iterable<Calabash> {
     private CalabashFactory calabashFactory = CalabashFactory.getInstance();
-    private ArrayList<Calabash> calabashes = new ArrayList<>(Arrays.asList(
+    private List<Calabash> calabashes = new ArrayList<>(Arrays.asList(
             calabashFactory.get(0),
             calabashFactory.get(1),
             calabashFactory.get(2),
@@ -30,7 +27,7 @@ public class CalaCrops extends Crops implements Iterable<Calabash> {
     private static CalaCrops crops = new CalaCrops();
     private CalaCrops() {
         try {
-            setFormation(new HeYi(Ground.space, 5, 4));
+            setFormation(new HeYi(3, 4));
         } catch (FormationException e) {
             e.printStackTrace();
         }
@@ -56,6 +53,10 @@ public class CalaCrops extends Crops implements Iterable<Calabash> {
         Collections.sort(calabashes);
     }
 
+    public List<Calabash> getCalabashes() {
+        return calabashes;
+    }
+
     public Calabash get(int i) {
         if(i >= 7) {
             throw new IndexOutOfBoundsException("method 'Calabash get(int i)' index out of bounds in class CalaCrops.");
@@ -77,6 +78,19 @@ public class CalaCrops extends Crops implements Iterable<Calabash> {
                 c.setPosition(pos);
                 pos.setHolder(c);
             }
+        }
+    }
+
+    public void addEnemy(Animal a) {
+        for(Calabash c: this) {
+            c.addEnemy(a);
+        }
+    }
+
+    public void addEnemy(EssenceCrops crops) {
+        for(Calabash c: this) {
+            c.addEnemy(crops.getScorpionEssence());
+            c.addEnemy(crops.getMinions());
         }
     }
 

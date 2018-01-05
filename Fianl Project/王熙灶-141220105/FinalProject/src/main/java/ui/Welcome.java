@@ -1,6 +1,7 @@
 package ui;
 
 import util.ImageReader;
+import util.Constant;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,19 +9,18 @@ import java.awt.*;
 public class Welcome extends JPanel {
     private Image background = ImageReader.getImage("background.png");
 //    private Image background = ImageReader.getImage("grandpa-alive.png");
-    private final int width = 1200;
-    private final int height = 720;
+    private final int width = Constant.WIDTH;
+    private final int height = Constant.HEIGHT;
 
     public Welcome() {
-        setBounds(0, 0, width, height);
-        setVisible(true);
-        setSize(width, height);
         setLayout(null);
+        setVisible(true);
     }
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(background, 0, 0, width, height, null);
+        super.paint(g);
+        g.drawImage(background, 0, 0, width, height, this);
     }
 
     @Deprecated

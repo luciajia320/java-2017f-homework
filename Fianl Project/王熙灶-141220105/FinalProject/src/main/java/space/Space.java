@@ -1,13 +1,12 @@
 package space;
 
 import creature.Creature;
-import creature.plant.RandomPlant;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 空间类，表示一个 N*N 的二维空间
+ * 空间类，表示一个 M * N 的二维空间
  */
 public class Space {
     private int width;
@@ -22,7 +21,6 @@ public class Space {
             List<Position<Creature>> ls = new ArrayList<>();
             for(int j = 0; j < width; j++) {
                 Position<Creature> pos = new Position<>(j, i);
-                pos.setHolder(RandomPlant.get());
                 ls.add(pos);
             }
             positionss.add(ls);
@@ -33,15 +31,30 @@ public class Space {
      * @param creature, 一个生物体
      * @param x, x坐标位置
      * @param y, y坐标位置
-     * 表示在空间的 (x, y) 位置上放置生物体 creature
+     * 表示将生物体 creature 与空间中的 (x, y) 位置相关联
      */
-    public void creature_position_setter(Creature creature, int x, int y) {
-        if(x > width || y > height) {
-            throw new IndexOutOfBoundsException("method 'void creature_position_setter(Creature creature, int x, int y)' index out of bounds in class HuluMountainFrame.");
-        }
-        Position<Creature> pos = positionss.get(y).get(x);
+    public void bind(Creature creature, int x, int y) {
+        Position<Creature> pos = getPos(x, y);
         pos.setHolder(creature);
         creature.setPosition(pos);
+    }
+
+    /**
+     * @param creature, 一个生物体
+     * 表示取消生物体 creature 和与之相关联的空间位置之间的关联
+     */
+    public void unbind(Creature creature) {
+        creature.unbindWith();
+    }
+
+    /**
+     * @param x, x坐标位置
+     * @param y, y坐标位置
+     * 表示取消空间位置 (x, y) 和与之相关联的生物之间的关联
+     */
+    public void unbind(int x, int y) {
+        Position<Creature> pos = getPos(x, y);
+        pos.unbindWith();
     }
 
     /**
@@ -80,7 +93,12 @@ public class Space {
         StringBuilder stringBuilder = new StringBuilder();
         for(List<Position<Creature>> positions: positionss) {
             for(Position<Creature> position: positions) {
-                stringBuilder.append(position.getHolder().toString()).append(' ');
+                if(position.getHolder() != null) {
+                    stringBuilder.append(position.getHolder().toString()).append(' ');
+                }
+                else {
+                    stringBuilder.append("[] ");
+                }
             }
             stringBuilder.append('\n');
         }

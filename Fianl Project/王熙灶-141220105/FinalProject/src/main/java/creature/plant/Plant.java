@@ -2,6 +2,9 @@ package creature.plant;
 
 import creature.Creature;
 
+import java.awt.*;
+
+@Deprecated
 public class Plant extends Creature {
     private String plantName;
     protected String plantEmoji;
@@ -17,5 +20,10 @@ public class Plant extends Creature {
 
     public String getPlantName() {
         return plantName;
+    }
+
+    @Override
+    public Image getImage() {
+        return null;
     }
 }

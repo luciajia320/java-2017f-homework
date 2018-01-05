@@ -10,6 +10,7 @@ import ui.Ground;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * 妖精战队，由蝎子精带领六只小喽啰组成
@@ -17,7 +18,7 @@ import java.util.Iterator;
 public class EssenceCrops extends Crops implements Iterable<Animal> {
     private ScorpionEssence scorpionEssence  = ScorpionEssence.getInstance();
     private MinionFactory minionFactory = MinionFactory.getInstance();
-    private ArrayList<Minion> minions = new ArrayList<>(Arrays.asList(
+    private List<Minion> minions = new ArrayList<>(Arrays.asList(
             minionFactory.get(0), minionFactory.get(1), minionFactory.get(2),
             minionFactory.get(3), minionFactory.get(4), minionFactory.get(5)
     ));
@@ -25,7 +26,7 @@ public class EssenceCrops extends Crops implements Iterable<Animal> {
     private static EssenceCrops crops = new EssenceCrops();
     private EssenceCrops() {
         try {
-            setFormation(new FengShi(Ground.space, 9, 4));
+            setFormation(new FengShi(7, 4));
         } catch (FormationException e) {
             e.printStackTrace();
         }
@@ -72,6 +73,22 @@ public class EssenceCrops extends Crops implements Iterable<Animal> {
             throw new IndexOutOfBoundsException("method 'Minion get(int i)' index out of bounds in class EssenceCrops.");
         }
         return minions.get(i);
+    }
+
+    public List<Minion> getMinions() {
+        return minions;
+    }
+
+    public void addEnemy(Animal a) {
+        for(Animal c: this) {
+            c.addEnemy(a);
+        }
+    }
+
+    public void addEnemy(CalaCrops crops) {
+        for(Animal a: this) {
+            a.addEnemy(crops.getCalabashes());
+        }
     }
 
     @Override

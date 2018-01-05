@@ -2,14 +2,14 @@ package creature;
 
 import space.Position;
 
+
 import java.awt.*;
 
 /**
  * 基类，生物体类
  */
-public class Creature {
+public abstract class Creature {
     private Position<Creature> position;
-    private Image image;
 
     public Position<Creature> getPosition() {
         return position;
@@ -19,11 +19,21 @@ public class Creature {
         this.position = position;
     }
 
-    public Image getImage() {
-        return image;
+    public void unbindWith() {
+        if(position != null) {
+            position.unbindWith();
+        }
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    abstract public Image getImage();
+
+    /**
+     * @param c, 另一个生物体
+     * @return 当前生物体与生物体c的曼哈顿距离
+     */
+    public int distance(Creature c) {
+        int dis_x = Math.abs(position.getX() - c.getPosition().getX());
+        int dis_y = Math.abs(position.getY() - c.getPosition().getY());
+        return dis_x + dis_y;
     }
 }

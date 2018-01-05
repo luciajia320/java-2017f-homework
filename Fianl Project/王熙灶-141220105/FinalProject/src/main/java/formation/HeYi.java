@@ -3,7 +3,7 @@ package formation;
 import exception.FormationException;
 import util.Dom4jXmlReader;
 import util.Point;
-import space.Space;
+import static util.Constant.space;
 
 import java.util.ArrayList;
 
@@ -19,13 +19,12 @@ import java.util.ArrayList;
  */
 public final class HeYi extends BasicFormation {
     /**
-     * @param space, 摆放阵法的空间
      * @param x, 阵头的x方向位置
      * @param y, 阵头的y方向位置
      * 这里的x方向表示从上到下，y方向表示从左到右
      */
-    public HeYi(Space space, int x, int y) throws FormationException {
-        super(space, x, y);
+    public HeYi(int x, int y) throws FormationException {
+        super(x, y);
         ArrayList<Point> points = Dom4jXmlReader.read("HeYi.xml");
         try {
             positions.set(0, space.getPos(current_y+points.get(0).y, current_x+points.get(0).x));

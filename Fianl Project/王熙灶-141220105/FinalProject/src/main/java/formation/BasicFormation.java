@@ -1,9 +1,7 @@
 package formation;
 
 import creature.Creature;
-import creature.plant.RandomPlant;
 import space.Position;
-import space.Space;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,7 +13,6 @@ import java.util.Iterator;
 public class BasicFormation implements Iterable<Position<Creature>> {
     protected int current_x;
     protected int current_y;
-    protected Space space;
     // 每个阵法只由七个位置构成
     protected ArrayList<Position<Creature>> positions = new ArrayList<>(Collections.nCopies(7, null));
 
@@ -26,10 +23,9 @@ public class BasicFormation implements Iterable<Position<Creature>> {
      * (原来的)这里的x方向表示从上到下，y方向表示从左到右
      * (现在的)这里的x方向表示从左到右，y方向表示从上到下
      */
-    public BasicFormation(Space space, int x, int y) {
+    public BasicFormation(int x, int y) {
         this.current_x = y;
         this.current_y = x;
-        this.space = space;
     }
 
     /**
@@ -37,8 +33,7 @@ public class BasicFormation implements Iterable<Position<Creature>> {
      */
     public void clear() {
         for (Position<Creature> pos : this) {
-            pos.getHolder().setPosition(null);
-            pos.setHolder(RandomPlant.get());
+            pos.unbindWith();
         }
     }
 

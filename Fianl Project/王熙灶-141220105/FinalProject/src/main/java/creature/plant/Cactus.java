@@ -1,5 +1,6 @@
 package creature.plant;
 
+@Deprecated
 public final class Cactus extends Plant {
     public Cactus() {
         super("Cactus", "\uD83C\uDF35");

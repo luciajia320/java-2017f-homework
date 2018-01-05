@@ -1,35 +1,77 @@
 package ui;
 
+import static util.Constant.space;
+import static util.Constant.XSIZE;
+import static util.Constant.YSIZE;
+
 import creature.animal.*;
-import space.Space;
+import util.GroundState;
 import util.ImageReader;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.LinkedList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.List;
 
 public class Ground extends JPanel {
     private final int size = 80;
-    private final int width = 1200;
-    private final int height = 720;
+//    private final int width = 1200;
+//    private final int height = 720;
+    private List<Animal> allAnimals = new LinkedList<>();
     private CalaCrops calaCrops = CalaCrops.getInstance();
     private EssenceCrops essenceCrops = EssenceCrops.getInstance();
     private GrandPa grandPa = GrandPa.getInstance();
     private SnakeEssence snake = SnakeEssence.getInstance();
-    public static Space space = new Space(15, 9);
+
+    private GroundState state;
 
     public Ground() {
-        space.creature_position_setter(grandPa, 5, 1);
-        space.creature_position_setter(snake, 9, 1);
-        setBounds(0, 0, width, height);
-        setVisible(true);
-        setSize(width, height);
+        space.bind(grandPa, 3, 1);
+        space.bind(snake, 7, 1);
+//        setBounds(0, 0, width, height);
+//        setSize(width, height);
         setLayout(null);
+        setVisible(true);
+
+        init();
     }
 
-    private void paintGrass(Graphics g) {
+    public void init() {
+        calaCrops.addEnemy(essenceCrops);
+        calaCrops.addEnemy(snake);
+        essenceCrops.addEnemy(calaCrops);
+        essenceCrops.addEnemy(grandPa);
+
+        allAnimals.addAll(essenceCrops.getMinions());
+        allAnimals.add(essenceCrops.getScorpionEssence());
+        allAnimals.add(snake);
+        allAnimals.addAll(calaCrops.getCalabashes());
+        allAnimals.add(grandPa);
+
+        state = GroundState.READY;
+    }
+
+    public void run() {
+//        ExecutorService exec = Executors.newFixedThreadPool(16);
+        for(Animal a: allAnimals) {
+            new Thread(a).start();
+        }
+    }
+
+    public void setState(GroundState state) {
+        this.state = state;
+    }
+
+    public GroundState getState() {
+        return state;
+    }
+
+    private void paintBackGround(Graphics g) {
         Image image = ImageReader.getImage("grass.png");
-        for (int i = 0; i < 15; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < XSIZE; i++) {
+            for (int j = 0; j < YSIZE; j++) {
                 g.drawImage(image, i * size, j * size, null);
             }
         }
@@ -63,7 +105,8 @@ public class Ground extends JPanel {
 
     @Override
     public void paint(Graphics g) {
-        paintGrass(g);
+        super.paint(g);
+        paintBackGround(g);
         paintCalaCrops(g);
         paintEssenceCrops(g);
         paint(g, grandPa);

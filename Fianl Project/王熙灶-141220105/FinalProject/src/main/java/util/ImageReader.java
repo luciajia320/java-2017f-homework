@@ -1,6 +1,7 @@
 package util;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -13,5 +14,9 @@ public class ImageReader {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static ImageIcon getIcon(String path) {
+        return new ImageIcon("src/main/resources/icons/" + path);
     }
 }

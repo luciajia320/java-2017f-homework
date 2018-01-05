@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+@Deprecated
 public class RandomPlant {
     private static ArrayList<Class<? extends Plant>> plants = new ArrayList<>(Arrays.asList(
         Blossom.class, /* blossom */

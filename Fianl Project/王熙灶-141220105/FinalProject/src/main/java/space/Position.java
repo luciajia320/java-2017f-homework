@@ -3,7 +3,7 @@ package space;
 import creature.Creature;
 
 /**
- * 位置类，表示空间中的一个点，每个点上可以放置一个Creature
+ * 位置类，表示空间中的一个位置，每个位置可以与一个Creature相关联
  */
 public class Position<T extends Creature> {
     private T holder;
@@ -13,7 +13,6 @@ public class Position<T extends Creature> {
     public Position(int x, int y) {
         this.x = x;
         this.y = y;
-        holder = null;
     }
 
     public void setHolder(T holder) {
@@ -22,6 +21,13 @@ public class Position<T extends Creature> {
 
     public T getHolder() {
         return holder;
+    }
+
+    public void unbindWith() {
+        if(holder != null) {
+            holder.setPosition(null);
+            holder = null;
+        }
     }
 
     public int getX() {
