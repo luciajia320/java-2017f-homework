@@ -7,3 +7,8 @@
 ---
 ###开始界面<br>
 ![Image text](https://github.com/YMing-Li/java-2017f-homework/blob/master/Fianl%20Project/%E6%9D%8E%E4%B8%80%E9%B8%A3-151220056/relatedpicsfor_readme/start.png)  
+###结束界面<br>
+####葫芦娃赢<br>
+![Image text](https://github.com/YMing-Li/java-2017f-homework/blob/master/Fianl%20Project/%E6%9D%8E%E4%B8%80%E9%B8%A3-151220056/relatedpicsfor_readme/end_win.png)  
+####葫芦娃输<br>
+![Image text](https://github.com/YMing-Li/java-2017f-homework/blob/master/Fianl%20Project/%E6%9D%8E%E4%B8%80%E9%B8%A3-151220056/relatedpicsfor_readme/end_lose.png) 
