@@ -6,4 +6,4 @@
 战争场面
 ---
 ###开始界面
-![](https://github.com/YMing-Li/java-2017f-homework/Fianl Project/李一鸣-151220056/relatedpicsfor_readme/start.png)  
+![](https://github.com/YMing-Li/java-2017f-homework/raw/master/Fianl Project/李一鸣-151220056/relatedpicsfor_readme/start.png)  
