@@ -15,7 +15,7 @@ public class test {
         hlwname.add("青");
         hlwname.add("蓝");
         hlwname.add("紫");
-        ArrayList<HuLuWa> brothers = new ArrayList<>();
+        ArrayList<HuLuWa> brothers = new ArrayList<HuLuWa>();
         for (int i = 0; i < 7; i++) {
             brothers.add(new HuLuWa(hlwname.get(i), new Position(0, i)));
         }

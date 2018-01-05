@@ -16,10 +16,12 @@ public class Field extends JPanel {
     public ArrayList<ArrayList<Creature>> creatures;
     int flag=0;
     int flag2=0;
-    FileOutputStream out;
+    int sign1 = 0;
 
+    FileOutputStream out;
+    JLabel jl=new JLabel();
     public ArrayList<Position> getPositions(int line) {
-        ArrayList<Position> tmpp = new ArrayList<>();
+        ArrayList<Position> tmpp = new ArrayList<Position>();
         for (int i = (N - HLW_SUM) / 2; i < (N + HLW_SUM) / 2; ++i)
             tmpp.add(positions.get(i).get(line));
         return tmpp;
@@ -38,6 +40,7 @@ public class Field extends JPanel {
     }
 
     public Field() {
+
         this.positions = new ArrayList<ArrayList<Position>>();
         this.creatures = new ArrayList<ArrayList<Creature>>();
         for (int i = 0; i < N; ++i) {
@@ -210,6 +213,21 @@ public class Field extends JPanel {
 
             }
         }
+        g.setColor(new Color(25, 150, 150));
+        g.setFont(new Font("宋体",Font.BOLD,20));
+        g.drawString("SPACE开始 很抱歉(┬＿┬)由于移动后原位置一直消除不了L键复盘未成功战场记录在out.txt", 0, 650);
+        if(sign1==1){
+            g.setColor(new Color(255, 0, 0));
+            //Font font = new Font("Arial",Font.BOLD,12);
+            g.setFont(new Font("宋体",Font.BOLD,40));
+            g.drawString("爷爷阵亡 葫芦娃lose(┬＿┬)", 200, 400);
+        }
+        else if (sign1==2){
+            g.setColor(new Color(255, 0, 0));
+            g.setFont(new Font("宋体",Font.BOLD,40));
+            g.drawString("妖精阵亡 葫芦娃win♪(＾∀＾●)ﾉ", 200, 400);
+        }
+
     }
 
     @Override
@@ -265,23 +283,25 @@ public class Field extends JPanel {
                        // System.out.println(flag+" "+flag2);
                         if (flag == 0 || flag2 == 0) {
                             record();
-                            boolean sign1 = true;
+
                             for (int i = 0; i < N; ++i)
                                 for (int j = 0; j < N; ++j) {
                                     if (creatures.get(i).get(j) instanceof Grandfather && !creatures.get(i).get(j).exist) {
-                                        sign1 = false;
+                                        sign1 = 1; //爷爷死了
                                         break;
                                     }
                                 }
+                            if(sign1==0)//爷爷没死 妖怪死光了
+                                sign1=2;
                             for (int i = 0; i < N; ++i)
                                 for (int j = 0; j < N; ++j) {
                                     creatures.get(i).get(j).setexist(false);
                                 }
                             this.cancel();
-                            if (!sign1)
-                                System.out.println("葫芦娃输了");
-                            else
-                                System.out.println("葫芦娃赢了");
+
+                            //sign1 0未开始 1葫芦娃输了 2葫芦娃赢了
+
+                           //     System.out.println("葫芦娃赢了");
                             try {
                                 out.close();
                             } catch (FileNotFoundException e1) {
@@ -289,7 +309,6 @@ public class Field extends JPanel {
                             } catch (IOException e1) {
                                 e1.printStackTrace();
                             }
-
                         }
                     else
                         record();
@@ -303,7 +322,9 @@ public class Field extends JPanel {
                     }
 
                 }
+                System.out.println(sign1);
                 repaint();
+
             }
             else if(key==KeyEvent.VK_L){
                 String strin="\0";

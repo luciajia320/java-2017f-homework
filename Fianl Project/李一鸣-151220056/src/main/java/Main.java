@@ -31,7 +31,7 @@ public class Main extends JFrame{
         hlwname.add("青");
         hlwname.add("蓝");
         hlwname.add("紫");
-        ArrayList<HuLuWa> brothers = new ArrayList<>();
+        ArrayList<HuLuWa> brothers = new ArrayList<HuLuWa>();
         for (int i = 0; i < HLW_SUM; i++) {
             brothers.add(new HuLuWa(hlwname.get(i), new Position(0, i)));
         }
@@ -42,7 +42,7 @@ public class Main extends JFrame{
         Field field = new Field();
         field.putIn(huluwaqueue);
 
-        ArrayList<Monster>louluos = new ArrayList<>();
+        ArrayList<Monster>louluos = new ArrayList<Monster>();
         for (int i = 0; i < LL_SUM; i++) {
             louluos.add ( new Monster("💀"));
         }
