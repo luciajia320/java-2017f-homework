@@ -3,6 +3,30 @@ Wangxiz的 Java 大作业说明文档。
 
 ## 版本更新记录
 
+### Final Project V 1.4
+#### 更新时间
+- 2018.01.07
+
+#### 更新内容
+- TODO：修复多线程bug
+- TODO：将状态enum改为英文
+
+### Final Project V 1.3
+#### 更新时间
+- 2018.01.06
+
+#### 更新内容
+- 添加打开文件和保存文件功能框架
+- 实现 `ArchiveFilter` 过滤文件类型
+- 定义存档文件格式 `.acv`
+- 添加存档读取器 `ArchiveReader`
+- 修改文件读取方式，解决直接执行jar包时文件读取错误的问题
+- 完善右侧控制面板 + 状态面板
+- 重构`class Crops`及其派生类
+- 添加存档IO `class ArchiveIO`
+- 将文件选择对话框与 `ArchiveIO`交互
+- 保存文件时若文件已存在提示是否覆盖
+
 ### Final Project V 1.2
 #### 更新时间
 - 2018.01.05
@@ -210,15 +234,16 @@ Class `FormationException`：自定义异常类。用于处理阵法中某个位
 
 ## 自动构建
 本项目使用的自动构建工具为 **Maven**，版本 **3.5.2**
-- **mvn package**：自动打包项目。其中，`target`目录下的`Assignment03-1.3.jar`是不指定主类版本，`Assignment03-1.3-jar-with-dependencies.jar`是指定主类版本
+- **mvn package**：自动打包项目。其中，`target`目录下的`Assignment03-1.3.jar`是不指定主类版本，`Assignment03-1.3-jar-with-dependencies.jar`是带依赖并且指定主类的版本
 - **mvn clean**：自动清理项目。删除`target`目录
 - **mvn test**：自动测试。调用项目中的所有单元测试方法进行测试
 
 ## 说明
 每种阵法**只能由七人**才能施展，多一人不可，少一人亦不行。
 
-### emoji 图标说明
-大娃：😎 二娃：😀 三娃：😛 四娃：😮 五娃：😐 六娃：😙 七娃：😟<br>
-爷爷：👴<br>
-蛇精：🐍 蝎子精：🦂 小喽啰：🐒<br>
-植物图标：🌼 🌵 🍀 🌺 🍁 🍄 🌴 🌹 🌻 🌷
+## 遇到的问题
+1、**问题描述**：在IEDA里运行正常，但是打包为可执行的jar包之后，报各种找不到文件的错误。
+
+**解决方案**：使用 `getResource()` 来读取`URL`而不是直接使用`File`来读取文件或者直接通过`pathname`来读取 `Image`。这里其实还有一个坑，就是`getResource()`中使用的 `path` 的问题:
+- `path`不以'/'开头时，默认是从此类所在的包下取资源
+- `path`以'/'开头时，则是从`ClassPath`根下获取

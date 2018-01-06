@@ -1,7 +1,7 @@
 package formation;
 
 import exception.FormationException;
-import util.Dom4jXmlReader;
+import util.FormationReader;
 import util.Point;
 import static util.Constant.space;
 
@@ -19,7 +19,7 @@ public final class LongSnake extends BasicFormation {
      */
     public LongSnake(int x, int y) throws FormationException {
         super(x, y);
-        ArrayList<Point> points = Dom4jXmlReader.read("LongSnake.xml");
+        ArrayList<Point> points = FormationReader.read("LongSnake.xml");
         try {
             positions.set(0, space.getPos(current_y+points.get(0).y, current_x+points.get(0).x));
             positions.set(1, space.getPos(current_y+points.get(1).y, current_x+points.get(1).x));

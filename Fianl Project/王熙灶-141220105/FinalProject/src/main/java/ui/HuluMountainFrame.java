@@ -1,5 +1,9 @@
 package ui;
 
+import static util.Constant.control;
+import static util.Constant.ground;
+import static util.Constant.status;
+
 import util.Constant;
 import util.GroundState;
 import util.ImageReader;
@@ -10,7 +14,7 @@ import java.awt.event.KeyEvent;
 
 public class HuluMountainFrame extends JFrame {
     private Welcome welcome = new Welcome();
-    private Ground ground = new Ground();
+//    private Ground ground = new Ground();
     private JButton enter = new JButton("进入游戏");
     private JButton replay = new JButton("回放记录");
     private JButton help = new JButton("游戏帮助");
@@ -46,8 +50,14 @@ public class HuluMountainFrame extends JFrame {
             setJMenuBar(menuBar);
             remove(welcome);
             remove(buttonpanel);
+
             ground.setBounds(0, 0, 960, 720);
             add(ground);
+            control.setBounds(960, 0, 240, 102);
+            add(control);
+            status.setBounds(960, 102, 240, 618);
+            add(status);
+
             setVisible(true);
             System.out.println(ground.getWidth());
             System.out.println(ground.getHeight());

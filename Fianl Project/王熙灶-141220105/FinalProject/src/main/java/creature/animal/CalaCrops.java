@@ -12,7 +12,7 @@ import java.util.*;
 /**
  * 葫芦娃战队，由七只葫芦娃组成
  */
-public class CalaCrops extends Crops implements Iterable<Calabash> {
+public class CalaCrops extends Crops {
     private CalabashFactory calabashFactory = CalabashFactory.getInstance();
     private List<Calabash> calabashes = new ArrayList<>(Arrays.asList(
             calabashFactory.get(0),
@@ -53,7 +53,7 @@ public class CalaCrops extends Crops implements Iterable<Calabash> {
         Collections.sort(calabashes);
     }
 
-    public List<Calabash> getCalabashes() {
+    public List<? extends Animal> getCalabashes() {
         return calabashes;
     }
 
@@ -82,24 +82,24 @@ public class CalaCrops extends Crops implements Iterable<Calabash> {
     }
 
     public void addEnemy(Animal a) {
-        for(Calabash c: this) {
+        for(Animal c: this) {
             c.addEnemy(a);
         }
     }
 
     public void addEnemy(EssenceCrops crops) {
-        for(Calabash c: this) {
+        for(Animal c: this) {
             c.addEnemy(crops.getScorpionEssence());
             c.addEnemy(crops.getMinions());
         }
     }
 
     @Override
-    public Iterator<Calabash> iterator() {
+    public Iterator<Animal> iterator() {
         return new CalabashIterator();
     }
 
-    private class CalabashIterator implements Iterator<Calabash> {
+    private class CalabashIterator implements Iterator<Animal> {
         int no = 0;
 
         @Override
@@ -108,7 +108,7 @@ public class CalaCrops extends Crops implements Iterable<Calabash> {
         }
 
         @Override
-        public Calabash next() {
+        public Animal next() {
             return calabashes.get(no++);
         }
     }

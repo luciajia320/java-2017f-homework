@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<archive>
+    <timepoint>
+        <creature>
+            <image>grandpa-alive.png</image>
+            <state>战斗</state>
+            <x>7</x>
+            <y>13</y>
+        </creature>
+        <creature>
+            <image>green-alive.png</image>
+            <state>冲锋</state>
+            <x>7</x>
+            <y>6</y>
+        </creature>
+    </timepoint>
+    <timepoint>
+        <creature>
+            <image>blue-alive.png</image>
+            <state>阵亡</state>
+            <x>7</x>
+            <y>13</y>
+        </creature>
+        <creature>
+            <image>red-alive.png</image>
+            <state>对阵</state>
+            <x>7</x>
+            <y>6</y>
+        </creature>
+    </timepoint>
+</archive>

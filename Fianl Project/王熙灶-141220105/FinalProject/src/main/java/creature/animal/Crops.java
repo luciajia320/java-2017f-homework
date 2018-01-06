@@ -2,7 +2,7 @@ package creature.animal;
 
 import formation.BasicFormation;
 
-public abstract class Crops {
+public abstract class Crops implements Iterable<Animal> {
     BasicFormation basicFormation;
 
     /**

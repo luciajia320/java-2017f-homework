@@ -1,5 +1,5 @@
 package util;
 
 public enum GroundState {
-    READY, RUNNING, PAUSE, OVER, ACHIVE
+    READY, RUNNING, PAUSE, OVER, ARCHIVE
 }

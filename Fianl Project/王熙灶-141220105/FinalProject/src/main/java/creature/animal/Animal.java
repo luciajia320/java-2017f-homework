@@ -3,16 +3,19 @@ package creature.animal;
 import creature.Creature;
 import static util.Constant.*;
 import util.Direction;
+import util.State;
 
 import java.awt.Image;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Animal extends Creature implements Runnable {
     private State state = State.对阵;
     Image imageAlive;
     Image imageDead;
     List<Animal> enemyList = new LinkedList<>();
+    public boolean runnable = false;
 
     public State getState() {
         return state;
@@ -39,7 +42,7 @@ public class Animal extends Creature implements Runnable {
     @Override
     public void run() {
         synchronized (space) {
-            while (isAlive()) {
+            while (runnable) {
                 Animal enemy = findNearestEnemy();
 //                if(enemy == null) return;
                 Direction x = (enemy.getPosition().getX() > getPosition().getX()) ? Direction.RIGHT : Direction.LEFT;
@@ -48,6 +51,12 @@ public class Animal extends Creature implements Runnable {
                     move(x);
                 } else if(movable(y)) {
                     move(y);
+                }
+                ground.repaint();
+                try {
+                    TimeUnit.MILLISECONDS.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         }

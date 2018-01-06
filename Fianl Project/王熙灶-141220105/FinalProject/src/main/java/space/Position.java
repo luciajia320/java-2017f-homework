@@ -37,4 +37,9 @@ public class Position<T extends Creature> {
     public int getY() {
         return y;
     }
+
+    @Override
+    public String toString() {
+        return "(" + x + ", " + y + ")";
+    }
 }

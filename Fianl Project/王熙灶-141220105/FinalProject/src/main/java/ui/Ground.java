@@ -54,9 +54,12 @@ public class Ground extends JPanel {
     }
 
     public void run() {
-//        ExecutorService exec = Executors.newFixedThreadPool(16);
+        state = GroundState.RUNNING;
         for(Animal a: allAnimals) {
-            new Thread(a).start();
+            if(!a.runnable) {
+                a.runnable = true;
+                new Thread(a).start();
+            }
         }
     }
 
@@ -77,18 +80,6 @@ public class Ground extends JPanel {
         }
     }
 
-    private void paintCalaCrops(Graphics g) {
-        for(Calabash c: calaCrops) {
-            paint(g, c);
-        }
-    }
-
-    private void paintEssenceCrops(Graphics g) {
-        for(Animal a: essenceCrops) {
-            paint(g, a);
-        }
-    }
-
     @Deprecated
     public void paintGrandPa(Graphics g) {
         g.drawImage(grandPa.getImage(), grandPa.getPosition().getX() * size, grandPa.getPosition().getY() * size, null);
@@ -103,12 +94,32 @@ public class Ground extends JPanel {
         g.drawImage(a.getImage(), a.getPosition().getX() * size, a.getPosition().getY() * size, null);
     }
 
+    @Deprecated
+    private void paintCalaCrops(Graphics g) {
+        for(Animal c: calaCrops) {
+            paint(g, c);
+        }
+    }
+
+    @Deprecated
+    private void paintEssenceCrops(Graphics g) {
+        for(Animal a: essenceCrops) {
+            paint(g, a);
+        }
+    }
+
+    private void paint(Graphics g, Crops c) {
+        for(Animal a: c) {
+            paint(g, a);
+        }
+    }
+
     @Override
     public void paint(Graphics g) {
         super.paint(g);
         paintBackGround(g);
-        paintCalaCrops(g);
-        paintEssenceCrops(g);
+        paint(g, calaCrops);
+        paint(g, essenceCrops);
         paint(g, grandPa);
         paint(g, snake);
     }

@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 妖精战队，由蝎子精带领六只小喽啰组成
  */
-public class EssenceCrops extends Crops implements Iterable<Animal> {
+public class EssenceCrops extends Crops {
     private ScorpionEssence scorpionEssence  = ScorpionEssence.getInstance();
     private MinionFactory minionFactory = MinionFactory.getInstance();
     private List<Minion> minions = new ArrayList<>(Arrays.asList(

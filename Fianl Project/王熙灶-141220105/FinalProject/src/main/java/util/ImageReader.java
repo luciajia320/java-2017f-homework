@@ -1,22 +1,17 @@
 package util;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import java.net.URL;
 
 public class ImageReader {
     public static Image getImage(String path) {
-        try {
-            return ImageIO.read(new File("src/main/resources/images/" + path));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        URL url = ImageReader.class.getResource("/images/" + path);
+        return new ImageIcon(url).getImage();
     }
 
     public static ImageIcon getIcon(String path) {
-        return new ImageIcon("src/main/resources/icons/" + path);
+        URL url = ImageReader.class.getResource("/icons/" + path);
+        return new ImageIcon(url);
     }
 }
