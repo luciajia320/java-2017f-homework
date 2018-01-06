@@ -11,9 +11,9 @@
 
 Huluwa 17f-Final 版本是葫芦娃大战的自动化程序，支持存档读档并可回放精彩过程；
 
-![AllIn](https://github.com/challvy/app-2017f-AllIn/raw/master/Screenshots/AllIn.png)
+![Huluwa](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa.png)
 
-**target目录中的Huluwa.jar可直接打开，按空格键即可立即开始多线程战斗**
+**target目录中的Huluwa.jar可直接打开，按空格键即可立即开始多线程战斗，更多界面截图可在网页末尾查看**
 
 ## 项目详情
 
@@ -25,7 +25,7 @@ Huluwa 17f-Final 版本是葫芦娃大战的自动化程序，支持存档读档
 
 ### 状态机
 
-![GuideView](https://github.com/challvy/app-2017f-AllIn/raw/master/Screenshots/GuideView.png)
+![Huluwa](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa-Status.png)
 
 ### 框架
 
@@ -42,7 +42,7 @@ Huluwa 17f-Final 版本是葫芦娃大战的自动化程序，支持存档读档
 * Creature抽象类实现Comparable接口用来对空间生物体进行排序，因为有前后遮挡关系，而实现Runnable接口来进行线程编程；
 * Creature抽象类派生出士兵和平民抽象类；
 
-![GuideView](https://github.com/challvy/app-2017f-AllIn/raw/master/Screenshots/GuideView.png)
+![Huluwa-UML](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa-UML.png)
 
 ### 集合与泛型
 
@@ -102,4 +102,13 @@ IOFile类实现：FileReader与BufferedReader用来读取文件，FileWriter与B
 * 中期根据教学进度，陆续添加功能，缝缝补补；
 * 后期在实现界面与复盘功能的时候，在原来码得自由自在的情况下，遇到不小的冲击，需要对框架进行比较大幅度改变；
 
-> 151220169 郑聪尉
+> 附录
+
+**葫芦娃正大杀四方，打得酣畅淋漓收服了俩妖精，可是小喽啰却发现了葫芦娃简单AI的破绽，直向爷爷奔去！预知后文如何，可查看葫芦娃篇章之功亏一篑！**
+![Huluwa](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/huluwa3.png)
+
+![Huluwa](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa-BadEnding.png)
+
+**还好还好，别忘了者实惠的地盘**
+
+![Huluwa](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa-HappyEnding.png)
