@@ -11,7 +11,7 @@
 
 Huluwa 17f-Final 版本是葫芦娃大战的自动化程序，支持存档读档并可回放精彩过程；
 
-![Huluwa](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa.png)
+![Huluwa0](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa0.png)
 
 **target目录中的Huluwa.jar可直接打开，按空格键即可立即开始多线程战斗，更多界面截图可在网页末尾查看**
 
@@ -25,7 +25,7 @@ Huluwa 17f-Final 版本是葫芦娃大战的自动化程序，支持存档读档
 
 ### 状态机
 
-![Huluwa](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa-Status.png)
+![Huluwa-Status](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa-Status.png)
 
 ### 框架
 
@@ -46,7 +46,7 @@ Huluwa 17f-Final 版本是葫芦娃大战的自动化程序，支持存档读档
 
 ### 集合与泛型
 
-程序用到Vector<>来存储各类角色，如Vector<Creature>存放roles和death，两个容器实时更新存放大小，程序效率会更高。
+程序用到Vector<>来存储各类角色，如Vector<Creature>存放roles和death，两个容器实时增删，程序效率会更高。
 
 ### 多态
 
@@ -84,17 +84,17 @@ IOFile类实现：FileReader与BufferedReader用来读取文件，FileWriter与B
 
 ### 线程安全
 
-每个将角色类中都存有Battle类用来与同一个逻辑控制后台交互，故需添加synchronized关键字；
+每个将角色类中都存有Battle类用来与同一个逻辑控制后台交互，故需添加synchronized和volatile关键字；
 
 ### 单元测试
 
 角色类以葫芦娃为代表进行测试即可。
 
 * testPosition()用来测试位置信息，被测试的方法有: x(), y()；
-* testLive()用来测试生命属性，isLive()，
-* testRole()用来测试isRightRole()
-* testImage()用来测试getImage()
-* testAttack()用来测试isAttacking()
+* testLive()用来测试生命属性，被测试的方法有: isLive()；
+* testRole()用来测试正义或邪恶，被测试的方法有: isRightRole()；
+* testImage()用来测试图片属性，被测试的方法有: getImage()；
+* testAttack()用来测试攻击属性，被测试的方法有: isAttacking()；
 
 ## 总结
 
@@ -105,10 +105,12 @@ IOFile类实现：FileReader与BufferedReader用来读取文件，FileWriter与B
 > 附录
 
 **葫芦娃正大杀四方，打得酣畅淋漓收服了俩妖精，可是小喽啰却发现了葫芦娃简单AI的破绽，直向爷爷奔去！预知后文如何，可查看葫芦娃篇章之功亏一篑！**
-![Huluwa](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/huluwa3.png)
+![Huluwa1](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa1.png)
 
-![Huluwa](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa-BadEnding.png)
+![Huluwa2](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa2.png)
 
-**还好还好，别忘了者实惠的地盘**
+![Huluwa-BadEnding](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa-BadEnding.png)
+
+**还好还好，别忘了这是谁的地盘**
 
 ![Huluwa](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa-HappyEnding.png)
