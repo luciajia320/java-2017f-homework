@@ -17,9 +17,12 @@ public class Field extends JPanel {
     int flag=0;
     int flag2=0;
     int sign1 = 0;
-
     FileOutputStream out;
-    JLabel jl=new JLabel();
+    int battlenum=0;
+    int battle_i=0;
+    String strin="\0";
+    int index=0;
+
     public ArrayList<Position> getPositions(int line) {
         ArrayList<Position> tmpp = new ArrayList<Position>();
         for (int i = (N - HLW_SUM) / 2; i < (N + HLW_SUM) / 2; ++i)
@@ -161,18 +164,18 @@ public class Field extends JPanel {
                     c.setPosition(this.positions.get(i).get(j));
                     x += SPACE;
                 } else if (tmpp.getHolder() instanceof Grandfather) {
-                    c = new Grandfather("🎅",x, y, this, 8);
+                    c = new Grandfather("爷",x, y, this, 8);
                     this.creatures.get(i).set(j,c);
                     this.positions.get(i).get(j).setHolder(c);
                     c.setPosition(this.positions.get(i).get(j));
                     x += SPACE;
                 } else if (tmpp.getHolder() instanceof Monster) {
-                    if (((Monster) tmpp.getHolder()).getname() == "🐛")
-                        c = new Monster("🐛",x, y, this, 9);
-                    else if (((Monster) tmpp.getHolder()).getname() == "🐍")
-                        c = new Monster("🐍",x, y, this, 10);
+                    if (((Monster) tmpp.getHolder()).getname() == "蝎")
+                        c = new Monster("蝎",x, y, this, 9);
+                    else if (((Monster) tmpp.getHolder()).getname() == "蛇")
+                        c = new Monster("蛇",x, y, this, 10);
                     else
-                        c = new Monster("💀",x, y, this, 11);
+                        c = new Monster("喽",x, y, this, 11);
                     this.creatures.get(i).set(j,c);
                     this.positions.get(i).get(j).setHolder(c);
                     c.setPosition(this.positions.get(i).get(j));
@@ -215,7 +218,10 @@ public class Field extends JPanel {
         }
         g.setColor(new Color(25, 150, 150));
         g.setFont(new Font("宋体",Font.BOLD,20));
-        g.drawString("SPACE开始 很抱歉(┬＿┬)由于移动后原位置一直消除不了L键复盘未成功战场记录在out.txt", 0, 650);
+        g.drawString("SPACE开始 L键复盘 满意的战场记录在与src文件夹同一目录下的best.txt ", 0, 630);
+
+        g.drawString("若存在小bug请见谅叉掉再次来过♪(＾∀＾●)ﾉ\"", 0, 680);
+
         if(sign1==1){
             g.setColor(new Color(255, 0, 0));
             //Font font = new Font("Arial",Font.BOLD,12);
@@ -235,6 +241,7 @@ public class Field extends JPanel {
         super.paint(g);
         buildWorld(g);
     }
+
 
     class TAdapter extends KeyAdapter {
 
@@ -300,7 +307,6 @@ public class Field extends JPanel {
                             this.cancel();
 
                             //sign1 0未开始 1葫芦娃输了 2葫芦娃赢了
-
                            //     System.out.println("葫芦娃赢了");
                             try {
                                 out.close();
@@ -322,22 +328,37 @@ public class Field extends JPanel {
                     }
 
                 }
-                System.out.println(sign1);
                 repaint();
 
             }
             else if(key==KeyEvent.VK_L){
-                String strin="\0";
-
-                File file=new File("out.txt");
+                for (int i = 0; i < N; ++i)
+                    for (int j = 0; j < N; ++j) {
+                        creatures.get(i).get(j).setexist(false);
+                    }
+             /*   try {
+                    out.close();
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }*/
+                JFileChooser fd = new JFileChooser();
+                fd.showOpenDialog(null);
+               // File file=new File("out.txt");
+                File file=fd.getSelectedFile();
+                if(!file.exists())
+                    System.exit(0);
                 try {
+                    strin="\0";
                     FileInputStream in = new FileInputStream(file);
+
                     int size=in.available();
                     byte[] buff=new byte[size];
                     in.read(buff);
                     in.close();
                     strin=new String(buff,"UTF-8");
-                    System.out.println(strin);
+                  //  System.out.println(strin);
                 }
                 catch (FileNotFoundException e1)
                 {
@@ -349,32 +370,128 @@ public class Field extends JPanel {
                 }
 
               //  initfield();
-                System.out.println("我很抱歉，由于存在bug(移动时生物体可以移入新位置 但原位置新移入Blank生物体始终不成功)复盘难以实现");
-                System.out.println("战场移动记录在out.txt");
+     //           System.out.println("我很抱歉，由于存在bug(移动时生物体可以移入新位置 但原位置新移入Blank生物体始终不成功)复盘难以实现");
+     //           System.out.println("战场移动记录在out.txt");
+
+                int len=strin.length();
+                battlenum=0;
+                for (int i=0;i<len;++i){
+                    if(strin.charAt(i)=='\n')
+                        battlenum++;
+                }
+                //System.out.println(battlenum);
+                index=0;
+
+                    //读入棋盘了
+                battle_i=0;
+                Timer timer=new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        index = recover(strin, index);
+                        battle_i += 1;
+                        repaint();
+                        if(battle_i==battlenum)
+                            this.cancel();
+                    }
+                },0,1500);
             }
         }
     }
+   public int recover(String strin,int index){
+       ArrayList<ArrayList<Creature>>creatures_new = new ArrayList<ArrayList<Creature>>();
+       ArrayList<ArrayList<Position>>positions_new = new ArrayList<ArrayList<Position>>();
+       for (int m = 0; m < N; ++m) {
+           positions_new.add(new ArrayList<Position>());
+           creatures_new.add(new ArrayList<Creature>());
+       }
+       for (int m = 0; m < N; ++m)
+           for (int n = 0; n < N; ++n) {
+               creatures_new.get(m).add(new Blank(m,n));
+               positions_new.get(m).add(new Position(m, n));/*[i][j]*/
+               creatures_new.get(m).get(n).setPosition(positions_new.get(m).get(n));
+           }
+       for (int m=index; strin.charAt(m)!='\n';++m,index=m){
+           int sx=0,sy=0;
+           String tx="";
+           String ty="";
+           int k=m;
+           m += 2;
+           tx+= strin.charAt(m);
+           if (strin.charAt(m + 1) != ' ') {
+               tx+= strin.charAt(m + 1);
+               m += 3;
+           } else {
+               m += 2;
+           }
+           ty+= strin.charAt(m);
+           if (strin.charAt(m + 1) != ' '&&strin.charAt(m+1)<'9'&&strin.charAt(m+1)>='0') {
+               ty+= strin.charAt(m + 1);
+
+               m += 1;
+           }
+           sx=char2int(tx);
+           sy=char2int(ty);
+           Creature c=new Blank("空",0,0,this);
+           if(strin.charAt(k)=='赤')
+                c = new HuLuWa("赤",sy*50+125,sx*50, this, 1);
+           if(strin.charAt(k)=='橙')
+               c = new HuLuWa("橙",sy*50+125,sx*50, this, 2);
+           if(strin.charAt(k)=='黄')
+               c = new HuLuWa("黄",sy*50+125,sx*50, this, 3);
+           if(strin.charAt(k)=='绿')
+               c = new HuLuWa("绿",sy*50+125,sx*50, this, 4);
+           if(strin.charAt(k)=='青')
+               c = new HuLuWa("青",sy*50+125,sx*50, this, 5);
+           if(strin.charAt(k)=='蓝')
+               c = new HuLuWa("蓝",sy*50+125,sx*50, this, 6);
+           if(strin.charAt(k)=='紫')
+               c = new HuLuWa("紫",sy*50+125,sx*50, this, 7);
+           if(strin.charAt(k)=='爷')
+               c = new Grandfather("爷",sy*50+125,sx*50, this, 8);
+           if(strin.charAt(k)=='蝎')
+               c = new Monster("蝎",sy*50+125,sx*50, this, 9);
+           if(strin.charAt(k)=='蛇')
+               c = new Monster("蛇",sy*50+125,sx*50, this, 10);
+           if(strin.charAt(k)=='喽')
+               c = new Monster("喽",sy*50+125,sx*50, this, 11);
+           creatures_new.get(sx).set(sy,c);
+           positions_new.get(sx).get(sy).setHolder(c);
+           c.setPosition(positions_new.get(sx).get(sy));
+
+       }
+       index+=1;
+       creatures=creatures_new;
+       positions=positions_new;
+
+       return index;
+   }
+    public int char2int(String c) {
+        int n=0;
+        for (int i=0;i<c.length();++i)
+            n=10*n+(c.charAt(i)-'0');
+        return n;
+    }
+
     public void record(){
         flag=0;
         flag2=0;
         byte[] buff=new byte[]{};
-        String aa="\0";
+        String aa="";
         for (int i = 0; i < 15; ++i) {
             for (int j = 0; j < 15; ++j) {
-                if( !(creatures.get(i).get(j) instanceof Blank) ){
+                if( !(creatures.get(i).get(j).getPosition().getHolder() instanceof Blank) ){
                     if(creatures.get(i).get(j).exist)
-                        aa+=creatures.get(i).get(j).getname()+"活"+i+"\t"+j+"\t";
+                        aa+=creatures.get(i).get(j).getname()+"活"+i+" "+j;
                     else
-                        aa+=creatures.get(i).get(j).getname()+"死"+i+"\t"+j+"\t";
+                        aa+=creatures.get(i).get(j).getname()+"死"+i+" "+j;
                 }
-                else
-                    aa+="         \t";
             }
-            aa+="\n";
+        //    aa+="\n";
         //    System.out.println();
         }
-        aa+="-----------\n";
-   //     System.out.println(aa);
+        aa+="\n";
+     //   System.out.println(aa);
         buff=aa.getBytes();
 
         try{

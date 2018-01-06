@@ -116,14 +116,14 @@ public class Monster extends Creature implements Runnable{
                  }
              }
          }
-
+        this.field.creatures.get(this.y() / 50).set((this.x() - 125) / 50,new Blank("空",this.x(), this.y(),this.field));
+        this.field.positions.get(this.y() / 50).get((this.x() - 125) / 50).setHolder(new Blank("空",this.x(), this.y(),this.field));
+        this.field.creatures.get(this.y() / 50).get((this.x() - 125) / 50).setPosition(this.field.positions.get(this.y() / 50).get((this.x() - 125) / 50));
         this.setX(nx);
         this.setY(ny);
         this.setPosition(new Position(ny,nx));
 
-        this.field.creatures.get(this.y() / 50).set((this.x() - 125) / 50,new Blank("空",this.x(), this.y(),this.field));
-        this.field.positions.get(this.y() / 50).get((this.x() - 125) / 50).setHolder(new Blank("空",this.x(), this.y(),this.field));
-        this.field.creatures.get(this.y() / 50).get((this.x() - 125) / 50).setPosition(this.field.positions.get(this.y() / 50).get((this.x() - 125) / 50));
+
 
         this.field.creatures.get(ny/50).set((nx-125)/50,this);
         this.field.positions.get(ny/50).get((nx-125)/50).setHolder(this);

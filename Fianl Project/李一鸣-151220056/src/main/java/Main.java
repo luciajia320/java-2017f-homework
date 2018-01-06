@@ -44,10 +44,10 @@ public class Main extends JFrame{
 
         ArrayList<Monster>louluos = new ArrayList<Monster>();
         for (int i = 0; i < LL_SUM; i++) {
-            louluos.add ( new Monster("💀"));
+            louluos.add ( new Monster("喽"));
         }
-        Monster xiezijing = new Monster("🐛");
-        Monster shejing = new Monster("🐍");
+        Monster xiezijing = new Monster("蝎");
+        Monster shejing = new Monster("蛇");
         Queue monsterqueue = new Queue(MON_SUM);         //生成妖怪队
 
         monsterqueue.JoinIn(xiezijing);
@@ -56,7 +56,7 @@ public class Main extends JFrame{
         monsterqueue.JoinIn(shejing);
         new CraneWing().format(monsterqueue);    //妖怪鹤翼形
         field.putIn(monsterqueue);
-        Creature grandfather = new Grandfather("🎅");
+        Creature grandfather = new Grandfather("爷");
         Queue audiencequeue = new Queue(1);  //观战助威队
         audiencequeue.JoinIn(grandfather);
         new Audience().format(audiencequeue);

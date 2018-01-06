@@ -109,20 +109,25 @@ public class HuLuWa extends Creature implements Runnable{
                  }
              }
          }
-        this.setX(nx);
-        this.setY(ny);
-        this.setPosition(new Position(ny,nx));
-//消除原来位置  一直消除不了 很难受！！！！
         Blank b=new Blank("空",this.x(), this.y(),this.field);
         this.field.creatures.get(this.y() / 50).set((this.x() - 125) / 50,b);
         this.field.positions.get(this.y() / 50).get((this.x() - 125) / 50).setHolder(b);
         this.field.creatures.get(this.y() / 50).get((this.x() - 125) / 50).setPosition(this.field.positions.get(this.y() / 50).get((this.x() - 125) / 50));
+
+        this.setX(nx);
+        this.setY(ny);
+        this.setPosition(new Position(ny,nx));
+
+
+
+//消除原来位置  一直消除不了 很难受！！！！
+
      //   b.setPosition(this.field.positions.get(this.y() / 50).get((this.x() - 125) / 50));
+
 //移到新位置
         this.field.creatures.get(ny/50).set((nx-125)/50,this);
         this.field.positions.get(ny/50).get((nx-125)/50).setHolder(this);
         this.setPosition(this.field.positions.get(ny/50).get((nx-125)/50));
-
     //    System.out.println(this.field.creatures.get(ny/50).get((nx-125)/50));
 
     }
