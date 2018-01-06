@@ -1,5 +1,6 @@
 /**
  * Cheerer是一种生物，可以为自己所属的势力加油助威
+ * 只能站在原地
  * 爷爷和蛇精属于这个类
  */
 package Characters;
@@ -7,12 +8,14 @@ package Characters;
 import java.awt.*;
 
 public class Cheerer extends Creature implements CheeringGroup {
-    private String name;
+    protected String name;
 
     public Cheerer(String name){
         super();
         this.name = name;
     }
+
+
     @Override
     protected void prepareRenderComponent() {
 
@@ -35,7 +38,9 @@ public class Cheerer extends Creature implements CheeringGroup {
 
     @Override
     protected void doThreadOperations() {
-
+        if (timerComponent.timesCount == 0) { // per second
+            cheerUp();
+        }
     }
 
     @Override

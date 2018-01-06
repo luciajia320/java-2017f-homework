@@ -89,7 +89,7 @@ public abstract class Creature implements Paintable, Runnable{
         synchronized (Creature.class) {
             for(Vector2 positionCoordinate: positionCoordinates) {
                 Position position = troop.getPositionAt(positionCoordinate.getX(), positionCoordinate.getY());
-                if (position.getHolder() == null) { // 候选的position没有被占据，可以移动
+                if (position != null && position.getHolder() == null) { // 候选的position没有被占据，可以移动
                     moveTo(position);
                     return true;
                 }
@@ -173,6 +173,12 @@ public abstract class Creature implements Paintable, Runnable{
         if (renderComponent != null) {
             renderComponent.paintInGraphics(g, positionWidth, positionHeight);
         }
+
+        extraPaintInGraphics(g, positionWidth, positionHeight);
+    }
+
+    protected void extraPaintInGraphics(Graphics g, int positionWidth, int positionHeight) {
+
     }
 
     public void setPosition(Position position) {   //  只改变position的值，但是不会处理相应的holder

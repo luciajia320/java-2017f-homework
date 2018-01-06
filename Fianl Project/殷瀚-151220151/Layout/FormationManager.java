@@ -99,14 +99,14 @@ public class FormationManager {
     };
 
     private static Vector2[] LeaderCoordinates = {
-            new Vector2(2, 0),
-            new Vector2(2, 0),
-            new Vector2(2, 0),
-            new Vector2(2, 1),
-            new Vector2(2, 0),
-            new Vector2(2, 0),
-            new Vector2(2, 0),
-            new Vector2(2, 0)
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 1),
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 0)
     };
     private static Vector2[] CheererCoordinates = {
             new Vector2(2, 5),

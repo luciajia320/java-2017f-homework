@@ -117,6 +117,7 @@ public class Troop {
 
     public void addOneCreature(Creature someCreature){
         creatures.add(someCreature);
+        someCreature.setPosition(this.field.getPositions()[someCreature.getPosition().getX()][someCreature.getPosition().getY()]);
         someCreature.setTroop(this);
     }
 

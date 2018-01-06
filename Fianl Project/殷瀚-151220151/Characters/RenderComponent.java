@@ -9,9 +9,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RenderComponent extends Component {
+    private ImageInfo defaultImageInfo = new ImageInfo("Image/none.png");
+
     private class ImageInfo {
         private Image image;
-        private int imageWidth, imageHeight, gestureNum;
+        private int imageWidth, imageHeight, gestureNum = 1;
 
         ImageInfo(Image image, int imageWidth, int imageHeight, int gestureNum ) {
             this.image = image;
@@ -20,23 +22,21 @@ public class RenderComponent extends Component {
             this.gestureNum = gestureNum;
         }
 
+        ImageInfo(String location) {
+            URL loc = this.getClass().getClassLoader().getResource(location);
+            ImageIcon imageIcon = new ImageIcon(loc);
+            image = imageIcon.getImage();
+            imageWidth = imageIcon.getIconWidth();
+            imageHeight = imageIcon.getIconHeight();
+            gestureNum = 1;
+        }
+
     }
     private Map<ImageType, ImageInfo> images = new HashMap<ImageType, ImageInfo>() {{
         for (ImageType imageType: ImageType.values()) {
-            put(imageType, null);
+            put(imageType, defaultImageInfo);
         }
     }};
-    //private ImageInfo currentImageInfo;
-    //ImageInfo[] images = new ImageInfo[4];
-//    private Image movingImage;
-//    private int movingImageWidth, movingImageHeight, movingGestureNum;
-
-//    private Image healthBarImage, healthBarFillImage;
-//    private Image tombImage;
-//    private Image idleImage;
-//
-//    private Image attackImage;
-//    private int attackImageWidth, attackImageHeight, attackGestureNum;
 
     private int gestureCount = 0, currentGestureNum = 1; // 根据这个数值选择图片中的一部分用来显示，从而显示出动态的图像。
     private Vector2 animationProgressStartCoordinate = new Vector2();
@@ -79,6 +79,7 @@ public class RenderComponent extends Component {
             int height = imageIcon.getIconHeight();
             images.put(imageType, new ImageInfo(image, width, height, gestureNumber));
         } catch (NullPointerException e) {
+            //e.printStackTrace();
             System.out.println("图片的路径名可能有错！");
         } catch (Exception e) {
             System.out.println("为 " + creatureClient + " 初始化Image失败！");
@@ -115,6 +116,12 @@ public class RenderComponent extends Component {
             int sourceRightBottomX = (gestureCount+1)*gestureImageWidth;
             int sourceRightBottomY = gestureImageHeight;
 
+            // 血条
+            if (creatureClient.alive) {
+                g.drawImage(images.get(ImageType.HEALTH_BAR).image, leftTopX, leftTopY, positionWidth, 10, null);
+                g.drawImage(images.get(ImageType.HEALTH_BAR_FILL).image, leftTopX, leftTopY, positionWidth * creatureClient.currentHealth / creatureClient.maxHealth, 10, null);
+            }
+
             switch (creatureClient.faceDirection) {
                 case LEFT: // 如果朝向左边，交换左上角和右下角的x坐标，使得显示的是水平翻转后的图片
                     g.drawImage(imageInfo.image,
@@ -139,10 +146,6 @@ public class RenderComponent extends Component {
             }
 
 
-            if (creatureClient.alive) {
-                g.drawImage(images.get(ImageType.HEALTH_BAR).image, leftTopX, leftTopY, positionWidth, 10, null);
-                g.drawImage(images.get(ImageType.HEALTH_BAR_FILL).image, leftTopX, leftTopY, positionWidth * creatureClient.currentHealth / creatureClient.maxHealth, 10, null);
-            }
 
             if(!creatureClient.position.isInSomeField()) {
                 // 说明这个生物已经不在field中，可能出现了线程不安全的问题
@@ -150,10 +153,8 @@ public class RenderComponent extends Component {
             }
             //throw new Exception();
         } catch (NullPointerException e) {
-            //e.printStackTrace();
-            System.out.println(creatureClient.getClass() + ":\n" +
-                    "\talive:" + creatureClient.alive + " state: " + creatureClient.state +
-                    "\n可能没有设置该状态下的图片。");
+            // 有未设置的图片
+            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -21,11 +21,11 @@ public class Huluwa extends Creature implements Comparable {
     }
 
 
-    public Huluwa(COLOR color, SENIORITY seiority) {
+    public Huluwa(COLOR color, SENIORITY seniority) {
         super();
 
         this.color = color;
-        this.seniority = seiority;
+        this.seniority = seniority;
 
         this.combatComponent.setAttackValue(20);
     }

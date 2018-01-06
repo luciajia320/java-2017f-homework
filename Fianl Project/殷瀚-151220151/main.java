@@ -1,5 +1,4 @@
-import Characters.Huluwa;
-import Characters.Louluo;
+import Characters.*;
 import Layout.Troop;
 import Field.Field;
 import Types.COLOR;
@@ -20,8 +19,14 @@ public class main {
         // 小喽啰
         Louluo[] lackeys = new Louluo[7];
         for (int i = 0; i < lackeys.length; i++) {
-            lackeys[i] = new Louluo(TianGan.values()[i]);
+            lackeys[i] = new Louluo(TianGan.values()[i%TianGan.values().length]);
         }
+        // 爷爷
+        Grandpa YeYe = new Grandpa("爷爷");
+        // 蛇精
+        SnakeMonster SheJing = new SnakeMonster("蛇精");
+        // 蝎子精
+        Leader XieZiJing = new Leader("蝎子精");
 
         /* 初始化各方势力 */
         Troop powerOfHuluwa = new Troop("葫芦娃", 2, 0);
@@ -32,7 +37,10 @@ public class main {
 
         /* 所有人物加入势力 */
         powerOfHuluwa.addCreatures(HuluBrothers);
+        powerOfHuluwa.addOneCreature(YeYe);
         powerOfYaojing.addCreatures(lackeys);
+        powerOfYaojing.addOneCreature(SheJing);
+        powerOfYaojing.addOneCreature(XieZiJing);
 
         /* 各方势力宣战 */
         powerOfHuluwa.declareWarTo(powerOfYaojing);
