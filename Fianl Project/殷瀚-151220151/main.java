@@ -18,14 +18,14 @@ public class main {
             HuluBrothers[i] = new Huluwa(COLOR.values()[i], SENIORITY.values()[i]);
         }
         // 小喽啰
-        Louluo[] lackeys = new Louluo[1];
+        Louluo[] lackeys = new Louluo[7];
         for (int i = 0; i < lackeys.length; i++) {
             lackeys[i] = new Louluo(TianGan.values()[i]);
         }
 
         /* 初始化各方势力 */
         Troop powerOfHuluwa = new Troop("葫芦娃", 2, 0);
-        Troop powerOfYaojing = new Troop("妖精", 2, 6);
+        Troop powerOfYaojing = new Troop("妖精", 4, 6);
         /* 各方势力登场 */
         field.addTroop(powerOfHuluwa);
         field.addTroop(powerOfYaojing);

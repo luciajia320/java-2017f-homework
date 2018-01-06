@@ -125,6 +125,11 @@ public class Field extends JPanel{
                         troop.startActing();
                     }
                     break;
+                case KeyEvent.VK_E:
+                    for(Troop troop: troops) {
+                        troop.pauseActing();
+                    }
+                    break;
                 case KeyEvent.VK_T:
                     repaint();
                     break;

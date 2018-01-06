@@ -12,10 +12,9 @@ import Types.FormationName;
 import Types.Vector2;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Troop {
     private String campName;
@@ -127,12 +126,21 @@ public class Troop {
         }
     }
 
+    List<Thread> threads = new LinkedList<>();
     public void startActing() {
         for(Creature creature: creatures) {
-            new Thread(creature).start();
+            Thread thread = new Thread(creature);
+            threads.add(thread);
+            thread.start();
         }
+
     }
 
+    public void pauseActing() {
+        for(Thread thread: threads) {
+            thread.interrupt();
+        }
+    }
     private void arrange(){
         if(this.field == null) {
             System.out.println("Troop.arrange(): 该Troop未加入Field.");
@@ -182,10 +190,13 @@ public class Troop {
         return creatures;
     }
 
-    public List<Creature> getHostileCreatures() {
+    public List<Creature> getAliveHostileCreatures() {
         List<Creature> hostileCreatures = new LinkedList<>();
         for(Troop troop: hostileTroops) {
-            hostileCreatures.addAll(troop.getCreatures());
+            hostileCreatures.addAll(
+                    troop.getCreatures().stream().filter(
+                            (creature)->creature.alive
+                    ).collect(Collectors.toList()));
         }
         return hostileCreatures;
     }

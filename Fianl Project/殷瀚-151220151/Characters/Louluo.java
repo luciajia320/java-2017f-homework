@@ -3,13 +3,11 @@
  */
 package Characters;
 
-import Field.Position;
 import Types.TianGan;
-import Types.Vector2;
 
 import javax.swing.*;
-import java.awt.*;
 import java.net.URL;
+import java.util.Random;
 
 public class Louluo extends Creature{
 
@@ -20,14 +18,24 @@ public class Louluo extends Creature{
 
         this.codeName = codeName;
 
+        this.combatComponent.setAttackValue(10);
     }
     @Override
-    protected void prepareRenderDelegate() {
-        URL loc = this.getClass().getClassLoader().getResource("Image/hama.png");
-        renderComponent.image = new ImageIcon(loc).getImage();
-        renderComponent.imageSizeX = 426;
-        renderComponent.imageSizeY = 69;
-        renderComponent.gestureNum = 6;
+    protected void prepareRenderComponent() {
+        try {
+            Random random = new Random();
+            int louluoKindNum = 2;
+            int choice = random.nextInt(louluoKindNum);
+
+            renderComponent.prepare(RenderComponent.ImageType.MOVING, "Image/louluo" + choice + "_moving.png", 6);
+            renderComponent.prepare(RenderComponent.ImageType.HEALTH_BAR, "Image/healthBar.png", 1);
+            renderComponent.prepare(RenderComponent.ImageType.HEALTH_BAR_FILL, "Image/healthBarFill.png", 1);
+            renderComponent.prepare(RenderComponent.ImageType.TOMB, "Image/tomb.png", 1);
+            renderComponent.prepare(RenderComponent.ImageType.IDLE, "Image/louluo" + choice + "_idle.png", 1);
+            renderComponent.prepare(RenderComponent.ImageType.ATTACKING, "Image/louluo" + choice + "_attack.png", 3);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     @Override
     public void report() {
@@ -37,25 +45,7 @@ public class Louluo extends Creature{
     @Override
     protected void doThreadOperations() {
         try{
-            if (timerComponent.timesCount == 0) { // per second
-                if (navigationDelegate != null) {
-                    // 先得到要去的position
-                    Position destination = navigationDelegate.getPositionOfNearestHostileCreature();
-                    // 然后尝试往这个方向移动
-                    Vector2 currentCoordinate = this.position.getCoordinate();
-                    isMoving = attemptToMoveTo(navigationDelegate.getPossibleNextPositionVectors(destination));
-                    if (isMoving) {
-                        remainMoveAnimationTimes = 10; // 移动动画持续500毫秒
-                        renderComponent.startMovingProgressWithDuration(remainMoveAnimationTimes, currentCoordinate);
-                    }
-                }
-            }
-            if (timerComponent.timesCount%2 == 0) {
-                if (isMoving) {
-                    renderComponent.changeToNextMovingGesture();
-                }
-            }
-            //Thread.sleep(1000);
+            doBattleOperations();
         } catch (NullPointerException e) {
             e.printStackTrace();
         } catch (Exception e) {

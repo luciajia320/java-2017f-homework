@@ -14,7 +14,7 @@ public class Leader extends Creature {
         this.name = name;
     }
     @Override
-    protected void prepareRenderDelegate() {
+    protected void prepareRenderComponent() {
 
     }
 

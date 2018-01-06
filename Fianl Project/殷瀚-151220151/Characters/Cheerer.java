@@ -14,7 +14,7 @@ public class Cheerer extends Creature implements CheeringGroup {
         this.name = name;
     }
     @Override
-    protected void prepareRenderDelegate() {
+    protected void prepareRenderComponent() {
 
     }
 

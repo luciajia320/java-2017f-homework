@@ -5,17 +5,24 @@ import Types.Vector2;
 
 import java.awt.*;
 
+enum Direction {
+    LEFT, RIGHT, UP, DOWN
+}
 public abstract class Creature implements Paintable, Runnable{
 
     protected Position position;
     //protected String campName;  //  每个生物有其所属的阵营
     protected Troop troop;
     protected RenderComponent renderComponent;
-    protected NavigationDelegate navigationDelegate;// 寻路组件，在需要寻路时向其索要目的地等信息
+    protected NavigationComponent navigationComponent;// 寻路组件，在需要寻路时向其索要目的地等信息
     protected TimerComponent timerComponent;
+    protected CombatComponent combatComponent;
 
-    protected int remainMoveAnimationTimes = 0;
-    protected boolean isMoving = false; // 用于实现连续移动动画
+    protected int remainActionAnimationClockCircles = 0;
+    CreatureState state = CreatureState.IDLE;
+    public boolean alive = true;
+    public int currentHealth = 100, maxHealth = 100;
+    Direction faceDirection = Direction.RIGHT;
 
     public abstract void report();
     public void act(){}
@@ -24,12 +31,13 @@ public abstract class Creature implements Paintable, Runnable{
 
         position = new Position(0, 0, null);
         renderComponent = new RenderComponent(this);
-        prepareRenderDelegate();
-        navigationDelegate = new NavigationDelegate(this);
+        prepareRenderComponent();
+        navigationComponent = new NavigationComponent(this);
         timerComponent = new TimerComponent(this);
+        combatComponent = new CombatComponent(this);
     }
 
-    protected abstract void prepareRenderDelegate();
+    protected abstract void prepareRenderComponent();
 
     public void moveTo(Position position) {
 
@@ -50,6 +58,9 @@ public abstract class Creature implements Paintable, Runnable{
             position.getHolder().moveTo((Position) null);
         }
 
+        if (this.position != null && position !=null) {
+            faceDirection = (position.getY() - this.position.getY()) > 0 ? Direction.RIGHT : Direction.LEFT;
+        }
         this.position = position;
         position.setHolder(this);
     }
@@ -72,6 +83,9 @@ public abstract class Creature implements Paintable, Runnable{
         /*
         尝试移动到某一组坐标上的position，只有找到一个没有被占据的position后，才真的会移动，否则不动。
          */
+        if (positionCoordinates == null) {
+            return false;
+        }
         synchronized (Creature.class) {
             for(Vector2 positionCoordinate: positionCoordinates) {
                 Position position = troop.getPositionAt(positionCoordinate.getX(), positionCoordinate.getY());
@@ -89,13 +103,7 @@ public abstract class Creature implements Paintable, Runnable{
         try {
             while (!Thread.interrupted()) {
                 doThreadOperations();
-                if (remainMoveAnimationTimes > 0) {
-                    remainMoveAnimationTimes --;
-                    renderComponent.updateMovingProgress();
-                    if (remainMoveAnimationTimes == 0)
-                        isMoving = false;
-                }
-                troop.askFieldToRepaint();
+                updatePaintings();
 
                 timerComponent.tick();
             }
@@ -107,7 +115,59 @@ public abstract class Creature implements Paintable, Runnable{
             e.printStackTrace();
         }
     }
+
+    protected void doBattleOperations() {
+        if (alive) {
+            if (timerComponent.timesCount == 0) { // per second
+                // 先判断是否有敌人可以攻击，若没有，则寻路
+                if (state == CreatureState.IDLE && combatComponent != null) {
+                    Position destination = navigationComponent.getPositionOfNearestAliveHostileCreature();
+                    if (destination != null && Vector2.ManhattanDistance(destination.getCoordinate(), this.position.getCoordinate()) == 1) {
+                        if (destination.getHolder() != null && destination.getHolder().alive) {
+                            combatComponent.attack(destination.getHolder());
+                            state = CreatureState.ATTACKING;
+                            remainActionAnimationClockCircles = 10; // 攻击动画持续500毫秒
+                            Vector2 currentCoordinate = this.position.getCoordinate();
+                            renderComponent.startAnimationProgressWithDuration(remainActionAnimationClockCircles, RenderComponent.ImageType.ATTACKING, currentCoordinate);
+                        }
+                    }
+                }
+                if (state == CreatureState.IDLE && navigationComponent != null) {
+                    // 先得到要去的position
+                    Position destination = navigationComponent.getPositionOfNearestAliveHostileCreature();
+                    // 然后尝试往这个方向移动
+                    Vector2 currentCoordinate = this.position.getCoordinate();
+                    boolean isMoving = attemptToMoveTo(navigationComponent.getPossibleNextPositionVectors(destination));
+                    if (isMoving) {
+                        state = CreatureState.MOVING;
+                        remainActionAnimationClockCircles = 10; // 移动动画持续500毫秒
+                        renderComponent.startAnimationProgressWithDuration(remainActionAnimationClockCircles, RenderComponent.ImageType.MOVING, currentCoordinate);
+                    }
+
+                }
+
+            }
+        }
+        if (timerComponent.timesCount%2 == 0) {
+            renderComponent.changeToNextGesture();
+//            if (state == CreatureState.MOVING) {
+//                renderComponent.changeToNextGesture();
+//            }
+        }
+    }
     protected abstract void doThreadOperations();
+    private final void updatePaintings() {
+        if (remainActionAnimationClockCircles > 0) {
+            remainActionAnimationClockCircles--;
+            renderComponent.updateMovingProgress();
+        }
+        if (remainActionAnimationClockCircles <= 0) {
+            state = CreatureState.IDLE;
+            renderComponent.resetMovingProgress();
+        }
+
+        troop.askFieldToRepaint();
+    }
 
     public final void paintInGraphics(Graphics g, int positionWidth, int positionHeight) {
         if (renderComponent != null) {

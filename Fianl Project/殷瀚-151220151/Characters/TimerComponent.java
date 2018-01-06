@@ -1,7 +1,6 @@
 package Characters;
 
-public class TimerComponent {
-    private Creature creatureClient;
+public class TimerComponent extends Component {
 
     private static final int timeInterval = 50;
     private int millisecondCount = 0;

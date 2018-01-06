@@ -1,12 +1,9 @@
 package Characters;
 
-import Field.Position;
 import Types.COLOR;
 import Types.SENIORITY;
-import Types.Vector2;
 
 import javax.swing.*;
-import java.awt.*;
 import java.net.URL;
 
 public class Huluwa extends Creature implements Comparable {
@@ -30,15 +27,20 @@ public class Huluwa extends Creature implements Comparable {
         this.color = color;
         this.seniority = seiority;
 
-
+        this.combatComponent.setAttackValue(20);
     }
     @Override
-    protected void prepareRenderDelegate() {
-        URL loc = this.getClass().getClassLoader().getResource("Image/xiaojingang.png");
-        renderComponent.image = new ImageIcon(loc).getImage();
-        renderComponent.imageSizeX = new ImageIcon(loc).getIconWidth();
-        renderComponent.imageSizeY = new ImageIcon(loc).getIconHeight();
-        renderComponent.gestureNum = 6;
+    protected void prepareRenderComponent() {
+        try {
+            renderComponent.prepare(RenderComponent.ImageType.MOVING, "Image/hero_moving.png", 6);
+            renderComponent.prepare(RenderComponent.ImageType.HEALTH_BAR, "Image/healthBar.png", 1);
+            renderComponent.prepare(RenderComponent.ImageType.HEALTH_BAR_FILL, "Image/healthBarFill.png", 1);
+            renderComponent.prepare(RenderComponent.ImageType.TOMB, "Image/tomb.png", 1);
+            renderComponent.prepare(RenderComponent.ImageType.ATTACKING, "Image/hero_attack.png", 4);
+            renderComponent.prepare(RenderComponent.ImageType.IDLE, "Image/hero_idle.png", 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -50,31 +52,7 @@ public class Huluwa extends Creature implements Comparable {
     @Override
     protected void doThreadOperations() {
         try {
-
-
-            if (timerComponent.timesCount == 0) { // per second
-                if (navigationDelegate != null) {
-                    // 先得到要去的position
-                    Position destination = navigationDelegate.getPositionOfNearestHostileCreature();
-                    // 然后尝试往这个方向移动
-                    Vector2 currentCoordinate = this.position.getCoordinate();
-                    isMoving = attemptToMoveTo(navigationDelegate.getPossibleNextPositionVectors(destination));
-                    if (isMoving) {
-                        remainMoveAnimationTimes = 10; // 移动动画持续500毫秒
-                        renderComponent.startMovingProgressWithDuration(remainMoveAnimationTimes, currentCoordinate);
-                    }
-
-                }
-            }
-
-            if (timerComponent.timesCount%2 == 0) {
-                if (isMoving) {
-                    renderComponent.changeToNextMovingGesture();
-                }
-            }
-
-
-            //Thread.sleep(1000);
+            doBattleOperations();
         } catch (NullPointerException e) {
             e.printStackTrace();
         } catch (Exception e) {
