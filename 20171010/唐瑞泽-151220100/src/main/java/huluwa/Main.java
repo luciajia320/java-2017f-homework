@@ -1,6 +1,7 @@
 /**
  * Created by tangruize on 10/16/17.
  */
+package huluwa;
 public class Main {
     public static void main(String[] args) {
         Battle battle = new Battle();

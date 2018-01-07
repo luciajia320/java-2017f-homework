@@ -1,3 +1,4 @@
+package huluwa;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class Battle {
     /* contains all creatures;
      * 0 for grandpa, 1~7 for calabash brothers, 8 for scorpion king and others for lackeys
      */
-    private List<Creature> creatures = new ArrayList<>();
+    private List<Creature> creatures = new ArrayList<Creature>();
 
     // creatures num
     private final int NUM = 28;
