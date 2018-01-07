@@ -11,6 +11,22 @@ public class Grandpa extends Cheerer {
         renderComponent.prepare(RenderComponent.ImageType.IDLE, "Image/grandpa_idle.png", 1);
         renderComponent.prepare(RenderComponent.ImageType.TOMB, "Image/tomb.png", 1);
         renderComponent.prepare(RenderComponent.ImageType.HEALTH_BAR, "Image/healthBar.png", 1);
+        // 文字气泡
+        renderComponent.prepare(RenderComponent.ImageType.TALK_BUBBLE, "Image/talk_bubble_blue.png", 1);
 
+    }
+
+    @Override
+    public String initInfo() {
+        return "Grandpa;" + name + ";";
+    }
+
+    @Override
+    public String toString() {
+        if (alive) {
+            return "grandpa_idle";
+        } else {
+            return "tomb";
+        }
     }
 }

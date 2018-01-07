@@ -2,7 +2,7 @@ package Layout;
 
 import Characters.Creature;
 import Characters.Huluwa;
-import Field.Position;
+import Base.Position;
 import Types.COLOR;
 import Types.SENIORITY;
 

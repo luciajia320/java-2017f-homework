@@ -1,7 +1,7 @@
 package Layout;
 
 import Characters.Comparable;
-import Field.Position;
+import Base.Position;
 
 public class BubbleSorter implements Sorter {
     @Override

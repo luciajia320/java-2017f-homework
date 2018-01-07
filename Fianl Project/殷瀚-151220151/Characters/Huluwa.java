@@ -64,11 +64,28 @@ public class Huluwa extends Creature implements Comparable {
 
     @Override
     public String toString(){
-        return this.seniority.toString()
-                + "(" + this.color.toString() + ")@"
-                + this.position.getX() + "," + this.position.getY()
-                + ";";
+        if (alive) {
+            switch (state) {
+                case MOVING:return "hero_moving";
+                case ATTACKING:return "hero_attack";
+                case IDLE:
+                default:return "hero_idle";
+            }
+        } else {
+            return "tomb";
+        }
+
+//        return this.seniority.toString()
+//                + "(" + this.color.toString() + ")@"
+//                + this.position.getX() + "," + this.position.getY()
+//                + ";";
     }
+
+    @Override
+    public String initInfo() {
+        return "Huluwa;" + this.color.toString() + ";"  + this.seniority.toString() + ";";
+    }
+
 
     @Override
     public boolean biggerThan(Comparable brother){

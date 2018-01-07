@@ -1,4 +1,4 @@
-package Field;
+package Base;
 
 import Characters.Creature;
 import Types.Vector2;

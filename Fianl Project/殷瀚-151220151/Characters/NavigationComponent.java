@@ -1,13 +1,13 @@
 package Characters;
 
-import Field.Position;
+import Base.Position;
 import Types.Vector2;
 
 import java.util.Collections;
 import java.util.List;
 
 /**
- * 实现了一些与寻路有关的方法。
+ * 实现了一些与寻路、获取战况有关的方法。
  * 以组合的方式添加到一个creature上。
  * 在creature初始化时，将其设置为这个寻路组件的creatureClient。
  */
@@ -15,6 +15,14 @@ public class NavigationComponent extends Component {
 
     public NavigationComponent(Creature creature) {
         creatureClient = creature;
+    }
+
+    public List<Creature> getAliveCampCreature() {
+        return creatureClient.troop.getAliveCreatures();
+    }
+
+    public List<Creature> getAliveHostileCreatures() {
+        return creatureClient.troop.getAliveHostileCreatures();
     }
 
     public Position getPositionOfNearestAliveHostileCreature() {

@@ -66,4 +66,9 @@ public class Vector2 {
     public static int ManhattanDistance(Vector2 v1, Vector2 v2) {
         return abs(v1.x-v2.x) + abs(v1.y-v2.y);
     }
+
+    @Override
+    public String toString(){
+        return x + ";" + y;
+    }
 }

@@ -1,15 +1,15 @@
 /**
- * Leader是一种生物，有名字，暂时只会站着
+ * ScorpionMonster是一种生物，有名字，暂时只会站着
  * 蝎子精属于这个类
  */
 package Characters;
 
 import java.awt.*;
 
-public class Leader extends Creature {
+public class ScorpionMonster extends Creature {
     private String name;
 
-    public Leader(String name){
+    public ScorpionMonster(String name){
         super();
         this.name = name;
 
@@ -51,9 +51,27 @@ public class Leader extends Creature {
 
     @Override
     public String toString(){
-        return this.name
-                + "@"
-                + this.position.getX() + "," + this.position.getY()
-                + ";";
+        if (alive) {
+            switch (state) {
+                case MOVING:
+                    return "xiezi_moving";
+                case ATTACKING:
+                    return "xiezi_attack";
+                case IDLE:
+                default:
+                    return "xiezi_idle";
+            }
+        } else {
+            return "tomb";
+        }
+//        return this.name
+//                + "@"
+//                + this.position.getX() + "," + this.position.getY()
+//                + ";";
+    }
+
+    @Override
+    public String initInfo() {
+        return "ScorpionMonster;" + name + ";";
     }
 }

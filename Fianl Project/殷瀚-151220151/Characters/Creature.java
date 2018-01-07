@@ -1,30 +1,36 @@
 package Characters;
-import Layout.Troop;
-import Field.Position;
+import Base.Troop;
+import Base.Position;
 import Types.Vector2;
 
 import java.awt.*;
+import java.io.Serializable;
 
 enum Direction {
     LEFT, RIGHT, UP, DOWN
 }
-public abstract class Creature implements Paintable, Runnable{
+public abstract class Creature implements Paintable, Runnable, Serializable{
 
     protected Position position;
-    //protected String campName;  //  每个生物有其所属的阵营
-    protected Troop troop;
-    protected RenderComponent renderComponent;
+
+    private String talkMessage;
+    protected Troop troop; //  每个生物有其所属的阵营
+    //m
+    public RenderComponent renderComponent;
     protected NavigationComponent navigationComponent;// 寻路组件，在需要寻路时向其索要目的地等信息
     protected TimerComponent timerComponent;
-    protected CombatComponent combatComponent;
+    public CombatComponent combatComponent;
 
-    protected int remainActionAnimationClockCircles = 0;
-    CreatureState state = CreatureState.IDLE;
+    //m
+    public int remainActionAnimationClockCircles = 0;
+    //m
+    public CreatureState state = CreatureState.IDLE;
     public boolean alive = true;
     public int currentHealth = 100, maxHealth = 100;
     Direction faceDirection = Direction.RIGHT;
 
     public abstract void report();
+    public abstract String initInfo();
     public void act(){}
 
     public Creature() {
@@ -116,7 +122,7 @@ public abstract class Creature implements Paintable, Runnable{
         }
     }
 
-    protected void doBattleOperations() {
+    protected final void doBattleOperations() {
         if (alive) {
             if (timerComponent.timesCount == 0) { // per second
                 // 先判断是否有敌人可以攻击，若没有，则寻路
@@ -129,10 +135,12 @@ public abstract class Creature implements Paintable, Runnable{
                             remainActionAnimationClockCircles = 10; // 攻击动画持续500毫秒
                             Vector2 currentCoordinate = this.position.getCoordinate();
                             renderComponent.startAnimationProgressWithDuration(remainActionAnimationClockCircles, RenderComponent.ImageType.ATTACKING, currentCoordinate);
+
                         }
                     }
                 }
                 if (state == CreatureState.IDLE && navigationComponent != null) {
+                    // 寻路
                     // 先得到要去的position
                     Position destination = navigationComponent.getPositionOfNearestAliveHostileCreature();
                     // 然后尝试往这个方向移动
@@ -142,6 +150,7 @@ public abstract class Creature implements Paintable, Runnable{
                         state = CreatureState.MOVING;
                         remainActionAnimationClockCircles = 10; // 移动动画持续500毫秒
                         renderComponent.startAnimationProgressWithDuration(remainActionAnimationClockCircles, RenderComponent.ImageType.MOVING, currentCoordinate);
+
                     }
 
                 }
@@ -156,28 +165,23 @@ public abstract class Creature implements Paintable, Runnable{
         }
     }
     protected abstract void doThreadOperations();
-    private final void updatePaintings() {
+    public final void updatePaintings() {
         if (remainActionAnimationClockCircles > 0) {
             remainActionAnimationClockCircles--;
-            renderComponent.updateMovingProgress();
+            renderComponent.updateAnimationProgress();
         }
         if (remainActionAnimationClockCircles <= 0) {
             state = CreatureState.IDLE;
-            renderComponent.resetMovingProgress();
+            renderComponent.resetAnimationProgress();
         }
 
-        troop.askFieldToRepaint();
+        //troop.askFieldToRepaint();
     }
 
     public final void paintInGraphics(Graphics g, int positionWidth, int positionHeight) {
         if (renderComponent != null) {
             renderComponent.paintInGraphics(g, positionWidth, positionHeight);
         }
-
-        extraPaintInGraphics(g, positionWidth, positionHeight);
-    }
-
-    protected void extraPaintInGraphics(Graphics g, int positionWidth, int positionHeight) {
 
     }
 
@@ -196,7 +200,6 @@ public abstract class Creature implements Paintable, Runnable{
         another.moveTo(tempPosition);
     }
 
-
     public String getCampName() {
         if(troop == null)
             return "";
@@ -206,5 +209,14 @@ public abstract class Creature implements Paintable, Runnable{
 
     public void setTroop(Troop troop) {
         this.troop = troop;
+    }
+
+
+    public String getTalkMessage() {
+        return talkMessage;
+    }
+
+    public void talk(String talkMessage) {
+        this.talkMessage = talkMessage;
     }
 }

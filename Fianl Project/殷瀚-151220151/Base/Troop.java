@@ -1,13 +1,13 @@
 /**
- * Troop:表示一方势力的队伍，包括campMember，Leader，Cheerer
+ * Troop:表示一方势力的队伍，包括campMember，ScorpionMonster，Cheerer
  */
-package Layout;
+package Base;
 
 import Characters.Cheerer;
 import Characters.Creature;
-import Characters.Leader;
-import Field.Position;
-import Field.Field;
+import Characters.CreatureState;
+import Characters.ScorpionMonster;
+import Layout.FormationManager;
 import Types.FormationName;
 import Types.Vector2;
 
@@ -154,7 +154,7 @@ public class Troop {
             Creature someCreature = creatures.get(i);
 
             Vector2 coordinateInField = new Vector2();
-            if(someCreature instanceof Leader){
+            if(someCreature instanceof ScorpionMonster){
                 coordinateInField = this.leaderCoordinate.add(this.anchorCoordinate);
             }else if(someCreature instanceof Cheerer){
                 coordinateInField = this.cheererCoordinate.add(this.anchorCoordinate);
@@ -191,14 +191,32 @@ public class Troop {
         return creatures;
     }
 
+    public List<Creature> getAliveCreatures() {
+        return creatures.stream().filter(
+                (creature) -> creature.alive
+        ).collect(Collectors.toList());
+    }
+
     public List<Creature> getAliveHostileCreatures() {
         List<Creature> hostileCreatures = new LinkedList<>();
         for(Troop troop: hostileTroops) {
             hostileCreatures.addAll(
                     troop.getCreatures().stream().filter(
-                            (creature)->creature.alive
+                            (creature) -> creature.alive
                     ).collect(Collectors.toList()));
         }
         return hostileCreatures;
+    }
+
+//    public void askFieldToRecord(long time, Creature creature, Vector2 target, CreatureState actionType, int duration) {
+//        if (field != null) {
+//            field.addOneRecord(time, creature, target, actionType, duration);
+//        }
+//    }
+
+    public void askFieldToRecord(long time, String imageName, int dx1, int dy1, int dx2 ,int dy2, int sx1, int sy1, int sx2, int sy2) {
+        if (field != null) {
+            field.addOneRecord(time, imageName, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2);
+        }
     }
 }

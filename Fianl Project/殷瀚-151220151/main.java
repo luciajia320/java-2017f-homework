@@ -1,6 +1,6 @@
 import Characters.*;
-import Layout.Troop;
-import Field.Field;
+import Base.Troop;
+import Base.Field;
 import Types.COLOR;
 import Types.SENIORITY;
 import Types.TianGan;
@@ -26,11 +26,11 @@ public class main {
         // 蛇精
         SnakeMonster SheJing = new SnakeMonster("蛇精");
         // 蝎子精
-        Leader XieZiJing = new Leader("蝎子精");
+        ScorpionMonster XieZiJing = new ScorpionMonster("蝎子精");
 
         /* 初始化各方势力 */
         Troop powerOfHuluwa = new Troop("葫芦娃", 2, 0);
-        Troop powerOfYaojing = new Troop("妖精", 4, 6);
+        Troop powerOfYaojing = new Troop("妖精", 8, 6);
         /* 各方势力登场 */
         field.addTroop(powerOfHuluwa);
         field.addTroop(powerOfYaojing);
@@ -39,14 +39,29 @@ public class main {
         powerOfHuluwa.addCreatures(HuluBrothers);
         powerOfHuluwa.addOneCreature(YeYe);
         powerOfYaojing.addCreatures(lackeys);
-        powerOfYaojing.addOneCreature(SheJing);
+       powerOfYaojing.addOneCreature(SheJing);
         powerOfYaojing.addOneCreature(XieZiJing);
 
         /* 各方势力宣战 */
         powerOfHuluwa.declareWarTo(powerOfYaojing);
         powerOfYaojing.declareWarTo(powerOfHuluwa);
 
+
+
         gameWindow.add(field);
         gameWindow.setVisible(true);
+
+//        Vector2 pp = HuluBrothers[0].getPosition().getCoordinate();
+//        HuluBrothers[0].moveTo(new Vector2(1, 1));
+//        HuluBrothers[0].remainActionAnimationClockCircles = 10;
+//        HuluBrothers[0].renderComponent.startAnimationProgressWithDuration(10, RenderComponent.ImageType.MOVING, pp);
+//        HuluBrothers[0].state = CreatureState.MOVING;
+//        field.repaint();
+
+//        try {
+//            Thread.sleep(10000);
+//        } catch ( Exception e) {
+//
+//        }
     }
 }

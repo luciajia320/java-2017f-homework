@@ -38,34 +38,44 @@ public class RenderComponent extends Component {
         }
     }};
 
-    private int gestureCount = 0, currentGestureNum = 1; // 根据这个数值选择图片中的一部分用来显示，从而显示出动态的图像。
+    private int gestureCount = 0; // 根据这个数值选择图片中的一部分用来显示，从而显示出动态的图像。
+
     private Vector2 animationProgressStartCoordinate = new Vector2();
     private int animationProgressDurationTimes = 0;
     private double animationProgress = 1; // 根据这个数值来对图像显示位置进行微调，以显示出连续的位移过程。
 
+    private int getCurrentGestureNum() {
+        try {
+            ImageType imageType = creatureClient.state.getImageType();
+            return images.get(imageType).gestureNum;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 1;
+        }
+
+    }
     public RenderComponent(Creature creature) {
         creatureClient = creature;
     }
 
     public void changeToNextGesture() {
-        gestureCount = (gestureCount + 1) % currentGestureNum;
+        gestureCount = (gestureCount + 1) % getCurrentGestureNum();
     }
 
     public void startAnimationProgressWithDuration(int times, ImageType type, Vector2 startPoint) {
         animationProgress = 0;
         animationProgressDurationTimes = times;
         animationProgressStartCoordinate = startPoint;
-        currentGestureNum = images.get(type).gestureNum;
     }
 
-    public void updateMovingProgress() {
+    public void updateAnimationProgress() {
         animationProgress += (double)1/ animationProgressDurationTimes;
         if (animationProgress >= 1) {
             gestureCount = 0;
         }
     }
 
-    public void resetMovingProgress() {
+    public void resetAnimationProgress() {
         animationProgress = 1;
         gestureCount = 0;
     }
@@ -93,12 +103,7 @@ public class RenderComponent extends Component {
             if (!creatureClient.alive) {
                 imageInfo = images.get(ImageType.TOMB);
             } else {
-                switch (creatureClient.state) {
-                    case MOVING: imageInfo = images.get(ImageType.MOVING); break;
-                    case ATTACKING: imageInfo = images.get(ImageType.ATTACKING); break;
-                    case IDLE: imageInfo = images.get(ImageType.IDLE); break;
-                    default: imageInfo = images.get(ImageType.IDLE); break;
-                }
+                imageInfo = images.get(creatureClient.state.getImageType());
             }
             int gestureImageWidth = imageInfo.imageWidth / imageInfo.gestureNum;
             int gestureImageHeight = imageInfo.imageHeight;
@@ -116,10 +121,49 @@ public class RenderComponent extends Component {
             int sourceRightBottomX = (gestureCount+1)*gestureImageWidth;
             int sourceRightBottomY = gestureImageHeight;
 
+            // 对话框
+            String talkMessage = creatureClient.getTalkMessage();
+            if (talkMessage != null && talkMessage != "") {
+                int bubbleImageHeight = 30, bubbleImageWidth = positionWidth + 20;
+                g.drawImage(images.get(ImageType.TALK_BUBBLE).image,
+                        leftTopX, leftTopY - bubbleImageHeight,
+                        bubbleImageWidth, bubbleImageHeight, null);
+                creatureClient.troop.askFieldToRecord(
+                        System.currentTimeMillis(),
+                        "talk_bubble_blue" + ".png",
+                        leftTopX, leftTopY - bubbleImageHeight,
+                        leftTopX + bubbleImageWidth, leftTopY - bubbleImageHeight + bubbleImageHeight,
+                        0, 0,
+                        images.get(ImageType.TALK_BUBBLE).imageWidth, images.get(ImageType.TALK_BUBBLE).imageHeight);
+
+                g.drawString(talkMessage, leftTopX + 5, leftTopY-bubbleImageHeight/2);
+                creatureClient.troop.askFieldToRecord(
+                        System.currentTimeMillis(),
+                        talkMessage,
+                        leftTopX, leftTopY,
+                        leftTopX + positionWidth, leftTopY + 10,
+                        0, 0,
+                        images.get(ImageType.HEALTH_BAR).imageWidth, images.get(ImageType.HEALTH_BAR).imageHeight);
+            }
             // 血条
             if (creatureClient.alive) {
                 g.drawImage(images.get(ImageType.HEALTH_BAR).image, leftTopX, leftTopY, positionWidth, 10, null);
+                creatureClient.troop.askFieldToRecord(
+                        System.currentTimeMillis(),
+                        "healthBar" + ".png",
+                        leftTopX, leftTopY,
+                        leftTopX + positionWidth, leftTopY + 10,
+                        0, 0,
+                        images.get(ImageType.HEALTH_BAR).imageWidth, images.get(ImageType.HEALTH_BAR).imageHeight);
+
                 g.drawImage(images.get(ImageType.HEALTH_BAR_FILL).image, leftTopX, leftTopY, positionWidth * creatureClient.currentHealth / creatureClient.maxHealth, 10, null);
+                creatureClient.troop.askFieldToRecord(
+                        System.currentTimeMillis(),
+                        "healthBarFill" + ".png",
+                        leftTopX, leftTopY,
+                        leftTopX + positionWidth * creatureClient.currentHealth / creatureClient.maxHealth, leftTopY + 10,
+                        0, 0,
+                        images.get(ImageType.HEALTH_BAR_FILL).imageWidth, images.get(ImageType.HEALTH_BAR_FILL).imageHeight);
             }
 
             switch (creatureClient.faceDirection) {
@@ -130,6 +174,13 @@ public class RenderComponent extends Component {
                             sourceLeftTopX, sourceLeftTopY,
                             sourceRightBottomX, sourceRightBottomY,
                             null);
+                    creatureClient.troop.askFieldToRecord(
+                            System.currentTimeMillis(),
+                            creatureClient.toString() + ".png",
+                            rightBottomX, leftTopY,
+                            leftTopX, rightBottomY,
+                            sourceLeftTopX, sourceLeftTopY,
+                            sourceRightBottomX, sourceRightBottomY);
                     break;
                 case RIGHT:
                     g.drawImage(imageInfo.image,
@@ -138,10 +189,15 @@ public class RenderComponent extends Component {
                             sourceLeftTopX, sourceLeftTopY,
                             sourceRightBottomX, sourceRightBottomY,
                             null);
+                    creatureClient.troop.askFieldToRecord(
+                            System.currentTimeMillis(),
+                            creatureClient.toString() + ".png",
+                            leftTopX, leftTopY,
+                            rightBottomX, rightBottomY,
+                            sourceLeftTopX, sourceLeftTopY,
+                            sourceRightBottomX, sourceRightBottomY);
                     break;
                 default:
-                    if (creatureClient instanceof Huluwa)
-                        System.out.println("there");
                     break;
             }
 
@@ -160,7 +216,9 @@ public class RenderComponent extends Component {
         }
     }
 
+    //public void paintTalk
+
     public enum ImageType {
-        ATTACKING, MOVING, IDLE, HEALTH_BAR, HEALTH_BAR_FILL, TOMB
+        ATTACKING, MOVING, IDLE, HEALTH_BAR, HEALTH_BAR_FILL, TOMB, TALK_BUBBLE
     }
 }
