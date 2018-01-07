@@ -130,6 +130,12 @@ public class BattleField extends JPanel{
 		}
 	}
 	
+	public void CleanTheEnemies() {
+		for(int i=0;i<rownum*colnum;i++)
+			if(field[i].reportHolder()&&(field[i].GetHolder().getname().equals("Ð«×Ó¾«")||field[i].GetHolder().getname().equals("ÔÓ±ø")))
+				field[i].DeleteHolder();
+	}
+	
 	public void setFieldVisible() {
 		for(int i=0;i<rownum;i++) {
 			for(int j=0;j<colnum;j++) {

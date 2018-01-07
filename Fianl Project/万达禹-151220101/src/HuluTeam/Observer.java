@@ -38,9 +38,10 @@ public class Observer extends JFrame{
 				if(e.getKeyCode()==KeyEvent.VK_ENTER) {	//按下回车重新开始游戏
 					t.reset();			//回合调度重置
 					f.ifstart = false;	//将游戏状态设为未开始
+					ifWrite = false;
 					f.reloadCreatures();
 				}
-				else if(e.getKeyCode() == KeyEvent.VK_UP) {		//读取文件
+				if(e.getKeyCode() == KeyEvent.VK_UP) {		//读取文件
 					ifWrite = true;
 					try {
 						FileReader fr = new FileReader(f.mousepath);
@@ -50,6 +51,9 @@ public class Observer extends JFrame{
 							try {
 							    int a = Integer.parseInt(Line);		//String转Integer
 							    //System.out.println(a);
+							    f.CleanTheEnemies();
+							    f.Choose_A_Formation_For_Enemies(3, 7, a);
+							    f.reloadCreatures();
 							} catch (NumberFormatException e2) {
 							    e2.printStackTrace();
 							}
@@ -79,7 +83,7 @@ public class Observer extends JFrame{
 					}
 					f.setAttackInfo("已读取"+f.mousepath+"的复盘记录。按下→执行下一步\r\n");
 				}
-				else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+				if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
 					ClickAttack(a1.get(idx),b1.get(idx));
 					idx++;
 				}
