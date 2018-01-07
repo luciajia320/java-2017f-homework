@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by tangruize on 10/16/17.
  */
@@ -11,7 +14,7 @@ public class Battle {
     /* contains all creatures;
      * 0 for grandpa, 1~7 for calabash brothers, 8 for scorpion king and others for lackeys
      */
-    private Creature[] creatures;
+    private List creatures = new ArrayList();
 
     // creatures num
     private final int NUM = 28;
@@ -19,21 +22,19 @@ public class Battle {
     // init creatures and map, and place grandpa and the scorpion king.
     Battle() {
         // create creatures
-        creatures = new Creature[NUM];
-        creatures[0] = new Grandpa();
+        creatures.add(new Grandpa());
         for (int i = 0; i < 7; ++i) {
-            creatures[i + 1] = new CalabashBrother(i);
+            creatures.add(new CalabashBrother(i));
         }
-        creatures[8] = new SnakeQueen();
-        creatures[9] = new ScorpionKing();
-        for (int i = 10; i < NUM; ++i) {
-            creatures[i] = new Lackey();
+        creatures.add(new SnakeQueen());
+        creatures.add(new ScorpionKing());
+        for (int i = creatures.size(); i <= NUM; ++i) {
+            creatures.add(new Lackey());
         }
 
         // init map
-        map = new int[SIZE][];
+        map = new int[SIZE][SIZE];
         for (int i = 0; i < SIZE; ++i) {
-            map[i] = new int[SIZE];
             for (int j = 0; j < SIZE; ++j) {
                 map[i][j] = -1;
             }
@@ -51,7 +52,7 @@ public class Battle {
         for (int i = 0; i < SIZE; ++i) {
             for (int j = 0; j < SIZE; ++j) {
                 if (map[i][j] != -1 && map[i][j] < NUM) {
-                    System.out.print(creatures[map[i][j]].getAttr());
+                    System.out.print(((Creature)creatures.get(map[i][j])).getAttr());
                 }
                 else {
                     System.out.print("  ");
