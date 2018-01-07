@@ -19,6 +19,16 @@ public class Battle {
     // creatures num
     private final int NUM = 28;
 
+    // get all creatures
+    List<Creature> getCreatures() {
+        return creatures;
+    }
+
+    // get map
+    int[][] getMap() {
+        return map;
+    }
+
     // init creatures and map, and place grandpa and the scorpion king.
     Battle() {
         // create creatures
@@ -43,7 +53,7 @@ public class Battle {
         // grandpa
         map[0][2] = 0;
 
-        // scorpion king
+        // snake queen
         map[0][8] = 8;
     }
 
