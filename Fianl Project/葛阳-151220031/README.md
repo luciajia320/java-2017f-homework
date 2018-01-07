@@ -2,7 +2,7 @@
 
 ## 操作说明
 * mvn clean test package后目标jar包为hulu-0.0.1-SNAPSHOT.jar
-* 提供的战斗记录位置 :葛阳-151220031/战斗记录/HuluwaWin.rec
+* 战斗记录为Sample.rec,运行时在按L出现的文件选择界面选择即可
 * 空格键开始游戏
 * L 键选择文件
 * R 键返回开始阵列
