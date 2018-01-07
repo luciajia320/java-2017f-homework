@@ -14,12 +14,8 @@ public class Yanyue extends Policy
 	public static final int MonsterNumber=18;
 	static
 	{
-		location=new HashMap<String,ArrayList<Position>>();
-
-		location.put("Grandfather",new ArrayList<Position>());
 		location.get("Grandfather").add(new Position(5,0));
 
-		location.put("Huluwa",new ArrayList<Position>());
 		location.get("Huluwa").add(new Position(5,2));
 		location.get("Huluwa").add(new Position(5,3));
 		location.get("Huluwa").add(new Position(5,4));
@@ -28,10 +24,10 @@ public class Yanyue extends Policy
 		location.get("Huluwa").add(new Position(5,7));
 		location.get("Huluwa").add(new Position(5,8));
 
-		location.put("Scorpion",new ArrayList<Position>());
+		location.get("Snake").add(new Position(5,17));
+
 		location.get("Scorpion").add(new Position(5,11));
 
-		location.put("Monster",new ArrayList<Position>());
 		location.get("Monster").add(new Position(4,11));
 		location.get("Monster").add(new Position(6,11));
 
@@ -57,8 +53,5 @@ public class Yanyue extends Policy
 
 		location.get("Monster").add(new Position(1,17));
 		location.get("Monster").add(new Position(9,17));
-
-		location.put("Snake",new ArrayList<Position>());
-		location.get("Snake").add(new Position(5,17));
 	}
 }

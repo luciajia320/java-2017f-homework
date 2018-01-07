@@ -17,25 +17,15 @@ public class Field
 
 	private String[][] area=new String[height][width];
 
-	private ArrayList<Position> positionQueue;
-	private ArrayList<Creature> creatureQueue;
+	private ArrayList<Creature> creatureQueue=new ArrayList<Creature>();
+	private ArrayList<Position> positionQueue=new ArrayList<Position>();
 
 	private Policy policy;
 
-	public ArrayList<Position> getPositionQueue()
-	{
-		return positionQueue;
-	}
-
-	public ArrayList<Creature> getCreatureQueue()
-	{
-		return creatureQueue;
-	}
-
 	public void initField()
 	{
-		positionQueue=new ArrayList<Position>();
-		creatureQueue=new ArrayList<Creature>();
+		creatureQueue.clear();
+		positionQueue.clear();
 		for(int i=0;i<height;i++)
 			for(int j=0;j<width;j++)
 				area[i][j]="  ";
@@ -93,15 +83,13 @@ public class Field
 			default:
 				break;
 		}
-		
-		policy.fillQueue(this);
 
-		Iterator<Creature> cIter=creatureQueue.iterator();
-		while (cIter.hasNext())
+		policy.fillQueue(creatureQueue,positionQueue);
+
+		for(Iterator<Creature> cIter=creatureQueue.iterator();cIter.hasNext();)
 		{
 			Creature create=cIter.next();
-			Position pos=create.getPosition();
-			area[pos.getX()][pos.getY()]=create.toString();
+			area[create.getPosition().getX()][create.getPosition().getY()]=create.toString();
 		}
 	}
 }

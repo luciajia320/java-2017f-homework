@@ -6,19 +6,24 @@
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Policy
 {
-	protected static Map<String,ArrayList<Position>> location;
-
-	public void fillQueue(Field f)
+	protected static Map<String,ArrayList<Position>> location=new HashMap<String,ArrayList<Position>>();
+	static
 	{
-		ArrayList<Position> pQueue=f.getPositionQueue();
-		ArrayList<Creature> cQueue=f.getCreatureQueue();
-		Iterator<Creature> cIter=cQueue.listIterator();
+		location.put("Grandfather",new ArrayList<Position>());
+		location.put("Huluwa",new ArrayList<Position>());
+		location.put("Snake",new ArrayList<Position>());
+		location.put("Scorpion",new ArrayList<Position>());
+		location.put("Monster",new ArrayList<Position>());
+	}
 
-		while(cIter.hasNext())
+	public void fillQueue(ArrayList<Creature> cQueue,ArrayList<Position> pQueue)
+	{
+		for(Iterator<Creature> cIter=cQueue.listIterator();cIter.hasNext();)
 		{
 			Creature create=cIter.next();
 			//System.out.println(cIter.next().getClass().getSimpleName());
@@ -35,6 +40,5 @@ public class Policy
 				;//throw exception
 			}
 		}
-
 	}
 }
