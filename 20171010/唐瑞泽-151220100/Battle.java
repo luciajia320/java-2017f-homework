@@ -14,7 +14,7 @@ public class Battle {
     /* contains all creatures;
      * 0 for grandpa, 1~7 for calabash brothers, 8 for scorpion king and others for lackeys
      */
-    private List creatures = new ArrayList();
+    private List<Creature> creatures = new ArrayList<>();
 
     // creatures num
     private final int NUM = 28;
@@ -52,7 +52,7 @@ public class Battle {
         for (int i = 0; i < SIZE; ++i) {
             for (int j = 0; j < SIZE; ++j) {
                 if (map[i][j] != -1 && map[i][j] < NUM) {
-                    System.out.print(((Creature)creatures.get(map[i][j])).getAttr());
+                    System.out.print((creatures.get(map[i][j])).getAttr());
                 }
                 else {
                     System.out.print("  ");
