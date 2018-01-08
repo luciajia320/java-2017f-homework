@@ -4,11 +4,11 @@
 本程序能够模拟葫芦娃队伍与蛇精队伍作战的场景，战斗开始前生成双方队伍的成员，分别站立到战场左上角和右上角，如下图
 
 
-![image](ScreenShots/start.png)
+![image](E:\Curriculum\JAVA Programming\finalProject\start.png)
 
 此时有两种选择，可以选择按下space键让双方队伍站成自己的队伍阵型，如下图
 
-![image](ScreenShots/formation.png)
+![image](battle.png)
 
 或者是按下L键选择文件播放
 
@@ -16,29 +16,16 @@
 
 战斗结束场景如下:
 
-![image](ScreenShots/end.png)
+![image](battle.png)
 
-如果选择了播放文件，请选择按照正确形式记录战斗场景的文件播放，否则将无法播放，播放中途无法停止播放，请给葫芦娃最起码的尊重，看完整场战斗。播放完成后，可以选择按ENTER回到初始界面。
+如果选择了播放文件，请选择按照正确形式记录战斗场景的文件播放，否则将无法播放，播放中途无法无法停止播放，请给葫芦娃最起码的尊重，看完整场战斗。播放完成后，可以选择按ENTER回到初始界面。
 ***
 ## 部分实现细节说明
 ### 模块间关系
-```
-graph TD
-    A[背景] -->|包含| B[战场]
-    B[战场] -->|存在| C[战斗]
-    C[战斗] -->|包含| D[双方队伍]
-    D[双方队伍] -->|包含| E[不同生物]
-```
+![image](battle.png)
 ### 生物类
 此部分代码完全沿用了之前写过的葫芦娃程序，以Creature类为基类，派生出具体的类，结构如下图：
-```
-graph TD
-    B[Huluwa] -->A[Creatures]
-    C[Yeye] -->A
-    D[Xiezi] -->A
-    E[Snake] -->A
-    F[Wugong] -->A
-```
+![image](battle.png)
 需要说明的是，写完之后发现基本上所有的工作都可以在Creature类里完成，没必要派生出这么多类。
 
 ### 背景类与战场类
@@ -54,8 +41,9 @@ graph TD
 队伍类中有一个Arraylist存着一方队伍的所有生物，生物类负责每个个体的生死，移动，是该程序运行的基本单位。
 ***
 ## 设计理念
- 
-**单一职责原则**  
+
+- **SOLID原则**  
+    **单一职责原则**  
 当需要修改某个类的时候原因有且只有一个（THERE SHOULD NEVER BE MORE THAN ONE REASON FOR A CLASS TO CHANGE）。换句话说就是让一个类只做一种类型责任，当这个类需要承当其他类型的责任的时候，就需要分解这个类。从我的模块关系图中可以看得出该理念的运用。
 
 
