@@ -2,9 +2,9 @@
 
 **一、目录结构**
 
-src/*.java :具体实现代码
+src/somejava.java :具体实现代码
 src/img :存储游戏中需要的图片
-log/*.txt :游戏战斗记录
+log/sometxt.txt :游戏战斗记录
 pictures/ :游戏截屏
 
 **二、具体实现**
