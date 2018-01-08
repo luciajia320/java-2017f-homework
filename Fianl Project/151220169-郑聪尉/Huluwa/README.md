@@ -9,7 +9,7 @@
 
 ## 项目预览
 
-Huluwa 17f-Final 版本是葫芦娃大战的自动化程序，支持存档读档并可回放精彩过程；
+Huluwa 17f-Final 版本是自动化的葫芦娃大战程序，支持存档读档并可回放精彩过程；
 
 ![Huluwa0](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa0.png)
 
