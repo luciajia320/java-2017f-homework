@@ -37,7 +37,7 @@ public class Toad extends Thing2D implements Runnable{
     public void run(){
         while (!Thread.interrupted()) {
             Random rand = new Random();
-            synchronized(record) {
+            synchronized(Main.ground) {
                 int old_y = (this.x() - 30) / 50;
                 int old_x = (this.y() - 30) / 50;
 
@@ -95,6 +95,8 @@ public class Toad extends Thing2D implements Runnable{
                         record[new_x][new_y] = 'T';
                     }
 
+                    savePic savepic=new savePic();
+                    savepic.save();
                     try {
                         File file = new java.io.File("HuLuWaRecord.txt");
                         PrintStream outfile = new PrintStream(new FileOutputStream(file, true));

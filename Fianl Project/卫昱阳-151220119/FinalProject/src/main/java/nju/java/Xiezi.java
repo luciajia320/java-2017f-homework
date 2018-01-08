@@ -37,7 +37,7 @@ public class Xiezi extends Thing2D implements Runnable{
     public void run() {
         while (!Thread.interrupted()) {
             Random rand = new Random();
-            synchronized(record) {
+            synchronized(Main.ground) {
                 int old_y = (this.x() - 30) / 50;
                 int old_x = (this.y() - 30) / 50;
 
@@ -72,6 +72,9 @@ public class Xiezi extends Thing2D implements Runnable{
                     ImageIcon iia = new ImageIcon(loc);
                     Image image = iia.getImage();
                     this.setImage(image);
+
+                    savePic savepic=new savePic();
+                    savepic.save();
 
                     try {
                         File file = new java.io.File("HuLuWaRecord.txt");

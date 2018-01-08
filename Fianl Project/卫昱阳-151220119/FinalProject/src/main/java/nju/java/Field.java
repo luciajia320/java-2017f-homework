@@ -11,6 +11,8 @@ import java.util.ArrayList;
  * Created by Yuyang Wei on 2017/12/21.
  */
 public class Field extends JPanel{
+    //static savePic savepic=new savePic();
+    static int Pic_count=0;
     private final int OFFSET=30;
     private final int SPACE=50;
     private static char record[][]=new char[13][13];
@@ -19,6 +21,8 @@ public class Field extends JPanel{
     private ArrayList Cloud=new ArrayList();
     private ArrayList TombStone=new ArrayList();
 
+    boolean loadMode=false;
+    PlayBack playback;
     private Grandfather grandfather;
     private Snake snake;
     private HU1 hu1;
@@ -36,7 +40,6 @@ public class Field extends JPanel{
     private Toad toad56;
     private Toad toad76;
     private Toad toad65;
-    //private Review review=new Review(this);
 
     //TODO
     private int w=0;
@@ -110,6 +113,7 @@ public class Field extends JPanel{
       tombstone for D
     */
     public final void initWorld(){
+        Pic_count=0;
         for(int i=0;i<13;i++){
             for(int j=0;j<13;j++){
                 this.level[i][j]='.';
@@ -402,7 +406,13 @@ public class Field extends JPanel{
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        buildWorld(g);
+        if(!loadMode) {
+            buildWorld(g);
+        }
+        else
+        {
+            playback.play(g);
+        }
     }
 
     class TAdapter extends KeyAdapter{
@@ -439,9 +449,14 @@ public class Field extends JPanel{
             }//restart
             else if(key==KeyEvent.VK_L){
                 System.out.println("Start review");
-                Grass.clear();
-                //Cloud.clear();
-                //review.start();
+                loadMode=true;
+
+                playback=new PlayBack(Field.this);
+                playback.init_back_count();
+                new Thread(playback).start();
+
+                //return;
+                //savepic.save();
             }//load to review
             repaint();
         }
@@ -452,6 +467,9 @@ public class Field extends JPanel{
         //Cloud.clear();
         Grass.clear();
         initWorld();
+
+
+
         if (completed) {
             completed = false;
         }

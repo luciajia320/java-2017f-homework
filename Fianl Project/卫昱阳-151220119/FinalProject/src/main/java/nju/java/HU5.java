@@ -35,7 +35,7 @@ public class HU5 extends Thing2D implements Runnable{
     public void run() {
         while (!Thread.interrupted()) {
             Random rand = new Random();
-            synchronized(record) {
+            synchronized(Main.ground) {
                 //this.move(rand.nextInt(10), rand.nextInt(10));
                 if (x() < 450 + 30) {
                     int old_y = (this.x() - 30) / 50;
@@ -61,6 +61,8 @@ public class HU5 extends Thing2D implements Runnable{
                         record[new_x][new_y] = 'D';
                     }
 
+                    savePic savepic=new savePic();
+                    savepic.save();
                     try {
                         File file = new java.io.File("HuLuWaRecord.txt");
                         PrintStream outfile = new PrintStream(new FileOutputStream(file, true));

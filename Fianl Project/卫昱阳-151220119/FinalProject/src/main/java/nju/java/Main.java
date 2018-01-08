@@ -43,9 +43,11 @@ public class Main extends JFrame {
         setTitle("葫芦娃大战妖精");
     }//InitUI
 
+    static Main ground;
+
     public static void main(String[] args) throws FileNotFoundException {
         Main.play();
-        Main ground = new Main();
+        ground = new Main();
         ground.setVisible(true);
     }
 }
