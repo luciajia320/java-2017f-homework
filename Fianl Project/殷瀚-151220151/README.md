@@ -1,9 +1,9 @@
 # Final Project
 ## 运行截图
-![image](battle1.png)<br>
-![image](battle2.png)<br>
-![imgae](battle3.png)<br>
-![image](gameEnd.png)<br>
+![image](ScreenShots/battle1.png)<br>
+![image](ScreenShots/battle2.png)<br>
+![imgae](ScreenShots/battle3.png)<br>
+![image](ScreenShots/gameEnd.png)<br>
 ## 功能说明
 ### 基本功能
 按照要求，按下空格后布阵并且开始战斗，在一方全员阵亡后，保存到文件（项目目录/record.txt），按下'L'显示文件对话框选择文件进行回放。
@@ -11,7 +11,7 @@
 #### 连续动画
 连续动画的实现是我这个项目的一个主要的难点。<br>
 用方框画出了所有的position。由于要体现出多线程的机制，所有生物的移动是以position为单位的，但是这样在两个position间移动时是不连续的，但是我想实现连贯的效果，如下图：<br>
-![image](move1.png)![image](move2.png)![image](move3.png)<br>
+![image](ScreenShots/move1.png)![image](ScreenShots/move2.png)![image](ScreenShots/move3.png)<br>
 
 实现的机制是：当一个生物移动到另一个position上时，他的坐标立刻改变，但是会启动一个持续0.5秒的动画。在显示的功能模块中实现这样一个函数
 >void startAnimationProgressWithDuration(int times, ImageType type, Vector2 startPoint)
@@ -19,13 +19,13 @@
 
 这样就可以实现连续的移动动画。<br>
 而连贯动作的显示，则是利用像下面这样的图片：<br>
-![image](hero_moving.png)<br>
+![image](ScreenShots/hero_moving.png)<br>
 每次截取显示图片的一部分来显示出连贯的动作。<br>
 。
 
 #### 战斗
 攻击也是动态的，实现的机制和上面类似。并且每个人拥有生命值和攻击力。还有相应的血条显示。<br>
-![image](attack1.png)![image](attack2.png)
+![image](ScreenShots/attack1.png)![image](ScreenShots/attack2.png)
 #### 爷爷和蛇精
 爷爷和蛇精属于Cheerer类，这个类继承自Creature，可以根据当前的战况显示不同的信息。目前为爷爷和蛇精实现的是：在战斗时显示敌军数量，在友方全部阵亡时显示“救命”，在敌方全灭时显示“胜利”。
 
