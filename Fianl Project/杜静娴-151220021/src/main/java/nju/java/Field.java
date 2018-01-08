@@ -1,5 +1,7 @@
 package nju.java;
 
+import org.junit.Test;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
