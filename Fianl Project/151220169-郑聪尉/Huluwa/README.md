@@ -47,7 +47,7 @@ Huluwa 17f-Final 版本是葫芦娃大战的自动化程序，支持存档读档
 
 ### 集合与泛型
 
-程序用到Vector<>来存储各类角色，如Vector<Creature>存放roles和death，两个容器实时增删，程序效率会更高。
+程序用到Vector<>来存储各类角色，如Vector<Creature>存放roles和death，两个容器实时增加或删减，程序效率会更高。
 
 ### 多态
 
