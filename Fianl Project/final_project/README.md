@@ -7,15 +7,6 @@
 - 这个世界上存在着一种强大的魔术力量，魔术师们凭借这种力量可以做到许多超自然的事情，这种力量的起源就是被称为万能的许愿机的圣杯。圣杯是一切魔术的根源，可以实现任何愿望，是每个魔术师梦寐以求的宝贝，然而它的每一次降临都是一场灾难。
 ## 故事背景
 - 这一次，圣杯降临在了冬木市，上一次圣杯战争中被魔术协会会长宝石翁封印的邪恶魔法师伏地魔冲破了封印，化身为更加强大的复仇者，联合邪恶的alter_ego想要夺取圣杯，利用这次战争一举摧毁人类。魔术协会派出了新上任的裁定者，协同召唤出的七个职介的从者（剑士、弓兵、枪兵、魔法师、骑兵、暗杀者、狂战士），为了捍卫正义而战。于是，在冬木市展开了这场决定人类命运的战争。
-## 游戏画面
-#### 阵型1
-![image](https://github.com/Dead96Beat/java-2017f-homework/blob/master/Fianl%20Project/final_project/葫芦娃报告截图/对阵1.png "应用截图")
-#### 阵型2
-![image](https://github.com/Dead96Beat/java-2017f-homework/blob/master/Fianl%20Project/final_project/葫芦娃报告截图/对阵2.png "应用截图")
-#### 阵型3
-![image](https://github.com/Dead96Beat/java-2017f-homework/blob/master/Fianl%20Project/final_project/葫芦娃报告截图/对阵3.png "应用截图")
-#### 阵型4
-![image](https://github.com/Dead96Beat/java-2017f-homework/blob/master/Fianl%20Project/final_project/葫芦娃报告截图/对阵4.png "应用截图")
 ***
 ## 游戏功能
 |选项|功能描述|
@@ -25,16 +16,31 @@
 |↓|弹出结果对话框|
 |→|将本次对战记录在文件中|
 |↑|将文件中的故事读到控制台|
-
 ***
-## 游戏界面
-- 葫芦娃和老爷爷一同对战妖精，在空间的左侧以长蛇阵站队
-- 小喽啰，蛇精和蝎子精迎战葫芦娃，在空间的右侧以鹤翼阵站队
-- 上帝按下空格后，葫芦娃们和妖精们将开始搏斗，知道有一方全部阵亡
-- 作为上帝，你可以随时按下Esc终止战争
-- 数据说明:葫芦娃胜率:60%，妖精胜率:50%，爷爷胜率:40%
-#### 游戏截图
-![image](https://github.com/triumphalLiu/Huluwa_VS_Monster/blob/master/screenshot/FieldScreenShot.png "应用截图")
+## 游戏内容
+- ruler和七个servant以随机的阵型站在战场左侧
+- avenger和alter_ego以随机阵型站在战场右侧
+- 当按下s键时，正邪双方开始互相接近，当不同阵营的两人相遇后，便开始互相厮杀，失败的一方被打回英灵座
+- 当一方全部阵亡时，另一方便获胜，获胜的一方可以抵达地图左下角的圣杯处，夺得圣杯
+## 游戏规则
+- 每个个体在遇到敌人是就会发起战斗，主动出战胜率为60%，被动迎战胜率为40%；做没有遇到敌人则继续向有敌人的方向前进
+## 游戏截图
+#### 阵型1
+![image](https://github.com/Dead96Beat/java-2017f-homework/blob/master/Fianl%20Project/final_project/葫芦娃报告截图/对阵1.png "应用截图")
+#### 阵型2
+![image](https://github.com/Dead96Beat/java-2017f-homework/blob/master/Fianl%20Project/final_project/葫芦娃报告截图/对阵2.png "应用截图")
+#### 阵型3
+![image](https://github.com/Dead96Beat/java-2017f-homework/blob/master/Fianl%20Project/final_project/葫芦娃报告截图/对阵3.png "应用截图")
+#### 阵型4
+![image](https://github.com/Dead96Beat/java-2017f-homework/blob/master/Fianl%20Project/final_project/葫芦娃报告截图/对阵4.png "应用截图")
+#### 战斗
+![image](https://github.com/Dead96Beat/java-2017f-homework/blob/master/Fianl%20Project/final_project/葫芦娃报告截图/战斗.png "应用截图")
+#### 结束
+![image](https://github.com/Dead96Beat/java-2017f-homework/blob/master/Fianl%20Project/final_project/葫芦娃报告截图/结束.png "应用截图")
+#### 战斗复盘
+![image](https://github.com/Dead96Beat/java-2017f-homework/blob/master/Fianl%20Project/final_project/葫芦娃报告截图/战斗复盘.png "应用截图")
+#### 战斗故事
+![image](https://github.com/Dead96Beat/java-2017f-homework/blob/master/Fianl%20Project/final_project/葫芦娃报告截图/战斗故事.png "应用截图")
 ***
 ## 结果界面
 - 当妖精全部阵亡后，葫芦娃和老爷爷获胜，从此过上了幸福的生活。
