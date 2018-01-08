@@ -18,6 +18,7 @@
 - 当敌人全部死亡时，恭喜你获得了胜利！你会获得本次游戏详细的战斗记录。
 ![image](https://github.com/Wandayu/java-2017f-homework/blob/master/Fianl%20Project/%E4%B8%87%E8%BE%BE%E7%A6%B9-151220101/%E5%AE%9E%E9%AA%8C%E6%88%AA%E5%9B%BE/%E8%83%9C%E5%88%A9%E6%88%AA%E5%9B%BE.png)
 
+### 游戏按键介绍
 |选项|功能描述|
 |:------|:----|
 |Enter键|重新开局，重新分配阵型，对于难度过高的阵型推荐用哦|
@@ -48,22 +49,23 @@
 ### 游戏代码介绍
 #### 代码框架介绍
 - 本次实验依旧延续开发了第三次葫芦娃排序的整体代码，并加入了游戏的控制部分以及整体的画图代码。
-|------package Creature  Creature包内含了所有生物类
-    |------class Creature  定义了生物的属性和方法，包括回复，攻击，技能等方法
-    |------interface Creatures  定义了生物群落接口
-    |------class HuluBoy  葫芦娃类，继承Creature
-    |------class HuluBrothers  葫芦兄弟类，Creatures接口的实现，HuluBoy类的聚集
-    |------class Enemies 敌人类，Creature接口的实现，提供了根据阵型需求自动更改敌人数量等功能
-    |------class DaWa,ErWa,......,QiWa  每个葫芦娃自成一类，继承HuluBoy，具体实现skill功能以便动态链接
+
+|------package Creature  Creature包内含了所有生物类<br>
+&nbsp;&nbsp;&nbsp;&nbsp;|------class Creature  定义了生物的属性和方法，包括回复，攻击，技能等方法<br>
+&nbsp;&nbsp;&nbsp;&nbsp;|------interface Creatures  定义了生物群落接口<br>
+&nbsp;&nbsp;&nbsp;&nbsp;|------class HuluBoy  葫芦娃类，继承Creature<br>
+&nbsp;&nbsp;&nbsp;&nbsp;|------class HuluBrothers  葫芦兄弟类，Creatures接口的实现，HuluBoy类的聚集<br>
+&nbsp;&nbsp;&nbsp;&nbsp;|------class Enemies 敌人类，Creature接口的实现，提供了根据阵型需求自动更改敌人数量等功能<br>
+&nbsp;&nbsp;&nbsp;&nbsp;|------class DaWa,ErWa,......,QiWa  每个葫芦娃自成一类，继承HuluBoy，具体实现skill功能以便动态链接<br>
     
-|------package Formation  Formation包内含了所有阵型类
-    |------interface Formation  定义了阵型接口
-    |------FlyingGeese_Formation,...,Arrow_Formation  每个阵型自成一类，实现Formation接口规定的阵型方法
+|------package Formation  Formation包内含了所有阵型类<br>
+&nbsp;&nbsp;&nbsp;&nbsp;|------interface Formation  定义了阵型接口<br>
+&nbsp;&nbsp;&nbsp;&nbsp;|------FlyingGeese_Formation,...,Arrow_Formation  每个阵型自成一类，实现Formation接口规定的阵型方法<br>
     
-|------package HuluTeam  HuluTeam包内含了所有游戏相关代码
-    |------class TimeTurn  时间调度类，判断该回合是哪个葫芦娃的回合，并根据当前回合计算下个回合的生物
-    |------class Position  位置类，记录了某一位置的可视信息，有无生物，以及具体生物
-    |------class BattleField  战场类，继承JPanel，聚集Position,HuluBrothers,Enemies,Formation等，实现可视化功能，paint根据位置可视化信息，生物信息等加载生物入场，根据游戏是否开始实时更新文本框内容，根据生物攻击返回的信息实时repaint
-    |------class Observer  管理观察类，继承JFrame，聚集BattleField,Timeturn，向窗口添加键盘和鼠标监听，规定了AI的攻击策略，负责读盘和复写。
-    |------class Game  游戏入口，Main函数所在类
-    
+|------package HuluTeam  HuluTeam包内含了所有游戏相关代码<br>
+&nbsp;&nbsp;&nbsp;&nbsp;|------class TimeTurn  时间调度类，判断该回合是哪个葫芦娃的回合，并根据当前回合计算下个回合的生物<br>
+&nbsp;&nbsp;&nbsp;&nbsp;|------class Position  位置类，记录了某一位置的可视信息，有无生物，以及具体生物<br>
+&nbsp;&nbsp;&nbsp;&nbsp;|------class BattleField  战场类，继承JPanel，聚集Position,HuluBrothers,Enemies,Formation等，实现可视化功能，paint根据位置可视化信息，生物信息等加载生物入场，根据游戏是否开始实时更新文本框内容，根据生物攻击返回的信息实时repaint<br>
+&nbsp;&nbsp;&nbsp;&nbsp;|------class Observer  管理观察类，继承JFrame，聚集BattleField,Timeturn，向窗口添加键盘和鼠标监听，规定了AI的攻击策略，负责读盘和复写<br>
+&nbsp;&nbsp;&nbsp;&nbsp;|------class Game  游戏入口，Main函数所在类<br>
+
