@@ -16,3 +16,5 @@ fileFilter/expPanel:对UI的扩展
 说明(快捷键T):对于整个界面的说明  
 ![加载不出来，凉了](https://github.com/exevvv/java-2017f-homework/blob/master/Fianl%20Project/胡语诚-141220042/1.png)  
 
+`项目中已包含一个战斗过程记录文件(HuluwaRecord1515380895896.txt)，可以直接进行回放`  
+
