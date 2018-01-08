@@ -29,7 +29,8 @@
 |鼠标点击|选定攻击位置，葫芦娃！出击！|
 
 当然，死去的生物可不会攻击哦
-！[image](https://github.com/Wandayu/java-2017f-homework/blob/master/Fianl%20Project/%E4%B8%87%E8%BE%BE%E7%A6%B9-151220101/%E5%AE%9E%E9%AA%8C%E6%88%AA%E5%9B%BE/%E6%AD%BB%E4%BA%A1%E6%88%AA%E5%9B%BE2.png)
+
+![image](https://github.com/Wandayu/java-2017f-homework/blob/master/Fianl%20Project/%E4%B8%87%E8%BE%BE%E7%A6%B9-151220101/%E5%AE%9E%E9%AA%8C%E6%88%AA%E5%9B%BE/%E6%AD%BB%E4%BA%A1%E6%88%AA%E5%9B%BE2.png)
 
 
 ### 游戏内容介绍
