@@ -14,7 +14,7 @@
 
  ### 文件说明  
  复盘参考文件为outPut2.txt  
- 可执行jar在target目录下，名为Huluwa-1.0-SNAPSHOT-shaded.jar（如果您用maven clean+test+package再次生成jar，如果出现打不开jar  
+ 可执行jar在target目录下，名为Huluwa-1.0-SNAPSHOT-shaded.jar（如果您用maven clean+test+package再次生成jar，如果出现打不开jar
  的情况，则修改jar里面的MANIFEST.MF文件，在里面加上Main_Class:Main即可）
  
  ### 战斗规则  
@@ -24,8 +24,8 @@
   
  ### 战斗力数值比较
          蛇精   蝎子精   小喽啰  
- 葫芦娃     1:3    1:1      3:1  
- 爷爷       1:4    1:2      2:1  
+ 葫芦娃     1:3      1:1        3:1  
+ 爷爷       1:4      1:2        2:1  
 
  ###移动策略  
  为了避免战斗过程草草结束，本程序采用了一种较为综合的策略：当生物体在角落的时候，下一次移动会以较大的概率朝向地图中心；当生物体靠近  
@@ -52,6 +52,6 @@
   ### 访问控制
  
  大部分的数据成员的访问控制为private，基于数据封装的同时，对外提供了set和get函数。很多类都有field成员变量，用来和field交互。
-
-  ### 范型 测试 注解
+  ### 范型 测试 注解  
+ 
   程序中都有体现
