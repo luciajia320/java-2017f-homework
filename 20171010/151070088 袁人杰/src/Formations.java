@@ -99,4 +99,8 @@ class Qi implements Creature{
     public String getName() {
         return PLACE_HOLDER;
     }
+
+    public void move(int x, int y) {
+        return;
+    }
 }

@@ -12,7 +12,7 @@ public class theBattleField {
 
         bros=new Huluwa[7];
         for (int i=0;i<bros.length;i++){
-            bros[i] = new Huluwa(Huluwa.COLOUR.values()[i], Huluwa.SENIORITY.values()[i]);
+            bros[i] = new Huluwa(Huluwa.COLOUR.values()[i], Huluwa.SENIORITY.values()[i],this.planar);
         }
 
         grandpa=new Grandpa();
@@ -56,6 +56,8 @@ public class theBattleField {
             field.planar.layout(l1, new Coordinate(1, 6));
             YanxingFormation y1 = new YanxingFormation(villainQueue);
             field.planar.layout(y1, new Coordinate(5, 5));
+
+            field.bros[0].move(0,1);
 
             field.planar.printPlanar();
 

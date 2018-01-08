@@ -2,11 +2,19 @@ public class Huluwa implements Creature,Comparation {
     private SENIORITY seniority;
     private Grid grid;//葫芦娃的位置
     private COLOUR colour;//葫芦娃的颜色
+    private Planar planar;
 
 
     public Huluwa(COLOUR colour,SENIORITY seniority){
         this.colour = colour;
         this.seniority = seniority;
+    }
+
+    public Huluwa(COLOUR colour,SENIORITY seniority,Planar planar){
+        this.colour = colour;
+        this.seniority = seniority;
+        this.planar = planar;
+
     }
 
     public void setColor(COLOUR colour) {
@@ -32,6 +40,14 @@ public class Huluwa implements Creature,Comparation {
         grid.setHolder(this);
     }
 
+
+    public void move(int x,int y) {
+        int nx = this.grid.getX()+x;
+        int ny = this.grid.getY()+y;
+        grid.setNull();
+        this.setGrid(planar.getGridOF(nx + x,y+ny));
+    }
+
     @Override
     public void report() {
         System.out.print(this.toString());
@@ -53,7 +69,7 @@ public class Huluwa implements Creature,Comparation {
 
     @Override
     public String getName() {
-        return SENIORITY.values().toString();
+        return seniority.toString();
     }
 
     enum COLOUR {
