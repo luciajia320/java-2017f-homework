@@ -1,9 +1,9 @@
-#工程说明
+# 工程说明
 
 在完成葫芦娃作业的过程中，我主要从两个方面来考虑实现问题，一个应该如何将整个葫芦娃大战妖怪的整个事件抽象出来，第二是该怎样将项目划分成各部分，更有条理地实现。
 
-##一 抽象
-![](https://github.com/njuhxc/java-2017f-homework/raw/master/jpg/2.gif)
+## 一 抽象
+![2](https://github.com/njuhxc/java-2017f-homework/blob/master/20171010/何欣程-141220040/jpg/2.png)
 
 整个世界都可以作为一个存在(Being)，存在分为生物(Creature)和非生物的二维空间(Position)，Creature有五个子类，葫芦娃，人，蛇，蝎子，小兵。这样，就形成了完整的父类和子类的关系。
 
@@ -24,8 +24,8 @@
 其中，为了保证数据的完整性，所有成员变量均为protected/private，对外传递均使用成员函数进行传递。
 
 
-##二 代码结构
-![](https://github.com/njuhxc/java-2017f-homework/raw/master/jpg/1.gif)
+## 二 代码结构
+![1](https://github.com/njuhxc/java-2017f-homework/blob/master/20171010/%E4%BD%95%E6%AC%A3%E7%A8%8B-141220040/jpg/1.png)
 
 由上图，可以清晰地看出代码结构。本项目由三大部分组成：
 BaseDefine: Action.java,Being.java,Creature.java,Position.java
@@ -33,7 +33,7 @@ BaseDefine: Action.java,Being.java,Creature.java,Position.java
 RealDefine:WarRole.java 具体地定义了一场战争的规则，想让定义出来的这些对象做什么，怎么做，这个工程的执行顺序是什么。
 RunGame:WarStart.java 封装好的对外接口，用户所拿到的只有warRole.war_start()这一个用户接口。
 
-##三 好处
+## 三 好处
 通过一层层的封装和抽象，我深刻地体会到了抽象机制的必要性。
 一，结构清晰分明，让人一目了然。
 二，保护数据完整性和私密性。
