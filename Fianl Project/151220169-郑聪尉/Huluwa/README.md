@@ -6,6 +6,7 @@
 
 * IntelliJ IDEA 2017.2；
 * Java8；
+* Maven 3.5.2;
 
 ## 项目预览
 
