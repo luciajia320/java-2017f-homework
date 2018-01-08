@@ -162,6 +162,7 @@ public class Field extends JPanel {
             g.drawString(out, x, y);
             return;
         }
+
         else {
             world.add(dawa);
             world.add(erwa);

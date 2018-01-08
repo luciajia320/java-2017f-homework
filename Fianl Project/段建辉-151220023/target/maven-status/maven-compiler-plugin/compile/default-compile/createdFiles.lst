@@ -3,6 +3,7 @@ FormationException.class
 Dawa.class
 sort.class
 Snake.class
+Main.class
 Color.class
 Liuwa.class
 Position.class
@@ -11,7 +12,7 @@ record.class
 Wuwa.class
 Field.class
 creature.class
-Ground.class
+rePlay.class
 Siwa.class
 Player.class
 Xiaojingang.class

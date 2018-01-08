@@ -5,7 +5,7 @@ class monster extends Player implements creature, Runnable {
     private int rank;
     private String name;
     Field field;
-
+    int reliveCount;
     monster(int x, int y, Field field){
         super(x,y, field);
         rank = 10;
@@ -14,6 +14,7 @@ class monster extends Player implements creature, Runnable {
         speed = 2;
         camp = 1;
         attackDistance = 50;
+        reliveCount = 0;
         URL url = getClass().getResource("player.png");
         setPlayerImage(url);
     }
@@ -68,10 +69,16 @@ class monster extends Player implements creature, Runnable {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                int reliveX = rand.nextInt(field.getBoardWidth()), reliveY = rand.nextInt(field.getBoardHeight());
-                this.setX(reliveX);
-                this.setY(reliveY);
-                alive = true;
+                if(reliveCount < 3) {
+                    int reliveX = rand.nextInt(field.getBoardWidth()), reliveY = rand.nextInt(field.getBoardHeight());
+                    this.setX(reliveX);
+                    this.setY(reliveY);
+                    alive = true;
+                    reliveCount++;
+                }
+                else {
+                    Thread.yield();
+                }
 
             }
 
@@ -101,6 +108,8 @@ class Scorpion extends monster {
 
         name = "🦂";
         this.field = field;
+        attackDistance = 80;
+
         URL url = getClass().getResource("Scorpion.png");
         setPlayerImage(url);
     }
@@ -125,6 +134,8 @@ class Snake extends monster {
 
         name = "🐍";
         this.field = field;
+        attackDistance = 80;
+
         URL url = getClass().getResource("Snake.png");
         setPlayerImage(url);
     }

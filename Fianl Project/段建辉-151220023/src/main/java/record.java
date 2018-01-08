@@ -2,26 +2,39 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Objects;
 
 public class record implements Runnable {
+
     private Field field;
 
     record(Field field) {
+
         this.field = field;
     }
+
     @Override
     public void run() {
-        File writeFile = new File("output.txt");
+
+        File writeFile = new File("theBeforeOne.txt");
 
         try {
+
             BufferedWriter out = new BufferedWriter(new FileWriter(writeFile));
 
             while (!field.getCompleted()) {
-                //System.out.println("here");
+
                 for (int i = 0; i < field.getWorld().size(); i++) {
-                    out.write(field.getWorld().get(i).x() + " " + field.getWorld().get(i).y() + "\n");
+
+                    Player tempP = field.getWorld().get(i);
+                    if(Objects.equals(tempP.getClass().getSimpleName(), "grandFather")) {
+                        continue;
+                    }
+
+                    out.write(tempP.x() + " " + tempP.y() + " " +tempP.isAlive()  + "\n");
                 }
-                Thread.sleep(100);
+
+                Thread.sleep(150);
             }
 
             out.flush();

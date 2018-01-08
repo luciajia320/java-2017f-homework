@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.io.*;
+import java.util.Objects;
 
 public class rePlay implements Runnable{
     Field field;
@@ -20,21 +21,30 @@ public class rePlay implements Runnable{
                 reader = new InputStreamReader(new FileInputStream(file));
                 BufferedReader br = new BufferedReader(reader);
                 String line;
+
                 while ((line = br.readLine()) != null) {
+
                     for(Player w : field.getWorld()) {
-                        if(w.getClass().getSimpleName() == "grandFather") {
+
+                        if(Objects.equals(w.getClass().getSimpleName(), "grandFather")) {
                             continue;
                         }
+
                         String[] pos = line.split(" ");
                         int nX = Integer.parseInt(pos[0]);
                         int nY = Integer.parseInt(pos[1]);
-                        w.setX(nX);
-                        w.setY(nY);
-                        this.field.repaint();
-                        Thread.sleep(8);
-                        if((line = br.readLine()) != null) {
-                            continue;
+
+                        if(Objects.equals(pos[2], "false")) {
+                            w.setDeath();
                         }
+                        else {
+                            w.setX(nX);
+                            w.setY(nY);
+                        }
+                        this.field.repaint();
+                        Thread.sleep(1);
+
+                        if((line = br.readLine()) != null) { continue; }
                         else { break; }
                     }
                 }
