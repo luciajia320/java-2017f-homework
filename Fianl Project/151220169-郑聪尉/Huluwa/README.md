@@ -13,7 +13,7 @@ Huluwa 17f-Final 版本是葫芦娃大战的自动化程序，支持存档读档
 
 ![Huluwa0](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa0.png)
 
-**可用Maven打包后运行Huluwa.jar，按空格键即可立即开始多线程战斗，更多界面截图可在网页末尾查看**
+**可用Maven打包后运行Huluwa.jar，按空格键即可立即开始多线程战斗，规则说明详见文尾**
 
 ## 项目详情
 
@@ -36,6 +36,17 @@ Huluwa 17f-Final 版本是葫芦娃大战的自动化程序，支持存档读档
 
 ## 设计要点
 
+### 设计原则
+
+#### 一、开放封闭原则 The Open-Closed Principle
+> absctract class的设计，将可供子类重写的设计为抽象方法，开放扩展；其它方法不可改变，关闭修改；
+
+#### 二、里氏替换原则 The Liskov Substitution Principle
+> 所有的Creatures都能被Huluwa, Yeye, Snake, Scorpion或者DemonTroop替换；
+
+#### 三、单一职责原则 The Single-Responsibility Principle
+> IOFile类仅实现文件读写；Creature仅实现角色属性与方法；
+
 ### 封装与继承
 
 * Object类表示二维对象，可派生出Creature抽象类，也可直接用来定义背景、图标等；
@@ -47,7 +58,7 @@ Huluwa 17f-Final 版本是葫芦娃大战的自动化程序，支持存档读档
 
 ### 集合与泛型
 
-程序用到Vector<>来存储各类角色，如Vector<Creature>存放roles和death，两个容器实时增加或删减，程序效率会更高。
+在Batle类中有角色roles和death的属性成员，其类型为Vector<Creature>来存储各类角色，两个容器实时增加或删减，程序效率会更高。
 
 ### 多态
 
@@ -66,14 +77,6 @@ Battle类中的roles和death使用泛型Vector<Creature>来存放不同角色，
     }
 }
 </code></pre>
-
-### 设计原则
-
-#### 一、单一职责原则
-> IOFile类仅实现文件读写；Creature仅实现角色属性与方法；
-
-#### 二、里氏替换原则
-> 所有的Creatures都能被Huluwa, Yeye, Snake, Scorpion或者DemonTroop替换；
 
 ### 注解
 
@@ -102,16 +105,43 @@ IOFile类实现：FileReader与BufferedReader用来读取文件，FileWriter与B
 * 设计前期经老师提醒，对抽象封装有了更深的体会；
 * 中期根据教学进度，陆续添加功能，缝缝补补；
 * 后期在实现界面与复盘功能的时候，在原来码得自由自在的情况下，遇到不小的冲击，需要对框架进行比较大幅度改变；
+* Battle类用来控制战斗逻辑与界面显示，没能做好MVC设计模式，这种模式在移动互联应用课上深有体会，所以寒假会进一步优化；
+* 阵型操作没有单独成一类，需要改进，同样可以考虑采用delegate模式；
 
-> 附录
+## 附录 规则说明
 
-**葫芦娃正大杀四方，打得酣畅淋漓收服了俩妖精，可是小喽啰却发现了葫芦娃简单AI的破绽，直向爷爷奔去！预知后文如何，可查看葫芦娃篇章之功亏一篑！**
+> 考虑到趣味性，规则有一定修改；
+
+### 前情概要
+* 时光倒流，穿山甲又双叒叕钻破了葫芦山，蛇精蝎子精从中逃了出来，变造小喽啰，占据山洞自得其乐，后话不提；
+* 另一边七个葫芦娃都成功破壳，个个法力高强，七娃尤其瞩目；
+* 在如意的指引下，妖精企图趁葫芦娃们不在抓住爷爷，而爷爷毫无反击能力；
+* 好在二娃有火眼金睛，七兄弟及时赶回葫芦山，一场恶斗不可避免；
+
+### 故事开始
+* 战斗伊始，双方拉开架势，小喽啰方阵排开，蝎子精蛇精身居其中，七兄弟则鹤翼以待；
+* 双方接近并产生碰撞的瞬间, 在非攻击状态下，判站在原地者死；
+* 葫芦娃和蝎子精能持续攻击一段时间，发光即为攻击态，判非攻击态者死，若都为攻击态则僵持；
+* 葫芦娃HP值初始为2，每次损伤则减1，若死则葫芦藤上对应会重新结上葫芦果，经过七秒钟孕育后复活；
+* 蛇精和蝎子精只有在被七娃的葫芦收服才判定为死，否则只是被暂时击退，会从山底下继续攻上来；
+* 当蛇精和蝎子精都未被收服，则小喽啰将被持续不断地造出来；
+
+
+### 图文解说
+![Huluwa0](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa0.png)
+**战斗伊始，双方拉开架势，小喽啰方阵排开，蝎子精蛇精身居其中，七兄弟则鹤翼以待**
+
 ![Huluwa1](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa1.png)
+**葫芦娃们毫不示弱，不灵不灵和蝎子精进行战斗**
 
 ![Huluwa2](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa2.png)
+**葫芦娃们为保护爷爷死伤惨重。不过已经干掉了蝎子精（灰色头像），而七秒钟过后葫芦藤上的葫芦将再次变身Soldiers**
 
 ![Huluwa-BadEnding](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa-BadEnding.png)
-
-**还好还好，别忘了这是谁的地盘**
+**葫芦娃们只攻击离他们最近的敌人，一心恋战却未能保护好爷爷唉**
 
 ![Huluwa](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa-HappyEnding.png)
+**诶，别忘了这是谁的地盘**
+
+### 集锦
+* 读取document中的文档即可回放查看精彩对局；
