@@ -4,11 +4,11 @@
 
 ## 文件结构
 
-![](fileStructure.png)
+![](figs/fileStructure.png)
 
 ## 类图
 
-![](./class.png)
+![](figs/class.png)
 
 
 
@@ -59,9 +59,25 @@
 
 基于老师给出的example作出修改（前一次的作业写的实在太差，和老师的没法比）
 
+![](figs/creature.png)
+
 1. 所有角色将其抽象成抽象类**Creature**，声明共用方法，同时实现比较接口**Comparable**,以便可以对任何生物体进行排序,各种生物均继承于此。
 
-2. Creature中预留act抽象方法，现在葫芦娃啥都不会，爷爷和蛇精也只会喊666，说不定之后的哪次作业他们就开始动起来了。
+   ![](figs/creaturefac.png)
+
+2. 使用**泛型**与**工厂模式**,设计了生物的生成工厂。
+
+   `interface CreatureFactoryInterface`是一个用于创建生物的接口，他传入某个生物的反射对象，和一个初始的生物给定位置，返回一个生物。
+
+   ```java
+   public interface CreatureFactoryInterface {
+        <T extends Creature> T createCreature(Class<T> tClass, PositionInterface positionInterface);
+   }
+   ```
+
+   `class CreatureFactory`继承了这个接口，并给出具体实现。
+
+3. Creature中预留act抽象方法，现在葫芦娃啥都不会，爷爷和蛇精也只会喊666，说不定之后的哪次作业他们就开始动起来了。
 
    ```java
 
@@ -72,9 +88,9 @@
 
    ```
 
-   ​
+   ![](figs/position.png)
 
-3. 抽象出**PositionInterface**,定义出了更广义上的坐标.
+4. 抽象出**PositionInterface**,定义出了更广义上的坐标.
 
    ```java
    public interface PositionInterface {
@@ -97,17 +113,7 @@
        ......
    ```
 
-   ​
-
-4. 所有生物的制造者，**CreatureFactory**工厂,利用泛型和工厂设计模式,抽象出工厂接口，用于生成所有的生物。
-
-   ```java
-   public interface CreatureFactoryInterface {
-        <T extends Creature> T createCreature(Class<T> tClass, PositionInterface positionInterface);
-   }
-   ```
-
-   ​
+   ![](figs/battleground.png)
 
 5. 抽象出**BattleGround**,定义出广义上的战场,他有一系列抽象的坐标，有一群生物，会往战场中加入生物，会清除生物，可以查看具体坐标的生物是什么，可以有观察整个战场情况的`show()`,以及最重要的打架`battle()`.
 
