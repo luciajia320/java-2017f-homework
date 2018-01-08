@@ -252,7 +252,7 @@ public class Field extends JPanel {
             int key = e.getKeyCode();
 
 
-            if (key == KeyEvent.VK_S) {
+            if (key == KeyEvent.VK_SPACE) {
 
                 red_cala = new Thread(red);
                 orange_cala = new Thread(orange);
@@ -313,15 +313,15 @@ public class Field extends JPanel {
                     BufferedWriter(new FileWriter("inputdata.txt"));
                     while((str=in.readLine())!=null){
                         System.out.println(str);
-                        out.write(str);  //½«¶ÁÈ¡µ½µÄ 1 ĞĞÊı¾İĞ´ÈëÊä³öÁ÷
-                        out.newLine();  //Ğ´Èë»»ĞĞ·û
+                        out.write(str);  //å°†è¯»å–åˆ°çš„ 1 è¡Œæ•°æ®å†™å…¥è¾“å‡ºæµ
+                        out.newLine();  //å†™å…¥æ¢è¡Œç¬¦
                     }
                     out.flush();
                     in.close();
                     out.close();
                 }
                 catch(IOException el){
-                    System.out.println("³öÏÖ´íÎó"+el);
+                    System.out.println("å‡ºç°é”™è¯¯"+el);
                 }
             }
 
