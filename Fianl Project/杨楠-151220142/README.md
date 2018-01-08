@@ -22,7 +22,7 @@
 
 遗留问题
 --
-通过mvn构建的工程导入eclipse完成实现后，由于eclipse不像intelliJ IDEA那样与mvn完全兼容，最后通过mvn命令生成文件产生各种警告，原先在eclipse全部通过的测试也无法通过了（暂时改为了ignore来生成package）。看来下学期的大实验是该把eclipse换成intelliJ了！
+通过mvn构建的工程导入eclipse完成实现后，由于eclipse不像intelliJ IDEA那样与mvn完全适应，通过mvn命令生成文件产生各种警告，原先在eclipse全部通过的测试也无法通过了（暂时改成ignore来生成package）。看来下学期的大实验是该把eclipse换成intelliJ了！
 
 *每次打斗的记录保存在外目录下文件data.hlw中。*
 
