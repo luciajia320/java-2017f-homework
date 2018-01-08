@@ -1,22 +1,76 @@
-葫芦大战蛇蝎  {#welcome}  
-=====================  
-  
+#葫芦大战蛇蝎
 
-This is a document about how to operate the game/drama.
-  
-----------  
-  
-  
-How to start  
----------  
-  
-  
-Tips:
+---
+######`It's a document about how to operate the game/drama.`
 
- ------------------|------------------------------------------|-------------------------------------  
-| Start | `Space`                      | Now the boys and the monsters are moving! |  
-| Save           | `Wait until at least one round ends.`    | You'll need to choose a path for it! |                  
-| Stop | `Space`                      | Now the boys and the monsters are moving! |  
-| Reload           | `L`                      
+---
 
-  
+#如何开始
+
+######Tips:
+- 开始：`Space`
+- 保存：自动
+- 结束：`Esc`
+- 重新开始：`R`
+- 载入历史记录：`L`
+
+---
+
+#类层次描述
+
+> #Ground
+- 继承自JFrame
+- 程序入口
+- 初始化UI
+- 与生俱来
+
+> #Field
+- 继承自JPanel
+- 一个适合打架看戏的场馆
+- 部署葫芦娃、爷爷、蛇精等妖怪
+- 管理战斗的状态机
+- 同时也是控制器
+
+> #WarMonitor
+- 裁判员角色，需要自由，当然是一个线程
+- 裁定场上运动合法性
+- 犯规者打回重来直到学会做人
+- 观察即将发生的战争并通知当事人
+- 尽量留给每一个人足够的时间来选择下一步动作
+- 判定战斗的结束通知场馆暂停营业
+
+> #Logger
+- 笔录角色
+- 将场上人物的状态变化记录成文件
+- 复盘的证人
+
+> #StoryTeller(interface)
+- 会讲故事的人
+- 需要一点自由(独立线程)
+- 忠诚于写好的台词
+
+> #Thing2D
+- 可能这就是脸面和地位
+
+> #Player
+- 实现Runnble接口的能自由活动的人
+- 运动员们上场了，这其实是个代表
+- 在场馆内出生，外面的人知道他们的联系方式
+- `Huluwa`，`Yeye`，`Xiezi`，`Shejing`，`Louluo`才是具有个性的人
+
+> #Mutex
+- 保管钥匙的人
+- 指挥大家打蜡、擦蜡的，总之去一些奇怪的地方得问他借钥匙
+- 条件就是必须上了十六层蜡才能让除蜡的进来擦一层
+- 但十六层满了以后也不会再允许打蜡的进去
+- 运动员都在打蜡
+- 裁判员在除蜡
+
+> #Enums
+> 队形 `Format`  
+> 葫芦 `Hulu`
+
+> #PositionGenerator
+- 可能大家都看不懂列队图吧需要他来指点
+- 可以问他下一个站在哪
+
