@@ -54,17 +54,17 @@ Huluwa 17f-Final 版本是葫芦娃大战的自动化程序，支持存档读档
 Battle类中的roles和death使用泛型Vector<Creature>来存放不同角色，其中Creature为抽象基类，体现了多态；
 
 <pre><code>private void initRole(){
-        roles = new Vector<Creature>();
-        for(Huluwa h: huluwa) {
-            roles.add(h);
-        }
-        roles.add(yeye);
-        roles.add(snake);
-        roles.add(scorpion);
-        for(DemonTroop d: demonTroop){
-            roles.add(d);
-        }
+    roles = new Vector<Creature>();
+    for(Huluwa h: huluwa) {
+        roles.add(h);
     }
+    roles.add(yeye);
+    roles.add(snake);
+    roles.add(scorpion);
+    for(DemonTroop d: demonTroop){
+        roles.add(d);
+    }
+}
 </code></pre>
 
 ### 设计原则
