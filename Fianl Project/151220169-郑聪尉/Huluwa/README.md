@@ -13,7 +13,7 @@ Huluwa 17f-Final 版本是葫芦娃大战的自动化程序，支持存档读档
 
 ![Huluwa0](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa0.png)
 
-**target目录中的Huluwa.jar可直接打开，按空格键即可立即开始多线程战斗，更多界面截图可在网页末尾查看**
+**可用Maven打包后运行Huluwa.jar，按空格键即可立即开始多线程战斗，更多界面截图可在网页末尾查看**
 
 ## 项目详情
 
