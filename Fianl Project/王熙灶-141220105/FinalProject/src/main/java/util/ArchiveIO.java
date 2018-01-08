@@ -67,7 +67,7 @@ public class ArchiveIO {
             for(CreatureArchived ca: tp.creatures) {
                 Element creature = timepoint.addElement("creature");
                 creature.addElement("image").addText(ca.image);
-                creature.addElement("state").addText(ca.state.toString());
+                creature.addElement("state").addText(ca.state.name());
                 creature.addElement("x").addText(Integer.toString(ca.x));
                 creature.addElement("y").addText(Integer.toString(ca.y));
             }
@@ -76,14 +76,50 @@ public class ArchiveIO {
         OutputFormat format = OutputFormat.createPrettyPrint();
         format.setEncoding("UTF-8");
         try {
-            if(!filename.endsWith(".cav")) {
-                filename += ".cav";
+            if(!filename.endsWith(".acv")) {
+                filename += ".acv";
             }
             FileWriter fileWriter = new FileWriter("src/main/resources/archives/" + filename);
             XMLWriter writer = new XMLWriter(fileWriter, format);
             writer.write(document);
             writer.close();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static int getRecordNo() {
+        int recordNo = 0;
+        SAXReader reader = new SAXReader();
+        Document document;
+        try {
+            URL url = FormationReader.class.getResource("/archives/recordNo.xml");
+            document = reader.read(url);
+            Element root = document.getRootElement();
+            recordNo = Integer.parseInt(root.getText());
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+        return recordNo;
+    }
+
+    public static void setRecordNo() {
+        SAXReader reader = new SAXReader();
+        Document document;
+        try {
+            URL url = FormationReader.class.getResource("/archives/recordNo.xml");
+            document = reader.read(url);
+            Element root = document.getRootElement();
+            root.setText(Integer.toString(Constant.recordNo));
+
+            OutputFormat format = OutputFormat.createPrettyPrint();
+            format.setEncoding("UTF-8");
+
+            FileWriter fileWriter = new FileWriter("src/main/resources/archives/recordNo.xml");
+            XMLWriter writer = new XMLWriter(fileWriter, format);
+            writer.write(document);
+            writer.close();
+        } catch (DocumentException | IOException e) {
             e.printStackTrace();
         }
     }

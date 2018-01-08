@@ -31,9 +31,14 @@ public class Space {
      * @param creature, 一个生物体
      * @param x, x坐标位置
      * @param y, y坐标位置
-     * 表示将生物体 creature 与空间中的 (x, y) 位置相关联
+     * 表示将生物体 creature 与空间中的 (x, y) 位置相关联, 如果之前已有位置，先取消关联
      */
-    public void bind(Creature creature, int x, int y) {
+    public synchronized void bind(Creature creature, int x, int y) {
+        Position<Creature> pre_pos = creature.getPosition();
+        if(pre_pos != null) {
+            pre_pos.setHolder(null);
+            creature.setPosition(null);
+        }
         Position<Creature> pos = getPos(x, y);
         pos.setHolder(creature);
         creature.setPosition(pos);
@@ -43,26 +48,26 @@ public class Space {
      * @param creature, 一个生物体
      * 表示取消生物体 creature 和与之相关联的空间位置之间的关联
      */
-    public void unbind(Creature creature) {
-        creature.unbindWith();
-    }
+//    public synchronized void unbind(Creature creature) {
+//        creature.unbindWith();
+//    }
 
     /**
      * @param x, x坐标位置
      * @param y, y坐标位置
      * 表示取消空间位置 (x, y) 和与之相关联的生物之间的关联
      */
-    public void unbind(int x, int y) {
-        Position<Creature> pos = getPos(x, y);
-        pos.unbindWith();
-    }
+//    public synchronized void unbind(int x, int y) {
+//        Position<Creature> pos = getPos(x, y);
+//        pos.unbindWith();
+//    }
 
     /**
      * @param x, x坐标位置
      * @param y, y坐标位置
      * @return 空间中(x, y)上的位置
      */
-    public Position<Creature> getPos(int x, int y) {
+    public synchronized Position<Creature> getPos(int x, int y) {
         if(x > width || y > height) {
             throw new IndexOutOfBoundsException("method 'Position<Creature> getPos(int x, int y)' index out of bounds in class HuluMountainFrame.");
         }

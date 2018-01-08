@@ -5,9 +5,10 @@ import formation.BasicFormation;
 import formation.HeYi;
 import exception.FormationException;
 import space.Position;
-import ui.Ground;
 
 import java.util.*;
+
+import static util.Constant.space;
 
 /**
  * 葫芦娃战队，由七只葫芦娃组成
@@ -23,9 +24,21 @@ public class CalaCrops extends Crops {
             calabashFactory.get(5),
             calabashFactory.get(6)
     ));
+    private GrandPa grandPa = GrandPa.getInstance();
 
     private static CalaCrops crops = new CalaCrops();
     private CalaCrops() {
+        animals.add(grandPa);
+        animals.add(calabashFactory.get(0));
+        animals.add(calabashFactory.get(1));
+        animals.add(calabashFactory.get(2));
+        animals.add(calabashFactory.get(3));
+        animals.add(calabashFactory.get(4));
+        animals.add(calabashFactory.get(5));
+        animals.add(calabashFactory.get(6));
+
+        space.bind(grandPa, 3, 1);
+
         try {
             setFormation(new HeYi(3, 4));
         } catch (FormationException e) {
@@ -69,24 +82,25 @@ public class CalaCrops extends Crops {
      */
     @Override
     public void setFormation(BasicFormation formation) {
-        clearFormation();
+//        clearFormation();
         basicFormation = formation;
         Iterator<Position<Creature>> itr = formation.iterator();
         for(Calabash c: calabashes) {
             if(itr.hasNext()) {
                 Position<Creature> pos = itr.next();
-                c.setPosition(pos);
-                pos.setHolder(c);
+                space.bind(c, pos.getX(), pos.getY());
             }
         }
     }
 
+    @Deprecated
     public void addEnemy(Animal a) {
         for(Animal c: this) {
             c.addEnemy(a);
         }
     }
 
+    @Deprecated
     public void addEnemy(EssenceCrops crops) {
         for(Animal c: this) {
             c.addEnemy(crops.getScorpionEssence());
@@ -104,12 +118,27 @@ public class CalaCrops extends Crops {
 
         @Override
         public boolean hasNext() {
-            return no < 7;
+            return no < 8;
         }
 
         @Override
         public Animal next() {
-            return calabashes.get(no++);
+            if(no == 0) {
+                no++;
+                return grandPa;
+            }
+            else {
+                no++;
+                return calabashes.get(no-2);
+            }
+        }
+    }
+
+    @Deprecated
+    public static void main(String[] args) {
+        CalaCrops calaCrops = CalaCrops.getInstance();
+        for(Animal a: calaCrops) {
+            System.out.println(a);
         }
     }
 }

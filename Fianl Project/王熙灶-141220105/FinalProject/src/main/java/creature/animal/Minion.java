@@ -7,8 +7,12 @@ import util.ImageReader;
  */
 public class Minion extends Animal {
     public Minion() {
-        imageAlive = ImageReader.getImage("minion-alive.png");
-        imageDead = ImageReader.getImage("minion-dead.png");
+        goodguy = false;
+        imageAlivePath = "minion-alive.png";
+        imageDeadPath = "minion-dead.png";
+        imagePath = imageAlivePath;
+        imageAlive = ImageReader.getImage(imageAlivePath);
+        imageDead = ImageReader.getImage(imageDeadPath);
     }
 
     @Override

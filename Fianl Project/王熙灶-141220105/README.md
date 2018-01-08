@@ -1,15 +1,32 @@
-# 说明文档
+# "葫芦娃大战妖精" 说明文档
 Wangxiz的 Java 大作业说明文档。
 
 ## 版本更新记录
+
+### Final Project V 1.5 (final version)
+#### 更新时间
+- 2018.01.08
+
+#### 更新内容
+- ~~TODO：每个时间点记录数据~~  **Done**
+- TODO：根据读取到的存档，完成游戏回放功能
+- TODO：`HelpFrame`细化
+- 修复一些bug
 
 ### Final Project V 1.4
 #### 更新时间
 - 2018.01.07
 
 #### 更新内容
-- TODO：修复多线程bug
-- TODO：将状态enum改为英文
+- ~~TODO：将 `Enum State` 改为英文枚举，中文字符串~~ **Done**
+- 将界面语言设置为 English
+- ~~TODO：解决欢迎界面按钮鼠标扫过才显示问题~~ **Solved**
+- 修改欢迎界面按钮，设为图标按钮
+- 修改欢迎界面背景
+- ~~TODO：修复多线程bug问题~~ **Solved**
+- ~~TODO：将所有生物体的信息输出到状态栏~~ **Done**
+- 添加游戏模式，指示是真实游戏还是存档回放
+
 
 ### Final Project V 1.3
 #### 更新时间
@@ -96,6 +113,7 @@ Wangxiz的 Java 大作业说明文档。
 2、
 
 ## 设计理念
+
 ### 继承思想
 1、生物体基类`Creature`。葫芦娃类`Calabash`、蝎子精类`ScorpionEssence`、蛇精类`SnakeEssence`、爷爷类`GrandPa`、小喽啰类`Minion`均继承于此。
 
@@ -125,6 +143,8 @@ Wangxiz的 Java 大作业说明文档。
 2、葫芦娃战队`CalaCrops`和妖魔战队`EssenceCrops`等类中，使用了单例设计模式，表示其唯一性。
 
 3、工厂模式。`CalabashFactory`和`MinionFactory`使用了工厂模式，一次性构造葫芦娃和小喽啰。
+
+4、迭代器设计模式。在战队基类`Crops`的定义中声明了对`Iterable<Animal>`接口的实现，但其作为抽象类并没有实现该接口，而是由其两个派生类`CalaCrops`和`EssenceCrops`分别进行了实现。
 
 ### 泛型机制
 1、`Position`类中，定义泛型为`T extends Creature`，表示`Position`的`Holder`是某种`Creature`类型。
@@ -168,22 +188,22 @@ Class `Creature`：代表生物体的基类。每个生物体拥有一个`Positi
 
 10、Class `EssenceCrops`：妖魔战队类，继承自`Crops`类。由一只蝎子精和六只小喽啰构成。实现了`Crops`中的抽象方法。
 
-#### Package `creature.plant`
-1、Class `Plant`：植物基类，继承自`Creature`类。有两个属性：`plantName`表示植物名称，`plantEmoji`表示植物的 emoji 图标。
+#### ~~Package `creature.plant`~~
+~~1、Class `Plant`：植物基类，继承自`Creature`类。有两个属性：`plantName`表示植物名称，`plantEmoji`表示植物的 emoji 图标。~~
 
-2、包含以下十种植物类，均继承自`Plant`类：
-- Class `FourLeafClover`：four leaf clover
-- Class `Mushroom`：mushroom
-- Class `MapleLeaf`：maple leaf
-- Class `Blossom`：blossom
-- Class `SunFlower`：sun flower
-- Class `Tulip`：tulip
-- Class `PalmTree`：palm tree
-- Class `Rose`：rose
-- Class `Cactus`：cactus
-- Class `Hibiscus`：hibiscus
+~~2、包含以下十种植物类，均继承自`Plant`类：~~
+- ~~Class `FourLeafClover`：four leaf clover~~
+- ~~Class `Mushroom`：mushroom~~
+- ~~Class `MapleLeaf`：maple leaf~~
+- ~~Class `Blossom`：blossom~~
+- ~~Class `SunFlower`：sun flower~~
+- ~~Class `Tulip`：tulip~~
+- ~~Class `PalmTree`：palm tree~~
+- ~~Class `Rose`：rose~~
+- ~~Class `Cactus`：cactus~~
+- ~~Class `Hibiscus`：hibiscus~~
 
-3、Class `RandomPlant`：随机植物类。静态方法`get()`从以上十种植物中，随机返回一种植物对象实例。使用了RTTI信息。
+3、~~Class `RandomPlant`：随机植物类。静态方法`get()`从以上十种植物中，随机返回一种植物对象实例。使用了RTTI信息。~~
 
 #### Package `formation`
 1、Class `BasicFormation`：阵法基类。`BasicFormation`有四个属性，`current_x`表示阵头的x方向坐标，`current_y`表示阵头的y方向坐标，`space`表示阵法所处的空间，`positions`则表示阵法的空间位置集合，每个阵法由七个阵法位置构成。`clear`方法取消当前阵法中每个位置上的生物与阵法位置的关联。`BasicFormation`实现了`Iterable`接口，为阵法位置提供了迭代器访问方式。
@@ -247,3 +267,11 @@ Class `FormationException`：自定义异常类。用于处理阵法中某个位
 **解决方案**：使用 `getResource()` 来读取`URL`而不是直接使用`File`来读取文件或者直接通过`pathname`来读取 `Image`。这里其实还有一个坑，就是`getResource()`中使用的 `path` 的问题:
 - `path`不以'/'开头时，默认是从此类所在的包下取资源
 - `path`以'/'开头时，则是从`ClassPath`根下获取
+
+2、**问题描述**：在加入背景图的`JPanel`上添加`Button`时，初始时`Button`不显示，当鼠标扫过的时候才显示
+
+**解决方案**：原因应该是`Button`的绘图是在`super.paint(g)`中完成的，而背景的绘图是在当前的派生类中完成的，所以会把`Button`给覆盖掉。通过在`drawImage()`后加上`Button.repaint()`，解决了这个问题。
+
+## **最后的最后**
+
+非常感谢曹老板和余老师这一个学期的辛苦付出，虽然自己以前自学过一点Java，但是听了两位老师的课以后感觉学到了很多很厉害的东西或者称其为思想吧。给两位老师点赞撒花🌺🌺🌺

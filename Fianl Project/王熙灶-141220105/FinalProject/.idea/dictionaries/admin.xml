@@ -5,7 +5,10 @@
       <w>aboutitem</w>
       <w>buttonpanel</w>
       <w>closeitem</w>
+      <w>downleft</w>
+      <w>drived</w>
       <w>filemenu</w>
+      <w>goodguy</w>
       <w>helpitem</w>
       <w>helpmenu</w>
       <w>hulu</w>
@@ -20,6 +23,7 @@
       <w>startitem</w>
       <w>stopitem</w>
       <w>timepoint</w>
+      <w>upleft</w>
       <w>xiezijing</w>
       <w>xsize</w>
       <w>ysize</w>

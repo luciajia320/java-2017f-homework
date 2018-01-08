@@ -9,8 +9,12 @@ public final class ScorpionEssence extends Animal {
     private static ScorpionEssence scorpionEssence = new ScorpionEssence();
 
     private ScorpionEssence() {
-        imageAlive = ImageReader.getImage("scorpion-alive.png");
-        imageDead = ImageReader.getImage("scorpion-dead.png");
+        goodguy = false;
+        imageAlivePath = "scorpion-alive.png";
+        imageDeadPath = "scorpion-dead.png";
+        imagePath = imageAlivePath;
+        imageAlive = ImageReader.getImage(imageAlivePath);
+        imageDead = ImageReader.getImage(imageDeadPath);
     }
 
     public static ScorpionEssence getInstance() {

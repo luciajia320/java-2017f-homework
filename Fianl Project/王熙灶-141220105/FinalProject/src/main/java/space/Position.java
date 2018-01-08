@@ -23,12 +23,12 @@ public class Position<T extends Creature> {
         return holder;
     }
 
-    public void unbindWith() {
-        if(holder != null) {
-            holder.setPosition(null);
-            holder = null;
-        }
-    }
+//    public void unbindWith() {
+//        if(holder != null) {
+//            holder.setPosition(null);
+//            holder = null;
+//        }
+//    }
 
     public int getX() {
         return x;

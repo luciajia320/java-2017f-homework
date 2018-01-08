@@ -31,11 +31,11 @@ public class BasicFormation implements Iterable<Position<Creature>> {
     /**
      * 取消当前阵法中每个位置上的生物与阵法位置的关联
      */
-    public void clear() {
-        for (Position<Creature> pos : this) {
-            pos.unbindWith();
-        }
-    }
+//    public void clear() {
+//        for (Position<Creature> pos : this) {
+//            pos.unbindWith();
+//        }
+//    }
 
     @Override
     public Iterator<Position<Creature>> iterator() {

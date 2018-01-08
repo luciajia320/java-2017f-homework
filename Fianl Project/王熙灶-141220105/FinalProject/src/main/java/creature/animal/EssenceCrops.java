@@ -5,18 +5,20 @@ import formation.BasicFormation;
 import formation.FengShi;
 import exception.FormationException;
 import space.Position;
-import ui.Ground;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import static util.Constant.space;
+
 /**
  * 妖精战队，由蝎子精带领六只小喽啰组成
  */
 public class EssenceCrops extends Crops {
-    private ScorpionEssence scorpionEssence  = ScorpionEssence.getInstance();
+    private ScorpionEssence scorpionEssence = ScorpionEssence.getInstance();
+    private SnakeEssence snakeEssence = SnakeEssence.getInstance();
     private MinionFactory minionFactory = MinionFactory.getInstance();
     private List<Minion> minions = new ArrayList<>(Arrays.asList(
             minionFactory.get(0), minionFactory.get(1), minionFactory.get(2),
@@ -25,6 +27,17 @@ public class EssenceCrops extends Crops {
 
     private static EssenceCrops crops = new EssenceCrops();
     private EssenceCrops() {
+        animals.add(scorpionEssence);
+        animals.add(snakeEssence);
+        animals.add(minionFactory.get(0));
+        animals.add(minionFactory.get(1));
+        animals.add(minionFactory.get(2));
+        animals.add(minionFactory.get(3));
+        animals.add(minionFactory.get(4));
+        animals.add(minionFactory.get(5));
+
+        space.bind(snakeEssence, 7, 1);
+
         try {
             setFormation(new FengShi(7, 4));
         } catch (FormationException e) {
@@ -41,18 +54,16 @@ public class EssenceCrops extends Crops {
      */
     @Override
     public void setFormation(BasicFormation formation) {
-        clearFormation();
+//        clearFormation();
         basicFormation = formation;
         Iterator<Position<Creature>> itr = formation.iterator();
         Position<Creature> pos = itr.next();
-        scorpionEssence.setPosition(pos);
-        pos.setHolder(scorpionEssence);
+        space.bind(scorpionEssence, pos.getX(), pos.getY());
 
         for(Minion minion: minions) {
             if(itr.hasNext()) {
                 pos = itr.next();
-                minion.setPosition(pos);
-                pos.setHolder(minion);
+                space.bind(minion, pos.getX(), pos.getY());
             }
         }
     }
@@ -101,7 +112,7 @@ public class EssenceCrops extends Crops {
 
         @Override
         public boolean hasNext() {
-            return no < 7;
+            return no < 8;
         }
 
         @Override
@@ -110,10 +121,22 @@ public class EssenceCrops extends Crops {
                 no++;
                 return scorpionEssence;
             }
+            else if(no == 1) {
+                no++;
+                return snakeEssence;
+            }
             else {
                 no++;
-                return minions.get(no-2);
+                return minions.get(no-3);
             }
+        }
+    }
+
+    @Deprecated
+    public static void main(String[] args) {
+        EssenceCrops essenceCrops = EssenceCrops.getInstance();
+        for(Animal a: essenceCrops) {
+            System.out.println(a);
         }
     }
 }

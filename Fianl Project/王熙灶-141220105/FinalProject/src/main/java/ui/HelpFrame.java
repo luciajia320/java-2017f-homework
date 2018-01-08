@@ -29,7 +29,7 @@ public class HelpFrame extends JFrame {
     class AboutPanel extends JPanel {
         @Override
         public void paint(Graphics g) {
-            g.drawImage(ImageReader.getImage("aboutbg3.jpg"), 0, 0, width, height, this);
+            g.drawImage(ImageReader.getImage("aboutbg4.png"), 0, 0, width, height, this);
         }
     }
 }
