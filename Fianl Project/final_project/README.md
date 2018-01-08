@@ -46,28 +46,33 @@
 ### 框架说明:
 - 本次大实验基本沿用老师所给的示例框架，在此基础上进行添加修改，以JFrame和JPanel为框架搭建图形界面；以多线程的
 方式控制角色运动；使用synchronized机制来实现多线程同步。
-#### creature 包含了各种生物的实现，包括：
-* Creature，作为interface，规定了生物具有的功能。
-* Huluwa，葫芦娃
-* Grandpa，老爷爷
-* Monster， 妖精
-* Xiezijing， 蝎子精（继承自妖精）
-* Xiaolouluo，小喽啰（继承自妖精）
-* Snake，蛇精（继承自妖精）
+### 个体：
+* Thing2D，所有角色的基类，包含坐标、图像、名字、死亡标记属性；有设置图像，设施死亡标记以及一系列读取功能
+* Player，extends Thing2D implements Runnable，新增了一个field属性，可以感知自己所在战场，观察同行有没有敌人
+以及地图上有无剩余地方；有控制移动的策略move；有run方法
+* Ruler， extends Player implements Boss，正义一方的领袖
+* servant， extends Player，正义一方的从者，有不同的职介，属于正义阵营
+* avenger， extends Player implements Boss，邪恶一方的领袖
+* alter_ego， extends Player ，邪恶一方的小兵
 * Space，空白（特殊的生物，如空气一般虚无缥缈）
-#### field 包含了二维战斗场景的实现，包括：
-* Field，二维空间，SizeX*SizeY的空间大小，提供了一系列对外的接口来改变Field战场的状态。
-* Position，单个位置，可以放置唯一的生物。
-#### frame 包含了UI相关的实现，包括：
-* Animation，动画效果，通过定时器实现了淡入淡出效果，界面背景图片变换时会展现。
-* FileModel，文件模块，用于保存字符串到文件，以及从文件读取字符串。
-* Controller，JavaFX界面的事件处理类，将UI层和事件层分离。
-* Main，程序入口，fxml文件的读取，主框架的搭建。
-#### stratagem 包含了一些阵法的实现，包括：
-* Stratagem，作为interface，规定了阵法应具备的方法。
-* HeyiStratagem，鹤翼阵
-* YanxingStratagem，雁形阵
-* ChangsheStratagem，长蛇阵
+### 策略：
+* strategy，所有策略的基类（注：所有阵型均为两阵营对称）
+* ArrowStrategy
+* GapStrategy
+* GooseStrategy
+* RecStrategy
+* SnakeStrategy
+### 辅助类：
+* score，用于比赛计分的类，其中数据和方法均为静态
+* story，用于记录战斗并与文件交互的类，包括静态的读写文件的方法
+* newWindow，为了弹出比赛结果新建的一个窗口
+* Team， 阵营类，包含阵营标记isKind、角色队列players、队伍策略ourStrategy属性;具有随机生成策略，按阵营添加角色的方法
+### 战场元素：
+* Point， 包含横坐标x、纵坐标y、占有本位制的角色的引用holder；具有报告坐标，报告持有者的方法。
+* field， extends JPanel， 具有OFFSET 、SPACE、宽w、高h、正义队伍goodTeam、邪恶队伍badTeam、胜利奖杯victory、
+点集points等属性；具有绘制背景，设置按键驱动，创建世界，返回点集信息的方法
+### 框架：
+* Main， extends JFrame，初始化窗口，并控制程序开始执行
 ### Test/测试
 主要对field.Field中的方法进行测试，包括：
 * Add方法是否能正确在指定位置放置生物。
