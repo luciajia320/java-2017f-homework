@@ -11,7 +11,7 @@
 #### 连续动画
 连续动画的实现是我这个项目的一个主要的难点。<br>
 用方框画出了所有的position。由于要体现出多线程的机制，所有生物的移动是以position为单位的，但是这样在两个position间移动时是不连续的，但是我想实现连贯的效果，如下图：<br>
-![image](ScreenShots/move1.png)![image](ScreenShots/move2.png)![image](ScreenShots/move3.png)<br>
+![image](ScreenShots/move.png)<br>
 
 实现的机制是：当一个生物移动到另一个position上时，他的坐标立刻改变，但是会启动一个持续0.5秒的动画。在显示的功能模块中实现这样一个函数
 >void startAnimationProgressWithDuration(int times, ImageType type, Vector2 startPoint)
@@ -40,7 +40,8 @@ CombatComponent: 战斗相关的组件<br>
 TimerComponent: 时钟组件<br>
 
 这样就避免了creature类太过庞大的问题。同时也为可能的功能拓展留下了空间，实现新的Componen就可以添加新的功能。<br>
-遗憾之处在于，由于时间有限，尽管花了不少时间去设计吗，有些地方还是没有很好地遵循依赖倒置原则。如果把完全让Creature类不依赖底层Component的实现，可以拥有非常高的可拓展性。
+![image](ScreenShots/PackageCharacters.png)<br>
+遗憾之处在于，由于时间有限，尽管花了不少时间去设计，有些地方还是没有很好地遵循依赖倒置原则。如果把完全让Creature类不依赖底层Component的实现，可以拥有非常高的可拓展性。
 #### 模型与视图分离
 开始做最终的大作业时，就想着尽量采用MVC的架构，但是感觉这个项目里面model和controller的界限不是很明确，所以只是把view和model分了开来，view的功能实现完成后（主要和上述的RenComponent有关），所有跟游戏逻辑有关的就是模型部分了，在实现生物的行为是不用去考虑如何显示的问题。
 #### 模版方法
