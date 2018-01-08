@@ -33,12 +33,8 @@ public class Review extends Player {
     @Override
     public void run() {
         try {
-            //                BufferedReader reader = new BufferedReader(
-            //                        new InputStreamReader(new FileInputStream(field.reviewFile)));
             isReview = true;
             BufferedReader br = new BufferedReader(new FileReader("review.txt"));
-            //int[][] map = field.getMap();
-
             int number = 1;
             String line;
             String[] s;
@@ -51,22 +47,19 @@ public class Review extends Player {
                 if(number % 9 != 0) {
                     for(int i = 0; i < s.length; i++) {
                         map[number - 1][i] = Integer.valueOf(s[i]);
-                        //System.out.print(Integer.valueOf(s[i]) + " ");
                     }
-                    //System.out.println();
                 }
                 else {
                     field.reviewMap(map);
                     field.repaint();
-                    Thread.sleep(new Random().nextInt(500) + 300);
+                    Thread.sleep(new Random().nextInt(200) + 100);
                     number = 0;
                 }
                 number++;
             }
+            isReview = false;
         }
         catch(Exception e) {
-            //e.printStackTrace();
         }
-
     }
 }

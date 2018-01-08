@@ -13,7 +13,7 @@ public class Huluwa extends GoodPerson implements Creature {
     private String color;
     private Position position;
 
-    public Huluwa( Field field, int id) {
+    public Huluwa(Field field, int id) {
         super(field);
         setName(names[id]);
         this.ID = id;

@@ -48,7 +48,7 @@
 
 - **回放模块** : 由类 `Review` 构成, 同时调用了Field类中的相关方法, 战斗的回放在 Review.txt 中
 
-![](image/ClassDiagram.png)
+![](ClassDiagram.png)
 
 ----
 

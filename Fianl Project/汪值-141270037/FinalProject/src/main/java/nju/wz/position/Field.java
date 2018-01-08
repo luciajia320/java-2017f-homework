@@ -1,6 +1,5 @@
 package nju.wz.position;
 
-import nju.wz.app.GodisGod;
 import nju.wz.creature.*;
 
 import javax.swing.*;
@@ -20,7 +19,8 @@ public class Field extends JPanel {
 
     private int threadLength = 16;
     public Thread[] threads = null;
-    public String reviewFile;
+    public String reviewFileName;
+    public static final String finalName = "review.txt";
 
     public Review review;
     private ArrayList<Tile> tiles = new ArrayList<>();
@@ -60,7 +60,6 @@ public class Field extends JPanel {
         return this.h;
     }
 
-
     public void resetMap() {
         for(int i = 0; i < map.length; i++) {
             for(int j = 0; j < map[i].length - 1; j++) {
@@ -91,7 +90,6 @@ public class Field extends JPanel {
             writer.write("\n");
         }
         catch(IOException e) {
-            //e.printStackTrace();
         }
         finally {
             lock.unlock();
@@ -99,7 +97,6 @@ public class Field extends JPanel {
     }
 
     public void reviewMap(int[][] map1) {
-
         for(int i = 0; i < map.length; i++) {
             for(int j = 0; j < map[i].length; j++) {
                 map[i][j] = map1[i][j];
@@ -175,24 +172,11 @@ public class Field extends JPanel {
                     if(p != null) {
                         p.setX(p.getX(j));
                         p.setY(p.getY(i));
-
-                        int x1 = p.getX(j);
-                        int y1 = p.getY(i);
-
-                        if(p instanceof Grandfather) {
-                            System.out.println(p.getClass().getName() + ": (" + x1 + ", " + y1 + ")");
-                            System.out.println(j + "    " + i);
-                        }
-
-                        //System.out.println(p.getClass().getName() + ": (" + x1 + ", " + y1 + ")");
                         players.add(p);
                     }
-
                 }
-
             }
         }
-
         ArrayList world = new ArrayList();
         world.addAll(tiles);
         world.addAll(players);
@@ -201,18 +185,17 @@ public class Field extends JPanel {
             Thing2D item = (Thing2D)world.get(i);
             if(item instanceof Player) {
                 Player player = (Player)item;
-
                 int y1 = ((Player)item).index1();
                 int x1 = ((Player)item).index2();
-
                 map[y1][x1] = getType(player);
-
                 g.drawImage(item.getImage(), item.x() + 2, item.y() + 2, this);
             }
             else {
                 g.drawImage(item.getImage(), item.x(), item.y(), this);
             }
         }
+        g.setColor(new Color(192, 21, 13));
+        g.drawString("回放", OFFSET, OFFSET - 30);
         resetMap();
     }
 
@@ -237,8 +220,6 @@ public class Field extends JPanel {
     }
 
     public void buildWorld(Graphics g) {
-
-
         g.setColor(new Color(250, 240, 170));
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
 
@@ -255,25 +236,22 @@ public class Field extends JPanel {
                 }
                 int y1 = ((Player)item).index1();
                 int x1 = ((Player)item).index2();
-
                 map[y1][x1] = getType(player);
-
                 g.drawImage(item.getImage(), item.x() + 2, item.y() + 2, this);
             }
             else {
                 g.drawImage(item.getImage(), item.x(), item.y(), this);
             }
         }
-
         if(isCompleted()) {
             try {
                 if(writer != null) {
                     writer.close();
                 }
-
             }
             catch(IOException e) {
-                //e.printStackTrace();
+            }finally{
+                writer = null;
             }
             completed = true;
             g.setColor(new Color(192, 21, 13));
@@ -289,7 +267,6 @@ public class Field extends JPanel {
                 }
             }
         }
-
         g.setColor(new Color(6, 6, 4));
         for(int i = 0; i < map.length; i++) {
             for(int j = 0; j < map[i].length - 1; j++) {
@@ -299,34 +276,33 @@ public class Field extends JPanel {
             }
             g.drawString(String.valueOf(i), OFFSET - 10, OFFSET * i + 74);
         }
-
         g.setColor(new Color(6, 6, 4));
         g.drawString("SPACE - 开始/继续", OFFSET, h + 20);
         g.drawString("L - 文件", OFFSET * 4, h + 20);
         g.drawString("S - 暂停", OFFSET * 6, h + 20);
-
-        //showMap();
     }
 
     class TAdapter extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
-            if(completed) {
-                return;
-            }
             int key = e.getKeyCode();
-
-            if(key == KeyEvent.VK_SPACE) {
+            if(key == KeyEvent.VK_SPACE && Review.isReview == false) {
+                if(completed == true) {
+                    restartLevel();
+                }
                 for(int i = 0; i < players.size(); i++) {
                     int id = players.get(i).getID();
                     threads[id] = new Thread(players.get(i), players.get(i).getName());
                     threads[id].start();
                 }
-                if(reviewFile == null && writer == null) {
-                    reviewFile = "review.txt";
+                if(reviewFileName == null || writer == null) {
+                    reviewFileName = finalName;
                     try {
                         writer = new BufferedWriter(
-                                new OutputStreamWriter(new FileOutputStream(reviewFile)));
+                                new OutputStreamWriter(new FileOutputStream(reviewFileName)));
+                        for(int i = 0; i < 10; i++) {
+                            writeMap();
+                        }
                     }
                     catch(FileNotFoundException e1) {
                         System.out.println("File Not Found Error!");
@@ -340,15 +316,13 @@ public class Field extends JPanel {
                     }
                 }
             }
-            else if(key == KeyEvent.VK_L) {
-                if(!players.isEmpty()) {
-                    for(int i = 0; i < players.size(); i++) {
-                        if(threads[i] != null && threads[i].isAlive()) {
-                            threads[i].interrupt();
-                        }
+            else if(key == KeyEvent.VK_L && Review.isReview == false) {
+                restartLevel();
+                for(int i = 0; i < players.size(); i++) {
+                    if(threads[i] != null && threads[i].isAlive()) {
+                        threads[i].interrupt();
                     }
                 }
-
                 JFileChooser jfc = new JFileChooser();
                 jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -360,21 +334,25 @@ public class Field extends JPanel {
                     if(returnVal == JFileChooser.APPROVE_OPTION) {
                         File file = jfc.getSelectedFile();
                         if(file.exists()) {
-                            System.out.println(file.getName());
-                            break;
+                            String name = file.getName();
+                            if(finalName.equals(name)) {
+                                System.out.println(finalName + " is selected.");
+                                break;
+                            }
+                            else {
+                                System.out.println("Please select file: " + finalName);
+                            }
                         }
                     }
                     else {
-                        System.out.println("文件选择失败");
+                        System.out.println("Open file error, select again: ");
                     }
                 }
                 Thread t = new Thread(review);
                 t.start();
-                restartLevel();
             }
             repaint();
         }
-
     }
 
     boolean isCompleted() {
@@ -390,7 +368,6 @@ public class Field extends JPanel {
                 }
             }
         }
-
         if(goodAlive == 0 || badAlive == 0) {
             huluwaWin = (badAlive == 0);
             return true;
@@ -400,10 +377,8 @@ public class Field extends JPanel {
     }
 
     private void moveInField(Player a, Player b) {
-
         int disY = a.index1() - b.index1();
         int disX = a.index2() - b.index2();
-
         if(disX == 0 && disY == 0) {
             System.out.println("Error exist.");
         }
@@ -419,11 +394,9 @@ public class Field extends JPanel {
         else if(disX - disY < 0 && disX + disY < 0) {
             a.move(OFFSET, 0);
         }
-        //writeMap();
     }
 
     public boolean isNot(Player a, Player b) {
-
         if(a.isDie() || b.isDie()) {
             return false;
         }
@@ -432,8 +405,6 @@ public class Field extends JPanel {
             return true;
         }
         return false;
-
-
     }
 
     public void findEnemy(Player a) {
@@ -454,7 +425,6 @@ public class Field extends JPanel {
                     closedEnemy = b;
                 }
             }
-
             if(min == 1) {
                 combat(a, closedEnemy);
                 writeMap();
@@ -463,14 +433,10 @@ public class Field extends JPanel {
                 moveInField(a, closedEnemy);
                 writeMap();
             }
-            else {
-                System.out.println("---------Over-----------");
-            }
         }
         finally {
             lock.unlock();
         }
-
     }
 
     public void combat(Player a, Player b) {
@@ -488,7 +454,6 @@ public class Field extends JPanel {
                 a.setDie(true);
                 map[a.index1()][a.index2()] = 0;
             }
-            //writeMap();
         }
         finally {
         }
@@ -497,24 +462,8 @@ public class Field extends JPanel {
 
     public boolean isExist(Player p, int n1, int n2) {
         if(map[n1][n2] == 0) {
-
             int type = getType(p);
             map[n1][n2] = type;
-            //            if(p instanceof Huluwa) {
-            //                map[n1][n2] = 1;
-            //            }
-            //            else if(p instanceof Grandfather) {
-            //                map[n1][n2] = 2;
-            //            }
-            //            else if(p instanceof Shejing) {
-            //                map[n1][n2] = 7;
-            //            }
-            //            else if(p instanceof Xiezijing) {
-            //                map[n1][n2] = 8;
-            //            }
-            //            else if(p instanceof Xiaoloulou) {
-            //                map[n1][n2] = 9;
-            //            }
             return false;
         }
         else {
@@ -534,8 +483,6 @@ public class Field extends JPanel {
     }
 
     public void restartLevel() {
-
-
         tiles.clear();
         players.clear();
         threads = null;

@@ -18,6 +18,6 @@ public final class Ground extends JFrame {
         setSize(field.getBoardWidth() + OFFSET,
                 field.getBoardHeight() + 2 * OFFSET);
         setLocationRelativeTo(null);
-        setTitle("Ground");
+        setTitle("葫芦娃大战蛇精");
     }
 }

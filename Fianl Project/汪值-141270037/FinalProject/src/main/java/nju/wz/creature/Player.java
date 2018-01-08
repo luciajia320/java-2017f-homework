@@ -62,10 +62,11 @@ public abstract class Player extends Thing2D implements Runnable, Creature {
         return (posY - Field.OFFSET) / Field.SPACE;
     }
 
-    public int getX(int index2){
+    public int getX(int index2) {
         return index2 * Field.OFFSET + Field.SPACE;
     }
-    public int getY(int index1){
+
+    public int getY(int index1) {
         return index1 * Field.OFFSET + Field.SPACE;
     }
 
@@ -74,8 +75,6 @@ public abstract class Player extends Thing2D implements Runnable, Creature {
         this.field = field;
         setFightPower(1.0);
     }
-
-
 
     public void repaint() {
         this.field.repaint();
@@ -115,15 +114,12 @@ public abstract class Player extends Thing2D implements Runnable, Creature {
             while(!Thread.interrupted()) {
 
                 Random rand = new Random();
-                Thread.sleep(rand.nextInt(2000) + 100);
-
+                Thread.sleep(rand.nextInt(2000) + 10000 / (int)getFightPower());
                 if(this.isDie()) {
                     break;
                 }
-
                 field.findEnemy(this);
                 field.repaint();
-
             }
         }
         catch(InterruptedException e) {
@@ -134,7 +130,6 @@ public abstract class Player extends Thing2D implements Runnable, Creature {
     public int compareTo(Creature a) {
         if(a instanceof Player) {
             Random rand = new Random();
-
             double rnd = rand.nextDouble() * (this.getFightPower() + ((Player)a).getFightPower());
             if(rnd < getFightPower()) {
                 return 1;
