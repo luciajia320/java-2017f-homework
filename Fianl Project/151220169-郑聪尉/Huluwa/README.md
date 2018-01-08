@@ -59,11 +59,11 @@ Huluwa 17f-Final 版本是自动化的葫芦娃大战程序，支持存档读档
 
 ### 集合与泛型
 
-Battle类中的roles和death的使用泛型的集合类型Vector<>，元素类型为Creature；
+Battle类中的roles和death的使用集合类型Vector<>，泛型的元素类型为Creature；
 
 ### 多态
 
-Battle类中的roles和death使用泛型Vector<>，其元素类型Creature为抽象基类，可替换为其具体子类Huluwa, Yeye等，体现了多态；
+Battle类中的roles和death使用泛型Vector<>，其元素类型Creature可替换为其具体子类Huluwa, Yeye等，体现了多态；
 
 <pre><code>private void initRole(){
     roles = new Vector<Creature>();
