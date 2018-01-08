@@ -4,11 +4,11 @@
 本程序能够模拟葫芦娃队伍与蛇精队伍作战的场景，战斗开始前生成双方队伍的成员，分别站立到战场左上角和右上角，如下图
 
 
-![image](E:\Curriculum\JAVA Programming\finalProject\start.png)
+![image](ScreenShots/start.png)
 
 此时有两种选择，可以选择按下space键让双方队伍站成自己的队伍阵型，如下图
 
-![image](battle.png)
+![image](ScreenShots/formation.png)
 
 或者是按下L键选择文件播放
 
@@ -16,16 +16,17 @@
 
 战斗结束场景如下:
 
-![image](battle.png)
+![image](ScreenShots/end.png)
 
 如果选择了播放文件，请选择按照正确形式记录战斗场景的文件播放，否则将无法播放，播放中途无法无法停止播放，请给葫芦娃最起码的尊重，看完整场战斗。播放完成后，可以选择按ENTER回到初始界面。
 ***
 ## 部分实现细节说明
 ### 模块间关系
-![image](battle.png)
+![image](ScreenShots/relation.png)
 ### 生物类
 此部分代码完全沿用了之前写过的葫芦娃程序，以Creature类为基类，派生出具体的类，结构如下图：
-![image](battle.png)
+![image](ScreenShots/creature.png)
+
 需要说明的是，写完之后发现基本上所有的工作都可以在Creature类里完成，没必要派生出这么多类。
 
 ### 背景类与战场类
