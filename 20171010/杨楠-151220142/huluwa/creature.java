@@ -3,11 +3,17 @@ package huluwa;
 public class creature {
 	private int row;
 	private int col;
-	protected type ty;
+	private type ty;
 	public creature() {
 		row = -1;
 		col = -1;
 		ty = new type();
+	}
+	public int gettype() {
+		return ty.gettype();
+	}
+	public void settype(int i) {
+		ty.settype(i);
 	}
 	public void setposition(int x,int y) {
 		row = x;

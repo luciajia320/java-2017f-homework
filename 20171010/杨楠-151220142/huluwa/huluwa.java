@@ -10,6 +10,6 @@ public class huluwa extends group{
 	public huluwa(int n) {
 		super(n);
 		for(int i=0;i<n;i++)
-			g[i].ty.settype(5+kids[i]);
+			g[i].settype(5+kids[i]);
 	}
 }
