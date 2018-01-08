@@ -54,7 +54,6 @@
 * servant， extends Player，正义一方的从者，有不同的职介，属于正义阵营
 * avenger， extends Player implements Boss，邪恶一方的领袖
 * alter_ego， extends Player ，邪恶一方的小兵
-* Space，空白（特殊的生物，如空气一般虚无缥缈）
 ### 策略：
 * strategy，所有策略的基类（注：所有阵型均为两阵营对称）
 * ArrowStrategy
