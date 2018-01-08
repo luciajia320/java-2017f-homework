@@ -39,8 +39,9 @@ Huluwa 17f-Final 版本是葫芦娃大战的自动化程序，支持存档读档
 ### 封装与继承
 
 * Object类表示二维对象，可派生出Creature抽象类，也可直接用来定义背景、图标等；
-* Creature抽象类表示各色角色，派生出士兵和平民两项抽象类，由其生命特特征，需Runnable接口来进行线程编程；
-* Creature抽象类由于有前后遮挡关系，需实现Comparable接口来进行空间排序；
+* Creature抽象类表示各色角色，派生出士兵和平民两项抽象类，由其生命特特征，需实现Runnable接口来进行线程编程；
+* Creature抽象类有前后遮挡关系，需实现Comparable接口来进行空间排序；
+* Soldier抽象类有进攻属性和方法，故需要添加进攻起始时间戳和终止时间戳来控制进攻时长；
 
 ![Huluwa-UML](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa-UML.png)
 
