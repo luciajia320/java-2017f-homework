@@ -14,7 +14,7 @@ pictures/ :游戏截屏
 
 在示例代码的基础上根据项目要求进行修改实现：
 
-1. 绘制NxM的二维空间：与示例代码相同使用小图标平铺的方法实现背景，背景小图标分辨率：80×80，人物像素：75×75，根据需要设置`OFFSET=60`，`SPACE=60`，绘制一个8×20的二维空间。
+1. 绘制NxM的二维空间：与示例代码相同使用小图标平铺的方法实现背景，背景小图标分辨率：80×80，人物分辨率：75×75，根据需要设置`OFFSET=60`，`SPACE=60`，绘制一个8×20的二维空间。
 
 2.修改类`Ting2D`，使其成为描述这个战斗背景对象的类，添加成员 `Role role` 表示该对象身份，其中`Role` 的定义为:
 `enum Role{GROUND,HUMAN,SNAKE,MONSTER,SCORPION,NOTCREATURE}`，分别表示葫芦娃、人类、蛇精、咯罗、蝎子精、非生物（即生物所处的位置），`Boolean is_live`，用于表示该对象（主要是生物对象）是否活着，非生物默认`is_live=false`，生物初始化默认`is_live=true`。修改构造函数，在构造时加上对Role的初始化。
@@ -27,20 +27,20 @@ pictures/ :游戏截屏
 
 `addKeyListener(new BankAdapter())`添加对键盘监听器，空格键：开始战斗，L：读取记录文件重现战斗结果，R：重新开始，Q：离开战斗。`initWorld()`，`initPlayer()`实现初始化，根据`level`初始化界面，将葫芦娃阵营初始化为方円，将蛇精阵营初始化为鹤翼。初始化后界面如下：
 
-![阵法](http://www.jingduzhisheng.com/wsxs/201609/12/W020160912537837823809.jpg)
+![初始](https://github.com/njuhxc/java-2017f-homework/blob/master/Fianl%20Project/%E4%BD%95%E6%AC%A3%E7%A8%8B-141220040/pictures/p1.PNG)
 
 5.1：开始战斗：调用`start()`函数。使用两个`Arraylist<Player>goodman`，`badman`存储敌对两个阵营，战斗时葫芦娃阵营每次向右前进一格，蛇精阵营每次向做前进一格，若敌对的两个对象距离接近一定距离（`Math.abs(x1-x2)<=OFFSET&&Math.abs(y1-y2)<=OFFSET`）,则触发`war()`，战败的对象`dead()`。使用两个`boolean goodman_live`，`badman_live`记录敌对两阵营团灭状况，若有一方为false，则战斗结束。使用`String all_log`记录战斗日志，每一行格式为`role id x y win/lose`，战斗结束写入文件，便于之后读取。
 
 5.2：读取战斗记录：使用`JFileChooser()`实现文件选择，根据每一行的记录更新界面情况然后刷新界面。
 读取记录界面如下：
 
-![阵法](http://www.jingduzhisheng.com/wsxs/201609/12/W020160912537837823809.jpg)
+![记录](https://github.com/njuhxc/java-2017f-homework/blob/master/Fianl%20Project/%E4%BD%95%E6%AC%A3%E7%A8%8B-141220040/pictures/p2.PNG)
 
 5.3：重新开始：调用`restartLevel()`。
 
 战斗结束后界面如下：
 
-![阵法](http://www.jingduzhisheng.com/wsxs/201609/12/W020160912537837823809.jpg)
+![结束](https://github.com/njuhxc/java-2017f-homework/blob/master/Fianl%20Project/%E4%BD%95%E6%AC%A3%E7%A8%8B-141220040/pictures/p3.PNG)
 
 
 
