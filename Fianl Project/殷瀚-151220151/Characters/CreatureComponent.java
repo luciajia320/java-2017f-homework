@@ -1,5 +1,5 @@
 package Characters;
 
-public abstract class Component {
+public abstract class CreatureComponent {
     protected Creature creatureClient;
 }

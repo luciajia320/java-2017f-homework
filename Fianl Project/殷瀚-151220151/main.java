@@ -5,11 +5,15 @@ import Types.COLOR;
 import Types.SENIORITY;
 import Types.TianGan;
 
+import javax.swing.*;
+import java.awt.*;
+import java.util.Random;
+
 public class main {
     public static void main(String[] args) {
         GameWindow gameWindow = new GameWindow(1200, 1000);
 
-        Field field = new Field(1000, 800, 15, 12, 2);
+        Field field = new Field(1000, 800, 15, 12);
 
         //葫芦娃
         Huluwa[] HuluBrothers = new Huluwa[7];
@@ -39,29 +43,16 @@ public class main {
         powerOfHuluwa.addCreatures(HuluBrothers);
         powerOfHuluwa.addOneCreature(YeYe);
         powerOfYaojing.addCreatures(lackeys);
-       powerOfYaojing.addOneCreature(SheJing);
+        powerOfYaojing.addOneCreature(SheJing);
         powerOfYaojing.addOneCreature(XieZiJing);
 
         /* 各方势力宣战 */
         powerOfHuluwa.declareWarTo(powerOfYaojing);
         powerOfYaojing.declareWarTo(powerOfHuluwa);
 
-
-
         gameWindow.add(field);
         gameWindow.setVisible(true);
+        gameWindow.setResizable(false);
 
-//        Vector2 pp = HuluBrothers[0].getPosition().getCoordinate();
-//        HuluBrothers[0].moveTo(new Vector2(1, 1));
-//        HuluBrothers[0].remainActionAnimationClockCircles = 10;
-//        HuluBrothers[0].renderComponent.startAnimationProgressWithDuration(10, RenderComponent.ImageType.MOVING, pp);
-//        HuluBrothers[0].state = CreatureState.MOVING;
-//        field.repaint();
-
-//        try {
-//            Thread.sleep(10000);
-//        } catch ( Exception e) {
-//
-//        }
     }
 }

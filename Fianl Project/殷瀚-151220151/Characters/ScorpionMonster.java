@@ -4,8 +4,6 @@
  */
 package Characters;
 
-import java.awt.*;
-
 public class ScorpionMonster extends Creature {
     private String name;
 
@@ -20,12 +18,12 @@ public class ScorpionMonster extends Creature {
     @Override
     protected void prepareRenderComponent() {
         try {
-            renderComponent.prepare(RenderComponent.ImageType.MOVING, "Image/xiezi_moving.png", 5);
-            renderComponent.prepare(RenderComponent.ImageType.HEALTH_BAR, "Image/healthBar.png", 1);
-            renderComponent.prepare(RenderComponent.ImageType.HEALTH_BAR_FILL, "Image/healthBarFill.png", 1);
-            renderComponent.prepare(RenderComponent.ImageType.TOMB, "Image/tomb.png", 1);
-            renderComponent.prepare(RenderComponent.ImageType.ATTACKING, "Image/xiezi_attack.png", 5);
-            renderComponent.prepare(RenderComponent.ImageType.IDLE, "Image/xiezi_idle.png", 1);
+            renderComponent.prepare(RenderCreatureComponent.ImageType.MOVING, "Image/xiezi_moving.png", 5);
+            renderComponent.prepare(RenderCreatureComponent.ImageType.HEALTH_BAR, "Image/healthBar.png", 1);
+            renderComponent.prepare(RenderCreatureComponent.ImageType.HEALTH_BAR_FILL, "Image/healthBarFill.png", 1);
+            renderComponent.prepare(RenderCreatureComponent.ImageType.TOMB, "Image/tomb.png", 1);
+            renderComponent.prepare(RenderCreatureComponent.ImageType.ATTACKING, "Image/xiezi_attack.png", 5);
+            renderComponent.prepare(RenderCreatureComponent.ImageType.IDLE, "Image/xiezi_idle.png", 1);
         } catch (Exception e) {
             e.printStackTrace();
         }

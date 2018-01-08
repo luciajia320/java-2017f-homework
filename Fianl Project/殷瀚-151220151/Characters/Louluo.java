@@ -5,39 +5,39 @@ package Characters;
 
 import Types.TianGan;
 
-import javax.swing.*;
-import java.net.URL;
 import java.util.Random;
 
 public class Louluo extends Creature{
 
     private TianGan codeName;
-    int louluoKind = 0;
+    private int louluoKind;
 
     public Louluo(TianGan codeName){
         super();
         this.codeName = codeName;
         this.combatComponent.setAttackValue(10);
-        Random random = new Random();
-        int louluoKindNum = 2;
-        int louluoKind = random.nextInt(louluoKindNum);
     }
 
-    public Louluo(TianGan codeName, int luoluokind) {
+    public Louluo(TianGan codeName, int louluokind) {
         super();
         this.codeName = codeName;
         this.combatComponent.setAttackValue(10);
-        this.louluoKind = louluoKind;
+        if (louluokind != 0 && louluokind != 1) {
+            louluokind = 0;
+        }
+        this.louluoKind = louluokind;
     }
     @Override
     protected void prepareRenderComponent() {
         try {
-            renderComponent.prepare(RenderComponent.ImageType.MOVING, "Image/louluo" + louluoKind + "_moving.png", 6);
-            renderComponent.prepare(RenderComponent.ImageType.HEALTH_BAR, "Image/healthBar.png", 1);
-            renderComponent.prepare(RenderComponent.ImageType.HEALTH_BAR_FILL, "Image/healthBarFill.png", 1);
-            renderComponent.prepare(RenderComponent.ImageType.TOMB, "Image/tomb.png", 1);
-            renderComponent.prepare(RenderComponent.ImageType.IDLE, "Image/louluo" + louluoKind + "_idle.png", 1);
-            renderComponent.prepare(RenderComponent.ImageType.ATTACKING, "Image/louluo" + louluoKind + "_attack.png", 3);
+            Random random = new Random();
+            this.louluoKind = random.nextInt(2);
+            renderComponent.prepare(RenderCreatureComponent.ImageType.MOVING, "Image/louluo" + louluoKind + "_moving.png", 6);
+            renderComponent.prepare(RenderCreatureComponent.ImageType.HEALTH_BAR, "Image/healthBar.png", 1);
+            renderComponent.prepare(RenderCreatureComponent.ImageType.HEALTH_BAR_FILL, "Image/healthBarFill.png", 1);
+            renderComponent.prepare(RenderCreatureComponent.ImageType.TOMB, "Image/tomb.png", 1);
+            renderComponent.prepare(RenderCreatureComponent.ImageType.IDLE, "Image/louluo" + louluoKind + "_idle.png", 1);
+            renderComponent.prepare(RenderCreatureComponent.ImageType.ATTACKING, "Image/louluo" + louluoKind + "_attack.png", 3);
         } catch (Exception e) {
             e.printStackTrace();
         }

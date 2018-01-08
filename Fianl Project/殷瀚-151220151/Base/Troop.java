@@ -219,4 +219,8 @@ public class Troop {
             field.addOneRecord(time, imageName, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2);
         }
     }
+
+    public void announceVictory() {
+        field.victory();
+    }
 }

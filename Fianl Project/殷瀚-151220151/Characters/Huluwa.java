@@ -3,9 +3,6 @@ package Characters;
 import Types.COLOR;
 import Types.SENIORITY;
 
-import javax.swing.*;
-import java.net.URL;
-
 public class Huluwa extends Creature implements Comparable {
 
     private COLOR color;
@@ -32,12 +29,12 @@ public class Huluwa extends Creature implements Comparable {
     @Override
     protected void prepareRenderComponent() {
         try {
-            renderComponent.prepare(RenderComponent.ImageType.MOVING, "Image/hero_moving.png", 6);
-            renderComponent.prepare(RenderComponent.ImageType.HEALTH_BAR, "Image/healthBar.png", 1);
-            renderComponent.prepare(RenderComponent.ImageType.HEALTH_BAR_FILL, "Image/healthBarFill.png", 1);
-            renderComponent.prepare(RenderComponent.ImageType.TOMB, "Image/tomb.png", 1);
-            renderComponent.prepare(RenderComponent.ImageType.ATTACKING, "Image/hero_attack.png", 4);
-            renderComponent.prepare(RenderComponent.ImageType.IDLE, "Image/hero_idle.png", 1);
+            renderComponent.prepare(RenderCreatureComponent.ImageType.MOVING, "Image/hero_moving.png", 6);
+            renderComponent.prepare(RenderCreatureComponent.ImageType.HEALTH_BAR, "Image/healthBar.png", 1);
+            renderComponent.prepare(RenderCreatureComponent.ImageType.HEALTH_BAR_FILL, "Image/healthBarFill.png", 1);
+            renderComponent.prepare(RenderCreatureComponent.ImageType.TOMB, "Image/tomb.png", 1);
+            renderComponent.prepare(RenderCreatureComponent.ImageType.ATTACKING, "Image/hero_attack.png", 4);
+            renderComponent.prepare(RenderCreatureComponent.ImageType.IDLE, "Image/hero_idle.png", 1);
         } catch (Exception e) {
             e.printStackTrace();
         }

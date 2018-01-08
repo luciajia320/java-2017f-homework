@@ -36,9 +36,14 @@ public class FieldImageRecordDelegate {
     }
 
     public List<ImageRecord> readFromFile(String path) {
+        File file =new File(path);
+
+        return readFromFile(file);
+    }
+
+    public List<ImageRecord> readFromFile(File file) {
 
         List<ImageRecord> records = null;
-        File file =new File(path);
         FileInputStream in;
         try {
             in = new FileInputStream(file);
@@ -49,11 +54,14 @@ public class FieldImageRecordDelegate {
         } catch (IOException e) {
             System.out.println("read object failed");
             e.printStackTrace();
+            return null;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            return null;
         }
         return records;
     }
+
 }
 
 class ImageRecord implements Serializable{

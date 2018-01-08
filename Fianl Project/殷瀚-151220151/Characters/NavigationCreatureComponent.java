@@ -11,9 +11,9 @@ import java.util.List;
  * 以组合的方式添加到一个creature上。
  * 在creature初始化时，将其设置为这个寻路组件的creatureClient。
  */
-public class NavigationComponent extends Component {
+public class NavigationCreatureComponent extends CreatureComponent {
 
-    public NavigationComponent(Creature creature) {
+    public NavigationCreatureComponent(Creature creature) {
         creatureClient = creature;
     }
 
@@ -44,7 +44,7 @@ public class NavigationComponent extends Component {
             }
             return destination;
         } catch (NullPointerException e) {
-            System.out.println("NavigationComponent.getPositionOfNearestAliveHostileCreature(): creatureClient可能未初始化。");
+            System.out.println("NavigationCreatureComponent.getPositionOfNearestAliveHostileCreature(): creatureClient可能未初始化。");
             return null;
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,7 +104,7 @@ public class NavigationComponent extends Component {
                 };
             }
         } catch (NullPointerException e) {
-            System.out.println("NavigationComponent.getPositionOfNearestAliveHostileCreature(): creatureClient可能未初始化。");
+            System.out.println("NavigationCreatureComponent.getPositionOfNearestAliveHostileCreature(): creatureClient可能未初始化。");
             return null;
         } catch (Exception e) {
             e.printStackTrace();

@@ -5,12 +5,10 @@
  */
 package Characters;
 
-import java.awt.*;
-
 public class Cheerer extends Creature implements CheeringGroup {
     protected String name;
     protected String cheerUpWords = "";
-
+    private boolean didAnnounceVictory = false;
     public Cheerer(String name){
         super();
         this.name = name;
@@ -20,7 +18,7 @@ public class Cheerer extends Creature implements CheeringGroup {
     @Override
     protected void prepareRenderComponent() {
         // 文字气泡
-        renderComponent.prepare(RenderComponent.ImageType.TALK_BUBBLE, "Image/talk_bubble_white.png", 1);
+        renderComponent.prepare(RenderCreatureComponent.ImageType.TALK_BUBBLE, "Image/talk_bubble_white.png", 1);
 
     }
 
@@ -37,6 +35,11 @@ public class Cheerer extends Creature implements CheeringGroup {
         if (alive) {
             if (remainHostileCreatureNum == 0) {
                 cheerUpWords = "胜利！";
+                if (didAnnounceVictory == false) {
+                    announceVictory();
+                    didAnnounceVictory = true;
+                }
+
             }else if (remainFriendlyForceNum <= 1) {
                 cheerUpWords = "救命！";
             } else {
@@ -75,5 +78,9 @@ public class Cheerer extends Creature implements CheeringGroup {
                 + "@"
                 + this.position.getX() + "," + this.position.getY()
                 + ";";
+    }
+
+    protected void announceVictory() {
+        troop.announceVictory();
     }
 }

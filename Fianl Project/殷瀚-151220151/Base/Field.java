@@ -10,12 +10,13 @@ import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.net.URL;
 import java.util.*;
 import java.util.List;
 
 public class Field extends JPanel{
-    private int fieldWidth, fieldHeight, positionRowCount, positionColCount, troopNum;
+    private int fieldWidth, fieldHeight, positionRowCount, positionColCount;
     private Position[][] positions;
 
     private final static String[] imagesNames = {
@@ -45,20 +46,19 @@ public class Field extends JPanel{
 
     private boolean isGridViewVisible = true;
 
-    //private FieldRecordDelegate fieldRecordDelegate = new FieldRecordDelegate(this);
     private FieldImageRecordDelegate fieldImageRecordDelegate = new FieldImageRecordDelegate(this);
+
     private long startTime = 0;
-    private double replaySlowRation = 0.9;
+    private double replaySlowRation = 0.7;
     private boolean isReplaying = false;
     private boolean gameStarted  = false;
     private List<ImageRecord> recordsInFile = null;
 
-    public Field(int fieldWidth, int fieldHeight, int positionRowCount, int positionColCount, int troopNum) {
+    public Field(int fieldWidth, int fieldHeight, int positionRowCount, int positionColCount) {
         this.fieldWidth = fieldWidth;
         this.fieldHeight = fieldHeight;
         this.positionRowCount = positionRowCount;
         this.positionColCount = positionColCount;
-        this.troopNum = troopNum;
 
         positions = new Position[positionRowCount][positionColCount];
         for(int i = 0; i < positionRowCount; i++) {
@@ -75,10 +75,14 @@ public class Field extends JPanel{
 
         addKeyListener(new TAdapter());
         setFocusable(true);
+
+        Timer repaintTimer = new Timer(50, (a)->{
+            repaint();
+        });
+        repaintTimer.start();
     }
-    public Field(int fieldWidth, int troopNum){
+    public Field(int fieldWidth){
         this.fieldWidth = fieldWidth;
-        this.troopNum = troopNum;
 
         positions = new Position[fieldWidth][fieldWidth];
 
@@ -147,11 +151,11 @@ public class Field extends JPanel{
                         );
                     }
                     temp.remove(imageRecord);
-                    System.out.println(imageRecord.imageName);
-                    System.out.println(imageRecord.dx1 + "'" + imageRecord.dy1);
-                    System.out.println(imageRecord.dx2 + "'" + imageRecord.dy2);
-                    System.out.println(imageRecord.sx1 + "'" + imageRecord.sy1);
-                    System.out.println(imageRecord.sx2 + "'" + imageRecord.sy2);
+//                    System.out.println(imageRecord.imageName);
+//                    System.out.println(imageRecord.dx1 + "'" + imageRecord.dy1);
+//                    System.out.println(imageRecord.dx2 + "'" + imageRecord.dy2);
+//                    System.out.println(imageRecord.sx1 + "'" + imageRecord.sy1);
+//                    System.out.println(imageRecord.sx2 + "'" + imageRecord.sy2);
                 }
             }
             recordsInFile.clear();
@@ -195,54 +199,68 @@ public class Field extends JPanel{
             int key = e.getKeyCode();
 
             switch (key) {
-                case KeyEvent.VK_LEFT: break;
-                case KeyEvent.VK_SPACE:
-                    for(Troop troop: troops) {
-                        troop.setFormation(FormationName.锋矢);
+                case KeyEvent.VK_L:
+                    if (gameStarted) {
+                        break;
                     }
-                    break;
-                case KeyEvent.VK_S:
-                    Timer timer1 = new Timer(50, (a)->{
-                        repaint();
-                    });
-                    timer1.start();
-                    for(Troop troop: troops) {
-                        troop.startActing();
-                    }
-                    startTime = System.currentTimeMillis();
-                    gameStarted = true;
+                    JFileChooser jfc=new JFileChooser();
+                    jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES );
+                    jfc.showDialog(new JLabel(), "选择");
+                    File file=jfc.getSelectedFile();
+                    if (file != null) {
 
-                    break;
-                case KeyEvent.VK_E:
-                    for(Troop troop: troops) {
-                        troop.pauseActing();
-                    }
-                    break;
-                case KeyEvent.VK_T:
-                    for(Troop troop: troops) {
-                        for (Creature creature: troop.getCreatures()) {
-                            creature.updatePaintings();
-                            creature.renderComponent.changeToNextGesture();
+                        recordsInFile = fieldImageRecordDelegate.readFromFile(file);
+                        if (recordsInFile != null) {
+                            isReplaying = true;
+                            startTime = System.currentTimeMillis();
+                        } else {
+                            isReplaying = false;
+                            System.out.println("文件格式错误。");
                         }
+
+                    } else {
+                        System.out.println("未选择文件。");
                     }
-                    //repaint();
-                    break;
-                case KeyEvent.VK_R:
-                    fieldImageRecordDelegate.saveToFile("test.txt");
-                    break;
-
-                case KeyEvent.VK_A:
-                    isReplaying = true;
-
-                    recordsInFile = fieldImageRecordDelegate.readFromFile("test.txt");
-                    try {
-
-                    startTime = System.currentTimeMillis();
 
                     break;
-                    } catch (NullPointerException exception) {
-                        exception.printStackTrace();
+                case KeyEvent.VK_SPACE:
+                    if (gameStarted == false) {
+                        for (Troop troop : troops) {
+                            troop.setFormation(FormationName.锋矢);
+                        }
+
+//                    Timer timer1 = new Timer(50, (a)->{
+//                        repaint();
+//                    });
+//                    timer1.start();
+                        for (Troop troop : troops) {
+                            troop.startActing();
+                        }
+                        startTime = System.currentTimeMillis();
+                        gameStarted = true;
                     }
+                    break;
+//                case KeyEvent.VK_E:
+//                    for(Troop troop: troops) {
+//                        troop.pauseActing();
+//                    }
+//                    break;
+//                case KeyEvent.VK_R:
+//                    saveRecord();
+//                    break;
+//
+//                case KeyEvent.VK_A:
+//
+//                    recordsInFile = fieldImageRecordDelegate.readFromFile("record.txt");
+//                    if (recordsInFile != null) {
+//                        isReplaying = true;
+//                        startTime = System.currentTimeMillis();
+//                    } else {
+//                        isReplaying = false;
+//                        System.out.println("文件格式错误。");
+//                    }
+//
+//                    break;
             }
 
             //repaint();
@@ -270,6 +288,15 @@ public class Field extends JPanel{
         for(int i = 0 ; i < troops.size() ; i++) {
             troops.get(i).act();
         }
+    }
+
+    public void victory() {
+        gameStarted = false;
+        saveRecord();
+        JOptionPane.showMessageDialog(null, "战斗结束，回放已保存至 record.txt");
+    }
+    public void saveRecord() {
+        fieldImageRecordDelegate.saveToFile("record.txt");
     }
 
     public static void main(String[] args) {
@@ -305,7 +332,7 @@ public class Field extends JPanel{
         powerOfYaojing.addOneCreature(XieZiJing);
 
         /* 初始化场地，11*11方阵，可容纳2方势力 */
-        Field field = new Field(11, 2);
+        Field field = new Field(11);
 
         /* 各方势力登场 */
         field.addTroop(powerOfHuluwa);

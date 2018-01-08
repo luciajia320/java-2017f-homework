@@ -8,7 +8,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RenderComponent extends Component {
+public class RenderCreatureComponent extends CreatureComponent {
     private ImageInfo defaultImageInfo = new ImageInfo("Image/none.png");
 
     private class ImageInfo {
@@ -54,7 +54,7 @@ public class RenderComponent extends Component {
         }
 
     }
-    public RenderComponent(Creature creature) {
+    public RenderCreatureComponent(Creature creature) {
         creatureClient = creature;
     }
 

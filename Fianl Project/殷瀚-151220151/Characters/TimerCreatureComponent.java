@@ -1,12 +1,12 @@
 package Characters;
 
-public class TimerComponent extends Component {
+public class TimerCreatureComponent extends CreatureComponent {
 
     private static final int timeInterval = 50;
     private int millisecondCount = 0;
     protected int timesCount = 0;
 
-    public TimerComponent(Creature creature) {
+    public TimerCreatureComponent(Creature creature) {
         creatureClient = creature;
     }
 

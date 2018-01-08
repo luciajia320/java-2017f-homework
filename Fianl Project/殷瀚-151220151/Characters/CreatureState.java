@@ -3,13 +3,13 @@ package Characters;
 public enum CreatureState {
     ATTACKING, MOVING, IDLE;
 
-    RenderComponent.ImageType getImageType() {
-        RenderComponent.ImageType imageType;
+    RenderCreatureComponent.ImageType getImageType() {
+        RenderCreatureComponent.ImageType imageType;
         switch (this) {
-            case MOVING: imageType = RenderComponent.ImageType.MOVING; break;
-            case ATTACKING: imageType = RenderComponent.ImageType.ATTACKING; break;
-            case IDLE: imageType = RenderComponent.ImageType.IDLE; break;
-            default: imageType = RenderComponent.ImageType.IDLE; break;
+            case MOVING: imageType = RenderCreatureComponent.ImageType.MOVING; break;
+            case ATTACKING: imageType = RenderCreatureComponent.ImageType.ATTACKING; break;
+            case IDLE: imageType = RenderCreatureComponent.ImageType.IDLE; break;
+            default: imageType = RenderCreatureComponent.ImageType.IDLE; break;
         }
         return imageType;
     }

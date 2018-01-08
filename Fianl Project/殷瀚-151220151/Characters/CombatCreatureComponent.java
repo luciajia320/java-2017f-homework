@@ -1,8 +1,8 @@
 package Characters;
 
-public class CombatComponent extends Component {
+public class CombatCreatureComponent extends CreatureComponent {
     private int attackValue = 0;
-    public CombatComponent(Creature creature) {
+    public CombatCreatureComponent(Creature creature) {
         creatureClient = creature;
     }
     public void beAttacked(int attackValue) {

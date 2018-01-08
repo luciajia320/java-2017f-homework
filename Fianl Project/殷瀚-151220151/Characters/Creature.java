@@ -16,10 +16,10 @@ public abstract class Creature implements Paintable, Runnable, Serializable{
     private String talkMessage;
     protected Troop troop; //  每个生物有其所属的阵营
     //m
-    public RenderComponent renderComponent;
-    protected NavigationComponent navigationComponent;// 寻路组件，在需要寻路时向其索要目的地等信息
-    protected TimerComponent timerComponent;
-    public CombatComponent combatComponent;
+    public RenderCreatureComponent renderComponent;
+    protected NavigationCreatureComponent navigationComponent;// 寻路组件，在需要寻路时向其索要目的地等信息
+    protected TimerCreatureComponent timerComponent;
+    public CombatCreatureComponent combatComponent;
 
     //m
     public int remainActionAnimationClockCircles = 0;
@@ -36,11 +36,11 @@ public abstract class Creature implements Paintable, Runnable, Serializable{
     public Creature() {
 
         position = new Position(0, 0, null);
-        renderComponent = new RenderComponent(this);
+        renderComponent = new RenderCreatureComponent(this);
         prepareRenderComponent();
-        navigationComponent = new NavigationComponent(this);
-        timerComponent = new TimerComponent(this);
-        combatComponent = new CombatComponent(this);
+        navigationComponent = new NavigationCreatureComponent(this);
+        timerComponent = new TimerCreatureComponent(this);
+        combatComponent = new CombatCreatureComponent(this);
     }
 
     protected abstract void prepareRenderComponent();
@@ -134,7 +134,7 @@ public abstract class Creature implements Paintable, Runnable, Serializable{
                             state = CreatureState.ATTACKING;
                             remainActionAnimationClockCircles = 10; // 攻击动画持续500毫秒
                             Vector2 currentCoordinate = this.position.getCoordinate();
-                            renderComponent.startAnimationProgressWithDuration(remainActionAnimationClockCircles, RenderComponent.ImageType.ATTACKING, currentCoordinate);
+                            renderComponent.startAnimationProgressWithDuration(remainActionAnimationClockCircles, RenderCreatureComponent.ImageType.ATTACKING, currentCoordinate);
 
                         }
                     }
@@ -149,7 +149,7 @@ public abstract class Creature implements Paintable, Runnable, Serializable{
                     if (isMoving) {
                         state = CreatureState.MOVING;
                         remainActionAnimationClockCircles = 10; // 移动动画持续500毫秒
-                        renderComponent.startAnimationProgressWithDuration(remainActionAnimationClockCircles, RenderComponent.ImageType.MOVING, currentCoordinate);
+                        renderComponent.startAnimationProgressWithDuration(remainActionAnimationClockCircles, RenderCreatureComponent.ImageType.MOVING, currentCoordinate);
 
                     }
 
