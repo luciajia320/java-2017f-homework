@@ -111,7 +111,7 @@ IOFile类实现：FileReader与BufferedReader用来读取文件，FileWriter与B
 
 ## 附录 规则说明
 
-> 考虑到趣味性，规则有一定修改；
+考虑到趣味性，规则有一定修改；
 
 ### 前情概要
 * 时光倒流，穿山甲又双叒叕钻破了葫芦山，蛇精蝎子精从中逃了出来，变造小喽啰，占据山洞自得其乐，后话不提；
@@ -130,19 +130,19 @@ IOFile类实现：FileReader与BufferedReader用来读取文件，FileWriter与B
 
 ### 图文解说
 ![Huluwa0](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa0.png)
-**战斗伊始，双方拉开架势，小喽啰方阵排开，蝎子精蛇精身居其中，七兄弟则鹤翼以待**
+> 战斗伊始，双方拉开架势，小喽啰方阵排开，蝎子精蛇精身居其中，七兄弟则鹤翼以待
 
 ![Huluwa1](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa1.png)
-**葫芦娃们毫不示弱，不灵不灵和蝎子精进行战斗**
+> 葫芦娃们毫不示弱，不灵不灵和蝎子精进行战斗
 
 ![Huluwa2](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa2.png)
-**葫芦娃们为保护爷爷死伤惨重。不过已经干掉了蝎子精（灰色头像），而七秒钟过后葫芦藤上的葫芦将再次变身Soldiers**
+> 葫芦娃们为保护爷爷死伤惨重。不过已经干掉了蝎子精（灰色头像），而七秒钟过后葫芦藤上的葫芦将再次变身Soldiers
 
 ![Huluwa-BadEnding](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa-BadEnding.png)
-**葫芦娃们只攻击离他们最近的敌人，一心恋战却未能保护好爷爷唉**
+> 葫芦娃们只攻击离他们最近的敌人，一心恋战却未能保护好爷爷唉
 
 ![Huluwa](https://github.com/challvy/java-2017f-homework/raw/master/Fianl%20Project/151220169-郑聪尉/Huluwa/prtSc/Huluwa-HappyEnding.png)
-**诶，别忘了这是谁的地盘**
+> 那谁，别忘了这是谁的地盘
 
 ### 集锦
 * 读取document中的文档即可回放查看精彩对局；
