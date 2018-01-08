@@ -15,6 +15,7 @@ Wangxiz的 Java 大作业说明文档。
 - 修改存档格式，删除冗余元素
 - 解决当前游戏的存档，在本轮结束之后不能读取的问题
 - 添加单元测试
+- UPDATE README
 
 ### Final Project V 1.4
 #### 更新时间
@@ -114,7 +115,7 @@ Wangxiz的 Java 大作业说明文档。
 
 ### 1. 欢迎界面
 如下：
-![2](2.png)
+![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/Fianl%20Project/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/images/2.png)
 
 欢迎界面上有三个按钮。
 - **Enter**。点击可以进入游戏界面。
@@ -123,7 +124,7 @@ Wangxiz的 Java 大作业说明文档。
 
 ### 2. 游戏界面
 如下：
-![1](1.png)
+![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/Fianl%20Project/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/images/1.png)
 
 1、 左边为 9 * 12 的**游戏世界**，右侧上方是**控制台**，下方是**消息栏**。
 
@@ -209,7 +210,7 @@ Wangxiz的 Java 大作业说明文档。
 
 ## 项目结构
 ### 整体结构图
->![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/20171010/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/jpgs/structure.png)
+>![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/Fianl%20Project/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/images/Welcome.png)
 
 ### 源代码说明
 #### Pavkage `archive`
