@@ -30,6 +30,7 @@ public class Constant {
     public static JButton control_start;
     public static JButton control_stop;
     public static JButton control_reset;
+
     public static final ControlPanel control = new ControlPanel();
 
     public static final StatusBar status = new StatusBar();

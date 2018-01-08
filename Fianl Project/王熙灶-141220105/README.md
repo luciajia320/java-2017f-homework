@@ -9,9 +9,12 @@ Wangxiz的 Java 大作业说明文档。
 
 #### 更新内容
 - ~~TODO：每个时间点记录数据~~  **Done**
-- TODO：根据读取到的存档，完成游戏回放功能
-- TODO：`HelpFrame`细化
-- 修复一些bug
+- ~~TODO：根据读取到的存档，完成游戏回放功能~~ **Done**
+- 修复游戏结束按 Reset 按钮无反应 bug
+- 游戏结束后自动存档，并记录文档编号。用户可使用 Save 菜单选择另存文件
+- 修改存档格式，删除冗余元素
+- 解决当前游戏的存档，在本轮结束之后不能读取的问题
+- 添加单元测试
 
 ### Final Project V 1.4
 #### 更新时间
@@ -107,10 +110,55 @@ Wangxiz的 Java 大作业说明文档。
 #### 第四幕：鸣金收兵
 最终，胜者为王，葫芦山霸主千秋万代。
 
-## 游戏设定
+## 操作说明
+
+### 1. 欢迎界面
+如下：
+![2](2.png)
+
+欢迎界面上有三个按钮。
+- **Enter**。点击可以进入游戏界面。
+- **RePlay**。点击进入游戏界面并直接跳出文件选择框选择存档进行回放。
+- **Help**。跳出帮助界面。
+
+### 2. 游戏界面
+如下：
+![1](1.png)
+
+1、 左边为 9 * 12 的**游戏世界**，右侧上方是**控制台**，下方是**消息栏**。
+
+2、控制台有三个按钮：
+- Start。只在`GAME`模式下有效。控制游戏开始
+- Stop。只在`GAME`模式下有效。控制游戏暂停
+- Reset。在`GAME`模式下控制游戏恢复初始状态；在`REPLAY`模式下控制游戏模式重新设置为`GAME`，并恢复初始状态
+
+### 3. 游戏模式
+游戏设有两个模式：
+- `GAME`模式。随机自动游戏模式
+- `REPLAY`模式。回放存档模式
+
+#### I. `GAME`模式
+初始，只有 `Start` 按钮可用。
+
+按下`Start`之后，`Start`按钮不可用，`Stop` 可用，`Reset` 可用；
+
+按下 `Stop` 按钮之后，`Start` 可用，`Reset` 可用；
+
+按下 `Reset` 按钮之后，`Start` 可用，`Reset` 和 `Stop` 不可用。
+
+游戏结束时，系统会自动保存当前游戏的存档。
+
+#### II. `REPLAY`模式
+从菜单栏里选择`Open`或者从欢迎界面直接进入`REPLAY`模式。会回放所选存档的游戏记录。
+
+在此模式下，当处于回放状态时，控制面板内三个按钮均处于`Disable`的状态；回放结束后，`Reset`按钮处于`Enable`状态，用于将游戏模式重新设置为`GAME`。
+
+### 4. 游戏设定
 1、生物体战死后，尸体留在原位置，并且该位置不能再被其他生物体占有；
 
-2、
+2、按下`Start`之后，所有生物开始随机走动，处于战斗状态；爷爷和蛇精初始某段时间保持加油状态。两方生物相遇时，简单起见，以五五开的概率随机阵亡一个。
+
+3、某方全部阵亡之后，对方获胜。
 
 ## 设计理念
 
@@ -164,6 +212,13 @@ Wangxiz的 Java 大作业说明文档。
 >![](https://raw.githubusercontent.com/Wangxiz/java-2017f-homework/master/20171010/%E7%8E%8B%E7%86%99%E7%81%B6-141220105/jpgs/structure.png)
 
 ### 源代码说明
+#### Pavkage `archive`
+Class `ArchiveRecorder`：存档记录器。用于将每一个时间点的信息累计起来。
+
+Class `CreatureArchived`：每一个生物体的存档信息。
+
+Class `TimePoint`：一个时间点的存档信息。
+
 #### Package `creature`
 Class `Creature`：代表生物体的基类。每个生物体拥有一个`Position`属性，代表其位置。还有相应的操作`Position`的`getPosition`和`setPosition`方法。
 
@@ -218,39 +273,63 @@ Class `Creature`：代表生物体的基类。每个生物体拥有一个`Positi
 
 6、Class `LongSnake`：长蛇阵法类，继承自`BasicFormation`类。
 
-#### Package `formation.exception`
+#### Package `exception`
 Class `FormationException`：自定义异常类。用于处理阵法中某个位置超出空间`space`边界的情况
-
-#### Package `formation.util`
-1、Class `XmlReader`：xml 配置文件读取器类。用于读取 xml 格式的阵法配置文件。
-
-2、Class `Point`：用于存储从 xml 文件中读取的阵法位置信息。
 
 #### Package `space`
 1、Class `Position`：表示位置的类。使用泛型机制，其上有一个泛型类型的属性`Holder`，表示这个位置上的物体。提供了`Holder`的`get`和`set`方法。
 
 2、Class `Space`：表示二维空间的类。`Space`有一个属性`size`，表示其大小，`Space`由 `size` * `size`个`Position`构成。其上有个方法`creature_position_setter`，用于将生物体与空间位置关联起来。还有相应的`Pos`和`size`的`get`方法。`Space`类重载了`toString`方法，用于输出空间上每个位置上的生物体情况。
 
-#### Class `TestMain`
+#### Package `ui`
+1、Class `AboutFrame`：关于界面。
+
+2、Class `ControlPanel`：控制面板。
+
+3、Class `Ground`：战场界面。
+
+4、Class `HelpFrame`：帮助界面。
+
+5、Class `HuluMountainFrame`：主界面Frame。
+
+6、Class `MenuBar`：菜单栏。
+
+7、Class `StatusBar`：消息栏。
+
+8、Class `Welcome`：欢迎界面。
+
+#### Package `util`
+1、Class `FormationReader`：xml 配置文件读取器类。用于读取 xml 格式的阵法配置文件。
+
+2、Class `Point`：用于存储从 xml 文件中读取的阵法位置信息。
+
+1、Class `ArchiveIO`：存档IO工具。
+
+1、Class `Constant`：静态变量工具类。
+
+1、Class `Direction`：方向枚举类型。有UP, DOWN, LEFT, RIGHT, UPLEFT, UPRIGHT, DOWNLEFT, DOWNRIGHT 八个方向。
+
+1、Enum `GameMode`：游戏模式枚举。有GAME、REPLAY两种模式。
+
+1、Enum `GroundState`：游戏状态枚举。有READY, RUNNING, PAUSE, OVER四种状态。
+
+1、Class `ImageReader`：静态图像读取器工具类。
+
+1、Class `RePlay`：用于REPLAY的Runnable接口实现。
+
+1、Class `State`：生物体状态枚举。有CHEER, WAIT, ATTACK, FIGHT, DEAD五种状态。
+
+#### Class `Main`
 主类。
 
 ### 单元测试
-#### Package `create.animal`
-1、Class `CalabashFactoryTest`：测试`getInstance()`、`get()`方法
-
-2、Class `CalaCropsTest`：测试`getInstance()`、`sort()`、`setXXXFormation()`方法
-
-3、Class `CropTest`：测试`clearFormation()`方法
-
-4、Class `EssenceCropsTest`：测试`getInstance()`、`setXXXFormation()`方法
-
-5、Class `MinionFactoryTest`：测试`getInstance()`、`get()`方法
-
-#### Package `create.plant`
-1、Class `RandomPlantTest`：测试`get()`方法
-
 #### Package `space`
-1、Class `SpaceTest`：测试`creature_position_setter()`方法
+1、Class `SpaceTest`：测试`bind()`方法、`unbindAll()`方法、`getPos()`方法
+
+#### Package `util`
+Class `ArchiveIOTest`：测试`read()`、`write()`方法
+
+Class `FormationReaderTest`：测试`read()`方法
 
 ## 自动构建
 本项目使用的自动构建工具为 **Maven**，版本 **3.5.2**
@@ -272,6 +351,12 @@ Class `FormationException`：自定义异常类。用于处理阵法中某个位
 
 **解决方案**：原因应该是`Button`的绘图是在`super.paint(g)`中完成的，而背景的绘图是在当前的派生类中完成的，所以会把`Button`给覆盖掉。通过在`drawImage()`后加上`Button.repaint()`，解决了这个问题。
 
+3、**问题描述**：在运行时，一轮游戏结束之后，想要回放这一轮的存档，结果提示找不到文件，但关闭程序重新运行的时候，就可以回放该轮存档
+
+**解决方案**：原因是存档的时候选择的路径是`src/main/resources`,而运行时读取的文档是从`target/classes`路径下读取的。本次运行的时候该路径下没有存档，自然找不到，而下次打开程序时，Maven会将`src/main/resources`下的存档自动拷贝到`target/classes`路径下，故而可以进行回放。解决的方法是存档时在两个路径下都保存文件，这样无论是本次还是下次运行程序，都可以找到存档。
+
 ## **最后的最后**
 
-非常感谢曹老板和余老师这一个学期的辛苦付出，虽然自己以前自学过一点Java，但是听了两位老师的课以后感觉学到了很多很厉害的东西或者称其为思想吧。给两位老师点赞撒花🌺🌺🌺
+有一个并发bug实在是调不出来了，明天要考试……最终还是弃了……
+
+但是啊，非常感谢曹老板和余老师这一个学期的辛苦付出，虽然自己以前自学过一点Java，但是听了两位老师的课以后感觉学到了很多很厉害的东西或者称其为思想吧。给两位老师点赞撒花🌺🌺🌺

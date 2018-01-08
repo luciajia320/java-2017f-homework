@@ -6,7 +6,7 @@ import creature.Creature;
  * 位置类，表示空间中的一个位置，每个位置可以与一个Creature相关联
  */
 public class Position<T extends Creature> {
-    private T holder;
+    private volatile T holder;
     private final int x;
     private final int y;
 

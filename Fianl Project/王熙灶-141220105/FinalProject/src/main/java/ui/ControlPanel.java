@@ -1,14 +1,18 @@
 package ui;
 
+import archive.CreatureArchived;
+import archive.TimePoint;
 import creature.animal.Animal;
 import util.GameMode;
 import util.GroundState;
+import util.RePlay;
 
 import static util.Constant.*;
 import static util.ImageReader.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.concurrent.TimeUnit;
 
 public class ControlPanel extends JPanel {
     /**
@@ -66,12 +70,18 @@ public class ControlPanel extends JPanel {
             control_stop.setEnabled(false);
             control_reset.setEnabled(false);
 
-//            if(mode == GameMode.GAME) mode = GameMode.REPLAY;
-//            else mode = GameMode.GAME;
-
-            if(ground.getState() == GroundState.RUNNING || ground.getState() == GroundState.PAUSE) {
+            if(ground.getState() == GroundState.RUNNING || ground.getState() == GroundState.PAUSE || ground.getState() == GroundState.OVER) {
+                if(ground.getState() == GroundState.RUNNING) {
+                    ground.stop();
+                }
                 ground.setState(GroundState.READY);
                 ground.reset();
+            }
+
+            if(mode == GameMode.REPLAY) {
+                mode = GameMode.GAME;
+                ground.reset();
+                ground.repaint();
             }
 
             ground.repaint();

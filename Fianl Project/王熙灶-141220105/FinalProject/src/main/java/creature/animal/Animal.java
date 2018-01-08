@@ -6,7 +6,6 @@ import static util.Constant.*;
 import space.Position;
 import util.Direction;
 import util.GroundState;
-import util.State;
 
 import java.awt.Image;
 import java.util.*;
@@ -19,16 +18,13 @@ public class Animal extends Creature {
     Image imageDead;
     volatile String imageAlivePath;
     volatile String imageDeadPath;
-    volatile String imagePath;
     private List<Animal> enemyList;
     private Random random = new Random();
-    protected boolean goodguy;
     private int cheerTime = 50;
-
     public static volatile boolean runnable = false;
 
-    public String getImagePath() {
-        return imagePath;
+    public void resetCheerTime() {
+        cheerTime = 50;
     }
 
     public void setEnemyList(List<Animal> enemies) {
@@ -50,11 +46,9 @@ public class Animal extends Creature {
     @Override
     public Image getImage() {
         if(isDead()) {
-            imagePath = imageDeadPath;
             return imageDead;
         }
         else {
-            imagePath = imageAlivePath;
             return imageAlive;
         }
     }
@@ -83,15 +77,16 @@ public class Animal extends Creature {
                 doAttack();
 
             try {
+                Thread.sleep(500);
                 recorder.add();
 
-                Thread.sleep(50);
                 ground.repaint();
                 status.repaint();
 
                 if(calaCrops.Win() || essenceCrops.Win()) {
                     runnable = false;
                     ground.setState(GroundState.OVER);
+                    control_stop.setEnabled(false);
                     ground.repaint();
                     status.repaint();
                     return;
@@ -133,46 +128,46 @@ public class Animal extends Creature {
     }
 
     public void doMove() {
-        Animal enemy = getRandomEnemy();
-        if(enemy == null) {
-            System.out.println("GetRandomEnemy get null enemy!");
-            return;
-        }
-        Direction x = (enemy.getPosition().getX() > getPosition().getX()) ? RIGHT : LEFT;
-        Direction y = (enemy.getPosition().getY() > getPosition().getY()) ? DOWN : UP;
+        synchronized (space) {
+            Animal enemy = getRandomEnemy();
+            if(enemy == null) {
+                System.out.println("GetRandomEnemy get null enemy!");
+                return;
+            }
+            Direction x = (enemy.getPosition().getX() > getPosition().getX()) ? RIGHT : LEFT;
+            Direction y = (enemy.getPosition().getY() > getPosition().getY()) ? DOWN : UP;
 
-//        if(movable(x) && movable(y)) {
-//            move(Direction.And(y, x));
-//            return;
-//        }
+            List<Direction> EnemyDrivedMovableDirection = new ArrayList<>();
+            if(movable(x)) EnemyDrivedMovableDirection.add(x);
+            if(movable(y)) EnemyDrivedMovableDirection.add(y);
 
-        List<Direction> EnemyDrivedMovableDirection = new ArrayList<>();
-        if(movable(x)) EnemyDrivedMovableDirection.add(x);
-        if(movable(y)) EnemyDrivedMovableDirection.add(y);
+            List<Direction> movableDirection = new ArrayList<>();
+            for(Direction direction: Direction.values()) {
+                if(movable(direction)) movableDirection.add(direction);
+            }
 
-        List<Direction> movableDirection = new ArrayList<>();
-        for(Direction direction: Direction.values()) {
-            if(movable(direction)) movableDirection.add(direction);
-        }
-
-        if(EnemyDrivedMovableDirection.size() > 0) {
-            Direction d = EnemyDrivedMovableDirection.get(random.nextInt(EnemyDrivedMovableDirection.size()));
-            move(d);
-        }
-        else if(movableDirection.size() > 0) {
-            Direction d = movableDirection.get(random.nextInt(movableDirection.size()));
-            move(d);
+            if(EnemyDrivedMovableDirection.size() > 0) {
+                Direction d = EnemyDrivedMovableDirection.get(random.nextInt(EnemyDrivedMovableDirection.size()));
+                move(d);
+            }
+            else if(movableDirection.size() > 0) {
+                Direction d = movableDirection.get(random.nextInt(movableDirection.size()));
+                move(d);
+            }
         }
     }
 
+    @Deprecated
     public void addEnemy(Animal animal) {
         enemyList.add(animal);
     }
 
+    @Deprecated
     public void addEnemy(List<? extends Animal> la) {
         enemyList.addAll(la);
     }
 
+    @Deprecated
     public void delEnemy(Animal animal) {
         enemyList.remove(animal);
     }

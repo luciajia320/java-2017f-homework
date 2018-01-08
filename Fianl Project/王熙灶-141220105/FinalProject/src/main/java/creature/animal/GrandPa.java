@@ -9,10 +9,8 @@ public final class GrandPa extends Animal {
     private static GrandPa grandPa = new GrandPa();
 
     private GrandPa() {
-        goodguy = true;
         imageAlivePath = "grandpa-alive.png";
         imageDeadPath = "grandpa-dead.png";
-        imagePath = imageAlivePath;
         imageAlive = ImageReader.getImage(imageAlivePath);
         imageDead = ImageReader.getImage(imageDeadPath);
     }

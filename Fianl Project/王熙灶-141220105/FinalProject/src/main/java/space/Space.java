@@ -1,6 +1,7 @@
 package space;
 
 import creature.Creature;
+import creature.animal.Animal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 public class Space {
     private int width;
     private int height;
-    private List<List<Position<Creature>>> positionss;
+    private volatile List<List<Position<Creature>>> positionss;
 
     public Space(int width, int height) {
         this.width = width;
@@ -31,17 +32,36 @@ public class Space {
      * @param creature, 一个生物体
      * @param x, x坐标位置
      * @param y, y坐标位置
-     * 表示将生物体 creature 与空间中的 (x, y) 位置相关联, 如果之前已有位置，先取消关联
+     * 表示将生物体 creature 与空间中的 (x, y) 位置相关联,
+     *     如果之前已有位置，先取消关联
+     *     如果位置之前已有生物体，不能关联
      */
     public synchronized void bind(Creature creature, int x, int y) {
         Position<Creature> pre_pos = creature.getPosition();
+        Position<Creature> pos = positionss.get(y).get(x);
+
         if(pre_pos != null) {
             pre_pos.setHolder(null);
             creature.setPosition(null);
         }
-        Position<Creature> pos = getPos(x, y);
+
+        if(pos.getHolder() != null) {
+            return;
+        }
+
         pos.setHolder(creature);
         creature.setPosition(pos);
+    }
+
+    public synchronized void unbindAll() {
+        for(int i = 0; i < height; i++) {
+            for(int j = 0; j < width; j++) {
+                Position<Creature> pos = positionss.get(i).get(j);
+                if(pos.getHolder() != null && pos.getHolder().getPosition() != null)
+                    pos.getHolder().setPosition(null);
+                pos.setHolder(null);
+            }
+        }
     }
 
     /**

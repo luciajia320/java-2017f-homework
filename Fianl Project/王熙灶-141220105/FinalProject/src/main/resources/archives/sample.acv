@@ -3,13 +3,11 @@
 <archive>
     <timepoint>
         <creature>
-            <image>grandpa-alive.png</image>
             <state>FIGHT</state>
             <x>7</x>
             <y>13</y>
         </creature>
         <creature>
-            <image>green-alive.png</image>
             <state>ATTACK</state>
             <x>7</x>
             <y>6</y>
@@ -17,13 +15,11 @@
     </timepoint>
     <timepoint>
         <creature>
-            <image>blue-alive.png</image>
             <state>DEAD</state>
             <x>7</x>
             <y>13</y>
         </creature>
         <creature>
-            <image>red-alive.png</image>
             <state>WAIT</state>
             <x>7</x>
             <y>6</y>

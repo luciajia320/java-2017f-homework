@@ -1,11 +1,6 @@
 package ui;
 
-import archive.CreatureArchived;
-import archive.TimePoint;
-import util.ArchiveIO;
-import util.Constant;
-import util.GameMode;
-import util.ImageReader;
+import util.*;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
@@ -24,6 +19,7 @@ public class MenuBar extends JMenuBar {
     private JFileChooser fileChooser = new JFileChooser("src/main/resources/archives");
 
     public JMenuItem saveitem;
+    public JMenuItem openitem;
 
     public MenuBar() {
         fileChooser.setFileFilter(new ArchiveFilter());
@@ -32,7 +28,7 @@ public class MenuBar extends JMenuBar {
 
         JMenu filemenu = new JMenu("File");
         filemenu.setMnemonic('F');
-        JMenuItem openitem = new JMenuItem("Open", ImageReader.getIcon("open.png"));
+        openitem = new JMenuItem("Open", ImageReader.getIcon("open.png"));
         openitem.addActionListener((ActionEvent e) -> {
             fileChooser.setApproveButtonText("Open");
             fileChooser.setDialogTitle("Open an archive");
@@ -42,13 +38,23 @@ public class MenuBar extends JMenuBar {
                 System.out.println("您选择打开的文件名称为：" + file.getName());
                 ReadPoints.clear();
                 ReadPoints.addAll(ArchiveIO.read(file.getName()));
-                if(mode == GameMode.GAME)
+                if(mode == GameMode.GAME) {
                     mode = GameMode.REPLAY;
-                ground.replay();
-//                System.out.println(ReadPoints);
+                    control_start.setEnabled(false);
+                    control_stop.setEnabled(false);
+                    control_reset.setEnabled(false);
+                    control.repaint();
+                }
+                new Thread(new RePlay()).start();
             } else if (result == JFileChooser.CANCEL_OPTION) {
                 System.out.println("您没有选择任何文件");
             }
+        });
+
+        welcome_replay.addActionListener(e -> {
+            welcome_enter.doClick();
+            ground.repaint();
+            openitem.doClick();
         });
 
         openitem.setAccelerator(KeyStroke.getKeyStroke('O',InputEvent.CTRL_MASK,false));

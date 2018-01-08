@@ -14,12 +14,10 @@ public class Calabash extends Animal implements Comparable<Calabash> {
      * @param order, 设定葫芦娃的长幼次序
      */
     public Calabash(Color color, Order order) {
-        goodguy = true;
         this.color = color;
         this.order = order;
         imageAlivePath = color.toString() + "-alive.png";
         imageDeadPath = color.toString() + "-dead.png";
-        imagePath = imageAlivePath;
         imageAlive = ImageReader.getImage(imageAlivePath);
         imageDead = ImageReader.getImage(imageDeadPath);
     }

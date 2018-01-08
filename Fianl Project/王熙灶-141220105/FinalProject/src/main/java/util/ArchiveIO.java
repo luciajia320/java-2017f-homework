@@ -40,8 +40,6 @@ public class ArchiveIO {
                 while (ct_iterator.hasNext()) {
                     CreatureArchived ca = new CreatureArchived();
                     Element creature = (Element) ct_iterator.next();
-                    Element image = creature.element("image");
-                    ca.image = image.getText();
                     Element state = creature.element("state");
                     ca.state = State.valueOf(state.getText());
                     Element x = creature.element("x");
@@ -66,7 +64,6 @@ public class ArchiveIO {
             Element timepoint = archive.addElement("timepoint");
             for(CreatureArchived ca: tp.creatures) {
                 Element creature = timepoint.addElement("creature");
-                creature.addElement("image").addText(ca.image);
                 creature.addElement("state").addText(ca.state.name());
                 creature.addElement("x").addText(Integer.toString(ca.x));
                 creature.addElement("y").addText(Integer.toString(ca.y));
@@ -79,10 +76,16 @@ public class ArchiveIO {
             if(!filename.endsWith(".acv")) {
                 filename += ".acv";
             }
-            FileWriter fileWriter = new FileWriter("src/main/resources/archives/" + filename);
+            FileWriter fileWriter = new FileWriter("target/classes/archives/" + filename);
             XMLWriter writer = new XMLWriter(fileWriter, format);
             writer.write(document);
+
+            FileWriter fileWriter2 = new FileWriter("src/main/resources/archives/" + filename);
+            XMLWriter writer2 = new XMLWriter(fileWriter2, format);
+            writer2.write(document);
+
             writer.close();
+            writer2.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

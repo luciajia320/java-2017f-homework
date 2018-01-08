@@ -9,10 +9,8 @@ public final class SnakeEssence extends Animal {
     private static SnakeEssence snakeEssence = new SnakeEssence();
 
     private SnakeEssence() {
-        goodguy = false;
         imageAlivePath = "snake-alive.png";
         imageDeadPath = "snake-dead.png";
-        imagePath = imageAlivePath;
         imageAlive = ImageReader.getImage(imageAlivePath);
         imageDead = ImageReader.getImage(imageDeadPath);
     }

@@ -16,8 +16,10 @@ public class ArchiveRecorder {
         TimePoint timePoint = new TimePoint();
         for(Animal animal: animals) {
             CreatureArchived c = new CreatureArchived();
-            c.image = animal.getImagePath();
             c.state = animal.getCurrentState();
+            if(animal.getPosition() == null) {
+                System.out.println(animal + " position is null");
+            }
             c.x = animal.getPosition().getX();
             c.y = animal.getPosition().getY();
             timePoint.creatures.add(c);
@@ -34,7 +36,6 @@ public class ArchiveRecorder {
     public synchronized void save(String filename) {
         ArchiveIO.write(timePoints, filename);
     }
-
 
     public synchronized void clear() {
         timePoints.clear();

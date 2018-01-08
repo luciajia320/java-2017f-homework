@@ -16,6 +16,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.LinkedList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -40,7 +41,10 @@ public class Ground extends JPanel {
         setLayout(null);
         setVisible(true);
 
-        addKeyListener(new KeyAdapter() {
+        addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -48,7 +52,13 @@ public class Ground extends JPanel {
                         ground.run();
                     }
                 }
+                if(e.getKeyCode() == KeyEvent.VK_L && (ground.getState() == GroundState.READY || ground.getState() == GroundState.OVER)) {
+                    menuBar.openitem.doClick();
+                }
             }
+
+            @Override
+            public void keyReleased(KeyEvent e) {}
         });
         init();
     }
@@ -67,7 +77,6 @@ public class Ground extends JPanel {
         Animal.runnable = true;
         for(Animal a: allAnimals) {
             a.setCurrentState(State.FIGHT);
-//            System.out.println("run runnable: " + Animal.runnable);
             new Thread(a).start();
         }
     }
@@ -75,7 +84,6 @@ public class Ground extends JPanel {
     public void stop() {
         Animal.runnable = false;
         for (Animal a: allAnimals) {
-//            System.out.println("stop runnable: " + Animal.runnable);
             a.interrupt();
         }
     }
@@ -83,9 +91,11 @@ public class Ground extends JPanel {
     public void reset() {
         recordSaved = false;
         recorder.clear();
+        space.unbindAll();
 
         for (Animal a: allAnimals) {
             a.setCurrentState(State.WAIT);
+            a.resetCheerTime();
         }
 
         try {
@@ -96,26 +106,8 @@ public class Ground extends JPanel {
         } catch (FormationException e) {
             e.printStackTrace();
         }
-    }
-
-    public void replay() {
-        System.out.println("YYYY, I am here!");
-        for(TimePoint tp: ReadPoints) {
-            System.out.println(tp.toString());
-            int i = 0;
-            for(CreatureArchived c: tp.creatures) {
-                animals.get(i).setCurrentState(c.state);
-                space.bind(animals.get(i), c.x, c.y);
-                i++;
-            }
-            ground.repaint();
-            status.repaint();
-            try {
-                TimeUnit.MILLISECONDS.sleep(50);
-            } catch (InterruptedException e1) {
-                e1.printStackTrace();
-            }
-        }
+        repaint();
+        status.repaint();
     }
 
     public void setState(GroundState state) {
@@ -180,8 +172,6 @@ public class Ground extends JPanel {
         if(mode == GameMode.GAME) {
             paint(g, calaCrops);
             paint(g, essenceCrops);
-            paint(g, grandPa);
-            paint(g, snake);
 //            g.setFont(new Font("华文行楷", Font.PLAIN, 100));
 //            g.setColor(new Color(109, 12, 12));
 //            g.drawString("葫芦队胜利", 230, 400);
@@ -213,11 +203,6 @@ public class Ground extends JPanel {
         else {
             paint(g, calaCrops);
             paint(g, essenceCrops);
-            paint(g, grandPa);
-            paint(g, snake);
-//            g.setFont(new Font("华文行楷", Font.PLAIN, 100));
-//            g.setColor(new Color(109, 12, 12));
-//            g.drawString("葫芦队胜利", 230, 400);
 
 //            int res = JOptionPane.showConfirmDialog(null, "Do U want to save this archive?", "Save", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 //            if(res == JOptionPane.YES_OPTION) {
