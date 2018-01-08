@@ -42,45 +42,10 @@
 #### 战斗故事
 ![image](https://github.com/Dead96Beat/java-2017f-homework/blob/master/Fianl%20Project/final_project/葫芦娃报告截图/战斗故事.png "应用截图")
 ***
-## 结果界面
-- 当妖精全部阵亡后，葫芦娃和老爷爷获胜，从此过上了幸福的生活。
-- 葫芦娃作为最后的胜利者，会摆出造型：
-![image](https://github.com/triumphalLiu/Huluwa_VS_Monster/blob/master/screenshot/HuluwaWinsScreenShot.png "应用截图")
-- 当葫芦娃和爷爷全部阵亡后，妖精获胜，葫芦娃最终还是没能抵挡妖精的侵袭，人间再次沦为炼狱...
-- 妖精作为最后的胜利者，会摆出造型：
-![image](https://github.com/triumphalLiu/Huluwa_VS_Monster/blob/master/screenshot/MonsterWinsScreenShot.png "应用截图")
-***
-## 操作说明
-<table><tr>
-<td> <strong>界面</strong></td> 
-<td> <strong>快捷键</strong></td>
-<td> <strong>操作描述</strong></td></tr>
-<tr><td rowspan="3">主界面</td>    
-<td>S</td>
-<td>开始游戏</td></tr>
-<tr><td>L</td>  
-<td>读取历史</td></tr>
-<tr><td>Esc / Q</td>  
-<td>退出游戏</td></tr>
-<tr><td rowspan="2">游戏界面</td>    
-<td>Space</td>
-<td>开始战斗</td></tr>
-<tr><td>Esc</td>  
-<td>返回主界面</td></tr>
-<tr><td rowspan="3">结果界面</td>    
-<td>L</td>  
-<td>读取历史</td></tr>
-<tr><td>S</td>  
-<td>保存记录(仅新的游戏结束后有效)</td></tr>
-<tr><td>Esc</td>
-<td>返回主界面</td></tr>
-</table>
-
-***
 ## 代码框架
-### GUI/图形界面
-采用JavaFX作为界面框架，使用Scene Builder搭建界面，通过fxml文件作为介质载入。
-### Package/包
+### 框架说明:
+- 本次大实验基本沿用老师所给的示例框架，在此基础上进行添加修改，以JFrame和JPanel为框架搭建图形界面；以多线程的
+方式控制角色运动；使用synchronized机制来实现多线程同步。
 #### creature 包含了各种生物的实现，包括：
 * Creature，作为interface，规定了生物具有的功能。
 * Huluwa，葫芦娃
