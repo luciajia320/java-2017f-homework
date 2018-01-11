@@ -3,11 +3,16 @@
 ---
 ######`It's a document about how to operate the game/drama.`
 
----
+
+
+![QQ20180111-135507](/Users/ViviansMac/Desktop/杜静娴-151220021/pics/QQ20180111-135507.png)
+
+![4DA9CFD3-4B55-4720-B087-9C0A377C64D6](/Users/ViviansMac/Desktop/杜静娴-151220021/pics/4DA9CFD3-4B55-4720-B087-9C0A377C64D6.png)
+
+----
 
 #如何开始
 
-######Tips:
 - 开始：`Space`
 - 保存：自动
 - 结束：`Esc`
@@ -17,6 +22,10 @@
 ---
 
 #类层次描述
+
+> # UML Diagram
+
+![C2724EB2-CE81-460B-8F3C-2F2D58CF9F65](pics/C2724EB2-CE81-460B-8F3C-2F2D58CF9F65.png)
 
 > #Ground
 - 继承自JFrame
@@ -73,4 +82,63 @@
 > #PositionGenerator
 - 可能大家都看不懂列队图吧需要他来指点
 - 可以问他下一个站在哪
+
+
+# 抽象&封装
+
+- `Player`基类：描述生物的共同的方法，实现Runnable接口
+
+  获取状态：isAlive，isStopped等
+
+  多线程：run控制各自在每一个刷新间隙的动作
+
+#继承
+
+- `Player`基类：`Huluwa`，`Yeye`，`Shejing`，`Xiezi`，`Louluo`等子类
+
+#多态
+
+- 每一个`Player`有自己的行动方式，`WarMonitor`只需要知道自己指挥的是一群`Player`，`Player`就能正确执行各个生物的不同行为。
+
+# 设计原则
+
+- SRP单一指责
+
+  `StoryTeller`只需要负责将log记录的故事叙述出来
+
+  `Player`只需要做下一步行进的提议，以及攻击对手
+
+  `FileAgent`只需要提供文件读写功能
+
+  `Logger`只需要组织log并使用FileAgent存取
+
+- OCP开放封闭
+
+  新增加`Player`只需要继承`Player`基类，重写接口，不需要修改`Player`的代码
+
+- LSP里氏替换
+
+  每一种实际的`Player`在类外部的使用中都用`Player`来替代
+
+- ISP接口隔离原则
+
+  `Player`不需要知道如何排兵布阵，只需要使用者告诉`PositionGenerator`用什么队形，它负责观察队列“图纸”，负责排列
+
+- DIP依赖倒置原则
+
+  具体的生物都依赖于`Player`基类，不需要`Player`去询问运行时的具体类
+
+- 观察者模式
+
+  ​	裁判角色`WarMonitor`控制`Field`的每一个刷新间隙场上的变化，`Player`具有一定的能动性，即run各自的run，但是`Mutex`变量可以控制每一轮行为按照一定的次序发生，即每一个`Player`行动，然后`WarMonitor`裁决，`WarMonitor`判断每一个人的动作是否合法，不合法的打回重做，合法的予以确认，然后判断每两个对手之间的状态变化，让走到战争开始边缘的`Player`开始战斗，做完这些再向Field点头示意刷新。
+
+- 适配器模式
+
+  `Field`配置了`TAdapter`键盘响应器
+
+- 装饰器
+
+  文件读写使用装饰器
+
+
 
