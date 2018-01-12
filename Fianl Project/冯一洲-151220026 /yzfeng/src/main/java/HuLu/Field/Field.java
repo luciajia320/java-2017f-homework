@@ -22,6 +22,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Field extends JPanel{
     private ImageIcon background;
+    private ImageIcon initbg;
     private final int SPACE = 60;
     private final int N = 17;
     private final int M = 9;
@@ -64,6 +65,8 @@ public class Field extends JPanel{
 
         URL loc = this.getClass().getClassLoader().getResource("bg.png");
         background= new ImageIcon(loc);
+        loc =this.getClass().getClassLoader().getResource("initbg.png");
+        initbg = new ImageIcon(loc);
 
         initWorld();
     }
@@ -94,7 +97,7 @@ public class Field extends JPanel{
 
     public final void initWorld() {
         count = 0;
-        gameState =GameState.START;
+        gameState =GameState.INIT;
         goodMEN = new ArrayList<GoodMan>();
         badMEN = new ArrayList<BadMan>();
 
@@ -170,6 +173,11 @@ public class Field extends JPanel{
         replay_count += 16;
     }
 
+    public void paintperface(Graphics g){
+        g.drawImage(initbg.getImage(), 0, 0,initbg.getIconWidth(),initbg.getIconHeight(), this);
+
+    }
+
     @Override
     public void paint(Graphics g) {
         if(gameState == GameState.REPLAYEND)
@@ -179,6 +187,10 @@ public class Field extends JPanel{
         {
             super.paint(g);
             buildWorld(g);
+        }
+        else if(gameState == GameState.INIT){
+            super.paint(g);
+            paintperface(g);
         }
         else if(gameState == GameState.REPLAY)
         {
