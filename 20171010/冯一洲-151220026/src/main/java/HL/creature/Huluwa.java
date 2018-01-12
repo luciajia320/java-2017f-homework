@@ -1,4 +1,6 @@
 package HL;
+import HL.creature.*;
+
 public class Huluwa implements Creature{
 
     private COLOR color;

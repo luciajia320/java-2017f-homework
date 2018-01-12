@@ -1,7 +1,7 @@
 package HL;
 import HL.creature.Creature;
 
-public class Position {
+public class Position<T extends Creature> {
 
     private Coordinate coorinate;
     private Creature holder;
@@ -13,8 +13,7 @@ public class Position {
     public void setHolder(Creature holder) {
         this.holder = holder;
     }
-
-
+    
     public Coordinate getCoorinate() {
         return coorinate;
     }

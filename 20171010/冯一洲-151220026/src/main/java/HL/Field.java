@@ -42,8 +42,6 @@ public class Field {
                     positions[i][j].getHolder().report();
                 else
                     System.out.print("🌲");
-
-
             }
             System.out.println();
         }
