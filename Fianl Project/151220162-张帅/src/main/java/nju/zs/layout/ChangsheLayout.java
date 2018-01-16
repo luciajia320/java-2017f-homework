@@ -1,10 +1,15 @@
+package nju.zs.layout;
+
+import nju.zs.Position;
+
 import java.util.ArrayList;
 
 public class ChangsheLayout implements Layout {
-	@Override
-	public void place(Queue queue) {
+	public Queue place(Queue queue) {
+		int offsetx = queue.getOffsetx();
 		ArrayList<Position> queuePositions = queue.getQueuePositions();
 		for(int i=0;i<queuePositions.size();i++)
-			queuePositions.get(i).setPosition(i, 0);
+			queuePositions.get(i).setPosition(0, i*offsetx);
+		return queue;
 	}
 }
