@@ -1,0 +1,103 @@
+caster at (1,3)
+saber at (2,1)
+assasin at (2,4)
+archer at (3,2)
+berserker at (3,5)
+lancer at (4,3)
+ruler at (4,6)
+rider at (5,4)
+alter_ego at (10,3)
+avenger at (10,4)
+alter_ego at (11,2)
+alter_ego at (11,5)
+alter_ego at (12,2)
+alter_ego at (12,5)
+alter_ego at (13,3)
+alter_ego at (13,4)
+caster moved form 1,3 to 2,3
+archer moved form 3,2 to 4,2
+saber moved form 2,1 to 2,2
+assasin moved form 2,4 to 3,4
+berserker moved form 3,5 to 4,5
+lancer moved form 4,3 to 5,3
+rider moved form 5,4 to 6,4
+alter_ego moved form 10,3 to 9,3
+avenger moved form 10,4 to 9,4
+alter_ego moved form 11,2 to 10,2
+alter_ego moved form 11,5 to 10,5
+alter_ego moved form 12,5 to 11,5
+alter_ego moved form 12,2 to 11,2
+alter_ego moved form 13,3 to 12,3
+alter_ego moved form 13,4 to 12,4
+archer moved form 4,2 to 5,2
+berserker moved form 4,5 to 5,5
+caster moved form 2,3 to 3,3
+saber moved form 2,2 to 3,2
+lancer moved form 5,3 to 6,3
+assasin moved form 3,4 to 4,4
+rider moved form 6,4 to 7,4
+alter_ego moved form 9,3 to 8,3
+ruler moved form 4,6 to 4,5
+avenger moved form 9,4 to 8,4
+alter_ego moved form 10,5 to 9,5
+alter_ego moved form 10,2 to 9,2
+alter_ego moved form 12,4 to 11,4
+alter_ego moved form 12,3 to 11,3
+archer moved form 5,2 to 6,2
+lancer moved form 6,3 to 7,3
+caster moved form 3,3 to 4,3
+saber moved form 3,2 to 4,2
+berserker moved form 5,5 to 6,5
+assasin moved form 4,4 to 5,4
+rider is killed by avenger
+alter_ego moved form 11,2 to 10,2
+avenger moved form 8,4 to 7,4
+alter_ego moved form 11,5 to 10,5
+alter_ego moved form 9,2 to 8,2
+alter_ego moved form 9,5 to 8,5
+ruler moved form 4,5 to 5,5
+alter_ego is killed by lancer
+alter_ego moved form 11,4 to 10,4
+alter_ego moved form 11,3 to 10,3
+assasin moved form 5,4 to 6,4
+lancer is killed by avenger
+archer moved form 6,2 to 7,2
+caster moved form 4,3 to 5,3
+saber moved form 4,2 to 5,2
+berserker moved form 6,5 to 7,5
+alter_ego moved form 10,5 to 9,5
+alter_ego killed berserker
+avenger is killed by assasin
+ruler moved form 5,5 to 6,5
+alter_ego moved form 10,2 to 9,2
+alter_ego is killed by archer
+alter_ego moved form 10,3 to 9,3
+alter_ego moved form 10,4 to 9,4
+saber moved form 5,2 to 6,2
+assasin moved form 6,4 to 7,4
+caster moved form 5,3 to 6,3
+archer moved form 7,2 to 8,2
+alter_ego moved form 8,5 to 7,5
+alter_ego is killed by archer
+ruler is killed by alter_ego
+alter_ego moved form 9,4 to 8,4
+alter_ego moved form 9,3 to 8,3
+archer is killed by alter_ego
+assasin is killed by alter_ego
+caster moved form 6,3 to 7,3
+alter_ego moved form 7,5 to 7,4
+alter_ego moved form 9,5 to 9,4
+alter_ego is killed by caster
+alter_ego moved form 8,4 to 8,3
+saber moved form 6,2 to 6,3
+caster killed alter_ego
+alter_ego moved form 9,4 to 9,3
+alter_ego killed caster
+saber moved form 6,3 to 7,3
+alter_ego killed saber
+alter_egoget the fate
+alter_ego moved form 9,3 to 9,2
+alter_egoget the fate
+final scores
+GoodTeam:BadTeam 0:2
+injustice victory!
