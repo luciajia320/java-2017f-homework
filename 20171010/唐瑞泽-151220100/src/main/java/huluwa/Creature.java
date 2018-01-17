@@ -1,6 +1,7 @@
 /**
  * Created by tangruize on 10/16/17.
  */
+package huluwa;
 public class Creature {
     // creature's name
     private String name;
