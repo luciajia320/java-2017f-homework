@@ -1,5 +1,5 @@
 public class Sorter {//Works
-    public void bubbleSort(Queue queue){
+    public void bubbleSort(CreatureQueue queue){
         System.out.println("冒泡排序过程！");
 
         for (int i=0;i<7;i++){
@@ -18,7 +18,7 @@ public class Sorter {//Works
         System.out.println("冒泡排序过程！");
         Grid[] ngrid = new Grid[something.length];
         for (int i= 0;i<something.length;i++){
-            ngrid[i]=something[i].getGrid();
+            ngrid[i]=something[i].getGrids();
             ngrid[i].setHolder(something[i]);
         }
         for (int i= 0;i<something.length;i++){
