@@ -3,6 +3,7 @@
 ------
 ## 设计理念
 
+<<<<<<< HEAD
 对前两次作业的优化和改版，基于example。<br>
 1. 首先对所有角色将其抽象成生物体接口**Creature**，声明共用方法。实例化各个对象。<br>
 2. 对列阵声明一个接口**Order**和方法`rank()`，过程中为了方便代码复用增加了static方法`addPos()`。方便后期增加阵势。<br>
@@ -10,11 +11,25 @@
 4. 调用`Crane().rank()`和`Arrow().rank()`实现两种情况下不同的阵势。具体实现时对葫芦娃兄弟、爷爷、蝎子精、蛇精、小喽啰都进行了排布。<br>
 5. 切换阵势时将局面上记录角色和位置的链表清空。<br>
 6. 实现`show()`函数打印局面。<br>
+=======
+��ǰ������ҵ���Ż��͸İ棬����example��<br>
+1. ���ȶ����н�ɫ��������������ӿ�**Creature**���������÷�����ʵ������������<br>
+2. ����������һ���ӿ�**Order**�ͷ���`rank()`��������Ϊ�˷�����븴��������static����`addPos()`����������������ơ�<br>
+3. ������**Embattle**�а����˶Խ�ɫ�Ĵ�����������ʼ�����棬���ӽ�ɫ�����Һ�«���ֵܵ�����ȡ�<br>
+4. ����`Crane().rank()`��`Arrow().rank()`ʵ����������²�ͬ�����ơ�����ʵ��ʱ�Ժ�«���ֵܡ�үү��Ы�Ӿ����߾���Сආ����������Ų���<br>
+5. �л�����ʱ�������ϼ�¼��ɫ��λ�õ�������ա�<br>
+6. ʵ��`show()`������ӡ���档<br>
+>>>>>>> new version of huluwa 20171105 by 127wx
 
 ## 面向对象概念
 
+<<<<<<< HEAD
 1. 把葫芦娃、爷爷等角色抽象成生物**Creature**，七兄弟和小喽啰等作为该类的**对象**是该类的**实例化**，有向类传递消息的**方法**，具体表现为`setPosition(), getPosition()`等函数实现。此次作业中每个对象采用的都是默认构造器创建。<br>
 2. 另一个接口是**Order**。因为列阵方式有多种（包括鹤形、箭矢形等），小喽啰可能随时变换更多的阵势，采用接口方便后续对阵势的补充。<br>
+=======
+1. �Ѻ�«�ޡ�үү�Ƚ�ɫ���������**Creature**�����ֵܺ�Сආ�����Ϊ�����**����**�Ǹ����**ʵ����**�������ഫ����Ϣ��**����**���������Ϊ`setPosition(), getPosition()`�Ⱥ���ʵ�֡��˴���ҵ��ÿ��������õĶ���Ĭ�Ϲ�����������<br>
+2. ��һ���ӿ���**Order**����Ϊ����ʽ�ж��֣��������Ρ���ʸ�εȣ���Сආ�������ʱ�任��������ƣ����ýӿڷ�����������ƵĲ��䡣<br>
+>>>>>>> new version of huluwa 20171105 by 127wx
 
 ## 面向对象机制
 
@@ -24,9 +39,15 @@
 
 ###  继承
 
+<<<<<<< HEAD
 1. Huluwa, Grandpa, Scorpion, Snake, Lackey继承自Creature接口。Crane, Arrow继承自Order接口，实现鹤形和箭矢形列阵。<br>
 2. 因为类都是继承自终极基类**Object**，通过`super()`调用基类版本构造器(比如Position类构造器)。<br>
 3. 在处理局面时，所有生物体(包括葫芦娃、小喽啰等)都**向上转型**为**Creature**。<br>
+=======
+1. Huluwa, Grandpa, Scorpion, Snake, Lackey�̳���Creature�ӿڡ�Crane, Arrow�̳���Order�ӿڣ�ʵ�ֺ��κͼ�ʸ������<br>
+2. ��Ϊ�඼�Ǽ̳����ռ�����**Object**��ͨ��`super()`���û���汾������(����Position�๹����)��<br>
+3. �ڴ�������ʱ������������(������«�ޡ�Сආ���)��**����ת��**Ϊ**Creature**��<br>
+>>>>>>> new version of huluwa 20171105 by 127wx
 
 ###  多态
 
