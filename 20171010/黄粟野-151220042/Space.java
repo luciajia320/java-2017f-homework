@@ -1,130 +1,56 @@
 public class Space
 {
-    final int N = 20;
+    public static final String PLACE_HOLDER = "🈳";
 
-    public Position [][]space;// = new Position[N][N];
+    private int width;
+    private int height;
 
-    public Space()
-    {
-        Position p = new Position(-1,-1);
-        space = new Position[N][N];
-        for(int i=0;i<N;i++)
-        {
-            for(int j=0;j<N;j++)
-            {
-                space[i][j]=new Position(-1,-1);
-                //space[i][j].setHolder(p.getHolder());
-            }
-        }
+    public int getWidth() {
+        return width;
     }
-
-    public void SetSpace(Huluwa[] brothers, Guys[] guys,Scorpion scorpion,Grangpa gp, Snake sp)
-    {
-        for(int i=0;i<N;i++)
-        {
-            for(int j=0;j<N;j++)
-            {
-                space[i][j]=new Position(-1,-1);
-            }
-        }
-        for(int i=0;i< brothers.length;i++) {
-            int a=brothers[i].getPosition().getX();
-            int b=brothers[i].getPosition().getY();
-            space[a][b] = new Position(a,b);
-            space[a][b].setHolder(brothers[i].getPosition().getHolder());
-        }
-
-        for(int i=0;i< guys.length;i++) {
-            int a=guys[i].getPosition().getX();
-            int b=guys[i].getPosition().getY();
-            space[a][b] = new Position(a,b);
-            space[a][b].setHolder(guys[i].getPosition().getHolder());
-        }
-
-        space[scorpion.getPosition().getX()][scorpion.getPosition().getY()]=new Position(scorpion.getPosition().getX(),scorpion.getPosition().getY());
-        space[scorpion.getPosition().getX()][scorpion.getPosition().getY()].setHolder(scorpion.getPosition().getHolder());
-
-        space[gp.getPosition().getX()][gp.getPosition().getY()]=new Position(gp.getPosition().getX(),gp.getPosition().getY());
-        space[gp.getPosition().getX()][gp.getPosition().getY()].setHolder(gp.getPosition().getHolder());
-
-        space[sp.getPosition().getX()][sp.getPosition().getY()]=new Position(sp.getPosition().getX(),sp.getPosition().getY());
-        space[sp.getPosition().getX()][sp.getPosition().getY()].setHolder(sp.getPosition().getHolder());
-
-
+    public void setWidth(int width) {
+        this.width = width;
     }
+    public int getHeight() {
+        return height;
+    }
+    public void setHeight(int height) { this.height = height; }
 
-    public void reportspace()
+    private Position position;
+    public Position getPosition() { return position; }
+    public void setPosition(Position position) { this.position = position; }
+
+    protected String[][] content;
+    public String[][] getContent() { return content; }
+    public void setContent(String[][] content) { this.content = content; }
+
+
+    public Space(int x, int y)
     {
 
-        for(int i=0;i<N;i++)
-        {
-            for(int j=0;j<N;j++)
+        this.width = x;
+        this.height = y;
+
+        this.content = new String[x][y];
+        for(int i=0;i<width;i++)
+            for(int j=0;j<height;j++)
             {
-                if(space[i][j].getX()!=-1 )
-                {
-                    space[i][j].getHolder().report();
-                }
+                content[i][j] = PLACE_HOLDER;
             }
-            System.out.println('\n');
-        }
-    }
-
-    public static void main(String[] args) {
-
-        //Creature [][]space = new Creature[N][N];
-
-        Huluwa[] brothers = new Huluwa[7];
-        Guys[] guys = new Guys[7];
-        Scorpion scorpion = new Scorpion(guys);
-        Grangpa gp = new Grangpa();
-        Snake sp = new Snake();
-
-        for (int i = 0; i < brothers.length; i++) {
-            brothers[i] = new Huluwa(COLOR.values()[i], SENIORITY.values()[i]);
-        }
-        //System.out.println(brothers[0]);
-
-        for (int i = 0; i < guys.length; i++) {
-            guys[i] = new Guys(SENIORITY.values()[i]);
-        }
-       // System.out.println(guys.length);
-        Queue queue = new Queue(brothers);
-        scorpion.queuefirst(guys);
-        Queueguys queueguys = new Queueguys(guys);
-
-        Position gpp = new Position(0,9);
-        Position spp = new Position(0,1);
-        gp.setPosition(gpp);
-        sp.setPosition(spp);
-
-
-        
-        Space space = new Space();
-        space.SetSpace(brothers,guys,scorpion,gp,sp);
-        //当前空间上的个点情况
-        space.reportspace();
-        System.out.println();
-
-        //以人物为主体，对于其各自位置的报告
-        queue.rollCall();
-        queueguys.rollCall();
-        scorpion.report();
-        gp.report();
-        sp.report();
-        System.out.println();
-
-
-
-        queueguys.shuffle(guys);
-        space.SetSpace(brothers,guys,scorpion,gp,sp);
-        space.reportspace();
-        queue.rollCall();
-        queueguys.rollCall();
-        scorpion.report();
-        gp.report();
-        sp.report();
-        System.out.println();
-
 
     }
+
+    public String toString() {
+        StringBuilder stringb = new StringBuilder();
+        for (int j = 0; j < height; j++) {
+            for (int i = 0; i < width; i++) {
+                stringb.append(content[i][j] + " ");
+            }
+            stringb.append("\n");
+        }
+
+        return stringb.toString();
+    }
+
+
 }
