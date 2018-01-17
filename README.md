@@ -12,3 +12,4 @@
 		2. 在myhomework下编写代码，代码使用`git add .`, `git commit -a` 和`git push`等命令进行管理；
 		3. 在javalover/java-2017f-homework进入当前作业目录，例如java-2017f-homework／20170912目录，执行`git submodule add https://github.com/javalover/myhomework 张三-141220001`,此处“张三”和“141220001” 分别替换真实姓名和学号。  
 5. 在javalover/java-2017f-homework上创建“pull request"
+# java_final
