@@ -1,0 +1,31 @@
+Wax 1 On! 
+Wax Off! 
+Wax 2 On! 
+Wax Off! 
+Wax 1 On! 
+Wax Off! 
+Wax 2 On! 
+Wax Off! 
+Wax 1 On! 
+Wax Off! 
+Wax 2 On! 
+Wax Off! 
+Wax 1 On! 
+Wax Off! 
+Wax 2 On! 
+Wax Off! 
+Wax 1 On! 
+Wax Off! 
+Wax 2 On! 
+Wax Off! 
+Wax 1 On! 
+Wax Off! 
+Wax 2 On! 
+Wax Off! 
+Wax 1 On! 
+Exiting via interrupt
+Exiting via interrupt
+Exiting via interrupt
+Ending Wax Off task
+Ending Wax 1 On task
+Ending Wax 2 On task

@@ -1,0 +1,25 @@
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+public class WaxOnMatic {
+
+    public static void main(String[] args) throws Exception {
+
+        Car car = new Car();
+
+        ExecutorService exec = Executors.newCachedThreadPool();
+
+        exec.execute(new WaxOff(car));
+
+        exec.execute(new WaxOn(car,1));
+
+        exec.execute(new WaxOn(car,2));
+
+        TimeUnit.SECONDS.sleep(10); // Run for a while...
+
+        exec.shutdownNow(); // Interrupt all tasks
+
+    }
+
+}
