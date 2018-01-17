@@ -1,12 +1,14 @@
 public class Snake implements Creature {
-    private Position position;
+    private Position<Creature> position;
+    private String name;
     @Override
-    public void setPosition(Position position) {
+    public void setPosition(Position<Creature> position) {
         this.position = position;
+        this.name="🐍";
         position.setHolder(this);
     }
     @Override
-    public Position getPosition() {
+    public Position<Creature> getPosition() {
         return position;
     }
     @Override
@@ -18,5 +20,8 @@ public class Snake implements Creature {
     public String toString(){
         return "蛇精@" + this.position.getX() + ","+this.position.getY()+";";
     }
-
+    @Override
+    public void show() {
+        System.out.print(name);
+    }
 }

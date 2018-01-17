@@ -2,7 +2,8 @@ public class Huluwa implements Creature, Comparable{
 
     private COLOR color;
     private SENIORITY seniority;
-    private Position position;
+    private Position<Creature> position;
+    private String name;
 
     public COLOR getColor() {
         return color;
@@ -14,19 +15,36 @@ public class Huluwa implements Creature, Comparable{
 
 
     @Override
-    public Position getPosition() {
+    public Position<Creature> getPosition() {
         return position;
     }
 
     @Override
-    public void setPosition(Position position) {
+    public void setPosition(Position<Creature> position) {
         this.position = position;
+        switch(this.color) {
+            case 赤:
+                name = "🍎";break;
+            case 橙:
+                name = "🍊";break;
+            case 黄:
+                name = "🍋";break;
+            case 绿:
+                name = "🍏";break;
+            case 青:
+                name = "🌎";break;
+            case 蓝:
+                name = "💧";break;
+            case 紫:
+                name = "🍆";break;
+        }
         position.setHolder(this);
     }
 
     Huluwa(COLOR color, SENIORITY seiority) {
         this.color = color;
         this.seniority = seiority;
+
     }
 
     @Override
@@ -37,6 +55,11 @@ public class Huluwa implements Creature, Comparable{
     @Override
     public String toString(){
         return this.seniority.toString() + "(" + this.color.toString() + ")@" + this.position.getX() + ","+this.position.getY()+";";
+    }
+
+    @Override
+    public void show() {
+        System.out.print(name);
     }
 
     @Override
