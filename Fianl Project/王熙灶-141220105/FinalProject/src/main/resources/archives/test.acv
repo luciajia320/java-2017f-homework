@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<archive>
+  <timepoint>
+    <creature>
+      <state>FIGHT</state>
+      <x>7</x>
+      <y>13</y>
+    </creature>
+    <creature>
+      <state>ATTACK</state>
+      <x>7</x>
+      <y>6</y>
+    </creature>
+  </timepoint>
+  <timepoint>
+    <creature>
+      <state>DEAD</state>
+      <x>7</x>
+      <y>13</y>
+    </creature>
+    <creature>
+      <state>WAIT</state>
+      <x>7</x>
+      <y>6</y>
+    </creature>
+  </timepoint>
+</archive>

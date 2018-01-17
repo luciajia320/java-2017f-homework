@@ -26,14 +26,37 @@ public class Snake extends Villain {
 
     @Override
     public String toString() {
-        return this.yourName.toString() +this.yourLevel.toString()+ "@grid(" + grid.getX() + "," + grid.getY() + ")";
+        return this.yourName.toString() +this.yourLevel.toString()+ "@grids(" + grid.getX() + "," + grid.getY() + ")";
     }
 
     @Override
     public String getName() {
-        return "蛇精";
+        return "🐍";
     }
 
+    public void arrowFormation(CreatureQueue queue, Coordinate start, Planar planar){
+        System.out.println("蛇精：锋矢阵！");
+    }
+
+    public void chongeFormation(CreatureQueue queue, Coordinate start, Planar planar){
+        System.out.println("蛇精：衝轭阵！");
+
+    }
+
+    public void lineFormation(CreatureQueue queue, Coordinate start, Planar planar){
+        System.out.println("蛇精：长蛇阵！");
+
+    }
+
+    public void yanxingFormation(CreatureQueue queue, Coordinate start, Planar planar){
+        System.out.println("蛇精：雁行阵！");
+
+    }
+
+    public void heyiFormation(CreatureQueue queue, Coordinate start, Planar planar){
+        System.out.println("蛇精：鹤翼阵！");
+
+    }
     enum NAME {
         金蛇精(1),青蛇精(2);
         private int sNum =0;
