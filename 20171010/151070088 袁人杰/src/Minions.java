@@ -15,7 +15,7 @@ public class Minions extends Villain {
 
     @Override
     public String toString() {
-        return this.yourLevel.toString()+this.Name.toString()+this.Code+"@grid("+ grid.getX()+","+ grid.getY()+")";
+        return this.yourLevel.toString()+this.Name.toString()+this.Code+"@grids("+ grid.getX()+","+ grid.getY()+")";
     }
 
     @Override
