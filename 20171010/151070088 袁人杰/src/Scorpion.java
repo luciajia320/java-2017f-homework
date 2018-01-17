@@ -1,6 +1,6 @@
 public class Scorpion extends Villain{
     //private LEVEL yourlevel;
-    private String Name="蝎子";
+    private String Name="🦂";
     private int Seniority;
 
     public Scorpion(LEVEL level,int seniority) {
@@ -31,7 +31,7 @@ public class Scorpion extends Villain{
 
     @Override
     public String toString() {
-        return this.Name.toString()+this.Seniority+this.yourLevel.toString()+"@grid("+ grid.getX()+","+ grid.getY()+")";
+        return this.Name.toString()+this.Seniority+this.yourLevel.toString()+"@grids("+ grid.getX()+","+ grid.getY()+")";
     }
 
 }

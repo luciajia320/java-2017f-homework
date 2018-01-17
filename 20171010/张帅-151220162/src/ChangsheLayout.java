@@ -1,8 +1,10 @@
+import java.util.ArrayList;
+
 public class ChangsheLayout implements Layout {
 	@Override
 	public void place(Queue queue) {
-		Position[] queuePositions = queue.getQueuePositions();
-		for(int i=0;i<queuePositions.length;i++)
-			queuePositions[i].setPosition(i, 0);
+		ArrayList<Position> queuePositions = queue.getQueuePositions();
+		for(int i=0;i<queuePositions.size();i++)
+			queuePositions.get(i).setPosition(i, 0);
 	}
 }

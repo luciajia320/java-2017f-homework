@@ -1,8 +1,11 @@
-public class Huluwa implements Creature{
+public class Huluwa <T extends Creature>//implements Creature
+{
 
     private COLOR color;
     private SENIORITY seniority;
     private Position position;
+    public static final String PLACE_HOLDER = "👧";
+    private T creatureh;
 
     public COLOR getColor() {
         return color;
@@ -13,15 +16,16 @@ public class Huluwa implements Creature{
     }
 
 
-    @Override
+    //@Override
     public Position getPosition() {
         return position;
     }
 
-    @Override
+    //@Override
     public void setPosition(Position position) {
         this.position = position;
-        position.setHolder(this);
+        //position.setHolder(this.position);
+        position.setHolder(this.creatureh);
     }
 
     Huluwa(COLOR color, SENIORITY seiority) {
@@ -29,7 +33,7 @@ public class Huluwa implements Creature{
         this.seniority = seiority;
     }
 
-    @Override
+    //@Override
     public void report() {
         System.out.print(this.toString());
     }
@@ -39,14 +43,8 @@ public class Huluwa implements Creature{
         return this.seniority.toString() + "(" + this.color.toString() + ")@" + this.position.getX() + "," + this.position.getY() + ";";
     }
 
-    /*@Override
-    public boolean biggerThan(Comparable brother){
+    public String getPlaceHolder() { return this.PLACE_HOLDER; }
 
-        if (brother instanceof  Huluwa)
-            return this.getSeniority().ordinal()> ((Huluwa) brother).getSeniority().ordinal();
-        else
-            return false;
-    }*/
 
 }
 
