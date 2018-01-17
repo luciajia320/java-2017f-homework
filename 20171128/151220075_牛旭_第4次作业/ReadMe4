@@ -1,0 +1,7 @@
+# 设计思路：<br>
+按照实验要求，需要WaxOn1、WaxOn2以及WaxOff三个线程并发，所以要给WaxOn类加一个int which属性，来表示WaxOn对象的ID，以便区分WaxOn1和WaxOn2。
+使用ExecutorService来管理线程。通过同步控制   机制，是的WaxOn1和WaxOn2同时进入等待buff的wait状态，此时WaxOff线程执行notifyall是的两个WaxOn
+线程都被唤醒，进入锁池，去竞争锁，以实现WaxOff与WaxOn1或WaxOn2交替执行。<br>
+# 遇到问题：<br>
+·本来notifyall是一种非公平的机制，应该是WaxOn1和WaxOn2在锁池中竞争锁，与进入锁池的顺序无关，但是可能是由于我的eclipse有问题，每次都会由最新进
+入锁池的线程获得锁，所以不得不进一步增加一个随机数，以实现WaxOn1和WaxOn2随机获得锁。<br>
