@@ -4,6 +4,9 @@
 [submodule "20170912/蒋雨霖-151220045"]
 	path = 20170912/蒋雨霖-151220045
 	url = https://github.com/jimmy233/myhomework
+[submodule "Fianl Project/支原-151220173"]
+	path = Fianl Project/支原-151220173
+	url = https://github.com/castlezhiyuan/HuluBattle
 [submodule "Fianl Project/曾冰洁-151220004"]
 	path = Fianl Project/曾冰洁-151220004
 	url = https://github.com/zengbingjie/HuluwaGUI
