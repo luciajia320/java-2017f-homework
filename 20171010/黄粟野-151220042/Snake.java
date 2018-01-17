@@ -1,25 +1,10 @@
-public class Snake implements Creature
-{
-    private Position position;
-
-    @Override
-    public Position getPosition() {
-        return position;
-    }
-
-    @Override
-    public void setPosition(Position position) {
-        this.position = position;
-        position.setHolder(this);
-    }
-
-    @Override
-    public void report() {
-        System.out.print(this.toString());
-    }
-
-    @Override
-    public String toString(){
-        return "蛇精 @" + this.position.getX() + "," + this.position.getY() + ";";
+public class Snake extends Space {
+    //private Position position;
+    public Snake(String matter) {
+        super(7, 2);
+        for (int i = 0; i < 7; i++) {
+            this.content[i][0] = matter;
+        }
     }
 }
+
