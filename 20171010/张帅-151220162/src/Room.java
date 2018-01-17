@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Room {
 
 	private Position[][] positions;
@@ -19,6 +21,7 @@ public class Room {
 	}
 
 	public void printRoom(){
+		System.out.println("--------------");
 		for(int i=0;i<positions.length;i++){
 			for(int j=0;j<positions[i].length;j++) {
 				if (positions[i][j].getEmpty())
@@ -28,13 +31,13 @@ public class Room {
 			}
 			System.out.println();
 		}
+		System.out.println("--------------");
 	}
 
 	public void addQueue(Queue queue, int beginX, int beginY){
-		Position[] queuePositions = queue.getQueuePositions();
-		for(int i=0;i<queuePositions.length;i++)
-			queuePositions[i].getHolder().setPosition(
-					this.positions[beginX+queuePositions[i].getX()][beginY+queuePositions[i].getY()]);
+		ArrayList<Position> queuePositions = queue.getQueuePositions();
+		for(Position it:queuePositions)
+			it.getHolder().setPosition(this.positions[beginX+it.getX()][beginY+it.getY()]);
 	}
 
 	public void addCreature(Creature creature, int x, int y){
@@ -86,7 +89,6 @@ public class Room {
 		layout.place(geniesQueue);
 
 		/* 将原先所有角色移出二维空间，后重新将不同阵营角色放入二维空间，然后输出对峙局面 */
-		System.out.println("--------------");
 		room.clear();
 		room.addQueue(brothersQueue, 0, 0);
 		room.addQueue(geniesQueue, 0, 7);

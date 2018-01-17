@@ -6,4 +6,5 @@ public interface Creature {
     public String getName();
 
     public Grid getGrid();
+
 }
