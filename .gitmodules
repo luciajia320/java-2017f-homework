@@ -4,6 +4,9 @@
 [submodule "20170912/蒋雨霖-151220045"]
 	path = 20170912/蒋雨霖-151220045
 	url = https://github.com/jimmy233/myhomework
+[submodule "Fianl Project/刘昆吾-141180071"]
+	path = Fianl Project/刘昆吾-141180071
+	url = https://github.com/Greatevery/myhomework.git
 [submodule "Fianl Project/段建辉-151220023"]
 	path = Fianl Project/段建辉-151220023
 	url = https://github.com/EnzoDuan/Huluwa
@@ -61,4 +64,3 @@
 [submodule "20170919/李奕萱-151160030"]
 	path = 20170919/李奕萱-151160030
 	url = https://github.com/liyixxxuan/secondhomework
-	url = https://github.com/MugenU/java_final_project
