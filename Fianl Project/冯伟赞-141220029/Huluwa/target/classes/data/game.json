@@ -1,0 +1,12 @@
+{
+  "name": "HULUWA",
+  "title": "HULUWA",
+  "author": "fwz",
+  "version": "1.0.0",
+  "params": {
+    "step": 100,
+    "offset": 0,
+    "space": 100,
+    "logLevel": 0
+  }
+}
