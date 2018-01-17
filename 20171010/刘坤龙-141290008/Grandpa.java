@@ -1,7 +1,9 @@
+package lonhh.huluwa;
+
 public class Grandpa extends Creature implements Active {
 
     Grandpa(){
-        super("爷");
+        super("\uD83C\uDF85");
     }
 
     @Override

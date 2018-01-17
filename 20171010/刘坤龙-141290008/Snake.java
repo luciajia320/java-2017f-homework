@@ -1,7 +1,9 @@
+package lonhh.huluwa;
+
 public class Snake extends Creature implements Active {
 
     Snake(){
-        super("蛇");
+        super("🐍");
     }
 
     @Override
