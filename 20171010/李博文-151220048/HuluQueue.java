@@ -1,27 +1,32 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class HuluQueue {
-    private Position[] positions;
-    private HuluBaby[] huluBabies;
+    private List<Position> positions;
+    private List<HuluBaby> huluBabies;
 
-    public Position[] getPositions() {
+    /*public Position[] getPositions() {
         return positions;
-    }
+    }*/
 
-    public HuluBaby[] getHuluBabies() {
+    /*public List<HuluBaby> getHuluBabies() {
         return huluBabies;
-    }
-    public HuluQueue(HuluBaby[] babies){
-        positions = new Position[babies.length];
+    }*/
+    public HuluQueue(List<HuluBaby> babies){
+        positions = new ArrayList<>(babies.size());
         huluBabies = babies;
 
-        for(int i = 0; i < babies.length; i++){
-            positions[i] = new Position(i, 0);
-            babies[i].setPosition(positions[i]);
+        for(int i = 0; i < babies.size(); i++){
+            positions.add(i,new Position(i, 0));
+            babies.get(i).setPosition(positions.get(i));
         }
 
     }
 
-    public Creature[] getCreature() {
+    public List<Creature> getCreature() {
 
-        return getHuluBabies();
+       List<Creature> creatures = new ArrayList<>();
+       creatures.addAll(huluBabies);
+       return creatures;
     }
 }

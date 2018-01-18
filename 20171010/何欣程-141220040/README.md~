@@ -1,0 +1,11 @@
+#工程说明
+
+在完成葫芦娃作业的过程中，我主要从两个方面来考虑实现问题，一个应该如何将整个葫芦娃大战妖怪的整个事件抽象出来，第二是该怎样将项目划分成各部分，更有条理地实现。
+
+##一 抽象
+![](https://github.com/njuhxc/java-2017f-homework/raw/master/jpg/2.gif)
+
+整个世界都可以作为一个存在(Being)，存在分为生物(Creature)和非生物的二维空间(Position)，
+
+##二 代码结构
+![](https://github.com/njuhxc/java-2017f-homework/raw/master/jpg/1.gif)
