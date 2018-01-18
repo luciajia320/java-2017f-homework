@@ -3,7 +3,7 @@ public class Minion implements Creature{
 
     @Override
     public void report() {
-        System.out.print("喽");
+        System.out.print("🐜 ");
     }
 
     @Override
