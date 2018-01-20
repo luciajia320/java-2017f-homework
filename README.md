@@ -1,24 +1,16 @@
-#Fianl 葫芦娃
 
-课程要求
-    
-    绘制一个NxM的二维空间（N和M足够大，空间左上角为原点，向右向下分别为X轴和Y轴正方向），该空间中的任意一个位置坐标上可且仅可站立一个生物体（葫芦娃、老爷爷、蛇精、蝎子精、小喽啰均属于生物体）；
-    请让七个兄弟和老爷爷以下图中的某种阵型在空间的左侧战队；
-    请让妖精（蛇精、蝎子精、小喽啰）以下图中的某种阵型在空间右侧战队；
-    以上各生物体均实现为一个线程（注：此处要求大家用线程是为了验证各位是否掌握了多线程并发编程，实际上GUI应用中应该用Swing Timer来进行UI刷新）；
-    按空格键时所有生物体线程执行start()，向敌方前进；
-    当某个生物体于敌方相遇（两者间的X轴距离和Y轴距离小于某个常量）时，选取一个概率决定双方生死，死者留下实体，生者寻找下一个敌人攻击；
-    某一方生物全部死亡时，结束。
+# 作业提交流程
 
-
-程序框架图
-
-    Thing2D: 
-    二维坐标 + image，相当于之前作业的position
-    Huluwa, Yeye, Shejing, Xiezijing, Xiaolouluo: 各种生物, 每种生物都有各自的image
-    Field:
-    这就是战场
-    Ground:
-    开始界面
-
-
+1. 注册github账号（假设账户名称为javalover。若已注册则跳过此步骤）；
+2. 用此账号登陆github（若已登陆则跳过此步骤）；
+3. fork本仓库（ https://github.com/njuics/java-2017f-homework ）至自己账户，仓库url为（ https://github.com/javalover/java-2017f-homework );
+4. 在你的本机clone你所fork的仓库(javalover/java-2017f-homework）；
+	1. 对于简单作业（在我们讲使用maven/gradle等构建工具开发java工程之前），请使用以下步骤
+		1. 在javalover/java-2017f-homework进入当前作业目录，例如java-2017f-homework／20170912目录，新建子目录`张三-141220001`,此处“张三”和“141220001” 分别替换真实姓名和学号;
+		2. 将你写好的代码文件拷贝到该目录下，然后执行`git add .`, `git commit -a` 和`git push`
+	2. 对于复杂作业和最后的大作业（在我们讲使用maven/gradle等构建工具开发java工程之后），请使用以下步骤
+		1. 在javalover账户下新建一个代码仓库，例如myhomework；
+		2. 在myhomework下编写代码，代码使用`git add .`, `git commit -a` 和`git push`等命令进行管理；
+		3. 在javalover/java-2017f-homework进入当前作业目录，例如java-2017f-homework／20170912目录，执行`git submodule add https://github.com/javalover/myhomework 张三-141220001`,此处“张三”和“141220001” 分别替换真实姓名和学号。  
+5. 在javalover/java-2017f-homework上创建“pull request"
+# java_final
