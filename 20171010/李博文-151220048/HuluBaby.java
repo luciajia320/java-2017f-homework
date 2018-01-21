@@ -15,7 +15,7 @@ public class HuluBaby implements Creature{
     }
     @Override
     public void report(){
-        System.out.print(seniority);
+        System.out.print("🐵 ");
     }
 
     @Override
