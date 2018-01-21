@@ -1,0 +1,3 @@
+# 作业：线程协同
+
+本次线程实验有多种解决方法，在此选择在WaxOn类中增加int型变量num以表示WaxOn1或WaxOn2。main函数中新建两个线程，在WaxOn类中用synchronize关键字保护共享变量，实现并发操作。
